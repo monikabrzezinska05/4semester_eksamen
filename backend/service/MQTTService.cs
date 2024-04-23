@@ -13,14 +13,16 @@ public class MQTTService(HistoryRepo historyRepo)
         var mqttClient = mqttFactory.CreateMqttClient();
 
         var mqttClientOptions = new MqttClientOptionsBuilder()
-            .WithTcpServer("localhost", 1883)
+            .WithTcpServer("mqtt.flespi.io", 8883)
             .WithProtocolVersion(MqttProtocolVersion.V500)
+            .WithCredentials("FlespiToken", "ysMQYbHHGzdTMuiSwz5a3RtqiRbP1hPFva5Vua1g4W9QdAv2TtQ0IJnwulHd4YQe")
+            .WithTls()
             .Build();
 
         await mqttClient.ConnectAsync(mqttClientOptions, CancellationToken.None);
 
         var mqttSubscribeOptions = mqttFactory.CreateSubscribeOptionsBuilder()
-            .WithTopicFilter(f => f.WithTopic("Security"))
+            .WithTopicFilter(f => f.WithTopic("Security/#"))
             .Build();
 
         await mqttClient.SubscribeAsync(mqttSubscribeOptions, CancellationToken.None);
@@ -32,7 +34,7 @@ public class MQTTService(HistoryRepo historyRepo)
                 var message = e.ApplicationMessage.ConvertPayloadToString();
                 Console.WriteLine("Received message: " + message);
 
-                //TODO: Send det til databasen.
+                //TODO: Send it to the database.
                 
             }
             catch (Exception exc)
