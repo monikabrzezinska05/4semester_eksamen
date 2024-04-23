@@ -26,6 +26,8 @@ public static class Startup
         
         builder.Services.AddSingleton<HistoryRepo>();
         
+        builder.Services.AddSingleton<MQTTService>();
+        
         builder.Services.AddSingleton<HistoryService>();
         builder.Services.AddHttpClient();
 
@@ -63,5 +65,6 @@ public static class Startup
                 }
             };
         });
+        app.Services.GetService<MQTTService>().CommunicateWithBroker();
     }
 }

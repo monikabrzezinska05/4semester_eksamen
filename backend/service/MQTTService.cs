@@ -5,9 +5,9 @@ using MQTTnet.Formatter;
 
 namespace service;
 
-public class MQTTService
+public class MQTTService(HistoryRepo historyRepo)
 {
-    public async Task CommunicateWithBroker(HistoryRepo historyRepo)
+    public async Task CommunicateWithBroker()
     {
         var mqttFactory = new MqttFactory();
         var mqttClient = mqttFactory.CreateMqttClient();
