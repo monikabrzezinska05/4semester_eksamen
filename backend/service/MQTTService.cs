@@ -27,11 +27,20 @@ public class MQTTService
 
         mqttClient.ApplicationMessageReceivedAsync += async e =>
         {
-            var message = e.ApplicationMessage.ConvertPayloadToString();
-            Console.WriteLine("Received message: " + message);
-            
-            //Send det til databasen.
-            
+            try
+            {
+                var message = e.ApplicationMessage.ConvertPayloadToString();
+                Console.WriteLine("Received message: " + message);
+
+                //TODO: Send det til databasen.
+                
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine(exc.Message);
+                Console.WriteLine(exc.InnerException);
+                Console.WriteLine(exc.StackTrace);
+            }
         };
     }
 }
