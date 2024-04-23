@@ -29,6 +29,9 @@ public class MQTTService
         {
             var message = e.ApplicationMessage.ConvertPayloadToString();
             Console.WriteLine("Received message: " + message);
+            
+            //Send det til databasen.
+            
         };
     }
 }
