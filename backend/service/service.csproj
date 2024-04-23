@@ -8,6 +8,11 @@
 
   <ItemGroup>
     <PackageReference Include="Fleck" Version="1.2.0" />
+    <PackageReference Include="MQTTnet" Version="4.3.3.952" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\infrastructure\infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
