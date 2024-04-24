@@ -6,6 +6,7 @@ using infrastructure;
 using infrastructure.repositories;
 using lib;
 using service;
+using service.PasswordHashing;
 
 namespace api;
 
@@ -25,10 +26,15 @@ public static class Startup
             dataSourceBuilder => dataSourceBuilder.EnableParameterLogging());
         
         builder.Services.AddSingleton<HistoryRepo>();
+        builder.Services.AddSingleton<AuthenticateRepository>();
+        builder.Services.AddSingleton<UserRepository>();
         
         builder.Services.AddSingleton<MQTTService>();
         
         builder.Services.AddSingleton<HistoryService>();
+        builder.Services.AddSingleton<AuthenticationService>();
+        builder.Services.AddSingleton<UserService>();
+        builder.Services.AddSingleton<HashingArgon2id>();
         builder.Services.AddHttpClient();
 
         var clientEventHandlers = builder.FindAndInjectClientEventHandlers(Assembly.GetExecutingAssembly());
