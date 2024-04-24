@@ -9,7 +9,7 @@ namespace ws.client_event_handlers;
 
 public class ClientWantsToSeeHistoryDto: BaseDto
 {
-    public List<HistoryModel> historyRecords { get; set; }
+    public List<HistoryModel> historyModel { get; set; }
 }
 
 public class ClientWantsToSeeHistory : BaseEventHandler<ClientWantsToSeeHistoryDto>
@@ -22,9 +22,10 @@ public class ClientWantsToSeeHistory : BaseEventHandler<ClientWantsToSeeHistoryD
     }
     public override Task Handle(ClientWantsToSeeHistoryDto dto, IWebSocketConnection socket)
     {
+        _historyService.GetHistory();
         var history = new ResponseDto()
         {
-            ResponseData = dto.historyRecords
+            ResponseData = dto.historyModel
         };
         var historyToClient = JsonSerializer.Serialize(history);
         socket.Send(historyToClient);
