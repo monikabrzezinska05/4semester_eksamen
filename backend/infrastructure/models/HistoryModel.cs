@@ -1,6 +1,6 @@
 namespace infrastructure.models;
 
-public class History
+public class HistoryModel
 {
     public int HistoryId { get; set; }
     public int UserId { get; set; }
