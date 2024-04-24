@@ -5,6 +5,7 @@ public class Unit
     public int UnitId { get; set; }
     public string Name { get; set; }
     public bool Status { get; set; }
+    public bool AlarmArmed { get; set; }
     public UnitType UnitTypeId { get; set; }
 }
 
