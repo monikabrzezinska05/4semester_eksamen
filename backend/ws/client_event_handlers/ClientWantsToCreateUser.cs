@@ -17,7 +17,7 @@ public class ClientWantsToCreateUserDto : BaseDto
 
 public class ClientWantsToCreateUser : BaseEventHandler<ClientWantsToCreateUserDto>
 {
-    public readonly UserService _userService;
+    private readonly UserService _userService;
     
     public ClientWantsToCreateUser(UserService userService)
     {
