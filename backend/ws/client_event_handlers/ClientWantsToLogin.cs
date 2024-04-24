@@ -6,7 +6,7 @@ using lib;
 using service;
 using ws.transfer_models.server_models;
 
-namespace ws.client_event_handlers;
+namespace ws;
 
 public class ClientWantsToLoginDto : BaseDto
 {
