@@ -29,9 +29,9 @@ public class ClientWantsToCreateUser : BaseEventHandler<ClientWantsToCreateUserD
     {
         var newUser = new User()
         {
-            name = dto.name,
-            isChild = dto.isChild,
-            email = dto.email
+            Name = dto.name,
+            IsChild = dto.isChild,
+            Mail = dto.email
         };
         
         var user = _userService.CreateUser(newUser, dto.password);

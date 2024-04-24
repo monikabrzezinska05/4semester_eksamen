@@ -32,6 +32,7 @@ public class ClientWantsToLogin : BaseEventHandler<ClientWantsToLoginDto>
         };
         
         var user = _authenticationService.Authenticate(newUserLogin);
+        Console.WriteLine("User: " + user!.Name);
         ResponseDto loginMessage;
         if (user == null)
         {
@@ -44,7 +45,7 @@ public class ClientWantsToLogin : BaseEventHandler<ClientWantsToLoginDto>
             loginMessage = new ResponseDto()
             {
                 MessageToClient = "You are logged in",
-                ResponseData = new UserLogin()
+                ResponseData = user
             };
         }
         var serverLogin = new ServerLogIn()
