@@ -40,12 +40,9 @@ public class ClientWantsToLogin : BaseEventHandler<ClientWantsToLoginDto>
                 MessageToClient = "You are logged in",
                 ResponseData = new UserLogin()
             };
-            
-            
         }
         var serverLogin = new ServerLogIn()
         {
-            
             ResponseDto = loginMessage
         };
         socket.Send(JsonSerializer.Serialize(serverLogin));

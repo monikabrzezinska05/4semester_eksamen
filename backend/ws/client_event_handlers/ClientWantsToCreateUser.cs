@@ -1,6 +1,10 @@
+using System.Text.Json;
+using api.transfer_models;
 using Fleck;
+using infrastructure.models;
 using lib;
 using service;
+using ws.transfer_models.server_models;
 
 namespace ws.client_event_handlers;
 
@@ -19,8 +23,29 @@ public class ClientWantsToCreateUser : BaseEventHandler<ClientWantsToCreateUserD
         _userService = userService;
     }
     
-    public override Task Handle(ClientWantsToCreateUserDto dto, IWebSocketConnection socket)
+    public override async Task Handle(ClientWantsToCreateUserDto dto, IWebSocketConnection socket)
     {
-        var user = _userService.CreateUser( , dto.password);
+        var user = _userService.CreateUser(user: new User(), dto.password);
+        ResponseDto createUserMessage;
+        if (user == null)
+        {
+            createUserMessage = new ResponseDto()
+            {
+                MessageToClient = "User already exists"
+            };
+        } else 
+        {
+            createUserMessage = new ResponseDto()
+            {
+                MessageToClient = "User created",
+                ResponseData = user
+            };
+        }
+        
+        var serverCreateUser = new ServerCreatesNewUser()
+        {
+            ResponseDto = createUserMessage
+        };
+        socket.Send(JsonSerializer.Serialize(serverCreateUser));
     }
 }
