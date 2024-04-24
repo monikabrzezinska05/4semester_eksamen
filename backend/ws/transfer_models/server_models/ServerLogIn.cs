@@ -1,4 +1,6 @@
-namespace ws;
+using lib;
+
+namespace ws.transfer_models.server_models;
 
 public class ServerLogIn : BaseDto
 {
