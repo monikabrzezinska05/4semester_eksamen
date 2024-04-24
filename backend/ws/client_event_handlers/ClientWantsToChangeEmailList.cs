@@ -1,3 +1,6 @@
+using Fleck;
+using lib;
+
 namespace ws;
 
 public class ClientWantsToChangeEmailListDto : BaseDto
@@ -7,5 +10,8 @@ public class ClientWantsToChangeEmailListDto : BaseDto
 
 public class ClientWantsToChangeEmailList : BaseEventHandler<ClientWantsToChangeEmailListDto>
 {
-    throw new NotImplementedException();
+    public override Task Handle(ClientWantsToChangeEmailListDto dto, IWebSocketConnection socket)
+    {
+        throw new NotImplementedException();
+    }
 }

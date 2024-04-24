@@ -1,3 +1,5 @@
+using lib;
+
 namespace ws;
 
 public class ServerLogIn : BaseDto
