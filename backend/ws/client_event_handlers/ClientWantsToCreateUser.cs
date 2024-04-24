@@ -13,6 +13,7 @@ public class ClientWantsToCreateUserDto : BaseDto
     public string name { get; set; }
     public string password { get; set; }
     public bool isChild { get; set; }
+    public string email { get; set; }
 }
 
 public class ClientWantsToCreateUser : BaseEventHandler<ClientWantsToCreateUserDto>
@@ -29,7 +30,8 @@ public class ClientWantsToCreateUser : BaseEventHandler<ClientWantsToCreateUserD
         var newUser = new User()
         {
             name = dto.name,
-            isChild = dto.isChild
+            isChild = dto.isChild,
+            email = dto.email
         };
         
         var user = _userService.CreateUser(newUser, dto.password);
