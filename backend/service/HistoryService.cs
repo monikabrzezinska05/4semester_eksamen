@@ -17,7 +17,6 @@ public class HistoryService
 
     public HistoryModel ViewHistory(HistoryModel history)
     {
-        
         return _historyRepo.GetHistory();
     }
 
