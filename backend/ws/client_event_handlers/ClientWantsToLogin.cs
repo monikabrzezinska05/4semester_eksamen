@@ -25,7 +25,13 @@ public class ClientWantsToLogin : BaseEventHandler<ClientWantsToLoginDto>
     
     public override async Task Handle(ClientWantsToLoginDto dto, IWebSocketConnection socket)
     {
-        var user = _authenticationService.Authenticate(userLogin: new UserLogin());
+        var newUserLogin = new UserLogin()
+        {
+            Email = dto.email,
+            Password = dto.password
+        };
+        
+        var user = _authenticationService.Authenticate(newUserLogin);
         ResponseDto loginMessage;
         if (user == null)
         {
