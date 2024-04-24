@@ -13,22 +13,30 @@ public class HistoryRepo
         _dataSource = dataSource;
     }
 
-    public HistoryModel GetHistory()
+    public List<HistoryModel> GetHistory(DateTime? timePeriod)
     {
-        const string sql = "SELECT * FROM history";
+        string sql = "";
+        if (timePeriod != null)
+        {
+            sql = "SELECT * FROM history WHERE history.date > @timePeriod";
+        }
+        else
+        {
+            sql = "SELECT * FROM history";
+        }
 
         using (var conn = _dataSource.OpenConnection())
         {
-            return conn.QueryFirst<HistoryModel>(sql);
+            return conn.Query<HistoryModel>(sql).ToList();
         }
     }
 
     public HistoryModel CreateHistory(HistoryModel model)
     {
-        const string sql = "INSERT INTO history(userId, unitId, date, eventType) VALUES(@userId, @unitid, @date, @eventType)";
+        const string sql = "INSERT INTO history(useremail, unitId, date, eventtype) VALUES(@UserEmail, @unitid, @date, @EventTypeId) RETURNING *";
         using (var conn = _dataSource.OpenConnection())
         {
-            var response = conn.QueryFirst<HistoryModel>(sql, new {model.UserId, model.UnitId, model.Date, model.EventTypeId});
+            var response = conn.QueryFirst<HistoryModel>(sql, new {model.UserEmail, model.UnitId, model.Date, model.EventTypeId});
             return response;
         }
     }

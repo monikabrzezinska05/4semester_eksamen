@@ -2,7 +2,7 @@ namespace infrastructure.models;
 
 public class HistoryModel
 {
-    public int HistoryId { get; set; }
+    public int? HistoryId { get; set; }
     public string? UserEmail { get; set; }
     public int UnitId { get; set; }
     public DateTime Date { get; set; }

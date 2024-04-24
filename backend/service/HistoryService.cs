@@ -15,9 +15,9 @@ public class HistoryService
         _logger = logger;
     }
 
-    public HistoryModel GetHistory()
+    public List<HistoryModel> GetHistory(DateTime? timePeriod)
     {
-        return _historyRepo.GetHistory();
+        return _historyRepo.GetHistory(timePeriod);
     }
 
     public HistoryModel CreateHistory(HistoryModel model)
