@@ -1,3 +1,5 @@
+using Dapper;
+using infrastructure.models;
 using Npgsql;
 
 namespace infrastructure.repositories;
@@ -10,5 +12,14 @@ public class HistoryRepo
     {
         _dataSource = dataSource;
     }
-    
+
+    public HistoryModel GetHistory()
+    {
+        const string sql = "SELECT * FROM history";
+
+        using (var conn = _dataSource.OpenConnection())
+        {
+            return conn.QueryFirst<HistoryModel>(sql);
+        }
+    }
 }
