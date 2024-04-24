@@ -1,8 +1,12 @@
+using Fleck;
+using lib;
+using ws;
+
 namespace ws;
 
 public class ClientWantsToLogoffDto : BaseDto
 {
-    throw new System.NotImplementedException();
+    
 }
 
 public class ClientWantsToLogoff : BaseEventHandler<ClientWantsToLogoffDto>
