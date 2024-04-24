@@ -16,7 +16,7 @@ public class MQTTService(HistoryRepo historyRepo)
             .WithTcpServer("mqtt.flespi.io", 8883)
             .WithProtocolVersion(MqttProtocolVersion.V500)
             .WithTls()
-            .WithCredentials("ysMQYbHHGzdTMuiSwz5a3RtqiRbP1hPFva5Vua1g4W9QdAv2TtQ0IJnwulHd4YQe")//Change to real token
+            .WithCredentials("ysMQYbHHGzdTMuiSwz5a3RtqiRbP1hPFva5Vua1g4W9QdAv2TtQ0IJnwulHd4YQe")//Change to real token.
             .Build();
 
         await mqttClient.ConnectAsync(mqttClientOptions, CancellationToken.None);
