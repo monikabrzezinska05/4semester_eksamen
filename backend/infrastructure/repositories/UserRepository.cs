@@ -13,23 +13,23 @@ public class UserRepository
         _dataSource = dataSource;
     }
     
-    public User? GetUserById(int pwHashUserId)
+    public User? GetUserByMail(string pwHashMail)
     {
-        const string sql = "SELECT * FROM public.\"User\" WHERE UserID = @pwHashUserId;";
+        const string sql = "SELECT * FROM public.\"User\" WHERE mail = @pwHashMail;";
         using (var conn = _dataSource.OpenConnection())
         {
-            return conn.QueryFirstOrDefault<User>(sql, new {pwHashUserId});
+            return conn.QueryFirstOrDefault<User>(sql, new {pwHashMail});
         }
     }
     
-    public void CreatePassword(string hash, string salt, int? userId)
+    public void CreatePassword(string hash, string salt, string mail)
     {
         var sql = "INSERT INTO public.passwords " +
-                  "(userid, password,salt) " +
-                  "VALUES (@userId, @hash, @salt)";
+                  "(useremail, password,salt) " +
+                  "VALUES (@mail, @hash, @salt)";
         using (var conn = _dataSource.OpenConnection())
         {
-            conn.Execute(sql, new {userId, hash, salt});
+            conn.Execute(sql, new {mail, hash, salt});
         }
     }
 
@@ -43,7 +43,7 @@ public class UserRepository
 
         using (var conn = _dataSource.OpenConnection())
         {
-            var response = conn.QueryFirst<User?>(sql, new {user.name, user.email, user.isChild});
+            var response = conn.QueryFirst<User?>(sql, new {user.Name, user.Mail, user.IsChild});
             if (response == null)
             {
                 throw new Exception("User already exists");

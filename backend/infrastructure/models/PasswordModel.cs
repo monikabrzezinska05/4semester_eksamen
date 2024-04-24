@@ -2,7 +2,7 @@ namespace infrastructure.models;
 
 public class PasswordModel
 {
-    public int UserID { get; set; }
+    public string Mail { get; set; }
     
     public required string Password { get; set; }
     
