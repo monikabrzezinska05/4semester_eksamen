@@ -10,8 +10,9 @@ namespace ws.client_event_handlers;
 
 public class ClientWantsToCreateUserDto : BaseDto
 {
-    public string email { get; set; }
+    public string name { get; set; }
     public string password { get; set; }
+    public bool isChild { get; set; }
 }
 
 public class ClientWantsToCreateUser : BaseEventHandler<ClientWantsToCreateUserDto>
