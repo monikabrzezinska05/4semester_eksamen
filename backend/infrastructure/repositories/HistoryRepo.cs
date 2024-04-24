@@ -22,4 +22,14 @@ public class HistoryRepo
             return conn.QueryFirst<HistoryModel>(sql);
         }
     }
+
+    public HistoryModel CreateHistory(HistoryModel model)
+    {
+        const string sql = "INSERT INTO history(userId, unitId, date, eventType) VALUES(@userId, @unitid, @date, @eventType)";
+        using (var conn = _dataSource.OpenConnection())
+        {
+            var response = conn.QueryFirst<HistoryModel>(sql, new {model.UserId, model.UnitId, model.Date, model.EventTypeId});
+            return response;
+        }
+    }
 }

@@ -20,6 +20,11 @@ public class HistoryService
         return _historyRepo.GetHistory();
     }
 
+    public HistoryModel CreateHistory(HistoryModel model)
+    {
+        return _historyRepo.CreateHistory(model);
+    }
+
 }
 
 
