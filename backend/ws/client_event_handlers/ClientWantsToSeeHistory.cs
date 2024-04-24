@@ -1,12 +1,15 @@
+using System.Text.Json;
+using api.transfer_models;
 using Fleck;
+using infrastructure.models;
 using lib;
 using service;
 
-namespace ws;
+namespace ws.client_event_handlers;
 
 public class ClientWantsToSeeHistoryDto: BaseDto
 {
-    
+    public List<HistoryModel> historyRecords { get; set; }
 }
 
 public class ClientWantsToSeeHistory : BaseEventHandler<ClientWantsToSeeHistoryDto>
@@ -19,6 +22,12 @@ public class ClientWantsToSeeHistory : BaseEventHandler<ClientWantsToSeeHistoryD
     }
     public override Task Handle(ClientWantsToSeeHistoryDto dto, IWebSocketConnection socket)
     {
-        var server = new WebSocketServer("42069")
+        var history = new ResponseDto()
+        {
+            ResponseData = dto.historyRecords
+        };
+        var historyToClient = JsonSerializer.Serialize(history);
+        socket.Send(historyToClient);
+        return Task.CompletedTask;
     }
 }

@@ -15,7 +15,7 @@ public class HistoryService
         _logger = logger;
     }
 
-    public HistoryModel ViewHistory(HistoryModel history)
+    public HistoryModel GetHistory()
     {
         return _historyRepo.GetHistory();
     }
