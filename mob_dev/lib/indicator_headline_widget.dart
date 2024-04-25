@@ -30,7 +30,6 @@ class _IndicatorHeadlineState extends State<IndicatorHeadline> {
           ),
         ),
         Divider(
-          color: Colors.black,
           height: 1,
           thickness: 2,
           indent: 20,
