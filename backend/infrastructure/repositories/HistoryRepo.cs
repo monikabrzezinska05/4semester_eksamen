@@ -25,10 +25,10 @@ public class HistoryRepo
 
     public HistoryModel CreateHistory(HistoryModel model)
     {
-        const string sql = "INSERT INTO history(userId, unitId, date, eventType) VALUES(@userId, @unitid, @date, @eventType)";
+        const string sql = "INSERT INTO history(historyId, unitId, date, eventType) VALUES(@historyId, @unitid, @date, @eventType)";
         using (var conn = _dataSource.OpenConnection())
         {
-            var response = conn.QueryFirst<HistoryModel>(sql, new {model.UserId, model.UnitId, model.Date, model.EventTypeId});
+            var response = conn.QueryFirst<HistoryModel>(sql, new {model.HistoryId, model.UnitId, model.Date, model.EventTypeId});
             return response;
         }
     }
