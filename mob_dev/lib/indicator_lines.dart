@@ -36,7 +36,7 @@ class _IndicatorLineState extends State<IndicatorLine> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+              padding: const EdgeInsets.only(left: 15.0, right: 2.5, top: 5),
               child: Row(
                 children: [
                   Text(widget.unitName, style: TextStyle(fontSize: 14)),
