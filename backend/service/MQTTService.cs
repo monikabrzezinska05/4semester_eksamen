@@ -6,7 +6,6 @@ namespace service;
 
 public class MQTTService
 {
-    public event EventHandler Mqtthandler;
     public async Task CommunicateWithBroker()
     {
         var mqttFactory = new MqttFactory();
@@ -35,7 +34,7 @@ public class MQTTService
                 Console.WriteLine("Received message: " + message);
                 
                 //send til event handler
-                Mqtthandler.Invoke(this, e);
+                
             }
             catch (Exception exc)
             {
