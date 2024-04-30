@@ -33,6 +33,7 @@ public class HistoryRepo
 
     public HistoryModel CreateHistory(HistoryModel model)
     {
+        Console.WriteLine("history repo");
         const string sql = "INSERT INTO history(useremail, unitId, date, eventtype) VALUES(@UserEmail, @unitid, @date, @EventTypeId) RETURNING *";
         using (var conn = _dataSource.OpenConnection())
         {

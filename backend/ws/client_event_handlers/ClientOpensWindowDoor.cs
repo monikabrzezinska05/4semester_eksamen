@@ -23,6 +23,7 @@ public class ClientOpensWindowDoor : BaseEventHandler<ClientOpensWindowDoorDto>
     public override Task Handle(ClientOpensWindowDoorDto dto, IWebSocketConnection socket)
     {
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.historyModel);
+        Console.WriteLine("clienthandler");
         var windowDoorHistory = new ResponseDto()
         {
             ResponseData = loggedEvent

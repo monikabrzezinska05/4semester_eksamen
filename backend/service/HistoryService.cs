@@ -22,6 +22,7 @@ public class HistoryService
 
     public HistoryModel CreateHistory(HistoryModel model)
     {
+        Console.WriteLine("history service");
         return _historyRepo.CreateHistory(model);
     }
 

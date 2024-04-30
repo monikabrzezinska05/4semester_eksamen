@@ -1,7 +1,7 @@
-using System.Text.Json;
 using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Formatter;
+using Newtonsoft.Json;
 
 namespace service;
 
@@ -33,14 +33,18 @@ public class MQTTService
             {
                 var message = e.ApplicationMessage.ConvertPayloadToString();
                 Console.WriteLine("Received message: " + message);
+                var json = JsonConvert.DeserializeObject(message);
 
                 if (StateService.Connections != null && StateService.Connections.Any())
                 {
                     var connection = StateService.Connections.FirstOrDefault().Value;
-
+                    
                     if (connection != null)
                     {
-                        await StateService.Connections.FirstOrDefault().Value.Send(JsonSerializer.Serialize(e));
+                        var jsonObj = JsonConvert.SerializeObject(message);
+                        //await connection.Send(jsonObj);
+                        connection.OnMessage.Invoke(jsonObj);
+                        Console.WriteLine("Message sent!");
                     }
                     else
                     {
