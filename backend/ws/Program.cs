@@ -34,6 +34,7 @@ public static class Startup
         builder.Services.AddSingleton<UserService>();
         builder.Services.AddSingleton<HashingArgon2id>();
         builder.Services.AddHttpClient();
+        builder.Services.AddJwtService();
 
         var clientEventHandlers = builder.FindAndInjectClientEventHandlers(Assembly.GetExecutingAssembly());
 
