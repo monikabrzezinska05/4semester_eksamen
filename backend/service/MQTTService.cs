@@ -1,3 +1,4 @@
+using System.Text.Json;
 using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Formatter;
@@ -32,9 +33,25 @@ public class MQTTService
             {
                 var message = e.ApplicationMessage.ConvertPayloadToString();
                 Console.WriteLine("Received message: " + message);
+
+                if (StateService.Connections != null && StateService.Connections.Any())
+                {
+                    var connection = StateService.Connections.FirstOrDefault().Value;
+
+                    if (connection != null)
+                    {
+                        await StateService.Connections.FirstOrDefault().Value.Send(JsonSerializer.Serialize(e));
+                    }
+                    else
+                    {
+                        Console.WriteLine("Connection is null.");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("No connections available.");
+                }
                 
-                //send til event handler
-                await StateService.Connections.FirstOrDefault().Value.Send(message);
             }
             catch (Exception exc)
             {
