@@ -17,7 +17,7 @@ public class MQTTService
             .WithTcpServer("mqtt.flespi.io", 8883)
             .WithProtocolVersion(MqttProtocolVersion.V500)
             .WithTls()
-            .WithCredentials("ysMQYbHHGzdTMuiSwz5a3RtqiRbP1hPFva5Vua1g4W9QdAv2TtQ0IJnwulHd4YQe")//Change to real token.
+            .WithCredentials(Environment.GetEnvironmentVariable("mqttToken"))//Change to real token.
             .Build();
 
         //Connect med options.
