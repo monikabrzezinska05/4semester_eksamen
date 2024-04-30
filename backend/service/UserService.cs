@@ -22,7 +22,7 @@ public class UserService
         var hash = _hashingArgon2Id.HashPassword(password, salt);
 
         var newUser = _userRepository.CreateUser(user);
-        _userRepository.CreatePassword(hash, salt, newUser.UserId);
+        _userRepository.CreatePassword(hash, salt, newUser.Mail);
         return newUser;
     }
 }

@@ -14,9 +14,9 @@ public class AuthenticateRepository
 
     public PasswordModel GetUserByEmail(string userEmail)
     {
-        const string sql = "SELECT passwords.UserID, passwords.password, passwords.salt " +
+        const string sql = "SELECT passwords.useremail, passwords.password, passwords.salt " +
                            "FROM public.passwords " +
-                           "JOIN public.\"User\" ON passwords.userid = \"User\".UserID " +
+                           "JOIN public.\"User\" ON passwords.useremail = \"User\".mail " +
                            "WHERE public.\"User\".mail = @userEmail;";
         using (var conn = _dataSource.OpenConnection())
         {
