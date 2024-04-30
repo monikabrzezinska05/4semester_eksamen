@@ -1,3 +1,4 @@
+using System.Net.WebSockets;
 using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Formatter;
@@ -34,7 +35,8 @@ public class MQTTService
                 Console.WriteLine("Received message: " + message);
                 
                 //send til event handler
-                
+                StateService.Connections.FirstOrDefault().Value.Send("");
+
             }
             catch (Exception exc)
             {
