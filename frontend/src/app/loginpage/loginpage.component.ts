@@ -21,4 +21,9 @@ export class LoginpageComponent {
     Password: ['', Validators.required],
     RememberMe: [false]
   });
+
+  async submit() {
+    const url = 'http://localhost:4200'; //ændre at some point
+
+  }
 }
