@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 using System.Net.WebSockets;
+=======
+using System.Reflection;
+>>>>>>> Stashed changes
 using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Formatter;
@@ -35,8 +39,13 @@ public class MQTTService
                 Console.WriteLine("Received message: " + message);
                 
                 //send til event handler
+<<<<<<< Updated upstream
                 StateService.Connections.FirstOrDefault().Value.Send("");
 
+=======
+                
+                
+>>>>>>> Stashed changes
             }
             catch (Exception exc)
             {
