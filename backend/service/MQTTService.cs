@@ -12,6 +12,7 @@ public class MQTTService
         var mqttFactory = new MqttFactory();
         var mqttClient = mqttFactory.CreateMqttClient();
 
+        //Connection options til flespi med brug af token.
         var mqttClientOptions = new MqttClientOptionsBuilder()
             .WithTcpServer("mqtt.flespi.io", 8883)
             .WithProtocolVersion(MqttProtocolVersion.V500)
@@ -19,30 +20,35 @@ public class MQTTService
             .WithCredentials("ysMQYbHHGzdTMuiSwz5a3RtqiRbP1hPFva5Vua1g4W9QdAv2TtQ0IJnwulHd4YQe")//Change to real token.
             .Build();
 
+        //Connect med options.
         await mqttClient.ConnectAsync(mqttClientOptions, CancellationToken.None);
 
+        //Subscribe options til topic.
         var mqttSubscribeOptions = mqttFactory.CreateSubscribeOptionsBuilder()
             .WithTopicFilter(f => f.WithTopic("Security/#"))
             .Build();
 
+        //Subscribe til topic.
         await mqttClient.SubscribeAsync(mqttSubscribeOptions, CancellationToken.None);
 
+        //Vent async til at få en besked.
         mqttClient.ApplicationMessageReceivedAsync += async e =>
         {
             try
             {
+                //Få beskeden.
                 var message = e.ApplicationMessage.ConvertPayloadToString();
-                Console.WriteLine("Received message: " + message);
-                var json = JsonConvert.DeserializeObject(message);
 
+                //Check at der er en connection.
                 if (StateService.Connections != null && StateService.Connections.Any())
                 {
+                    //Få en connection.
                     var connection = StateService.Connections.FirstOrDefault().Value;
                     
                     if (connection != null)
                     {
+                        //Serialize til json object og send det!
                         var jsonObj = JsonConvert.SerializeObject(message);
-                        //await connection.Send(jsonObj);
                         connection.OnMessage.Invoke(jsonObj);
                         Console.WriteLine("Message sent!");
                     }
