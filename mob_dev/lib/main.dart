@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:mob_dev/history_page.dart';
 import 'package:mob_dev/settings_page.dart';
 
-import 'firebase_options.dart';
 import 'home_page.dart';
 import 'models/history_element_model.dart';
 
