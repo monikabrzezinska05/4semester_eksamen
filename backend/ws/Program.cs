@@ -29,6 +29,8 @@ public static class Startup
         builder.Services.AddSingleton<AuthenticateRepository>();
         builder.Services.AddSingleton<UserRepository>();
         
+        builder.Services.AddSingleton<MQTTService>();
+        
         builder.Services.AddSingleton<HistoryService>();
         builder.Services.AddSingleton<AuthenticationService>();
         builder.Services.AddSingleton<UserService>();
@@ -70,5 +72,6 @@ public static class Startup
                 }
             };
         });
+        app.Services.GetService<MQTTService>().CommunicateWithBroker();
     }
 }
