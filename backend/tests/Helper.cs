@@ -1,3 +1,6 @@
+using Dapper;
+using Npgsql;
+
 namespace tests;
 
 public static class Helper
@@ -45,3 +48,53 @@ public static class Helper
             conn.Execute(RebuildScript);
         }
     }
+
+    public static string RebuildScript = @"
+DROP SCHEMA IF EXISTS postgrestest CASCADE;
+CREATE SCHEMA postgres;
+
+-- Create EventType table
+CREATE TABLE EventType (
+    EventTypeId SERIAL PRIMARY KEY,
+    Name VARCHAR(20)
+);
+
+-- Create UnitType table
+CREATE TABLE UnitType (
+    UnitTypeId SERIAL PRIMARY KEY,
+    Name VARCHAR(15)
+);
+
+-- Create User table
+CREATE TABLE 'User' (
+    UserId SERIAL PRIMARY KEY,
+    Name VARCHAR(30),
+    Mail VARCHAR(50),
+    Child BOOLEAN
+);
+
+-- Create Passwords table
+CREATE TABLE Passwords (
+    UserId SERIAL REFERENCES 'User'(UserId),
+    Password VARCHAR(255),
+    Salt VARCHAR(255),
+    PRIMARY KEY (UserId)
+);
+
+-- Create Unit table
+CREATE TABLE Unit (
+    UnitId SERIAL PRIMARY KEY,
+    Name VARCHAR(60),
+    Status BOOLEAN,
+    UnitTypeId SERIAL REFERENCES UnitType(UnitTypeId)
+);
+
+-- Create History table
+CREATE TABLE History (
+    HistoryId SERIAL PRIMARY KEY,
+    UnitId SERIAL REFERENCES Unit(UnitId),
+    Date DATE,
+    UserId SERIAL REFERENCES 'User'(UserId),
+    EventTypeId SERIAL REFERENCES EventType(EventTypeId)
+);";
+}

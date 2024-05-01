@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "service", "backend\service\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "infrastructure", "backend\infrastructure\infrastructure.csproj", "{BA674760-FAB3-4797-9638-E46F301F3724}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "tests", "backend\tests\tests.csproj", "{14950E39-BADF-41C5-A940-F2A421DA928D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,10 +34,15 @@ Global
 		{BA674760-FAB3-4797-9638-E46F301F3724}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA674760-FAB3-4797-9638-E46F301F3724}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA674760-FAB3-4797-9638-E46F301F3724}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14950E39-BADF-41C5-A940-F2A421DA928D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14950E39-BADF-41C5-A940-F2A421DA928D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14950E39-BADF-41C5-A940-F2A421DA928D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14950E39-BADF-41C5-A940-F2A421DA928D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{EFB50B7E-8AD5-45EF-9578-9CD2340D39E5} = {B983D91D-5AB4-49F0-A7D6-73A9160CCFA4}
 		{4A56EF2D-36CB-4E1D-977E-205042587EEA} = {B983D91D-5AB4-49F0-A7D6-73A9160CCFA4}
 		{BA674760-FAB3-4797-9638-E46F301F3724} = {B983D91D-5AB4-49F0-A7D6-73A9160CCFA4}
+		{14950E39-BADF-41C5-A940-F2A421DA928D} = {B983D91D-5AB4-49F0-A7D6-73A9160CCFA4}
 	EndGlobalSection
 EndGlobal
