@@ -25,7 +25,7 @@ public class EmailService
             Text = @$"{unit.Name} has been triggered at: {history.Date}.
 
 
-Best Regards, Securty"
+Best Regards, Securty Home Security"
         };
         foreach (var email in getMails().ToList())
         {
