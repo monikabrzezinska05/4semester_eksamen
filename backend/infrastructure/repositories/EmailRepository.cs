@@ -6,7 +6,7 @@ namespace infrastructure.repositories;
 
 public class EmailRepository
 {
-    private static NpgsqlDataSource _dataSource;
+    private NpgsqlDataSource _dataSource;
 
     public EmailRepository(NpgsqlDataSource dataSource)
     {

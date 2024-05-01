@@ -7,14 +7,14 @@ namespace service;
 
 public class EmailService
 {
-    private static EmailRepository _emailRepository;
+    private EmailRepository _emailRepository;
 
     public EmailService(EmailRepository emailRepository)
     {
         _emailRepository = emailRepository;
     }
 
-    public static void SendEmail(HistoryModel history, Unit unit)
+    public void SendEmail(HistoryModel history, Unit unit)
     {
         var message = new MimeMessage();
         message.From.Add(new MailboxAddress("Securty", Environment.GetEnvironmentVariable("fromEmail")));
@@ -41,7 +41,7 @@ Best Regards, Securty"
         }
     }
 
-    public static IEnumerable<EmailModel> getMails()
+    public IEnumerable<EmailModel> getMails()
     {
         return _emailRepository.getMails();
     }

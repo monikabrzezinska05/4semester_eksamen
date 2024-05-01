@@ -15,18 +15,20 @@ public class ClientTriggersAlarm : BaseEventHandler<ClientTriggersAlarmDto>
 {
     private readonly HistoryService _historyService;
     private readonly UnitService _unitService;
+    private readonly EmailService _emailService;
 
-    public ClientTriggersAlarm(HistoryService historyService, UnitService unitService)
+    public ClientTriggersAlarm(HistoryService historyService, UnitService unitService, EmailService emailService)
     {
         _historyService = historyService;
         _unitService = unitService;
+        _emailService = emailService;
     }
 
     public override Task Handle(ClientTriggersAlarmDto dto, IWebSocketConnection socket)
     {
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.HistoryModel);
         Unit unit = _unitService.getUnitById(dto.HistoryModel.UnitId);
-        EmailService.SendEmail(loggedEvent, unit);
+        _emailService.SendEmail(loggedEvent, unit);
         var alarmTriggerDto = new ResponseDto()
         {   
             ResponseData = loggedEvent
