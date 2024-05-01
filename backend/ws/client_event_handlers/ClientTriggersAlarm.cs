@@ -38,5 +38,3 @@ public class ClientTriggersAlarm : BaseEventHandler<ClientTriggersAlarmDto>
         return Task.CompletedTask;
     }
 }
-
-// TO DO - Når alarmen trigger skal den sende en notifikation - mailing liste skal laves.

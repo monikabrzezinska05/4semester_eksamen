@@ -46,6 +46,3 @@ Best Regards, Securty"
         return _emailRepository.getMails();
     }
 }
-
-//todo Liste med email, navn og id, fetch liste i database hver gang jeg vil sende mail. Få mail service til at hente det fra databasen
-//Hent liste fra database, loop igennem liste for at sende mail?
