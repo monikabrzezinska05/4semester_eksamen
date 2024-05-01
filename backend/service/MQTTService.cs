@@ -38,7 +38,9 @@ public class MQTTService
             {
                 //Få beskeden.
                 var message = e.ApplicationMessage.ConvertPayloadToString();
-
+                Console.WriteLine();
+                Console.WriteLine("RECEIVED MESSAGE FROM MQTT CLIENT: "+message);
+                Console.WriteLine();
                 //Check at der er en connection.
                 if (StateService.Connections != null && StateService.Connections.Any())
                 {
@@ -49,7 +51,7 @@ public class MQTTService
                     {
                         //Serialize til json object og send det!
                         var jsonObj = JsonConvert.SerializeObject(message);
-                        connection.OnMessage.Invoke(jsonObj);
+                        connection.OnMessage.Invoke(message);
                         Console.WriteLine("Message sent!");
                     }
                     else
