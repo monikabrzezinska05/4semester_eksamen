@@ -22,6 +22,7 @@ public class AuthenticationService
     {
         try
         {
+            Console.WriteLine("String med hvad jeg skriver" + userLogin.Email);
             var pwHash = _authenticateRepository.GetUserByEmail(userLogin.Email);
             var hashAlgorithm = new HashingArgon2id();
             var isValid =

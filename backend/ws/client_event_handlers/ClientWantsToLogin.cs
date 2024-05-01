@@ -10,31 +10,28 @@ namespace ws;
 
 public class ClientWantsToLoginDto : BaseDto
 {
-    public string email { get; set; }
-    public string password { get; set; }
+    public UserLogin userLogin { get; set; }
 }
 
 public class ClientWantsToLogin : BaseEventHandler<ClientWantsToLoginDto>
 {
     private readonly AuthenticationService _authenticationService;
+    private readonly TokenService _tokenService;
     
-    public ClientWantsToLogin(AuthenticationService authenticationService)
+    public ClientWantsToLogin(AuthenticationService authenticationService, TokenService tokenService)
     { 
         _authenticationService = authenticationService;
+        _tokenService = tokenService;
     }
     
     public override async Task Handle(ClientWantsToLoginDto dto, IWebSocketConnection socket)
     {
-        var newUserLogin = new UserLogin()
-        {
-            Email = dto.email,
-            Password = dto.password
-        };
-        
-        var user = _authenticationService.Authenticate(newUserLogin);
+        var user = _authenticationService.Authenticate(dto.userLogin);
+        var userToken = _tokenService.IssueJwt(user);
         Console.WriteLine("User: " + user!.Name);
         ResponseDto loginMessage;
-        if (user == null)
+        
+        if (user == null )
         {
             loginMessage = new ResponseDto()
             {
@@ -47,6 +44,9 @@ public class ClientWantsToLogin : BaseEventHandler<ClientWantsToLoginDto>
                 MessageToClient = "You are logged in",
                 ResponseData = user
             };
+            StateService.GetClient(socket.ConnectionInfo.Id).IsAuthenticated = true;
+            StateService.GetClient(socket.ConnectionInfo.Id).user = user;
+            socket.SendDto(new ServerAuthenticatesUser {jwt = _tokenService.IssueJwt(user)});
         }
         var serverLogin = new ServerLogIn()
         {
