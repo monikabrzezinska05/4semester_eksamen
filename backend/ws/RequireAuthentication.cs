@@ -1,12 +1,17 @@
 ﻿using System.Security.Authentication;
-using Microsoft.AspNetCore.Mvc.Filters;
+using Fleck;
+using lib;
+using service;
 
 namespace api;
 
-public class RequireAuthentication : ActionFilterAttribute
+public class RequireAuthenticationAttribute : BaseEventFilter
 {
-    public override void OnActionExecuting(ActionExecutingContext context)
+    public override Task Handle<T>(IWebSocketConnection socket, T dto)
     {
-        if (context.HttpContext.GetSessionData() == null) throw new AuthenticationException();
+        if (!StateService.GetClient(socket.ConnectionInfo.Id).IsAuthenticated)
+            throw new AuthenticationException("Client is not authenticated!");
+        return Task.CompletedTask;
+
     }
 }
