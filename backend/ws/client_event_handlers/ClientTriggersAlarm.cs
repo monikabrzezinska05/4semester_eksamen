@@ -26,7 +26,7 @@ public class ClientTriggersAlarm : BaseEventHandler<ClientTriggersAlarmDto>
     {
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.HistoryModel);
         Unit unit = _unitService.getUnitById(dto.HistoryModel.UnitId);
-        EmailService.SendEmail("scoop", loggedEvent, unit);
+        EmailService.SendEmail(loggedEvent, unit);
         var alarmTriggerDto = new ResponseDto()
         {   
             ResponseData = loggedEvent
