@@ -7,13 +7,12 @@ namespace service;
 
 public class EmailService
 {
-    public static void SendEmail(string clientName, string toEmail, HistoryModel history)
+    public static void SendEmail(string toEmail, HistoryModel history, Unit unit)
     {
-        Unit unit = UnitRepository.getUnitById(history.UnitId);
         var message = new MimeMessage();
         message.From.Add(new MailboxAddress("Securty", Environment.GetEnvironmentVariable("fromEmail")));
-        message.To.Add(new MailboxAddress(clientName, toEmail));
-        message.Subject = "Skal ændres når jeg har et subject";
+        message.To.Add(new MailboxAddress(toEmail,toEmail));
+        message.Subject = "Alarm triggered";
 
         message.Body = new TextPart("plain")
         {
@@ -34,5 +33,5 @@ Best Regards, Securty"
     }
 }
 
-//todo Liste med email og id, fetch liste i database hver gang jeg vil sende mail. Få mail service til at hente det fra databasen
-//Unit på text string med triggered alarm. Skal os hentes fra databasen.
+//todo Liste med email, navn og id, fetch liste i database hver gang jeg vil sende mail. Få mail service til at hente det fra databasen
+//Hent liste fra database, loop igennem liste for at sende mail?
