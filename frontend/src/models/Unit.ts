@@ -1,6 +1,12 @@
 export interface Unit{
   unitId?: number;
   name: string;
-  status: bool;
-  history: History[];
+  status: boolean;
+  unitType: UnitType;
+}
+
+export enum UnitType{
+  Door,
+  Window,
+  MotionSensor,
 }
