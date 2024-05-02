@@ -6,6 +6,7 @@ import 'package:mob_dev/settings_page.dart';
 
 import 'home_page.dart';
 import 'models/History/history_element_model.dart';
+import 'models/unit/unit_model.dart';
 
 void main() async {
   runApp(const MyApp());
@@ -51,28 +52,48 @@ class _MainPageState extends State<MainPage> {
   final List<HistoryElementModel> historyElements = [
     HistoryElementModel(
       historyId: 1,
-      unitName: 'MasterUnit 1',
+      unit: UnitModel(
+        unitId: 1,
+        name: 'MasterUnit 1',
+        unitType: UnitType.Door,
+        status: true,
+      ),
       eventType: EventType.AlarmArmed,
       personName: 'John Doe',
       date: DateTime.now(),
     ),
     HistoryElementModel(
       historyId: 2,
-      unitName: 'MasterUnit 1',
+      unit: UnitModel(
+        unitId: 1,
+        name: 'MasterUnit 1',
+        unitType: UnitType.Door,
+        status: true,
+      ),
       eventType: EventType.AlarmDisarmed,
       personName: 'John Doe',
       date: DateTime.now(),
     ),
     HistoryElementModel(
       historyId: 3,
-      unitName: 'MasterUnit 1',
+      unit: UnitModel(
+        unitId: 1,
+        name: 'MasterUnit 1',
+        unitType: UnitType.Door,
+        status: true,
+      ),
       eventType: EventType.AlarmStopped,
       personName: 'John Doe',
       date: DateTime.now(),
     ),
     HistoryElementModel(
       historyId: 3,
-      unitName: 'MasterUnit 1',
+      unit: UnitModel(
+        unitId: 1,
+        name: 'MasterUnit 1',
+        unitType: UnitType.Door,
+        status: true,
+      ),
       eventType: EventType.AlarmStopped,
       personName: 'John Doe',
       date: DateTime.now(),

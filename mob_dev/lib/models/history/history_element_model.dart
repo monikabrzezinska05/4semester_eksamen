@@ -1,6 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
+import '../unit/unit_model.dart';
+
 part 'history_element_model.freezed.dart';
 part 'history_element_model.g.dart';
 
@@ -9,7 +11,7 @@ part 'history_element_model.g.dart';
 class HistoryElementModel with _$HistoryElementModel {
    factory HistoryElementModel({
     required int historyId,
-    required Unit unit,
+    required UnitModel unit,
     required String personName,
     required EventType eventType,
     required DateTime date,

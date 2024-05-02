@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 
 import 'models/History/history_element_model.dart';
 
+
 class HistoryPage extends StatefulWidget {
   final List<HistoryElementModel> historyElements;
   const HistoryPage({super.key, required this.historyElements});
@@ -41,7 +42,7 @@ class _HistoryElementState extends State<HistoryElement> {
       itemBuilder: (context, index) {
         final historyElement = widget.historyElements[index];
         return ListTile(
-          title: Text(historyElement.unitName),
+          title: Text(historyElement.unit.name),
           subtitle: Text(generateSubtitle(historyElement)),
           trailing: Text(DateFormat('H:m:s d/M/y').format(historyElement.date)),
         );

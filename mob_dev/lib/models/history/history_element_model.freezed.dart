@@ -21,7 +21,7 @@ HistoryElementModel _$HistoryElementModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$HistoryElementModel {
   int get historyId => throw _privateConstructorUsedError;
-  String get unitName => throw _privateConstructorUsedError;
+  UnitModel get unit => throw _privateConstructorUsedError;
   String get personName => throw _privateConstructorUsedError;
   EventType get eventType => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
@@ -40,10 +40,12 @@ abstract class $HistoryElementModelCopyWith<$Res> {
   @useResult
   $Res call(
       {int historyId,
-      String unitName,
+      UnitModel unit,
       String personName,
       EventType eventType,
       DateTime date});
+
+  $UnitModelCopyWith<$Res> get unit;
 }
 
 /// @nodoc
@@ -60,7 +62,7 @@ class _$HistoryElementModelCopyWithImpl<$Res, $Val extends HistoryElementModel>
   @override
   $Res call({
     Object? historyId = null,
-    Object? unitName = null,
+    Object? unit = null,
     Object? personName = null,
     Object? eventType = null,
     Object? date = null,
@@ -70,10 +72,10 @@ class _$HistoryElementModelCopyWithImpl<$Res, $Val extends HistoryElementModel>
           ? _value.historyId
           : historyId // ignore: cast_nullable_to_non_nullable
               as int,
-      unitName: null == unitName
-          ? _value.unitName
-          : unitName // ignore: cast_nullable_to_non_nullable
-              as String,
+      unit: null == unit
+          ? _value.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as UnitModel,
       personName: null == personName
           ? _value.personName
           : personName // ignore: cast_nullable_to_non_nullable
@@ -88,6 +90,14 @@ class _$HistoryElementModelCopyWithImpl<$Res, $Val extends HistoryElementModel>
               as DateTime,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UnitModelCopyWith<$Res> get unit {
+    return $UnitModelCopyWith<$Res>(_value.unit, (value) {
+      return _then(_value.copyWith(unit: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -100,10 +110,13 @@ abstract class _$$HistoryElementModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {int historyId,
-      String unitName,
+      UnitModel unit,
       String personName,
       EventType eventType,
       DateTime date});
+
+  @override
+  $UnitModelCopyWith<$Res> get unit;
 }
 
 /// @nodoc
@@ -118,7 +131,7 @@ class __$$HistoryElementModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? historyId = null,
-    Object? unitName = null,
+    Object? unit = null,
     Object? personName = null,
     Object? eventType = null,
     Object? date = null,
@@ -128,10 +141,10 @@ class __$$HistoryElementModelImplCopyWithImpl<$Res>
           ? _value.historyId
           : historyId // ignore: cast_nullable_to_non_nullable
               as int,
-      unitName: null == unitName
-          ? _value.unitName
-          : unitName // ignore: cast_nullable_to_non_nullable
-              as String,
+      unit: null == unit
+          ? _value.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as UnitModel,
       personName: null == personName
           ? _value.personName
           : personName // ignore: cast_nullable_to_non_nullable
@@ -155,7 +168,7 @@ class _$HistoryElementModelImpl
     implements _HistoryElementModel {
   _$HistoryElementModelImpl(
       {required this.historyId,
-      required this.unitName,
+      required this.unit,
       required this.personName,
       required this.eventType,
       required this.date});
@@ -166,7 +179,7 @@ class _$HistoryElementModelImpl
   @override
   final int historyId;
   @override
-  final String unitName;
+  final UnitModel unit;
   @override
   final String personName;
   @override
@@ -176,7 +189,7 @@ class _$HistoryElementModelImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HistoryElementModel(historyId: $historyId, unitName: $unitName, personName: $personName, eventType: $eventType, date: $date)';
+    return 'HistoryElementModel(historyId: $historyId, unit: $unit, personName: $personName, eventType: $eventType, date: $date)';
   }
 
   @override
@@ -185,7 +198,7 @@ class _$HistoryElementModelImpl
     properties
       ..add(DiagnosticsProperty('type', 'HistoryElementModel'))
       ..add(DiagnosticsProperty('historyId', historyId))
-      ..add(DiagnosticsProperty('unitName', unitName))
+      ..add(DiagnosticsProperty('unit', unit))
       ..add(DiagnosticsProperty('personName', personName))
       ..add(DiagnosticsProperty('eventType', eventType))
       ..add(DiagnosticsProperty('date', date));
@@ -198,8 +211,7 @@ class _$HistoryElementModelImpl
             other is _$HistoryElementModelImpl &&
             (identical(other.historyId, historyId) ||
                 other.historyId == historyId) &&
-            (identical(other.unitName, unitName) ||
-                other.unitName == unitName) &&
+            (identical(other.unit, unit) || other.unit == unit) &&
             (identical(other.personName, personName) ||
                 other.personName == personName) &&
             (identical(other.eventType, eventType) ||
@@ -209,8 +221,8 @@ class _$HistoryElementModelImpl
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, historyId, unitName, personName, eventType, date);
+  int get hashCode =>
+      Object.hash(runtimeType, historyId, unit, personName, eventType, date);
 
   @JsonKey(ignore: true)
   @override
@@ -230,7 +242,7 @@ class _$HistoryElementModelImpl
 abstract class _HistoryElementModel implements HistoryElementModel {
   factory _HistoryElementModel(
       {required final int historyId,
-      required final String unitName,
+      required final UnitModel unit,
       required final String personName,
       required final EventType eventType,
       required final DateTime date}) = _$HistoryElementModelImpl;
@@ -241,7 +253,7 @@ abstract class _HistoryElementModel implements HistoryElementModel {
   @override
   int get historyId;
   @override
-  String get unitName;
+  UnitModel get unit;
   @override
   String get personName;
   @override
