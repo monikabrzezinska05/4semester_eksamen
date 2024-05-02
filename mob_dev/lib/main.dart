@@ -66,7 +66,7 @@ class _MainPageState extends State<MainPage> {
       historyId: 2,
       unit: UnitModel(
         unitId: 1,
-        name: 'MasterUnit 1',
+        name: 'MasterUnit 2',
         unitType: UnitType.Door,
         status: true,
       ),
@@ -78,7 +78,7 @@ class _MainPageState extends State<MainPage> {
       historyId: 3,
       unit: UnitModel(
         unitId: 1,
-        name: 'MasterUnit 1',
+        name: 'MasterUnit 3',
         unitType: UnitType.Door,
         status: true,
       ),
@@ -87,10 +87,10 @@ class _MainPageState extends State<MainPage> {
       date: DateTime.now(),
     ),
     HistoryElementModel(
-      historyId: 3,
+      historyId: 4,
       unit: UnitModel(
         unitId: 1,
-        name: 'MasterUnit 1',
+        name: 'MasterUnit 4',
         unitType: UnitType.Door,
         status: true,
       ),

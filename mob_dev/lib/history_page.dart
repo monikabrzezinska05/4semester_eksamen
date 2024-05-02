@@ -19,12 +19,58 @@ class _HistoryPageState extends State<HistoryPage> {
       appBar: AppBar(
         title: const Text('history'),
       ),
-      body:  Center(
-        child: HistoryElement(historyElements: widget.historyElements)
+      body: Column(
+        children: [HistoryFilterElement(historyElements: widget.historyElements), Container(child: HistoryElement(historyElements: widget.historyElements))],
       ),
     );
   }
 }
+
+class HistoryFilterElement extends StatefulWidget {
+  final List<HistoryElementModel> historyElements;
+  const HistoryFilterElement({Key? key, required this.historyElements}) : super(key: key);
+
+  @override
+  State<HistoryFilterElement> createState() => _HistoryFilterElementState();
+}
+
+class _HistoryFilterElementState extends State<HistoryFilterElement> {
+  String dropdownValue = '';
+
+  @override
+  void initState() {
+    super.initState();
+    dropdownValue = widget.historyElements[0].unit.name;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var eventTypes = widget.historyElements.map((historyElement) => historyElement.unit.name).toSet();
+
+    return DropdownButton<String>(
+      value: dropdownValue,
+      icon: const Icon(Icons.arrow_downward),
+      elevation: 16,
+      style: const TextStyle(color: Colors.pink),
+      underline: Container(
+        height: 2,
+        color: Colors.pink,
+      ),
+      onChanged: (String? value) {
+        setState(() {
+          dropdownValue = value!;
+        });
+      },
+      items: widget.historyElements.map<DropdownMenuItem<String>>((HistoryElementModel value) {
+        return DropdownMenuItem<String>(
+          value: value.unit.name,
+          child: Text(value.unit.name),
+        );
+      }).toList(),
+    );
+  }
+}
+
 
 class HistoryElement extends StatefulWidget {
   final List<HistoryElementModel> historyElements;
