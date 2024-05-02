@@ -28,12 +28,16 @@ public static class Startup
         builder.Services.AddSingleton<HistoryRepo>();
         builder.Services.AddSingleton<AuthenticateRepository>();
         builder.Services.AddSingleton<UserRepository>();
+        builder.Services.AddSingleton<EmailRepository>();
+        builder.Services.AddSingleton<UnitRepository>();
         
         builder.Services.AddSingleton<MQTTService>();
         
         builder.Services.AddSingleton<HistoryService>();
         builder.Services.AddSingleton<AuthenticationService>();
         builder.Services.AddSingleton<UserService>();
+        builder.Services.AddSingleton<EmailService>();
+        builder.Services.AddSingleton<UnitService>();
         builder.Services.AddSingleton<HashingArgon2id>();
         builder.Services.AddHttpClient();
 
