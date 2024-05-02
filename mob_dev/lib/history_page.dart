@@ -15,14 +15,6 @@ class HistoryPage extends StatefulWidget {
 class _HistoryPageState extends State<HistoryPage> {
   String selectedUnit = '';
 
-  List<String> getUnits() {
-    List<String> units = widget.historyElements
-        .map((element) => element.unit.name)
-        .toSet()
-        .toList();
-    return units;
-  }
-
   void onUnitSelected(String unit) {
     setState(() {
       selectedUnit = unit;
@@ -37,7 +29,7 @@ class _HistoryPageState extends State<HistoryPage> {
       ),
       body: Column(
         children: [
-         HistoryPanelFilters(historyElements: getUnits(), onUnitSelected: onUnitSelected),
+         HistoryPanelFilters(historyElements: widget.historyElements, onUnitSelected: onUnitSelected),
           Expanded(
               child: HistoryElement(
             historyElements: widget.historyElements,
@@ -51,7 +43,7 @@ class _HistoryPageState extends State<HistoryPage> {
 
 class HistoryPanelFilters extends StatefulWidget {
 
-  final List<String> historyElements;
+  final List<HistoryElementModel> historyElements;
   final ValueChanged<String> onUnitSelected;
 
   const HistoryPanelFilters({super.key, required this.historyElements, required this.onUnitSelected});
@@ -61,6 +53,20 @@ class HistoryPanelFilters extends StatefulWidget {
 }
 
 class _HistoryPanelFiltersState extends State<HistoryPanelFilters> {
+
+  //TODO - Implement three string builders from historyElements
+  List<String> getUnits() {
+    return widget.historyElements.map((element) => element.unit.name).toSet().toList();
+  }
+
+  List<String> getEvents() {
+    return widget.historyElements.map((element) => element.eventType.toString().substring(10)).toSet().toList();
+  }
+
+  List<String> getPersons() {
+    return widget.historyElements.map((element) => element.personName).toSet().toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
@@ -71,18 +77,21 @@ class _HistoryPanelFiltersState extends State<HistoryPanelFilters> {
             Spacer(),
             Spacer(),
             HistoryDropdownMenus(
-              historyElements: widget.historyElements,
+              historyElements: getUnits(),
               onUnitSelected: widget.onUnitSelected,
+              filterType: 'unit'
             ),
             Spacer(),
             HistoryDropdownMenus(
-              historyElements: widget.historyElements,
+              historyElements: getEvents(),
               onUnitSelected: widget.onUnitSelected,
+              filterType: 'event'
             ),
             Spacer(),
             HistoryDropdownMenus(
-              historyElements: widget.historyElements,
+              historyElements: getPersons(),
               onUnitSelected: widget.onUnitSelected,
+              filterType: 'person'
             ),
             Spacer(),
             Spacer(),
@@ -97,9 +106,10 @@ class _HistoryPanelFiltersState extends State<HistoryPanelFilters> {
 class HistoryDropdownMenus extends StatefulWidget {
   final List<String> historyElements;
   final ValueChanged<String> onUnitSelected;
+  String filterType = '';
 
-  const HistoryDropdownMenus(
-      {Key? key, required this.historyElements, required this.onUnitSelected})
+   HistoryDropdownMenus(
+      {Key? key, required this.historyElements, required this.onUnitSelected, required this.filterType})
       : super(key: key);
 
   @override
@@ -117,7 +127,6 @@ class _HistoryDropdownMenusState extends State<HistoryDropdownMenus> {
   @override
   Widget build(BuildContext context) {
     return DropdownButton<String>(
-      hint: Text("Filter by unit"),
       value: dropdownValue,
       icon: const Icon(Icons.arrow_downward),
       elevation: 16,
@@ -138,7 +147,7 @@ class _HistoryDropdownMenusState extends State<HistoryDropdownMenus> {
         });
       },
       items: [
-        DropdownMenuItem(child: Text("Filter by unit")),
+        DropdownMenuItem(child: Text("Filter by " + widget.filterType)),
         ...widget.historyElements.map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
