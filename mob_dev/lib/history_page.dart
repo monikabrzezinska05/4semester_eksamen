@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import 'models/history_element_model.dart';
+import 'models/History/history_element_model.dart';
 
 class HistoryPage extends StatefulWidget {
   final List<HistoryElementModel> historyElements;
@@ -16,7 +16,7 @@ class _HistoryPageState extends State<HistoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('History'),
+        title: const Text('history'),
       ),
       body:  Center(
         child: HistoryElement(historyElements: widget.historyElements)

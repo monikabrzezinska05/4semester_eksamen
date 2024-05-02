@@ -16,26 +16,41 @@ public class HistoryRepo
     public List<HistoryModel> GetHistory(DateTime? timePeriod)
     {
         string sql = "";
+        string sqlGetUnit = "SELECT * FROM unit WHERE unitid IN (@unitid)";
         if (timePeriod != null)
         {
             sql =
-                "SELECT historyid, CONCAT(u.unitid, u.name, u.unittype, u.status) as \"Unit\", \"User\".name, eventtype, date\n" +
+                "SELECT historyid, unitid, \"User\".name, eventtype, date\n" +
                 "FROM history\n" +
-                "JOIN public.unit u on u.unitid = history.unitid\n " +
                 "LEFT JOIN public.\"User\" on \"User\".mail = history.useremail WHERE history.date > @timePeriod";
         }
         else
         {
             sql =
-                "SELECT historyid, CONCAT(u.unitid, u.name, u.unittype, u.status) as \"Unit\", \"User\".name, eventtype, date\n" +
+                "SELECT historyid, unitid, \"User\".name, eventtype, date\n" +
                 "FROM history\n" +
-                "JOIN public.unit u on u.unitid = history.unitid\n " +
                 "LEFT JOIN public.\"User\" on \"User\".mail = history.useremail";
         }
 
         using (var conn = _dataSource.OpenConnection())
         {
-            return conn.Query<HistoryModel>(sql).ToList();
+            List<HistoryModel> historyModels = conn.Query<HistoryModel>(sql).ToList();
+            
+            List<int> unitIds = historyModels.Select(historyModel => historyModel.UnitId).ToList();
+            
+            var unitIdParameters = new DynamicParameters();
+            foreach (var unitId in unitIds)
+            {
+                unitIdParameters.Add($"{unitId}", unitId);
+            }
+            List<Unit> units = conn.Query<Unit>(sqlGetUnit, unitIdParameters).ToList();
+            
+            foreach (var historyModel in historyModels)
+            {
+                historyModel.Unit = units.Find(unit => unit.UnitId == historyModel.UnitId);
+            }
+
+            return historyModels;
         }
     }
 

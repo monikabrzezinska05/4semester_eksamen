@@ -9,7 +9,7 @@ part 'history_element_model.g.dart';
 class HistoryElementModel with _$HistoryElementModel {
    factory HistoryElementModel({
     required int historyId,
-    required String unitName,
+    required Unit unit,
     required String personName,
     required EventType eventType,
     required DateTime date,

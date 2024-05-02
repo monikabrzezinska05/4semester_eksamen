@@ -5,7 +5,7 @@ import 'package:mob_dev/history_page.dart';
 import 'package:mob_dev/settings_page.dart';
 
 import 'home_page.dart';
-import 'models/history_element_model.dart';
+import 'models/History/history_element_model.dart';
 
 void main() async {
   runApp(const MyApp());
@@ -47,7 +47,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   final List<String> headline = ['MaserUnit 1', 'MasterUnit 2', 'MsterUnit 3'];
-  final List<String> underheadlines = ['Unit 1', 'Unit 2', 'Unit 3'];
+  final List<String> underheadlines = ['unit 1', 'unit 2', 'unit 3'];
   final List<HistoryElementModel> historyElements = [
     HistoryElementModel(
       historyId: 1,
@@ -111,7 +111,7 @@ class _MainPageState extends State<MainPage> {
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.history),
-            label: 'History',
+            label: 'history',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
