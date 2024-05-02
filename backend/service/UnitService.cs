@@ -12,8 +12,13 @@ public class UnitService
         _unitRepository = unitRepository;
     }
 
-    public Unit getUnitById(int unitId)
+    public Unit GetUnitById(int unitId)
     {
-        return _unitRepository.getUnitById(unitId);
+        return _unitRepository.GetUnitById(unitId);
+    }
+
+    public List<Unit> GetAllUnits()
+    {
+        return _unitRepository.GetAllUnits();
     }
 }

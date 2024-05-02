@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {OverviewComponent} from "../overview/overview.component";
 import {SidebarComponent} from "../sidebar/sidebar.component";
 
@@ -12,6 +12,11 @@ import {SidebarComponent} from "../sidebar/sidebar.component";
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
+  constructor() { }
+
+  ngOnInit(): void {
+
+  }
 
 }

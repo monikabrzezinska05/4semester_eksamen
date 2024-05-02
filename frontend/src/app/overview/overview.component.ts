@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {Unit, UnitType} from "../../models/Unit";
 import {State} from "../../services/state.service";
@@ -11,7 +11,7 @@ import {State} from "../../services/state.service";
   styleUrl: './overview.component.css'
 })
 
-export class OverviewComponent {
+export class OverviewComponent implements OnInit, AfterViewInit{
   listOfUnits: number[] = [1,2,3,4];
   @Input() unitType!: string;
   unit!: Unit[];
@@ -27,7 +27,15 @@ export class OverviewComponent {
     });
   }
 
-  loadUnits() {
+  ngAfterViewInit(): void {
+    this.loadUnits();
+    }
 
+  ngOnInit(): void { }
+
+  loadUnits() {
+    this.state.ws.send(JSON.stringify({
+      eventType: "ClientOpensConnection"
+    }));
   }
 }

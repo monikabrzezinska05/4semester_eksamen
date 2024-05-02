@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Unit} from "../models/Unit";
 import {environment} from "../environments/environment";
-import {BaseDto, ServerShowsHistoryDto} from "../models/BaseDto";
+import {BaseDto, ServerOpensConnectionDto, ServerShowsHistoryDto} from "../models/BaseDto";
 import {HistoryModel} from "../models/HistoryModel";
 
 @Injectable({
@@ -22,8 +22,12 @@ export class State{
       this[messageFromServer.eventType].call(this, messageFromServer);
     }
   }
-  
+
   ServerShowsHistory(dto: ServerShowsHistoryDto){
-    this.history = dto.responseDto.map(response => response.responseData);
+    this.history.push(...dto.responseDto.responseData);
+  }
+
+  ServerOpensConnection(dto: ServerOpensConnectionDto){
+    this.units.push(...dto.responseDto.responseData);
   }
 }
