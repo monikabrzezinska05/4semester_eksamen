@@ -1,7 +1,8 @@
 import {Injectable} from "@angular/core";
 import {Unit} from "../models/Unit";
 import {environment} from "../environments/environment";
-import {BaseDto} from "../models/BaseDto";
+import {BaseDto, ServerShowsHistoryDto} from "../models/BaseDto";
+import {HistoryModel} from "../models/HistoryModel";
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +10,8 @@ import {BaseDto} from "../models/BaseDto";
 
 export class State{
   units: Unit[]= [];
+  history: HistoryModel[] = [];
+
   ws: WebSocket = new WebSocket(environment.baseUrl)
 
   constructor() {
@@ -19,7 +22,8 @@ export class State{
       this[messageFromServer.eventType].call(this, messageFromServer);
     }
   }
+  
+  ServerShowsHistory(dto: ServerShowsHistoryDto){
+    this.history = dto.responseDto.map(response => response.responseData);
+  }
 }
-
-
-
