@@ -1,12 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import 'models/History/history_element_model.dart';
 
-
 class HistoryPage extends StatefulWidget {
   final List<HistoryElementModel> historyElements;
+
   const HistoryPage({super.key, required this.historyElements});
 
   @override
@@ -14,6 +13,22 @@ class HistoryPage extends StatefulWidget {
 }
 
 class _HistoryPageState extends State<HistoryPage> {
+  String selectedUnit = '';
+
+  List<String> getUnits() {
+    List<String> units = widget.historyElements
+        .map((element) => element.unit.name)
+        .toSet()
+        .toList();
+    return units;
+  }
+
+  void onUnitSelected(String unit) {
+    setState(() {
+      selectedUnit = unit;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,77 +36,159 @@ class _HistoryPageState extends State<HistoryPage> {
         title: const Text('history'),
       ),
       body: Column(
-        children: [HistoryFilterElement(historyElements: widget.historyElements), Expanded(child: HistoryElement(historyElements: widget.historyElements))],
+        children: [
+         HistoryPanelFilters(historyElements: getUnits(), onUnitSelected: onUnitSelected),
+          Expanded(
+              child: HistoryElement(
+            historyElements: widget.historyElements,
+            selectedUnit: selectedUnit,
+          ))
+        ],
       ),
     );
   }
 }
 
-class HistoryFilterElement extends StatefulWidget {
-  final List<HistoryElementModel> historyElements;
-  const HistoryFilterElement({Key? key, required this.historyElements}) : super(key: key);
+class HistoryPanelFilters extends StatefulWidget {
+
+  final List<String> historyElements;
+  final ValueChanged<String> onUnitSelected;
+
+  const HistoryPanelFilters({super.key, required this.historyElements, required this.onUnitSelected});
 
   @override
-  State<HistoryFilterElement> createState() => _HistoryFilterElementState();
+  State<HistoryPanelFilters> createState() => _HistoryPanelFiltersState();
 }
 
-class _HistoryFilterElementState extends State<HistoryFilterElement> {
-  String dropdownValue = '';
+class _HistoryPanelFiltersState extends State<HistoryPanelFilters> {
+  @override
+  Widget build(BuildContext context) {
+    return ExpansionTile(
+      title: const Text("Filters"),
+      children: [
+        Row(
+          children: [
+            Spacer(),
+            Spacer(),
+            HistoryDropdownMenus(
+              historyElements: widget.historyElements,
+              onUnitSelected: widget.onUnitSelected,
+            ),
+            Spacer(),
+            HistoryDropdownMenus(
+              historyElements: widget.historyElements,
+              onUnitSelected: widget.onUnitSelected,
+            ),
+            Spacer(),
+            HistoryDropdownMenus(
+              historyElements: widget.historyElements,
+              onUnitSelected: widget.onUnitSelected,
+            ),
+            Spacer(),
+            Spacer(),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+
+class HistoryDropdownMenus extends StatefulWidget {
+  final List<String> historyElements;
+  final ValueChanged<String> onUnitSelected;
+
+  const HistoryDropdownMenus(
+      {Key? key, required this.historyElements, required this.onUnitSelected})
+      : super(key: key);
+
+  @override
+  State<HistoryDropdownMenus> createState() => _HistoryDropdownMenusState();
+}
+
+class _HistoryDropdownMenusState extends State<HistoryDropdownMenus> {
+  String? dropdownValue;
 
   @override
   void initState() {
     super.initState();
-    dropdownValue = widget.historyElements[0].unit.name;
   }
 
   @override
   Widget build(BuildContext context) {
-    var eventTypes = widget.historyElements.map((historyElement) => historyElement.unit.name).toSet();
-
     return DropdownButton<String>(
+      hint: Text("Filter by unit"),
       value: dropdownValue,
       icon: const Icon(Icons.arrow_downward),
       elevation: 16,
-      style: const TextStyle(color: Colors.pink),
+      style: const TextStyle(color: Colors.deepOrange),
       underline: Container(
         height: 2,
-        color: Colors.pink,
+        color: Colors.deepOrange,
       ),
       onChanged: (String? value) {
         setState(() {
-          dropdownValue = value!;
+          if (value == null) {
+            widget.onUnitSelected('');
+            dropdownValue = null;
+          } else {
+            dropdownValue = value!;
+            widget.onUnitSelected(value);
+          }
         });
       },
-      items: widget.historyElements.map<DropdownMenuItem<String>>((HistoryElementModel value) {
-        return DropdownMenuItem<String>(
-          value: value.unit.name,
-          child: Text(value.unit.name),
-        );
-      }).toList(),
+      items: [
+        DropdownMenuItem(child: Text("Filter by unit")),
+        ...widget.historyElements.map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
+            value: value,
+            child: Text(value),
+          );
+        }).toList()
+      ],
     );
   }
 }
 
-
 class HistoryElement extends StatefulWidget {
+  final String? selectedUnit;
   final List<HistoryElementModel> historyElements;
-  const HistoryElement({super.key, required this.historyElements});
+
+  const HistoryElement(
+      {super.key, required this.historyElements, required this.selectedUnit});
 
   @override
   State<HistoryElement> createState() => _HistoryElementState();
 }
 
 class _HistoryElementState extends State<HistoryElement> {
+  List<HistoryElementModel>? filteredHistoryElements;
+  List<HistoryElementModel>? usedListOfHistoryElements;
+
+  void checkFilter() {
+    if (filteredHistoryElements!.length > 0) {
+      usedListOfHistoryElements = filteredHistoryElements!;
+    } else {
+      usedListOfHistoryElements = widget.historyElements;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    filteredHistoryElements = widget.historyElements
+        .where((element) => element.unit.name == widget.selectedUnit)
+        .toList();
+    checkFilter();
+
     return ListView.builder(
-      itemCount: widget.historyElements.length,
+      itemCount: usedListOfHistoryElements!.length,
       itemBuilder: (context, index) {
-        final historyElement = widget.historyElements[index];
+        ;
         return ListTile(
-          title: Text(historyElement.unit.name),
-          subtitle: Text(generateSubtitle(historyElement)),
-          trailing: Text(DateFormat('H:m:s d/M/y').format(historyElement.date)),
+          title: Text(usedListOfHistoryElements![index].unit.name),
+          subtitle: Text(generateSubtitle(usedListOfHistoryElements![index])),
+          trailing: Text(DateFormat('H:m:s d/M/y')
+              .format(usedListOfHistoryElements![index].date)),
         );
       },
     );
