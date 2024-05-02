@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -20,7 +21,7 @@ class _HistoryPageState extends State<HistoryPage> {
         title: const Text('history'),
       ),
       body: Column(
-        children: [HistoryFilterElement(historyElements: widget.historyElements), Container(child: HistoryElement(historyElements: widget.historyElements))],
+        children: [HistoryFilterElement(historyElements: widget.historyElements), Expanded(child: HistoryElement(historyElements: widget.historyElements))],
       ),
     );
   }
