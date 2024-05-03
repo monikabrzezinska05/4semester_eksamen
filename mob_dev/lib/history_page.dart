@@ -22,6 +22,16 @@ class _HistoryPageState extends State<HistoryPage> {
       selectedUnit = unit;
     });
   }
+  void onEventSelected(String unit) {
+    setState(() {
+      selectedEventType = unit;
+    });
+  }
+  void onPersonSelected(String unit) {
+    setState(() {
+      selectedPerson = unit;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +43,16 @@ class _HistoryPageState extends State<HistoryPage> {
         children: [
           HistoryPanelFilters(
               historyElements: widget.historyElements,
-              onUnitSelected: onUnitSelected),
+              onUnitSelected: onUnitSelected,
+              onEventTypeSelected: onEventSelected,
+              onPersonSelected: onPersonSelected
+          ),
           Expanded(
             child: HistoryElement(
               historyElements: widget.historyElements,
               selectedUnit: selectedUnit,
-              selectedEventType:,
+              selectedEventType: selectedEventType,
+              selectedPerson: selectedPerson,
             ),
           )
         ],
