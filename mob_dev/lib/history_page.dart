@@ -14,6 +14,8 @@ class HistoryPage extends StatefulWidget {
 
 class _HistoryPageState extends State<HistoryPage> {
   String selectedUnit = '';
+  String selectedEventType = '';
+  String selectedPerson = '';
 
   void onUnitSelected(String unit) {
     setState(() {
@@ -29,12 +31,16 @@ class _HistoryPageState extends State<HistoryPage> {
       ),
       body: Column(
         children: [
-         HistoryPanelFilters(historyElements: widget.historyElements, onUnitSelected: onUnitSelected),
+          HistoryPanelFilters(
+              historyElements: widget.historyElements,
+              onUnitSelected: onUnitSelected),
           Expanded(
-              child: HistoryElement(
-            historyElements: widget.historyElements,
-            selectedUnit: selectedUnit,
-          ))
+            child: HistoryElement(
+              historyElements: widget.historyElements,
+              selectedUnit: selectedUnit,
+              selectedEventType:,
+            ),
+          )
         ],
       ),
     );
@@ -42,29 +48,42 @@ class _HistoryPageState extends State<HistoryPage> {
 }
 
 class HistoryPanelFilters extends StatefulWidget {
-
   final List<HistoryElementModel> historyElements;
   final ValueChanged<String> onUnitSelected;
+  final ValueChanged<String> onEventTypeSelected;
+  final ValueChanged<String> onPersonSelected;
 
-  const HistoryPanelFilters({super.key, required this.historyElements, required this.onUnitSelected});
+  const HistoryPanelFilters({super.key,
+    required this.historyElements,
+    required this.onUnitSelected,
+    required this.onEventTypeSelected,
+    required this.onPersonSelected});
 
   @override
   State<HistoryPanelFilters> createState() => _HistoryPanelFiltersState();
 }
 
 class _HistoryPanelFiltersState extends State<HistoryPanelFilters> {
-
   //TODO - Implement three string builders from historyElements
   List<String> getUnits() {
-    return widget.historyElements.map((element) => element.unit.name).toSet().toList();
+    return widget.historyElements
+        .map((element) => element.unit.name)
+        .toSet()
+        .toList();
   }
 
   List<String> getEvents() {
-    return widget.historyElements.map((element) => element.eventType.toString().substring(10)).toSet().toList();
+    return widget.historyElements
+        .map((element) => element.eventType.toString().substring(10))
+        .toSet()
+        .toList();
   }
 
   List<String> getPersons() {
-    return widget.historyElements.map((element) => element.personName).toSet().toList();
+    return widget.historyElements
+        .map((element) => element.personName)
+        .toSet()
+        .toList();
   }
 
   @override
@@ -77,22 +96,19 @@ class _HistoryPanelFiltersState extends State<HistoryPanelFilters> {
             Spacer(),
             Spacer(),
             HistoryDropdownMenus(
-              historyElements: getUnits(),
-              onUnitSelected: widget.onUnitSelected,
-              filterType: 'unit'
-            ),
+                historyElements: getUnits(),
+                onSelected: widget.onUnitSelected,
+                filterType: 'unit'),
             Spacer(),
             HistoryDropdownMenus(
-              historyElements: getEvents(),
-              onUnitSelected: widget.onUnitSelected,
-              filterType: 'event'
-            ),
+                historyElements: getEvents(),
+                onSelected: widget.onEventTypeSelected,
+                filterType: 'event'),
             Spacer(),
             HistoryDropdownMenus(
-              historyElements: getPersons(),
-              onUnitSelected: widget.onUnitSelected,
-              filterType: 'person'
-            ),
+                historyElements: getPersons(),
+                onSelected: widget.onPersonSelected,
+                filterType: 'person'),
             Spacer(),
             Spacer(),
           ],
@@ -102,14 +118,15 @@ class _HistoryPanelFiltersState extends State<HistoryPanelFilters> {
   }
 }
 
-
 class HistoryDropdownMenus extends StatefulWidget {
   final List<String> historyElements;
-  final ValueChanged<String> onUnitSelected;
+  final ValueChanged<String> onSelected;
   String filterType = '';
 
-   HistoryDropdownMenus(
-      {Key? key, required this.historyElements, required this.onUnitSelected, required this.filterType})
+  HistoryDropdownMenus({Key? key,
+    required this.historyElements,
+    required this.onSelected,
+    required this.filterType})
       : super(key: key);
 
   @override
@@ -138,11 +155,11 @@ class _HistoryDropdownMenusState extends State<HistoryDropdownMenus> {
       onChanged: (String? value) {
         setState(() {
           if (value == null) {
-            widget.onUnitSelected('');
+            widget.onSelected('');
             dropdownValue = null;
           } else {
             dropdownValue = value!;
-            widget.onUnitSelected(value);
+            widget.onSelected(value);
           }
         });
       },
@@ -161,10 +178,15 @@ class _HistoryDropdownMenusState extends State<HistoryDropdownMenus> {
 
 class HistoryElement extends StatefulWidget {
   final String? selectedUnit;
+  final String? selectedEventType;
+  final String? selectedPerson;
   final List<HistoryElementModel> historyElements;
 
-  const HistoryElement(
-      {super.key, required this.historyElements, required this.selectedUnit});
+  const HistoryElement({super.key,
+    required this.historyElements,
+    required this.selectedUnit,
+    required this.selectedEventType,
+    required this.selectedPerson});
 
   @override
   State<HistoryElement> createState() => _HistoryElementState();
@@ -189,10 +211,21 @@ class _HistoryElementState extends State<HistoryElement> {
         .toList();
     checkFilter();
 
+    String? unitAttribute = widget.selectedUnit;
+    String? eventTypeAttribute = widget.selectedEventType;
+    String? personAttribute = widget.selectedPerson;
+
+    filteredHistoryElements
+        ?.where((element) =>
+    (unitAttribute == null || element.unit.name == unitAttribute) &&
+        (eventTypeAttribute == null ||
+            element.eventType.name == eventTypeAttribute) &&
+        (personAttribute == null || element.personName == personAttribute))
+        .toList();
+
     return ListView.builder(
       itemCount: usedListOfHistoryElements!.length,
       itemBuilder: (context, index) {
-        ;
         return ListTile(
           title: Text(usedListOfHistoryElements![index].unit.name),
           subtitle: Text(generateSubtitle(usedListOfHistoryElements![index])),
