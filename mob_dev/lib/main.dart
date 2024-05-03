@@ -59,7 +59,7 @@ class _MainPageState extends State<MainPage> {
         status: true,
       ),
       eventType: EventType.AlarmArmed,
-      personName: 'John Doe',
+      personName: 'Dan Doe',
       date: DateTime.now(),
     ),
     HistoryElementModel(
