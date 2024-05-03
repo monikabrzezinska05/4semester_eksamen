@@ -43,17 +43,9 @@ class _HistoryPageState extends State<HistoryPage> {
       ),
       body: Column(
         children: [
-          HistoryPanelFilters(
-              historyElements: widget.historyElements,
-              onUnitSelected: onUnitSelected,
-              onEventTypeSelected: onEventSelected,
-              onPersonSelected: onPersonSelected),
           Expanded(
             child: HistoryElement(
               historyElements: widget.historyElements,
-              selectedUnit: selectedUnit,
-              selectedEventType: selectedEventType,
-              selectedPerson: selectedPerson,
             ),
           )
         ],
@@ -67,20 +59,21 @@ class HistoryPanelFilters extends StatefulWidget {
   final ValueChanged<String> onUnitSelected;
   final ValueChanged<String> onEventTypeSelected;
   final ValueChanged<String> onPersonSelected;
+  final VoidCallback? onResetFilters;
 
   const HistoryPanelFilters(
       {super.key,
       required this.historyElements,
       required this.onUnitSelected,
       required this.onEventTypeSelected,
-      required this.onPersonSelected});
+      required this.onPersonSelected,
+      required this.onResetFilters});
 
   @override
   State<HistoryPanelFilters> createState() => _HistoryPanelFiltersState();
 }
 
 class _HistoryPanelFiltersState extends State<HistoryPanelFilters> {
-  //TODO - Implement three string builders from historyElements
   List<String> getUnits() {
     return widget.historyElements
         .map((element) => element.unit.name)
@@ -126,7 +119,7 @@ class _HistoryPanelFiltersState extends State<HistoryPanelFilters> {
                 onSelected: widget.onPersonSelected,
                 filterType: 'person'),
             Spacer(),
-            Spacer(),
+            ElevatedButton(onPressed: widget.onResetFilters, child: Text("Reset"))
           ],
         ),
       ],
@@ -143,7 +136,7 @@ class HistoryDropdownMenus extends StatefulWidget {
       {Key? key,
       required this.historyElements,
       required this.onSelected,
-      required this.filterType})
+      required this.filterType,})
       : super(key: key);
 
   @override
@@ -181,7 +174,7 @@ class _HistoryDropdownMenusState extends State<HistoryDropdownMenus> {
         });
       },
       items: [
-        DropdownMenuItem(child: Text("Filter by " + widget.filterType)),
+        DropdownMenuItem(child: Text("Filter by " + widget.filterType), value: null),
         ...widget.historyElements.map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
@@ -194,84 +187,92 @@ class _HistoryDropdownMenusState extends State<HistoryDropdownMenus> {
 }
 
 class HistoryElement extends StatefulWidget {
-  final String? selectedUnit;
-  final String? selectedEventType;
-  final String? selectedPerson;
   final List<HistoryElementModel> historyElements;
 
-  const HistoryElement(
-      {super.key,
-      required this.historyElements,
-      required this.selectedUnit,
-      required this.selectedEventType,
-      required this.selectedPerson});
+  const HistoryElement({Key? key, required this.historyElements}) : super(key: key);
 
   @override
   State<HistoryElement> createState() => _HistoryElementState();
 }
 
 class _HistoryElementState extends State<HistoryElement> {
+  String? selectedUnit;
+  String? selectedEventType;
+  String? selectedPerson;
   List<HistoryElementModel>? filteredHistoryElements;
-  List<HistoryElementModel>? usedListOfHistoryElements;
-  List<HistoryElementModel>? filteredByUnit;
-  List<HistoryElementModel>? filteredByEvent;
-  List<HistoryElementModel>? filteredByPerson;
+  List<HistoryElementModel>? originalHistoryElements;
 
-  void checkFilter() {
-    if (filteredHistoryElements!.length > 0) {
-      usedListOfHistoryElements = filteredHistoryElements!;
-    } else {
-      usedListOfHistoryElements = widget.historyElements;
-    }
+  @override
+  void initState() {
+    super.initState();
+    originalHistoryElements = List.from(widget.historyElements);
+    filteredHistoryElements = List.from(widget.historyElements);
+  }
+
+  void onUnitSelected(String unit) {
+    setState(() {
+      selectedUnit = unit;
+      filterHistoryElements();
+    });
+  }
+
+  void onEventSelected(String event) {
+    setState(() {
+      selectedEventType = event;
+      filterHistoryElements();
+    });
+  }
+
+  void onPersonSelected(String person) {
+    setState(() {
+      selectedPerson = person;
+      filterHistoryElements();
+    });
+  }
+
+  void filterHistoryElements() {
+    filteredHistoryElements = originalHistoryElements!
+        .where((element) =>
+    (selectedUnit == null || element.unit.name == selectedUnit) &&
+        (selectedEventType == null || element.eventType.name == selectedEventType) &&
+        (selectedPerson == null || element.personName == selectedPerson))
+        .toList();
+  }
+
+  void resetFilters() {
+    setState(() {
+      selectedUnit = null;
+      selectedEventType = null;
+      selectedPerson = null;
+      filteredHistoryElements = List.from(originalHistoryElements!);
+
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    // filteredHistoryElements = widget.historyElements
-    //     .where((element) => element.unit.name == widget.selectedUnit)
-    //     .toList();
-    // checkFilter();
-
-    String? unitAttribute = widget.selectedUnit;
-    String? eventTypeAttribute = widget.selectedEventType;
-    String? personAttribute = widget.selectedPerson;
-
-    // filteredHistoryElements = widget.historyElements
-    //     .where((element) =>
-    //         (unitAttribute == null || element.unit.name == unitAttribute) ||
-    //         (eventTypeAttribute == null || element.eventType.name == eventTypeAttribute) ||
-    //         (personAttribute == null || element.personName == personAttribute))
-    //     .toList();
-    // checkFilter();
-
-    filteredByUnit = widget.historyElements
-    .where((element) => unitAttribute == null || element.unit.name == unitAttribute)
-        .toList();
-
-    filteredByEvent = filteredByUnit!
-    .where((element) => eventTypeAttribute == null || element.eventType.name == eventTypeAttribute)
-        .toList();
-
-    filteredByPerson = filteredByEvent!
-    .where((element) => personAttribute == null || element.personName == personAttribute)
-        .toList();
-
-    print("unit: " + filteredByUnit.toString());
-    print("event: " + filteredByEvent.toString());
-    print("person: " + filteredByPerson.toString());
-    filteredHistoryElements = filteredByPerson;
-    checkFilter();
-
-    return ListView.builder(
-      itemCount: usedListOfHistoryElements!.length,
-      itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(usedListOfHistoryElements![index].unit.name),
-          subtitle: Text(generateSubtitle(usedListOfHistoryElements![index])),
-          trailing: Text(DateFormat('H:m:s d/M/y')
-              .format(usedListOfHistoryElements![index].date)),
-        );
-      },
+    return Column(
+      children: [
+        HistoryPanelFilters(
+            historyElements: widget.historyElements,
+            onUnitSelected: onUnitSelected,
+            onEventTypeSelected: onEventSelected,
+            onPersonSelected: onPersonSelected,
+            onResetFilters: resetFilters),
+        Expanded(
+          child: ListView.builder(
+            itemCount: filteredHistoryElements!.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(filteredHistoryElements![index].unit.name),
+                subtitle: Text(generateSubtitle(filteredHistoryElements![index])),
+                trailing: Text(DateFormat('H:m:s d/M/y')
+                    .format(filteredHistoryElements![index].date)),
+              );
+            },
+          ),
+        )
+      ],
     );
   }
 
@@ -283,7 +284,7 @@ class _HistoryElementState extends State<HistoryElement> {
         return "Alarm armed by " + historyElement.personName;
       case EventType.AlarmDisarmed:
         return "Alarm disarmed by " + historyElement.personName;
-      case _:
+      default:
         return "Event: " + historyElement.eventType.toString();
     }
   }
