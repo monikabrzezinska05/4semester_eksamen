@@ -15,9 +15,11 @@ export class State{
   ws: WebSocket = new WebSocket(environment.baseUrl)
 
   constructor() {
+    console.log("something happened before connect");
     this.ws.onmessage = message => {
+      
       const messageFromServer = JSON.parse(message.data) as BaseDto<any>
-
+      console.log("message from server received");
       // @ts-ignore
       this[messageFromServer.eventType].call(this, messageFromServer);
     }
