@@ -47,8 +47,6 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  final List<String> headline = ['MaserUnit 1', 'MasterUnit 2', 'MsterUnit 3'];
-  final List<String> underheadlines = ['unit 1', 'unit 2', 'unit 3'];
 
   int _selectedIndex = 1;
   late List<Widget> _widgetOptions;
@@ -58,8 +56,8 @@ class _MainPageState extends State<MainPage> {
     super.initState();
     _widgetOptions = <Widget>[
       HistoryPage(),
-      HomePage(headline: headline, underheadlines: underheadlines),
-      SettingsPage()
+      SettingsPage(),
+      HomePage()
     ];
   }
 
