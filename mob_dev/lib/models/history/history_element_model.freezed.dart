@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-HistoryModel _$HistoryElementModelFromJson(Map<String, dynamic> json) {
+HistoryModel _$HistoryModelFromJson(Map<String, dynamic> json) {
   return _HistoryElementModel.fromJson(json);
 }
 
 /// @nodoc
-mixin _$HistoryElementModel {
+mixin _$HistoryModel {
   int get historyId => throw _privateConstructorUsedError;
   UnitModel get unit => throw _privateConstructorUsedError;
   String get personName => throw _privateConstructorUsedError;
@@ -28,15 +28,15 @@ mixin _$HistoryElementModel {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $HistoryElementModelCopyWith<HistoryModel> get copyWith =>
+  $HistoryModelCopyWith<HistoryModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $HistoryElementModelCopyWith<$Res> {
-  factory $HistoryElementModelCopyWith(
+abstract class $HistoryModelCopyWith<$Res> {
+  factory $HistoryModelCopyWith(
           HistoryModel value, $Res Function(HistoryModel) then) =
-      _$HistoryElementModelCopyWithImpl<$Res, HistoryModel>;
+      _$HistoryModelCopyWithImpl<$Res, HistoryModel>;
   @useResult
   $Res call(
       {int historyId,
@@ -49,9 +49,9 @@ abstract class $HistoryElementModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$HistoryElementModelCopyWithImpl<$Res, $Val extends HistoryModel>
-    implements $HistoryElementModelCopyWith<$Res> {
-  _$HistoryElementModelCopyWithImpl(this._value, this._then);
+class _$HistoryModelCopyWithImpl<$Res, $Val extends HistoryModel>
+    implements $HistoryModelCopyWith<$Res> {
+  _$HistoryModelCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -102,7 +102,7 @@ class _$HistoryElementModelCopyWithImpl<$Res, $Val extends HistoryModel>
 
 /// @nodoc
 abstract class _$$HistoryElementModelImplCopyWith<$Res>
-    implements $HistoryElementModelCopyWith<$Res> {
+    implements $HistoryModelCopyWith<$Res> {
   factory _$$HistoryElementModelImplCopyWith(_$HistoryElementModelImpl value,
           $Res Function(_$HistoryElementModelImpl) then) =
       __$$HistoryElementModelImplCopyWithImpl<$Res>;
@@ -121,7 +121,7 @@ abstract class _$$HistoryElementModelImplCopyWith<$Res>
 
 /// @nodoc
 class __$$HistoryElementModelImplCopyWithImpl<$Res>
-    extends _$HistoryElementModelCopyWithImpl<$Res, _$HistoryElementModelImpl>
+    extends _$HistoryModelCopyWithImpl<$Res, _$HistoryElementModelImpl>
     implements _$$HistoryElementModelImplCopyWith<$Res> {
   __$$HistoryElementModelImplCopyWithImpl(_$HistoryElementModelImpl _value,
       $Res Function(_$HistoryElementModelImpl) _then)
@@ -189,14 +189,14 @@ class _$HistoryElementModelImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'HistoryElementModel(historyId: $historyId, unit: $unit, personName: $personName, eventType: $eventType, date: $date)';
+    return 'HistoryModel(historyId: $historyId, unit: $unit, personName: $personName, eventType: $eventType, date: $date)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'HistoryElementModel'))
+      ..add(DiagnosticsProperty('type', 'HistoryModel'))
       ..add(DiagnosticsProperty('historyId', historyId))
       ..add(DiagnosticsProperty('unit', unit))
       ..add(DiagnosticsProperty('personName', personName))
