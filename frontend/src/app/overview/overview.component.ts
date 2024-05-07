@@ -2,6 +2,7 @@ import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {Unit, UnitType} from "../../models/Unit";
 import {State} from "../../services/state.service";
+import {concatWith} from "rxjs";
 
 @Component({
   selector: 'app-overview',
@@ -11,31 +12,44 @@ import {State} from "../../services/state.service";
   styleUrl: './overview.component.css'
 })
 
-export class OverviewComponent implements OnInit, AfterViewInit{
-  listOfUnits: number[] = [1,2,3,4];
-  @Input() unitType!: string;
-  unit!: Unit[];
+export class OverviewComponent implements OnInit {
+  listOfUnits: number[] = [1, 2, 3, 4];
+  @Input() unitType!: number;
+  units!: Unit[];
 
-  constructor(private state: State) {
-    this.unit = state.units.filter(unit => {
+  constructor(private state: State) {}
+
+  ngOnInit(): void {
+    this.insertUnits()
+  }
+
+  insertUnits() {
+    console.log(this.state.units)
+    console.log("Entered insertUnits()", this.unitType)
+    /*this.units = this.state.units.filter(unit => {
+      debugger;
       switch (this.unitType) {
-        case "Door": return unit.unitType === UnitType.Door;
-        case "Window": return unit.unitType === UnitType.Window;
-        case "Motion Sensor": return unit.unitType === UnitType.MotionSensor;
-        default: return false;
+        case "Door":
+          console.log("Door")
+          return unit.UnitTypeId === UnitType.Door;
+        case "Window":
+          console.log("Window")
+          return unit.UnitTypeId === UnitType.Window;
+        case "Motion Sensor":
+          console.log("Motion Sensor")
+          return unit.UnitTypeId === UnitType.MotionSensor;
+        default:
+          console.log("failed")
+          return false;
       }
-    });
+    });*/
+    //debugger;
+
+    this.state.units.forEach(u => {
+      console.log(u)
+      console.log(this.unitType)
+      return u.UnitTypeId == this.unitType;
+    })
   }
 
-  ngAfterViewInit(): void {
-    this.loadUnits();
-    }
-
-  ngOnInit(): void { }
-
-  loadUnits() {
-    this.state.ws.send(JSON.stringify({
-      eventType: "ClientOpensConnection"
-    }));
-  }
 }

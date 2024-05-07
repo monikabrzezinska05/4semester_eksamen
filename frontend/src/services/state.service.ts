@@ -8,28 +8,34 @@ import {HistoryModel} from "../models/HistoryModel";
   providedIn: 'root'
 })
 
-export class State{
-  units: Unit[]= [];
+export class State {
+  units: Unit[] = [];
   history: HistoryModel[] = [];
 
-  ws: WebSocket = new WebSocket(environment.baseUrl)
+  ws: WebSocket = new WebSocket(environment.baseUrl);
 
   constructor() {
     console.log("something happened before connect");
     this.ws.onmessage = message => {
-      
+
       const messageFromServer = JSON.parse(message.data) as BaseDto<any>
       console.log("message from server received");
       // @ts-ignore
       this[messageFromServer.eventType].call(this, messageFromServer);
     }
+
+    this.ws.onopen = () => {
+      this.ws.send(JSON.stringify({
+        eventType: "ClientOpensConnection"
+      }));
+    };
   }
 
-  ServerShowsHistory(dto: ServerShowsHistoryDto){
-    this.history.push(...dto.responseDto.responseData);
+  ServerShowsHistory(dto: ServerShowsHistoryDto) {
+    this.history.push(...dto.responseDto.ResponseData);
   }
 
-  ServerOpensConnection(dto: ServerOpensConnectionDto){
-    this.units.push(...dto.responseDto.responseData);
+  ServerOpensConnection(dto: ServerOpensConnectionDto) {
+    this.units.push(...dto.ResponseDto.ResponseData);
   }
 }
