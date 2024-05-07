@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:mob_dev/history_bloc/history_state.dart';
 
 import 'history_bloc/history_cubit.dart';
-import 'models/history/history_element_model.dart';
+import 'models/history/history_model.dart';
 
 class HistoryPage extends StatelessWidget {
   const HistoryPage({super.key});

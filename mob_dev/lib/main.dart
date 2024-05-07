@@ -5,7 +5,7 @@ import 'package:mob_dev/history_page.dart';
 import 'package:mob_dev/settings_page.dart';
 
 import 'home_page.dart';
-import 'models/History/history_element_model.dart';
+import 'models/History/history_model.dart';
 import 'models/unit/unit_model.dart';
 
 void main() async {
@@ -59,7 +59,7 @@ class _MainPageState extends State<MainPage> {
     _widgetOptions = <Widget>[
       HistoryPage(),
       HomePage(headline: headline, underheadlines: underheadlines),
-      SettingsPage(items: ['Item 1', 'Item 2', 'Item 3'])
+      SettingsPage()
     ];
   }
 
@@ -68,7 +68,7 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       appBar: AppBar(
           toolbarHeight: 200,
-          title: Image.network(
+          title: Image.asset(
             "assets/securty_logo.png",
             fit: BoxFit.cover,
             height: 200,
