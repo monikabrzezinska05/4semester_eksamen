@@ -8,8 +8,8 @@ part 'history_element_model.g.dart';
 
 
 @freezed
-class HistoryElementModel with _$HistoryElementModel {
-   factory HistoryElementModel({
+class HistoryModel with _$HistoryElementModel {
+   factory HistoryModel({
     required int historyId,
     required UnitModel unit,
     required String personName,
@@ -17,7 +17,7 @@ class HistoryElementModel with _$HistoryElementModel {
     required DateTime date,
   }) = _HistoryElementModel;
 
-  factory HistoryElementModel.fromJson(Map<String, Object?> json) => _$HistoryElementModelFromJson(json);
+  factory HistoryModel.fromJson(Map<String, Object?> json) => _$HistoryElementModelFromJson(json);
 }
 
 

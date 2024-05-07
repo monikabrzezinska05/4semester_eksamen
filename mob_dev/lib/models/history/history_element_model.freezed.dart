@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-HistoryElementModel _$HistoryElementModelFromJson(Map<String, dynamic> json) {
+HistoryModel _$HistoryElementModelFromJson(Map<String, dynamic> json) {
   return _HistoryElementModel.fromJson(json);
 }
 
@@ -28,15 +28,15 @@ mixin _$HistoryElementModel {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $HistoryElementModelCopyWith<HistoryElementModel> get copyWith =>
+  $HistoryElementModelCopyWith<HistoryModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $HistoryElementModelCopyWith<$Res> {
   factory $HistoryElementModelCopyWith(
-          HistoryElementModel value, $Res Function(HistoryElementModel) then) =
-      _$HistoryElementModelCopyWithImpl<$Res, HistoryElementModel>;
+          HistoryModel value, $Res Function(HistoryModel) then) =
+      _$HistoryElementModelCopyWithImpl<$Res, HistoryModel>;
   @useResult
   $Res call(
       {int historyId,
@@ -49,7 +49,7 @@ abstract class $HistoryElementModelCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$HistoryElementModelCopyWithImpl<$Res, $Val extends HistoryElementModel>
+class _$HistoryElementModelCopyWithImpl<$Res, $Val extends HistoryModel>
     implements $HistoryElementModelCopyWith<$Res> {
   _$HistoryElementModelCopyWithImpl(this._value, this._then);
 
@@ -239,7 +239,7 @@ class _$HistoryElementModelImpl
   }
 }
 
-abstract class _HistoryElementModel implements HistoryElementModel {
+abstract class _HistoryElementModel implements HistoryModel {
   factory _HistoryElementModel(
       {required final int historyId,
       required final UnitModel unit,

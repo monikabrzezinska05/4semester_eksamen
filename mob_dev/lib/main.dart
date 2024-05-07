@@ -49,56 +49,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   final List<String> headline = ['MaserUnit 1', 'MasterUnit 2', 'MsterUnit 3'];
   final List<String> underheadlines = ['unit 1', 'unit 2', 'unit 3'];
-  final List<HistoryElementModel> historyElements = [
-    HistoryElementModel(
-      historyId: 1,
-      unit: UnitModel(
-        unitId: 1,
-        name: 'MasterUnit 1',
-        unitType: UnitType.Door,
-        status: true,
-      ),
-      eventType: EventType.AlarmArmed,
-      personName: 'Dan Doe',
-      date: DateTime.now(),
-    ),
-    HistoryElementModel(
-      historyId: 2,
-      unit: UnitModel(
-        unitId: 1,
-        name: 'MasterUnit 2',
-        unitType: UnitType.Door,
-        status: true,
-      ),
-      eventType: EventType.AlarmDisarmed,
-      personName: 'John Doe',
-      date: DateTime.now(),
-    ),
-    HistoryElementModel(
-      historyId: 3,
-      unit: UnitModel(
-        unitId: 1,
-        name: 'MasterUnit 3',
-        unitType: UnitType.Door,
-        status: true,
-      ),
-      eventType: EventType.AlarmStopped,
-      personName: 'John Doe',
-      date: DateTime.now(),
-    ),
-    HistoryElementModel(
-      historyId: 4,
-      unit: UnitModel(
-        unitId: 1,
-        name: 'MasterUnit 4',
-        unitType: UnitType.Door,
-        status: true,
-      ),
-      eventType: EventType.AlarmStopped,
-      personName: 'John Doe',
-      date: DateTime.now(),
-    ),
-  ];
+
   int _selectedIndex = 1;
   late List<Widget> _widgetOptions;
 
@@ -106,9 +57,7 @@ class _MainPageState extends State<MainPage> {
   void initState() {
     super.initState();
     _widgetOptions = <Widget>[
-      HistoryPage(
-        historyElements: historyElements,
-      ),
+      HistoryPage(),
       HomePage(headline: headline, underheadlines: underheadlines),
       SettingsPage(items: ['Item 1', 'Item 2', 'Item 3'])
     ];
