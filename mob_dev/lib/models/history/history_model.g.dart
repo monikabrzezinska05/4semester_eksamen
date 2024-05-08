@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'history_element_model.dart';
+part of 'history_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

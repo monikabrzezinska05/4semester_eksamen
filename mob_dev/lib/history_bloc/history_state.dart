@@ -1,4 +1,4 @@
-import '../models/history/history_element_model.dart';
+import '../models/history/history_model.dart';
 
 class HistoryState {
   final List<HistoryModel> allHistory;
@@ -32,7 +32,7 @@ class HistoryState {
     );
   }
 
-  copyWith({
+  HistoryState copyWith({
     List<HistoryModel>? allHistory,
     List<HistoryModel>? shownHistory,
     String? selectedUnit,

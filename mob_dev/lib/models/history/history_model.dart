@@ -3,8 +3,8 @@ import 'package:flutter/foundation.dart';
 
 import '../unit/unit_model.dart';
 
-part 'history_element_model.freezed.dart';
-part 'history_element_model.g.dart';
+part 'history_model.freezed.dart';
+part 'history_model.g.dart';
 
 
 @freezed
