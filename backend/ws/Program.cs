@@ -32,6 +32,7 @@ public static class Startup
         builder.Services.AddSingleton<MQTTService>();
         
         builder.Services.AddSingleton<HistoryService>();
+        builder.Services.AddSingleton<TokenService>();
         builder.Services.AddSingleton<AuthenticationService>();
         builder.Services.AddSingleton<UserService>();
         builder.Services.AddSingleton<HashingArgon2id>();
