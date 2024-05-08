@@ -36,6 +36,20 @@ export class State {
   }
 
   ServerOpensConnection(dto: ServerOpensConnectionDto) {
-    this.units.push(...dto.ResponseDto.ResponseData);
+    this.units.push(...dto.ResponseDto);
+    console.log("done working on message thingy");
+    console.log(this.units);
+    /*this.units = [{
+      UnitId: 0,
+      Name: "Test",
+      UnitTypeId: 0,
+      Status: false
+    },
+      {
+        UnitId: 1,
+        Name: "Test2",
+        UnitTypeId: 0,
+        Status: false
+      }];*/
   }
 }

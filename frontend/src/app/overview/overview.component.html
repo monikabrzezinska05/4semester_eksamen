@@ -3,8 +3,7 @@
   <p>STATUS THINGY HERE!</p>
 </div>
 <hr>
-<div>{{units | json}}</div>
-<div *ngFor="let unit of units">
+<div *ngFor="let unit of state.units | filterBy: ['UnitTypeId']: this.unitType">
   <div class="body">
     <div style="height: 30px; width: 50px">
       <p>{{unit.Name}}</p>

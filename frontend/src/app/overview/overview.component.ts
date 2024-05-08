@@ -2,12 +2,12 @@ import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {Unit, UnitType} from "../../models/Unit";
 import {State} from "../../services/state.service";
-import {concatWith} from "rxjs";
+import {NgArrayPipesModule} from "ngx-pipes";
 
 @Component({
   selector: 'app-overview',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, NgArrayPipesModule],
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.css'
 })
@@ -17,39 +17,24 @@ export class OverviewComponent implements OnInit {
   @Input() unitType!: number;
   units!: Unit[];
 
-  constructor(private state: State) {}
+  constructor(public state: State) {}
+
+
 
   ngOnInit(): void {
-    this.insertUnits()
+    setTimeout(() => {
+      this.insertUnits()
+    }, 0);
+    //this.insertUnits()
   }
 
   insertUnits() {
     console.log(this.state.units)
     console.log("Entered insertUnits()", this.unitType)
-    /*this.units = this.state.units.filter(unit => {
-      debugger;
-      switch (this.unitType) {
-        case "Door":
-          console.log("Door")
-          return unit.UnitTypeId === UnitType.Door;
-        case "Window":
-          console.log("Window")
-          return unit.UnitTypeId === UnitType.Window;
-        case "Motion Sensor":
-          console.log("Motion Sensor")
-          return unit.UnitTypeId === UnitType.MotionSensor;
-        default:
-          console.log("failed")
-          return false;
-      }
-    });*/
-    //debugger;
-
-    this.state.units.forEach(u => {
+    this.units = this.state.units.filter(u => {
       console.log(u)
       console.log(this.unitType)
       return u.UnitTypeId == this.unitType;
-    })
+  });
   }
-
 }

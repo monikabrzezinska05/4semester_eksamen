@@ -29,7 +29,7 @@ public class ClientOpensConnection : BaseEventHandler<ClientOpensConnectionDto>
         };
         var responseToClient = JsonSerializer.Serialize(new ServerOpensConnection()
         {
-            ResponseDto = responseDto
+            ResponseDto = _unitService.GetAllUnits()
         });
         socket.Send(responseToClient);
         return Task.CompletedTask;
