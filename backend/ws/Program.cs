@@ -35,6 +35,7 @@ public static class Startup
         builder.Services.AddSingleton<AuthenticationService>();
         builder.Services.AddSingleton<UserService>();
         builder.Services.AddSingleton<HashingArgon2id>();
+        builder.Services.AddSingleton<TokenService>();
         builder.Services.AddHttpClient();
 
         var clientEventHandlers = builder.FindAndInjectClientEventHandlers(Assembly.GetExecutingAssembly());

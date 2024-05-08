@@ -18,22 +18,25 @@ public class AuthenticationService
         _logger = logger;
     }
     
-    public User? Authenticate(UserLogin userLogin)
+    public User? Authenticate(String email, String password)
     {
         try
         {
-            var pwHash = _authenticateRepository.GetUserByEmail(userLogin.Email);
+            Console.WriteLine("im in");
+            var pwHash = _authenticateRepository.GetUserByEmail(email);
+            Console.WriteLine("Hash: " + pwHash.salt);
             var hashAlgorithm = new HashingArgon2id();
             var isValid =
-                hashAlgorithm.VerifyHashedPassword(userLogin.Password, pwHash.Password, pwHash.Salt);
+                hashAlgorithm.VerifyHashedPassword(password, pwHash.password, pwHash.salt);
             if (isValid)
             {
-                Console.WriteLine("email numero dos" + userLogin.Email);
-                return _userRepository.GetUserByMail(userLogin.Email);
+                Console.WriteLine("email numero dos" + email);
+                return _userRepository.GetUserByMail(email);
             }
         }
         catch (Exception e)
         {
+            Console.WriteLine(e);
             _logger.LogError("Authentication error: {Message}", e);
         }
 
