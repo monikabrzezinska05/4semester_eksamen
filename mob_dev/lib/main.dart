@@ -1,16 +1,24 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mob_dev/history_page.dart';
 import 'package:mob_dev/settings_page.dart';
+import 'package:web_socket_channel/web_socket_channel.dart';
 
 import 'home_page.dart';
-import 'models/History/history_model.dart';
-import 'models/unit/unit_model.dart';
 
-void main() async {
-  runApp(const MyApp());
-}
+final wsUri = Uri.parse('ws://localhost:8181');
+final channel = WebSocketChannel.connect(wsUri);
+
+// void main() async {
+//   runApp(const MyApp());
+// }
+
+// void main() async {
+//   runApp(BlocProvider(
+//     create: (context) => ,
+//   ))
+// }
 
 class MyApp extends StatelessWidget {
   static final ValueNotifier<ThemeMode> themeNotifier =
