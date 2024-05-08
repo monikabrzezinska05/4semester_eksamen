@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
-import '../history/history_element_model.dart';
+import '../history/history_model.dart';
 
 part 'events_model.freezed.dart';
 part 'events_model.g.dart';
