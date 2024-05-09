@@ -18,6 +18,10 @@ export class OverviewComponent implements OnInit {
   units$?: Observable<Unit[]>;
 
   constructor(public state: State) {
+    var dto = {
+      eventType: "ClientWantsToSeeUnits"
+    }
+    this.state.ws.send(JSON.stringify(dto))
   }
 
   ngOnInit(): void {

@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Unit, UnitType} from "../models/Unit";
 import {environment} from "../environments/environment";
-import {BaseDto, ServerAuthenticatesUserDto, ServerOpensConnectionDto, ServerShowsHistoryDto} from "../models/BaseDto";
+import {BaseDto, ServerAuthenticatesUserDto, ServerShowsUnitsDto, ServerShowsHistoryDto} from "../models/BaseDto";
 import {HistoryModel} from "../models/HistoryModel";
 import {UserModel} from "../models/UserModel";
 import {Router} from "@angular/router";
@@ -16,7 +16,7 @@ export class State {
   currentUser?: UserModel;
 
   ws: WebSocket = new WebSocket(environment.websocketBaseUrl);
-  
+
   history$: BehaviorSubject<HistoryModel[]> = new BehaviorSubject<HistoryModel[]>([]);
   units$: BehaviorSubject<Unit[]> = new BehaviorSubject<Unit[]>([]);
 
@@ -32,7 +32,8 @@ export class State {
   }
 
   ServerShowsHistory(dto: ServerShowsHistoryDto) {
-    this.history.push(...dto.responseDto.responseData);
+    var current = this.history$.getValue();
+    this.history$.next([...current, ...dto.responseDto.responseData]);
   }
 
   ServerAuthenticatesUser(dto: ServerAuthenticatesUserDto) {
@@ -44,7 +45,7 @@ export class State {
     }
   }
 
-  ServerOpensConnection(dto: ServerOpensConnectionDto) {
+  ServerShowsUnits(dto: ServerShowsUnitsDto) {
     var current = this.units$.getValue();
     this.units$.next([...current, ...dto.responseDto.responseData]);
   }

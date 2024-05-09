@@ -41,7 +41,7 @@ export class ServerShowsHistoryDto extends BaseDto<ServerShowsHistoryDto>{
   responseDto!: ResponseDto<HistoryModel[]>;
 }
 
-export class ServerOpensConnectionDto extends BaseDto<ServerOpensConnectionDto>{
+export class ServerShowsUnitsDto extends BaseDto<ServerShowsUnitsDto>{
   responseDto!: ResponseDto<Unit[]>;
 }
 
