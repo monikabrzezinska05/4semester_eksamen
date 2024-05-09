@@ -1,11 +1,11 @@
 div {
-  border: 1px red solid;
 }
 
 .header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin-top: 20px;
 }
 
 .body {
