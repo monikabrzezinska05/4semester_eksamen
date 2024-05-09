@@ -12,7 +12,7 @@ export class State {
   units: Unit[] = [];
   history: HistoryModel[] = [];
 
-  ws: WebSocket = new WebSocket(environment.baseUrl);
+  ws: WebSocket = new WebSocket(environment.websocketBaseUrl);
 
   constructor() {
     console.log("something happened before connect");
