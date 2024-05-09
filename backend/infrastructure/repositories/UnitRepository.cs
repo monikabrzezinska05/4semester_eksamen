@@ -12,13 +12,23 @@ public class UnitRepository
         _dataSource = dataSource;
     }
 
-    public Unit getUnitById(int unitId)
+    public Unit GetUnitById(int unitId)
     {
         string sql = "SELECT * FROM unit WHERE unitId =@UnitId";
 
         using (var conn = _dataSource.OpenConnection())
         {
             return conn.QueryFirst<Unit>(sql, new {unitId});
+        }
+    }
+
+    public List<Unit> GetAllUnits()
+    {
+        string sql = "SELECT * FROM unit";
+        
+        using (var conn = _dataSource.OpenConnection())
+        {
+            return conn.Query<Unit>(sql).ToList();
         }
     }
 }

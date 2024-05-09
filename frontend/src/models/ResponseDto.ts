@@ -1,4 +1,4 @@
 export interface ResponseDto<T> {
-  messageToClient: string;
-  responseData: T;
+  MessageToClient: string;
+  ResponseData: T;
 }

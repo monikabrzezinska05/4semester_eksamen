@@ -27,7 +27,7 @@ public class ClientTriggersAlarm : BaseEventHandler<ClientTriggersAlarmDto>
     public override Task Handle(ClientTriggersAlarmDto dto, IWebSocketConnection socket)
     {
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.HistoryModel);
-        Unit unit = _unitService.getUnitById(dto.HistoryModel.UnitId);
+        Unit unit = _unitService.GetUnitById(dto.HistoryModel.UnitId);
         _emailService.SendEmail(loggedEvent, unit);
         var alarmTriggerDto = new ResponseDto()
         {   
