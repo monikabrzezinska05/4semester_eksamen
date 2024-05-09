@@ -7,21 +7,21 @@ using ws.transfer_models.server_models;
 
 namespace ws;
 
-public class ClientOpensConnectionDto : BaseDto
+public class ClientWantsToSeeUnitsDto : BaseDto
 {
     // Skal nok laves om til at passe med noget JWT, men skal bare lige have det til at virke...
     public string? ConnectionId { get; set; }
 }
 
-public class ClientOpensConnection : BaseEventHandler<ClientOpensConnectionDto>
+public class ClientWantsToSeeUnits : BaseEventHandler<ClientWantsToSeeUnitsDto>
 {
     private readonly UnitService _unitService;
-    public ClientOpensConnection(UnitService unitService)
+    public ClientWantsToSeeUnits(UnitService unitService)
     {
         _unitService = unitService;
     }
     
-    public override Task Handle(ClientOpensConnectionDto dto, IWebSocketConnection socket)
+    public override Task Handle(ClientWantsToSeeUnitsDto dto, IWebSocketConnection socket)
     {
         var responseDto = new ResponseDto()
         {
@@ -32,7 +32,7 @@ public class ClientOpensConnection : BaseEventHandler<ClientOpensConnectionDto>
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
-        var responseToClient = JsonSerializer.Serialize(new ServerOpensConnection()
+        var responseToClient = JsonSerializer.Serialize(new ServerShowsUnits()
         {
             ResponseDto = responseDto
         }, option);
