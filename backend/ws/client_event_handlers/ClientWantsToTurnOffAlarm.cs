@@ -16,17 +16,18 @@ public class ClientWantsToTurnOffAlarmDto: BaseDto
 public class ClientWantsToTurnOffAlarm : BaseEventHandler<ClientWantsToTurnOffAlarmDto>
 {
     private readonly HistoryService _historyService;
-    private readonly MQTTSubscribeService _mqttSubscribeService;
+    private readonly MQTTPublishService _mqttPublishService;
 
-    public ClientWantsToTurnOffAlarm(HistoryService historyService, MQTTSubscribeService mqttSubscribeService)
+    public ClientWantsToTurnOffAlarm(HistoryService historyService, MQTTPublishService mqttPublishService)
     {
         _historyService = historyService;
-        _mqttSubscribeService = mqttSubscribeService;
+        _mqttPublishService = mqttPublishService;
     }
 
-    public override Task Handle(ClientWantsToTurnOffAlarmDto dto, IWebSocketConnection socket)
+    public override async Task Handle(ClientWantsToTurnOffAlarmDto dto, IWebSocketConnection socket)
     {
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.historyModel);
+        await _mqttPublishService.AlarmTurnOffPublish();
         var turnOffAlarm = new ResponseDto()
         {
             ResponseData = loggedEvent
@@ -35,7 +36,6 @@ public class ClientWantsToTurnOffAlarm : BaseEventHandler<ClientWantsToTurnOffAl
         {
             ResponseDto = turnOffAlarm
         });
-        socket.Send(turnOffAlarmToClient);
-        return Task.CompletedTask;
+        await socket.Send(turnOffAlarmToClient);
     }
 }
