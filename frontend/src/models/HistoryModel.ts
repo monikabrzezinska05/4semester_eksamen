@@ -1,4 +1,4 @@
-export interface History{
+export interface HistoryModel {
   historyId?: number;
   userId: number;
   unitId: number;

@@ -56,6 +56,7 @@ public static class Startup
             {
                 try
                 {
+                    Console.WriteLine("Client connected");
                     StateService.AddConnection(ws);
                 }
                 catch (Exception e)
