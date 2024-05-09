@@ -1,8 +1,9 @@
-import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {Unit, UnitType} from "../../models/Unit";
 import {State} from "../../services/state.service";
 import {NgArrayPipesModule} from "ngx-pipes";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-overview',
@@ -13,28 +14,29 @@ import {NgArrayPipesModule} from "ngx-pipes";
 })
 
 export class OverviewComponent implements OnInit {
-  listOfUnits: number[] = [1, 2, 3, 4];
   @Input() unitType!: number;
-  units!: Unit[];
+  units$?: Observable<Unit[]>;
 
-  constructor(public state: State) {}
-
-
-
-  ngOnInit(): void {
-    setTimeout(() => {
-      this.insertUnits()
-    }, 0);
-    //this.insertUnits()
+  constructor(public state: State) {
   }
 
-  insertUnits() {
-    console.log(this.state.units)
-    console.log("Entered insertUnits()", this.unitType)
-    this.units = this.state.units.filter(u => {
-      console.log(u)
-      console.log(this.unitType)
-      return u.UnitTypeId == this.unitType;
-  });
+  ngOnInit(): void {
+    this.units$ = this.getUnitsObservable(this.unitType);
+  }
+
+  private getUnitsObservable(unitType: UnitType): Observable<Unit[]> {
+    if (unitType === UnitType.Door) {
+      return this.state.getDoors();
+    }
+
+    if (unitType === UnitType.Window) {
+      return this.state.getWindows();
+    }
+
+    if (unitType === UnitType.MotionSensor) {
+      return this.state.getMotionSensor();
+    }
+
+    throw new Error(`Unknown unit type: ${unitType}`);
   }
 }

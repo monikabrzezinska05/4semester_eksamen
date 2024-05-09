@@ -1,17 +1,17 @@
 import {Injectable} from "@angular/core";
-import {Unit} from "../models/Unit";
+import {Unit, UnitType} from "../models/Unit";
 import {environment} from "../environments/environment";
 import {BaseDto, ServerOpensConnectionDto, ServerShowsHistoryDto} from "../models/BaseDto";
 import {HistoryModel} from "../models/HistoryModel";
+import {BehaviorSubject, combineLatest, map, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class State {
-  units: Unit[] = [];
-  history: HistoryModel[] = [];
-
+  history$: BehaviorSubject<HistoryModel[]> = new BehaviorSubject<HistoryModel[]>([]);
+  units$: BehaviorSubject<Unit[]> = new BehaviorSubject<Unit[]>([]);
   ws: WebSocket = new WebSocket(environment.baseUrl);
 
   constructor() {
@@ -19,7 +19,7 @@ export class State {
     this.ws.onmessage = message => {
 
       const messageFromServer = JSON.parse(message.data) as BaseDto<any>
-      console.log("message from server received");
+      console.log("message from server received", messageFromServer);
       // @ts-ignore
       this[messageFromServer.eventType].call(this, messageFromServer);
     }
@@ -32,24 +32,32 @@ export class State {
   }
 
   ServerShowsHistory(dto: ServerShowsHistoryDto) {
-    this.history.push(...dto.responseDto.ResponseData);
+    var current = this.history$.getValue();
+    this.history$.next([...current, ...dto.responseDto.responseData]);
   }
 
   ServerOpensConnection(dto: ServerOpensConnectionDto) {
-    this.units.push(...dto.ResponseDto);
-    console.log("done working on message thingy");
-    console.log(this.units);
-    /*this.units = [{
-      UnitId: 0,
-      Name: "Test",
-      UnitTypeId: 0,
-      Status: false
-    },
-      {
-        UnitId: 1,
-        Name: "Test2",
-        UnitTypeId: 0,
-        Status: false
-      }];*/
+    var current = this.units$.getValue();
+    this.units$.next([...current, ...dto.responseDto.responseData]);
+  }
+
+  public getAllHistory(): Observable<HistoryModel[]> {
+    return this.history$.asObservable();
+  }
+
+  public getUnitHistory(unitId: number): Observable<HistoryModel[]> {
+    return this.history$.pipe(map((history) => history.filter((historyModel) => historyModel.unitId === unitId)));
+  }
+
+  public getDoors(): Observable<Unit[]> {
+    return this.units$.pipe(map((units) => units.filter((unit) => unit.unitTypeId === UnitType.Door)));
+  }
+
+  public getWindows() {
+    return this.units$.pipe(map((units) => units.filter((unit) => unit.unitTypeId === UnitType.Window)));
+  }
+
+  public getMotionSensor() {
+    return this.units$.pipe(map((units) => units.filter((unit) => unit.unitTypeId === UnitType.MotionSensor)));
   }
 }
