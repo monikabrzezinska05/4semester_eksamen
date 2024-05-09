@@ -4,6 +4,7 @@ using Fleck;
 using infrastructure.models;
 using lib;
 using service;
+using ws.transfer_models.server_models;
 
 namespace ws;
 
@@ -30,7 +31,10 @@ public class ClientWantsToTurnOffAlarm : BaseEventHandler<ClientWantsToTurnOffAl
         {
             ResponseData = loggedEvent
         };
-        var turnOffAlarmToClient = JsonSerializer.Serialize(turnOffAlarm);
+        var turnOffAlarmToClient = JsonSerializer.Serialize(new ServerHasDeactivatedAlarm()
+        {
+            ResponseDto = turnOffAlarm
+        });
         socket.Send(turnOffAlarmToClient);
         return Task.CompletedTask;
     }
