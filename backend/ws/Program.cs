@@ -32,6 +32,7 @@ public static class Startup
         builder.Services.AddSingleton<UnitRepository>();
         
         builder.Services.AddSingleton<MQTTSubscribeService>();
+        builder.Services.AddSingleton<MQTTPublishService>();
         
         builder.Services.AddSingleton<HistoryService>();
         builder.Services.AddSingleton<AuthenticationService>();
