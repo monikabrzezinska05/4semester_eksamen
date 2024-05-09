@@ -30,9 +30,8 @@ public static class Startup
         builder.Services.AddSingleton<UserRepository>();
         builder.Services.AddSingleton<EmailRepository>();
         builder.Services.AddSingleton<UnitRepository>();
-
-        builder.Services.AddSingleton<MQTTService>();
-
+        builder.Services.AddSingleton<MQTTSubscribeService>();
+        builder.Services.AddSingleton<MQTTPublishService>();
         builder.Services.AddSingleton<HistoryService>();
         builder.Services.AddSingleton<TokenService>();
         builder.Services.AddSingleton<AuthenticationService>();
@@ -82,6 +81,6 @@ public static class Startup
                 }
             };
         });
-        app.Services.GetService<MQTTService>().CommunicateWithBroker();
+        app.Services.GetService<MQTTSubscribeService>().CommunicateWithBroker();
     }
 }

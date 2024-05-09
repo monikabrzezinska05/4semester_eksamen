@@ -1,8 +1,8 @@
 export interface Unit{
-  UnitId?: number;
-  Name: string;
-  Status: boolean;
-  UnitTypeId: UnitType;
+  unitId?: number;
+  name: string;
+  status: boolean;
+  unitTypeId: UnitType;
 }
 
 export enum UnitType{

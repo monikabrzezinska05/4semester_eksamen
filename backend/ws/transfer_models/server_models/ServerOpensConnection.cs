@@ -6,5 +6,5 @@ namespace ws.transfer_models.server_models;
 
 public class ServerOpensConnection : BaseDto
 {
-    public List<Unit> ResponseDto { get; set; }
+    public ResponseDto ResponseDto { get; set; }
 }

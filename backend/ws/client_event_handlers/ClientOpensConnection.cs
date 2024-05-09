@@ -25,12 +25,17 @@ public class ClientOpensConnection : BaseEventHandler<ClientOpensConnectionDto>
     {
         var responseDto = new ResponseDto()
         {
-            ResponseData = _unitService.GetAllUnits()
+            ResponseData = _unitService.GetAllUnits(),
+            MessageToClient = "Connection opened"
+        };
+        var option = new JsonSerializerOptions()
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
         var responseToClient = JsonSerializer.Serialize(new ServerOpensConnection()
         {
-            ResponseDto = _unitService.GetAllUnits()
-        });
+            ResponseDto = responseDto
+        }, option);
         socket.Send(responseToClient);
         return Task.CompletedTask;
     }
