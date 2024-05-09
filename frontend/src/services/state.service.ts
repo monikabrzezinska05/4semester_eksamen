@@ -1,8 +1,10 @@
 import {Injectable} from "@angular/core";
 import {Unit, UnitType} from "../models/Unit";
 import {environment} from "../environments/environment";
-import {BaseDto, ServerOpensConnectionDto, ServerShowsHistoryDto} from "../models/BaseDto";
+import {BaseDto, ServerAuthenticatesUserDto, ServerOpensConnectionDto, ServerShowsHistoryDto} from "../models/BaseDto";
 import {HistoryModel} from "../models/HistoryModel";
+import {UserModel} from "../models/UserModel";
+import {Router} from "@angular/router";
 import {BehaviorSubject, combineLatest, map, Observable} from "rxjs";
 
 @Injectable({
@@ -10,11 +12,15 @@ import {BehaviorSubject, combineLatest, map, Observable} from "rxjs";
 })
 
 export class State {
+  private authenticated: boolean = false;
+  currentUser?: UserModel;
+
+  ws: WebSocket = new WebSocket(environment.websocketBaseUrl);
+  
   history$: BehaviorSubject<HistoryModel[]> = new BehaviorSubject<HistoryModel[]>([]);
   units$: BehaviorSubject<Unit[]> = new BehaviorSubject<Unit[]>([]);
-  ws: WebSocket = new WebSocket(environment.baseUrl);
 
-  constructor() {
+  constructor(private router: Router) {
     console.log("something happened before connect");
     this.ws.onmessage = message => {
 
@@ -23,17 +29,19 @@ export class State {
       // @ts-ignore
       this[messageFromServer.eventType].call(this, messageFromServer);
     }
-
-    this.ws.onopen = () => {
-      this.ws.send(JSON.stringify({
-        eventType: "ClientOpensConnection"
-      }));
-    };
   }
 
   ServerShowsHistory(dto: ServerShowsHistoryDto) {
-    var current = this.history$.getValue();
-    this.history$.next([...current, ...dto.responseDto.responseData]);
+    this.history.push(...dto.responseDto.responseData);
+  }
+
+  ServerAuthenticatesUser(dto: ServerAuthenticatesUserDto) {
+    if (dto.responseDto !== null && dto.jwt !== null) {
+      this.authenticated = true;
+      this.currentUser = dto.responseDto;
+      console.log("authentication happens in frontend");
+      this.router.navigateByUrl('');
+    }
   }
 
   ServerOpensConnection(dto: ServerOpensConnectionDto) {

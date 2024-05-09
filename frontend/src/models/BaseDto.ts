@@ -44,3 +44,8 @@ export class ServerShowsHistoryDto extends BaseDto<ServerShowsHistoryDto>{
 export class ServerOpensConnectionDto extends BaseDto<ServerOpensConnectionDto>{
   responseDto!: ResponseDto<Unit[]>;
 }
+
+export class ServerAuthenticatesUserDto extends BaseDto<ServerAuthenticatesUserDto>{
+  responseDto!: UserModel;
+  jwt!: string;
+}

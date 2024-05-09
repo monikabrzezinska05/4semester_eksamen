@@ -1,57 +1,53 @@
+using System.Security.Authentication;
 using System.Text.Json;
 using api.transfer_models;
 using Fleck;
 using infrastructure.models;
+using infrastructure.repositories;
 using lib;
 using service;
+using ws;
 using ws.transfer_models.server_models;
 
-namespace ws;
-
-public class ClientWantsToLoginDto : BaseDto
-{
-    public string email { get; set; }
-    public string password { get; set; }
+public class ClientWantsToLoginDto : BaseDto {
+    public UserLogin userLogin { get; set; }
 }
 
-public class ClientWantsToLogin : BaseEventHandler<ClientWantsToLoginDto>
+public class ClientWantsToLogin() : BaseEventHandler<ClientWantsToLoginDto>
 {
     private readonly AuthenticationService _authenticationService;
+    private readonly TokenService _tokenService;
     
-    public ClientWantsToLogin(AuthenticationService authenticationService)
-    { 
-        _authenticationService = authenticationService;
-    }
-    
-    public override async Task Handle(ClientWantsToLoginDto dto, IWebSocketConnection socket)
+    public ClientWantsToLogin(AuthenticationService authenticationService, TokenService tokenService) : this()
     {
-        var newUserLogin = new UserLogin()
+        _authenticationService = authenticationService;
+        _tokenService = tokenService;
+    }
+
+    public override Task Handle(ClientWantsToLoginDto request, IWebSocketConnection socket)
+    {
+        var user = _authenticationService.Authenticate(request.userLogin);
+        
+        StateService.GetClient(socket.ConnectionInfo.Id).IsAuthenticated = true;
+        StateService.GetClient(socket.ConnectionInfo.Id).user = user!;
+        var jwt = _tokenService.IssueJwt(user!);
+
+        var responseDto = new ResponseDto()
         {
-            Email = dto.email,
-            Password = dto.password
+            ResponseData = user,
+            Jwt = jwt 
         };
         
-        var user = _authenticationService.Authenticate(newUserLogin);
-        Console.WriteLine("User: " + user!.Name);
-        ResponseDto loginMessage;
-        if (user == null)
+        var options = new JsonSerializerOptions()
         {
-            loginMessage = new ResponseDto()
-            {
-                MessageToClient = "Invalid email or password"
-            };
-        } else 
-        {
-            loginMessage = new ResponseDto()
-            {
-                MessageToClient = "You are logged in",
-                ResponseData = user
-            };
-        }
-        var serverLogin = new ServerLogIn()
-        {
-            ResponseDto = loginMessage
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
-        socket.Send(JsonSerializer.Serialize(serverLogin));
+        
+        var responseToClient = JsonSerializer.Serialize(new ServerAuthenticatesUser()
+        {
+            ResponseDto = responseDto
+        }, options);
+        socket.Send(responseToClient);
+        return Task.CompletedTask;
     }
 }
