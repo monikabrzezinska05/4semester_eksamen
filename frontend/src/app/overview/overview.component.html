@@ -1,0 +1,16 @@
+<div class="header">
+  <p>{{ unitType }}</p>
+  <p>STATUS THINGY HERE!</p>
+</div>
+<hr>
+<ng-container *ngFor="let unit of units$ | async">
+  <div>
+    <div class="body">
+      <div style="height: 30px; width: 50px">
+        <p>{{ unit.name }}</p>
+      </div>
+      <div style="height: 30px; width: 50px">
+      </div>
+    </div>
+  </div>
+</ng-container>
