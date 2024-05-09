@@ -4,6 +4,7 @@ import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Router, RouterOutlet} from "@angular/router";
 import {WsClientService} from "../../ws.client.service";
 import {ClientWantsToLogin} from "../../models/clientWantsToLogin";
+import {State} from "../../services/state.service";
 
 @Component({
   selector: 'app-loginpage',
@@ -14,18 +15,26 @@ import {ClientWantsToLogin} from "../../models/clientWantsToLogin";
 })
 
 export class LoginpageComponent {
-  ws = inject(WsClientService);
 
   constructor(public readonly router: Router,
-              private readonly formBuilder: FormBuilder){}
+              private readonly formBuilder: FormBuilder,
+              private state: State) {
+  }
 
   readonly login = this.formBuilder.group({
     Email: ['', [Validators.required, Validators.email]],
-    Password: ['', Validators.required],
-    RememberMe: [false]
+    Password: ['', Validators.required]
   });
 
- Login() {
-  this.ws.socketConnection.sendDto(new ClientWantsToLogin({Password: this.login.value.Password!, Email: this.login.value.Email!}));
+  Login() {
+    var dto =
+      {
+        eventType: "ClientWantsToLogin",
+        UserLogin: {
+          Email: this.login.value.Email,
+          Password: this.login.value.Password
+        }
+      };
+    this.state.ws.send(JSON.stringify(dto));
   }
 }

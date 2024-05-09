@@ -31,9 +31,23 @@ public class ClientWantsToLogin() : BaseEventHandler<ClientWantsToLoginDto>
         StateService.GetClient(socket.ConnectionInfo.Id).IsAuthenticated = true;
         StateService.GetClient(socket.ConnectionInfo.Id).user = user!;
         var jwt = _tokenService.IssueJwt(user!);
-        
-        socket.SendDto(new ServerAuthenticatesUser() { ResponseDto = });
 
+        var responseDto = new ResponseDto()
+        {
+            ResponseData = user,
+            Jwt = jwt 
+        };
+        
+        var options = new JsonSerializerOptions()
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
+        
+        var responseToClient = JsonSerializer.Serialize(new ServerAuthenticatesUser()
+        {
+            ResponseDto = responseDto
+        }, options);
+        socket.Send(responseToClient);
         return Task.CompletedTask;
     }
 }
