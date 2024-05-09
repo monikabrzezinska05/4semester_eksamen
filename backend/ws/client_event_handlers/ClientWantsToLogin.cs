@@ -64,18 +64,17 @@ public class ClientWantsToLogin() : BaseEventHandler<ClientWantsToLoginDto>
 
     public override Task Handle(ClientWantsToLoginDto request, IWebSocketConnection socket)
     {
-        Console.WriteLine("vi er i handler!");
         Console.WriteLine("request: " + request.userLogin.Email + " " + request.userLogin.Password);
-
-        Console.WriteLine("object lavet");
         
         var user = _authenticationService.Authenticate(request.userLogin);
         Console.WriteLine("vi har user");
         
         StateService.GetClient(socket.ConnectionInfo.Id).IsAuthenticated = true;
-        StateService.GetClient(socket.ConnectionInfo.Id).user = user;
+        Console.WriteLine("mellem");
+        StateService.GetClient(socket.ConnectionInfo.Id).user = user!;
         
-        socket.SendDto(new ServerAuthenticatesUser() { jwt = _tokenService.IssueJwt(user) });
+        Console.WriteLine("send dto!");
+        socket.SendDto(new ServerAuthenticatesUser() { jwt = _tokenService.IssueJwt(user!) });
 
         return Task.CompletedTask;
     }

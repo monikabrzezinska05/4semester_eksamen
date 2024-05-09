@@ -21,18 +21,18 @@ public static class Startup
     public static void Statup(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
-        
+
         builder.Services.AddNpgsqlDataSource(Utilities.connectionString,
             dataSourceBuilder => dataSourceBuilder.EnableParameterLogging());
-        
+
         builder.Services.AddSingleton<HistoryRepo>();
         builder.Services.AddSingleton<AuthenticateRepository>();
         builder.Services.AddSingleton<UserRepository>();
         builder.Services.AddSingleton<EmailRepository>();
         builder.Services.AddSingleton<UnitRepository>();
-        
+
         builder.Services.AddSingleton<MQTTService>();
-        
+
         builder.Services.AddSingleton<HistoryService>();
         builder.Services.AddSingleton<TokenService>();
         builder.Services.AddSingleton<AuthenticationService>();
@@ -50,7 +50,11 @@ public static class Startup
 
         server.Start(ws =>
         {
-            ws.OnClose = () => { StateService.RemoveConnection(ws); };
+            ws.OnClose = () =>
+            {
+                StateService.RemoveConnection(ws);
+                StateService.RemoveClient(ws.ConnectionInfo.Id);
+            };
 
             ws.OnOpen = async () =>
             {
@@ -58,6 +62,7 @@ public static class Startup
                 {
                     Console.WriteLine("Client connected");
                     StateService.AddConnection(ws);
+                    StateService.AddClient(ws.ConnectionInfo.Id, ws);
                 }
                 catch (Exception e)
                 {

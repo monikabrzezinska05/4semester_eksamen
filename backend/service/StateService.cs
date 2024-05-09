@@ -19,6 +19,16 @@ public static class StateService
     {
         return _clients[clientId];
     }
+
+    public static void AddClient(Guid clientId, IWebSocketConnection connection)
+    {
+        _clients.TryAdd(clientId, new WsWithMetadata(connection));
+    }
+
+    public static void RemoveClient(Guid clientId)
+    {
+        _clients.Remove(clientId);
+    }
     
     public static bool AddConnection(IWebSocketConnection ws)
     {

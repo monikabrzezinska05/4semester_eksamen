@@ -35,6 +35,7 @@ public class TokenService(IConfiguration configuration)
     {
         try
         {
+            Console.WriteLine("ind i validate jwt");
             IJsonSerializer serializer = new JsonNetSerializer();
             var provider = new UtcDateTimeProvider();
             IBase64UrlEncoder urlEncoder = new JwtBase64UrlEncoder();
