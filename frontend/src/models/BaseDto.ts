@@ -42,5 +42,5 @@ export class ServerShowsHistoryDto extends BaseDto<ServerShowsHistoryDto>{
 }
 
 export class ServerOpensConnectionDto extends BaseDto<ServerOpensConnectionDto>{
-  ResponseDto!: Unit[];
+  responseDto!: ResponseDto<Unit[]>;
 }
