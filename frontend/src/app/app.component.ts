@@ -12,5 +12,5 @@ import {LoginpageComponent} from "./loginpage/loginpage.component";
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-
+  
 }

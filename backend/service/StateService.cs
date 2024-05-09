@@ -34,8 +34,7 @@ public static class StateService
     {
         return Connections.TryAdd(ws.ConnectionInfo.Id, ws);
     }
-
-
+    
     public static bool RemoveConnection(IWebSocketConnection ws)
     {
         return Connections.Remove(ws.ConnectionInfo.Id);

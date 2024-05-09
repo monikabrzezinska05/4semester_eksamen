@@ -24,57 +24,15 @@ public class ClientWantsToLogin() : BaseEventHandler<ClientWantsToLoginDto>
         _tokenService = tokenService;
     }
 
-    // public ClientWantsToLogin(AuthenticationService authenticationService)
-    // {
-    //     _authenticationService = authenticationService;
-    // }
-
-    // public override async Task Handle(ClientWantsToLoginDto dto, IWebSocketConnection socket)
-    // {
-    //     var newUserLogin = new UserLogin()
-    //     {
-    //         Email = dto.email,
-    //         Password = dto.password
-    //     };
-    //     
-    //     var user = _authenticationService.Authenticate(newUserLogin);
-    //     Console.WriteLine("User: " + user!.Name);
-    //     ResponseDto loginMessage;
-    //     if (user == null)
-    //     {
-    //         loginMessage = new ResponseDto()
-    //         {
-    //             MessageToClient = "Invalid email or password"
-    //         };
-    //     } else 
-    //     {
-    //         loginMessage = new ResponseDto()
-    //         {
-    //             MessageToClient = "You are logged in",
-    //             ResponseData = user
-    //         };
-    //         
-    //     }
-    //     var serverLogin = new ServerLogIn()
-    //     {
-    //         ResponseDto = loginMessage
-    //     };
-    //     socket.Send(JsonSerializer.Serialize(serverLogin));
-    // }
-
     public override Task Handle(ClientWantsToLoginDto request, IWebSocketConnection socket)
     {
-        Console.WriteLine("request: " + request.userLogin.Email + " " + request.userLogin.Password);
-        
         var user = _authenticationService.Authenticate(request.userLogin);
-        Console.WriteLine("vi har user");
         
         StateService.GetClient(socket.ConnectionInfo.Id).IsAuthenticated = true;
-        Console.WriteLine("mellem");
         StateService.GetClient(socket.ConnectionInfo.Id).user = user!;
+        var jwt = _tokenService.IssueJwt(user!);
         
-        Console.WriteLine("send dto!");
-        socket.SendDto(new ServerAuthenticatesUser() { jwt = _tokenService.IssueJwt(user!) });
+        socket.SendDto(new ServerAuthenticatesUser() { ResponseDto = });
 
         return Task.CompletedTask;
     }
