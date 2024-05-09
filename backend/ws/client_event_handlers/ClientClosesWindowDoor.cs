@@ -4,6 +4,7 @@ using Fleck;
 using infrastructure.models;
 using lib;
 using service;
+using ws.transfer_models.server_models;
 
 namespace ws;
 
@@ -28,7 +29,10 @@ public class ClientClosesWindowDoor : BaseEventHandler<ClientClosesWindowDoorDto
         {
             ResponseData = loggedEvent
         };
-        var windowdoorHistoryToClient = JsonSerializer.Serialize(windowDoorHistory);
+        var windowdoorHistoryToClient = JsonSerializer.Serialize(new ServerClosesWindowDoor()
+        {
+            ResponseDto = windowDoorHistory
+        });
         socket.Send(windowdoorHistoryToClient);
         return Task.CompletedTask;
     }

@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace service;
 
-public class MQTTService
+public class MQTTSubscribeService
 {
     public async Task CommunicateWithBroker()
     {
