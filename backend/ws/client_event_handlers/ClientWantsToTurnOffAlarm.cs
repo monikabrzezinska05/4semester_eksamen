@@ -16,12 +16,12 @@ public class ClientWantsToTurnOffAlarmDto: BaseDto
 public class ClientWantsToTurnOffAlarm : BaseEventHandler<ClientWantsToTurnOffAlarmDto>
 {
     private readonly HistoryService _historyService;
-    private readonly MQTTService _mqttService;
+    private readonly MQTTSubscribeService _mqttSubscribeService;
 
-    public ClientWantsToTurnOffAlarm(HistoryService historyService, MQTTService mqttService)
+    public ClientWantsToTurnOffAlarm(HistoryService historyService, MQTTSubscribeService mqttSubscribeService)
     {
         _historyService = historyService;
-        _mqttService = mqttService;
+        _mqttSubscribeService = mqttSubscribeService;
     }
 
     public override Task Handle(ClientWantsToTurnOffAlarmDto dto, IWebSocketConnection socket)
