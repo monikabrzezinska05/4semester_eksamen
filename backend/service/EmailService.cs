@@ -45,4 +45,14 @@ Best Regards, Securty Home Security"
     {
         return _emailRepository.getMails();
     }
+
+    public EmailModel createEmail(EmailModel model)
+    {
+        return _emailRepository.createEmail(model);
+    }
+
+    public void deleteEmail(int id)
+    {
+        _emailRepository.deleteEmail(id);
+    }
 }
