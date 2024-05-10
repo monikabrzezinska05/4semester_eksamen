@@ -31,7 +31,7 @@ public class ClientWantsToDeleteEmail : BaseEventHandler<ClientWantsToDeleteEmai
         {
             ResponseData = loggedEvent
         };
-        var deleteEmailToClient = JsonSerializer.Serialize(new ServerShowsEmailList()
+        var deleteEmailToClient = JsonSerializer.Serialize(new ServerDeletesEmail()
         {
             ResponseDto = deleteEmail
         });

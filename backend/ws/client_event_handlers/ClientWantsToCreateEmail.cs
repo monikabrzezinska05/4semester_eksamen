@@ -29,7 +29,7 @@ public class ClientWantsToCreateEmail : BaseEventHandler<ClientWantsToCreateEmai
         {
             ResponseData = loggedEvent
         };
-        var newEmailToClient = JsonSerializer.Serialize(new ServerShowsEmailList()
+        var newEmailToClient = JsonSerializer.Serialize(new ServerCreatesEmail()
         {
             ResponseDto = newEmail
         });
