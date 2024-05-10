@@ -30,7 +30,18 @@ public class ClientWantsToTurnOnAlarmsWindowDoor : BaseEventHandler<ClientWantsT
     public override async Task Handle(ClientWantsToTurnOnAlarmsWindowDoorDto dto, IWebSocketConnection socket)
     {
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.historyModel);
-        _unitService.SetAllWindowDoorStatus((int)Status.Armed);
+        var units = _unitService.SetAllWindowDoorStatus((int)Status.Armed);
+        foreach (var unit in units)
+        {
+            var history = new HistoryModel()
+            {
+                UnitId = unit.UnitId,
+                Date = DateTime.Now,
+                EventTypeId = EventType.AlarmArmed
+
+            };
+            _historyService.CreateHistory(history);
+        }
         await _mqttPublishService.AlarmTurnOnWindowDoorPublish();
         var turnOnAlarm = new ResponseDto()
         {
