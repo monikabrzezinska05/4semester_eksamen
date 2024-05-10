@@ -6,8 +6,8 @@ export interface Unit{
 }
 
 export enum UnitType{
-  Door,
-  Window,
+  Doors,
+  Windows,
   MotionSensor,
 }
 

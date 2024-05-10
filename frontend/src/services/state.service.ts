@@ -64,11 +64,11 @@ export class State {
   }
 
   public getDoors(): Observable<Unit[]> {
-    return this.units$.pipe(map((units) => units.filter((unit) => unit.unitTypeId === UnitType.Door)));
+    return this.units$.pipe(map((units) => units.filter((unit) => unit.unitTypeId === UnitType.Doors)));
   }
 
   public getWindows() {
-    return this.units$.pipe(map((units) => units.filter((unit) => unit.unitTypeId === UnitType.Window)));
+    return this.units$.pipe(map((units) => units.filter((unit) => unit.unitTypeId === UnitType.Windows)));
   }
 
   public getMotionSensor() {

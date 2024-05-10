@@ -14,7 +14,8 @@ import {map, Observable} from "rxjs";
 })
 
 export class OverviewComponent implements OnInit {
-  @Input() unitType!: number;
+  @Input() unitType!: UnitType;
+  unitTypeName!: string;
   units$?: Observable<Unit[]>;
 
   constructor(public state: State) {
@@ -22,14 +23,23 @@ export class OverviewComponent implements OnInit {
 
   ngOnInit(): void {
     this.units$ = this.getUnitsObservable(this.unitType);
+    this.unitTypeName = UnitType[this.unitType]
+    this.checkIfMotionSensor(this.unitType);
+    console.log("Unittype: ", this.unitTypeName);
+  }
+
+  private checkIfMotionSensor(unitType: UnitType) {
+    if(unitType === UnitType.MotionSensor){
+      this.unitTypeName = "Motion Sensors";
+    }
   }
 
   private getUnitsObservable(unitType: UnitType): Observable<Unit[]> {
-    if (unitType === UnitType.Door) {
+    if (unitType === UnitType.Doors) {
       return this.state.getDoors();
     }
 
-    if (unitType === UnitType.Window) {
+    if (unitType === UnitType.Windows) {
       return this.state.getWindows();
     }
 
