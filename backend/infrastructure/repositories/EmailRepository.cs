@@ -21,4 +21,24 @@ public class EmailRepository
             return conn.Query<EmailModel>(sql);
         }
     }
+
+    public EmailModel createEmail(EmailModel model)
+    {
+        const string sql = "INSERT INTO emaillist(id, mail) VALUES(@Id, @Mail) RETURNING *";
+        using (var conn = _dataSource.OpenConnection())
+        {
+            var response = conn.QueryFirst<EmailModel>(sql, new { model.id, model.mail });
+            return response;
+        }
+    }
+
+    public bool deleteEmail(int id)
+    {
+        const string sql = "DELETE FROM emaillist WHERE id = @id";
+        using (var conn = _dataSource.OpenConnection())
+        {
+            var response = conn.Execute(sql, new {id}) == 1;
+            return response;
+        }
+    }
 }
