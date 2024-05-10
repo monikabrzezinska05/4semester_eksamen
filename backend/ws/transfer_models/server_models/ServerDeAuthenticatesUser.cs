@@ -3,7 +3,7 @@ using lib;
 
 namespace ws.transfer_models.server_models;
 
-public class ServerLogoff : BaseDto
+public class ServerDeAuthenticatesUser : BaseDto
 {
     public ResponseDto ResponseDto { get; set; }
 }

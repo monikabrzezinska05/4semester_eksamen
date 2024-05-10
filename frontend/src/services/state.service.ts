@@ -1,7 +1,13 @@
 import {Injectable} from "@angular/core";
 import {Unit, UnitType} from "../models/Unit";
 import {environment} from "../environments/environment";
-import {BaseDto, ServerAuthenticatesUserDto, ServerShowsUnitsDto, ServerShowsHistoryDto} from "../models/BaseDto";
+import {
+  BaseDto,
+  ServerAuthenticatesUserDto,
+  ServerShowsUnitsDto,
+  ServerShowsHistoryDto,
+  ServerDeAuthenticatesUserDto
+} from "../models/BaseDto";
 import {HistoryModel} from "../models/HistoryModel";
 import {UserModel} from "../models/UserModel";
 import {Router} from "@angular/router";
@@ -43,6 +49,20 @@ export class State {
       console.log("authentication happens in frontend");
       this.router.navigateByUrl('');
     }
+    this.ws.onopen = () => {};
+  }
+
+  ServerDeAuthenticatesUser(dto: ServerDeAuthenticatesUserDto) {
+    this.authenticated = false;
+    this.currentUser = undefined;
+    this.units$ = new BehaviorSubject<Unit[]>([]);
+    this.history$ = new BehaviorSubject<HistoryModel[]>([]);
+    this.router.navigateByUrl('/login');
+    console.log(" has happened deauthentication in frontend");
+  }
+
+  ServerLogsOffUser(dto: ServerDeAuthenticatesUserDto) {
+    this.ws.close();
   }
 
   ServerShowsUnits(dto: ServerShowsUnitsDto) {

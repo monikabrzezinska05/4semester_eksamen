@@ -49,3 +49,7 @@ export class ServerAuthenticatesUserDto extends BaseDto<ServerAuthenticatesUserD
   responseDto!: UserModel;
   jwt!: string;
 }
+
+export class ServerDeAuthenticatesUserDto extends BaseDto<ServerDeAuthenticatesUserDto>{
+  responseDto!: ResponseDto<undefined>;
+}
