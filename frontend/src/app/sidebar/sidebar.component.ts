@@ -1,4 +1,6 @@
 import {Component, OnInit, ViewChild, ElementRef, Renderer2, AfterViewInit} from '@angular/core';
+import {FormBuilder, Validators} from "@angular/forms";
+import {State} from "../../services/state.service";
 
 @Component({
   selector: 'app-sidebar',
@@ -10,7 +12,9 @@ import {Component, OnInit, ViewChild, ElementRef, Renderer2, AfterViewInit} from
 export class SidebarComponent implements OnInit, AfterViewInit {
   @ViewChild('toggleSwitch') toggleSwitch!: ElementRef;
 
-  constructor(private renderer: Renderer2){ }
+  constructor(private renderer: Renderer2,
+              private state: State,
+              private formBuilder: FormBuilder){ }
 
   ngOnInit(): void { }
 
@@ -27,5 +31,21 @@ export class SidebarComponent implements OnInit, AfterViewInit {
         }
       });
     }, 0);
+  }
+
+  private readonly logoff = this.formBuilder.group({
+    Email: ['', [Validators.required, Validators.email]],
+    Password: ['', Validators.required]
+  });
+
+  Logoff() {
+    var dto = {
+      eventType: "ClientWantsToLogoff",
+      UserLogin: {
+        Email: this.logoff.value.Email,
+        Password: this.logoff.value.Password
+      }
+    };
+    this.state.ws.send(JSON.stringify(dto));
   }
 }
