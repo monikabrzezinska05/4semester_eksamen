@@ -51,8 +51,8 @@ Best Regards, Securty Home Security"
         return _emailRepository.createEmail(model);
     }
 
-    public void deleteEmail(int id)
+    public bool deleteEmail(int id)
     {
-        _emailRepository.deleteEmail(id);
+        return _emailRepository.deleteEmail(id);
     }
 }

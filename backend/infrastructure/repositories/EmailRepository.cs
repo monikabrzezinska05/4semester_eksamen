@@ -32,12 +32,13 @@ public class EmailRepository
         }
     }
 
-    public void deleteEmail(int id)
+    public bool deleteEmail(int id)
     {
         const string sql = "DELETE FROM emaillist WHERE id = @id";
         using (var conn = _dataSource.OpenConnection())
         {
-            var response = conn.Execute(sql, new {id});
+            var response = conn.Execute(sql, new {id}) == 1;
+            return response;
         }
     }
 }
