@@ -55,7 +55,10 @@ export class State {
   ServerDeAuthenticatesUser(dto: ServerDeAuthenticatesUserDto) {
     this.authenticated = false;
     this.currentUser = undefined;
+    this.units$ = new BehaviorSubject<Unit[]>([]);
+    this.history$ = new BehaviorSubject<HistoryModel[]>([]);
     this.router.navigateByUrl('/login');
+    console.log(" has happened deauthentication in frontend");
   }
 
   ServerLogsOffUser(dto: ServerDeAuthenticatesUserDto) {
