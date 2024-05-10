@@ -26,10 +26,10 @@ public class ClientWantsToDeleteEmail : BaseEventHandler<ClientWantsToDeleteEmai
     {
         int emailId = dto.EmailModel.id;
         
-        bool loggedEvent = _emailService.deleteEmail(emailId);
+        _emailService.deleteEmail(emailId);
         var deleteEmail = new ResponseDto()
         {
-            ResponseData = loggedEvent
+            MessageToClient = "Email has been successfully deleted"
         };
         var deleteEmailToClient = JsonSerializer.Serialize(new ServerDeletesEmail()
         {
