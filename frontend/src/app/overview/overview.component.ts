@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CommonModule} from "@angular/common";
-import {Unit, UnitType} from "../../models/Unit";
+import {Status, Unit, UnitType} from "../../models/Unit";
 import {State} from "../../services/state.service";
 import {NgArrayPipesModule} from "ngx-pipes";
-import {Observable} from "rxjs";
+import {map, Observable} from "rxjs";
 
 @Component({
   selector: 'app-overview',
@@ -18,10 +18,6 @@ export class OverviewComponent implements OnInit {
   units$?: Observable<Unit[]>;
 
   constructor(public state: State) {
-    var dto = {
-      eventType: "ClientWantsToSeeUnits"
-    }
-    this.state.ws.send(JSON.stringify(dto))
   }
 
   ngOnInit(): void {
@@ -42,5 +38,30 @@ export class OverviewComponent implements OnInit {
     }
 
     throw new Error(`Unknown unit type: ${unitType}`);
+  }
+
+  getAllStatusColor() {
+    var statusYellow = this.units$?.pipe(map(units => units.filter(unit => unit.status === Status.Disarmed)));
+    var statusRed = this.units$?.pipe(map(units => units.filter(unit => unit.status === Status.Triggered)));
+    if (statusRed) {
+      return "red";
+    }
+    if (statusYellow) {
+      return "yellow";
+    }
+    return "green";
+  }
+
+  getStatusColor(Unit: Unit) {
+    if (Unit.status === Status.Armed) {
+      return "green";
+    }
+    if (Unit.status === Status.Disarmed) {
+      return "yellow";
+    }
+    if (Unit.status === Status.Triggered) {
+      return "red";
+    }
+    return "black";
   }
 }

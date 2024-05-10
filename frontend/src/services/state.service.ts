@@ -42,6 +42,11 @@ export class State {
       this.currentUser = dto.responseDto;
       console.log("authentication happens in frontend");
       this.router.navigateByUrl('');
+
+      var getUnitsDto = {
+        eventType: "ClientWantsToSeeUnits"
+      }
+      this.ws.send(JSON.stringify(getUnitsDto))
     }
   }
 
