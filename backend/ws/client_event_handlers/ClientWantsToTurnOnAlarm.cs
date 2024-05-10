@@ -18,16 +18,19 @@ public class ClientWantsToTurnOnAlarm : BaseEventHandler<ClientWantsToTurnOnAlar
 {
     private readonly HistoryService _historyService;
     private readonly MQTTPublishService _mqttPublishService;
+    private readonly UnitService _unitService;
 
-    public ClientWantsToTurnOnAlarm(HistoryService historyService, MQTTPublishService mqttPublishService)
+    public ClientWantsToTurnOnAlarm(HistoryService historyService, MQTTPublishService mqttPublishService, UnitService unitService)
     {
         _historyService = historyService;
         _mqttPublishService = mqttPublishService;
+        _unitService = unitService;
     }
 
     public override async Task Handle(ClientWantsToTurnOnAlarmDto dto, IWebSocketConnection socket)
     {
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.HistoryModel);
+        _unitService.SetAllUnitStatus((int)Status.Armed);
         await _mqttPublishService.AlarmTurnOnPublish();
         var turnOnAlarm = new ResponseDto()
         {

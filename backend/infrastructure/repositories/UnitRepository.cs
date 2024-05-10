@@ -31,4 +31,24 @@ public class UnitRepository
             return conn.Query<Unit>(sql).ToList();
         }
     }
+
+    public Unit SetUnitStatus(int unitId, int status)
+    {
+        string sql = "UPDATE unit SET status = @status WHERE unitid = @unitId;";
+
+        using (var conn = _dataSource.OpenConnection())
+        {
+            return conn.QueryFirst<Unit>(sql, new {@unitId, @status});
+        }
+    }
+
+    public List<Unit> SetAllUnitStatus(int status)
+    {
+        string sql = "UPDATE unit SET status = @status;";
+
+        using (var conn = _dataSource.OpenConnection())
+        { 
+            return conn.Query<Unit>(sql, new {@status}).ToList();
+        }
+    }
 }
