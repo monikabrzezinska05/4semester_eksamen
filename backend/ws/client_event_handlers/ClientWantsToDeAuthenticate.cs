@@ -7,28 +7,25 @@ using ws;
 
 namespace ws;
 
-public class ClientWantsToLogoffDto : BaseDto
-{
-    public UserLogin UserLogin { get; set; }
-}
+public class ClientWantsToDeAuthenticateDto : BaseDto {}
 
-public class ClientWantsToLogoff() : BaseEventHandler<ClientWantsToLogoffDto>
+public class ClientWantsToDeAuthenticate() : BaseEventHandler<ClientWantsToDeAuthenticateDto>
 {
     private readonly TokenService _tokenService;
 
-    public ClientWantsToLogoff(TokenService tokenService) : this()
+    public ClientWantsToDeAuthenticate(TokenService tokenService) : this()
     {
         _tokenService = tokenService;
     }
 
-    public override Task Handle(ClientWantsToLogoffDto dto, IWebSocketConnection socket)
+    public override Task Handle(ClientWantsToDeAuthenticateDto dto, IWebSocketConnection socket)
     {
         if (!StateService.GetClient(socket.ConnectionInfo.Id).IsAuthenticated)
         {
+            Console.WriteLine("Client is not authenticated");
             throw new AuthenticationException();
         }
         StateService.GetClient(socket.ConnectionInfo.Id).IsAuthenticated = false;
-        
         return Task.CompletedTask;
     }
 }

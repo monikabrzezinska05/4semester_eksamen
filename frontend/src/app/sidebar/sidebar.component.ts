@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild, ElementRef, Renderer2, AfterViewInit} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {State} from "../../services/state.service";
+import {ServerDeAuthenticatesUserDto} from "../../models/BaseDto";
 
 @Component({
   selector: 'app-sidebar',
@@ -33,19 +34,11 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     }, 0);
   }
 
-  private readonly logoff = this.formBuilder.group({
-    Email: ['', [Validators.required, Validators.email]],
-    Password: ['', Validators.required]
-  });
-
   Logoff() {
+    console.log('Logoff method has been called');
     var dto = {
-      eventType: "ClientWantsToLogoff",
-      UserLogin: {
-        Email: this.logoff.value.Email,
-        Password: this.logoff.value.Password
-      }
-    };
+      eventType: "ClientWantsToDeAuthenticate"
+    }
     this.state.ws.send(JSON.stringify(dto));
   }
 }
