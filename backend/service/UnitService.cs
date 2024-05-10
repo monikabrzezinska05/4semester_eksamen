@@ -31,4 +31,9 @@ public class UnitService
     {
         return _unitRepository.SetAllUnitStatus(status);
     }
+
+    public List<Unit> SetWindowDoorStatus(int status)
+    {
+        return _unitRepository.SetWindowDoorStatus(status);
+    }
 }

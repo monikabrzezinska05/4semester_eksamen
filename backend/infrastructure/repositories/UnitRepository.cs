@@ -51,4 +51,14 @@ public class UnitRepository
             return conn.Query<Unit>(sql, new {@status}).ToList();
         }
     }
+
+    public List<Unit> SetWindowDoorStatus(int status)
+    {
+        string sql = "UPDATE unit SET status = @status WHERE unittype != 2";
+
+        using (var conn = _dataSource.OpenConnection())
+        {
+            return conn.Query<Unit>(sql, new { @status }).ToList();
+        }
+    }
 }
