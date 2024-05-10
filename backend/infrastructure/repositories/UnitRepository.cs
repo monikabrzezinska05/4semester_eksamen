@@ -14,7 +14,7 @@ public class UnitRepository
 
     public Unit GetUnitById(int unitId)
     {
-        string sql = "SELECT * FROM unit WHERE unitId =@UnitId";
+        string sql = "SELECT * FROM unit WHERE unitId = @UnitId;";
 
         using (var conn = _dataSource.OpenConnection())
         {
@@ -24,7 +24,7 @@ public class UnitRepository
 
     public List<Unit> GetAllUnits()
     {
-        string sql = "SELECT * FROM unit";
+        string sql = "SELECT * FROM unit;";
         
         using (var conn = _dataSource.OpenConnection())
         {
@@ -52,13 +52,23 @@ public class UnitRepository
         }
     }
 
-    public List<Unit> SetWindowDoorStatus(int status)
+    public List<Unit> SetAllWindowDoorStatus(int status)
     {
-        string sql = "UPDATE unit SET status = @status WHERE unittype != 2";
+        string sql = "UPDATE unit SET status = @status WHERE unittype != 2;";
 
         using (var conn = _dataSource.OpenConnection())
         {
             return conn.Query<Unit>(sql, new { @status }).ToList();
+        }
+    }
+
+    public List<Unit> SetAllSpecificUnitStatus(int status, int type)
+    {
+        string sql = "UPDATE unit SET status = @status WHERE unittype = @type;";
+
+        using (var conn = _dataSource.OpenConnection())
+        {
+            return conn.Query<Unit>(sql, new { @status, @type }).ToList();
         }
     }
 }

@@ -8,18 +8,18 @@ using ws.transfer_models.server_models;
 
 namespace ws.client_event_handlers;
 
-public class ClientWantsToTurnOffAlarmWindowDoorDto : BaseDto
+public class ClientWantsToTurnOffAlarmsWindowDoorDto : BaseDto
 {
     public HistoryModel historyModel { get; set; }
 }
 
-public class ClientWantsToTurnOffAlarmWindowDoor : BaseEventHandler<ClientWantsToTurnOffAlarmWindowDoorDto>
+public class ClientWantsToTurnOffAlarmsWindowDoor : BaseEventHandler<ClientWantsToTurnOffAlarmsWindowDoorDto>
 {
     private readonly HistoryService _historyService;
     private readonly MQTTPublishService _mqttPublishService;
     private readonly UnitService _unitService;
 
-    public ClientWantsToTurnOffAlarmWindowDoor(HistoryService historyService, MQTTPublishService mqttPublishService, UnitService unitService)
+    public ClientWantsToTurnOffAlarmsWindowDoor(HistoryService historyService, MQTTPublishService mqttPublishService, UnitService unitService)
     {
         _historyService = historyService;
         _mqttPublishService = mqttPublishService;
@@ -27,10 +27,10 @@ public class ClientWantsToTurnOffAlarmWindowDoor : BaseEventHandler<ClientWantsT
     }
 
 
-    public override async Task Handle(ClientWantsToTurnOffAlarmWindowDoorDto dto, IWebSocketConnection socket)
+    public override async Task Handle(ClientWantsToTurnOffAlarmsWindowDoorDto dto, IWebSocketConnection socket)
     {
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.historyModel);
-        _unitService.SetWindowDoorStatus((int)Status.Disarmed);
+        _unitService.SetAllWindowDoorStatus((int)Status.Disarmed);
         await _mqttPublishService.AlarmTurnOffWindowDoorPublish();
         var turnOffAlarm = new ResponseDto()
         {

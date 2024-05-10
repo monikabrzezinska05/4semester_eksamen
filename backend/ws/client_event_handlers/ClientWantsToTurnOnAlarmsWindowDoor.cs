@@ -8,18 +8,18 @@ using ws.transfer_models.server_models;
 
 namespace ws.client_event_handlers;
 
-public class ClientWantsToTurnOnAlarmWindowDoorDto : BaseDto
+public class ClientWantsToTurnOnAlarmsWindowDoorDto : BaseDto
 {
     public HistoryModel historyModel { get; set; }
 }
 
-public class ClientWantsToTurnOnAlarmWindowDoor : BaseEventHandler<ClientWantsToTurnOnAlarmWindowDoorDto>
+public class ClientWantsToTurnOnAlarmsWindowDoor : BaseEventHandler<ClientWantsToTurnOnAlarmsWindowDoorDto>
 {
     private readonly HistoryService _historyService;
     private readonly MQTTPublishService _mqttPublishService;
     private readonly UnitService _unitService;
 
-    public ClientWantsToTurnOnAlarmWindowDoor(HistoryService historyService, MQTTPublishService mqttPublishService, UnitService unitService)
+    public ClientWantsToTurnOnAlarmsWindowDoor(HistoryService historyService, MQTTPublishService mqttPublishService, UnitService unitService)
     {
         _historyService = historyService;
         _mqttPublishService = mqttPublishService;
@@ -27,10 +27,10 @@ public class ClientWantsToTurnOnAlarmWindowDoor : BaseEventHandler<ClientWantsTo
     }
 
 
-    public override async Task Handle(ClientWantsToTurnOnAlarmWindowDoorDto dto, IWebSocketConnection socket)
+    public override async Task Handle(ClientWantsToTurnOnAlarmsWindowDoorDto dto, IWebSocketConnection socket)
     {
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.historyModel);
-        _unitService.SetWindowDoorStatus((int)Status.Armed);
+        _unitService.SetAllWindowDoorStatus((int)Status.Armed);
         await _mqttPublishService.AlarmTurnOnWindowDoorPublish();
         var turnOnAlarm = new ResponseDto()
         {
