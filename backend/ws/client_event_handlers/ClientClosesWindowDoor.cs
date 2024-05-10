@@ -29,11 +29,11 @@ public class ClientClosesWindowDoor : BaseEventHandler<ClientClosesWindowDoorDto
         {
             ResponseData = loggedEvent
         };
-        var windowdoorHistoryToClient = JsonSerializer.Serialize(new ServerClosesWindowDoor()
+        var windowDoorHistoryToClient = JsonSerializer.Serialize(new ServerClosesWindowDoor()
         {
             ResponseDto = windowDoorHistory
         });
-        socket.Send(windowdoorHistoryToClient);
+        socket.Send(windowDoorHistoryToClient);
         return Task.CompletedTask;
     }
 }
