@@ -2,13 +2,12 @@ import {Component, Input, OnInit} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {Unit, UnitType} from "../../models/Unit";
 import {State} from "../../services/state.service";
-import {NgArrayPipesModule} from "ngx-pipes";
 import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-overview',
   standalone: true,
-  imports: [CommonModule, NgArrayPipesModule],
+  imports: [CommonModule],
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.css'
 })
@@ -17,12 +16,7 @@ export class OverviewComponent implements OnInit {
   @Input() unitType!: number;
   units$?: Observable<Unit[]>;
 
-  constructor(public state: State) {
-    var dto = {
-      eventType: "ClientWantsToSeeUnits"
-    }
-    this.state.ws.send(JSON.stringify(dto))
-  }
+  constructor(public state: State) { }
 
   ngOnInit(): void {
     this.units$ = this.getUnitsObservable(this.unitType);

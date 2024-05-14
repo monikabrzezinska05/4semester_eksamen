@@ -1,0 +1,19 @@
+<style>
+  div {
+    border: 1px solid red;
+  }
+  .mainDiv {
+    display: flex;
+  }
+  .filters {
+    width: 80%;
+    height: 20px;
+  }
+</style>
+
+<div class="mainDiv">
+  <div class="filters">
+  </div>
+  <div *ngFor="let historyItem of History$ | async">
+    <div style="width: 10px; height: 10px"></div>
+</div>

@@ -49,7 +49,22 @@ export class State {
       console.log("authentication happens in frontend");
       this.router.navigateByUrl('');
     }
-    this.ws.onopen = () => {};
+    this.getUnitsFromServer();
+    this.getHistoryFromServer();
+  }
+
+  private getUnitsFromServer() {
+    var dto = {
+      eventType: "ClientWantsToSeeUnits"
+    }
+    this.ws.send(JSON.stringify(dto));
+  }
+
+  private getHistoryFromServer() {
+    var dto = {
+      eventType: "ClientWantsToSeeHistory"
+    }
+    this.ws.send(JSON.stringify(dto));
   }
 
   ServerDeAuthenticatesUser(dto: ServerDeAuthenticatesUserDto) {
