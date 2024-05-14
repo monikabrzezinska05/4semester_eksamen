@@ -11,23 +11,26 @@ namespace ws;
 
 public class ClientWantsToTurnOnAlarmDto: BaseDto
 {
-    public HistoryModel HistoryModel { get; set; }
+    public HistoryModel historyModel { get; set; }
 }
 
 public class ClientWantsToTurnOnAlarm : BaseEventHandler<ClientWantsToTurnOnAlarmDto>
 {
     private readonly HistoryService _historyService;
     private readonly MQTTPublishService _mqttPublishService;
+    private readonly UnitService _unitService;
 
-    public ClientWantsToTurnOnAlarm(HistoryService historyService, MQTTPublishService mqttPublishService)
+    public ClientWantsToTurnOnAlarm(HistoryService historyService, MQTTPublishService mqttPublishService, UnitService unitService)
     {
         _historyService = historyService;
         _mqttPublishService = mqttPublishService;
+        _unitService = unitService;
     }
 
     public override async Task Handle(ClientWantsToTurnOnAlarmDto dto, IWebSocketConnection socket)
     {
-        HistoryModel loggedEvent = _historyService.CreateHistory(dto.HistoryModel);
+        HistoryModel loggedEvent = _historyService.CreateHistory(dto.historyModel);
+        _unitService.SetUnitStatus(dto.historyModel.UnitId, Status.Armed);
         await _mqttPublishService.AlarmTurnOnPublish();
         var turnOnAlarm = new ResponseDto()
         {
