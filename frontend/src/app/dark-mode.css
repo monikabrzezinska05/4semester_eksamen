@@ -1,0 +1,22 @@
+body.dark-mode {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.dark-mode .modal-content {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.modal-content {
+  background-color: white;
+  color: black;
+}
+
+.dark-mode .toggle-switch {
+  background-color: green;
+}
+
+.toggle-switch {
+  background-color: red;
+}

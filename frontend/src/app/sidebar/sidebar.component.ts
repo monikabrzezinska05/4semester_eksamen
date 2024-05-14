@@ -14,6 +14,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   @ViewChild('toggleSwitch') toggleSwitch!: ElementRef;
   @ViewChild('toggleDarkmode') toggleDarkmodeSwitch!: ElementRef;
   private modal! : HTMLElement;
+  darkMode = false;
 
   constructor(private renderer: Renderer2,
               private state: State,
@@ -33,6 +34,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
           knob.style.left = '55px';
         }
       });
+      //til modal
       this.renderer.listen(this.toggleDarkmodeSwitch.nativeElement, 'click', (event) => {
         const knob = this.toggleDarkmodeSwitch.nativeElement.querySelector('.toggle-knob') as HTMLElement;
         if (knob.style.left === '55px') {
@@ -66,7 +68,13 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   toggleDarkmode() {
-    let element = document.body;
-    element.classList.toggle("dark-mode");
+    this.darkMode = !this.darkMode;
+    if (this.darkMode) {
+      this.renderer.addClass(document.body, 'dark-mode');
+      this.renderer.addClass(this.modal, 'dark-mode');
+    } else {
+      this.renderer.removeClass(document.body, 'dark-mode');
+      this.renderer.removeClass(this.modal, 'dark-mode');
+    }
   }
 }
