@@ -22,7 +22,7 @@ public class UnitService
         return _unitRepository.GetAllUnits();
     }
 
-    public Unit SetUnitStatus(int unitId, int status)
+    public Unit SetUnitStatus(int unitId, Status status)
     {
         return _unitRepository.SetUnitStatus(unitId, status);
     }
@@ -32,7 +32,7 @@ public class UnitService
         return _unitRepository.SetAllUnitStatus(status);
     }
 
-    public List<Unit> SetAllWindowDoorStatus(int status)
+    public List<Unit> SetAllWindowDoorStatus(Status status)
     {
         return _unitRepository.SetAllWindowDoorStatus(status);
     }

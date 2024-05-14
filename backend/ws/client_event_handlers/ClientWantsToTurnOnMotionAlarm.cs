@@ -30,7 +30,7 @@ public class ClientWantsToTurnOnMotionAlarm : BaseEventHandler<ClientWantsToTurn
     public override async Task Handle(ClientWantsToTurnOnAlarmsWindowDoorDto dto, IWebSocketConnection socket)
     {
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.historyModel);
-        var units = _unitService.SetAllWindowDoorStatus((int)Status.Armed);
+        var units = _unitService.SetAllWindowDoorStatus(Status.Armed);
         foreach (var unit in units)
         {
             var history = new HistoryModel()

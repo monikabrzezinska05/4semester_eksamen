@@ -29,7 +29,7 @@ public class ClientWantsToTurnOffAlarm : BaseEventHandler<ClientWantsToTurnOffAl
     public override async Task Handle(ClientWantsToTurnOffAlarmDto dto, IWebSocketConnection socket)
     {
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.historyModel);
-        _unitService.SetUnitStatus(dto.historyModel.UnitId, (int)Status.Disarmed);
+        _unitService.SetUnitStatus(dto.historyModel.UnitId, Status.Disarmed);
         await _mqttPublishService.AlarmTurnOffPublish();
         var turnOffAlarm = new ResponseDto()
         {

@@ -32,7 +32,7 @@ public class UnitRepository
         }
     }
 
-    public Unit SetUnitStatus(int unitId, int status)
+    public Unit SetUnitStatus(int unitId, Status status)
     {
         string sql = "UPDATE unit SET status = @status WHERE unitid = @unitId;";
 
@@ -52,7 +52,7 @@ public class UnitRepository
         }
     }
 
-    public List<Unit> SetAllWindowDoorStatus(int status)
+    public List<Unit> SetAllWindowDoorStatus(Status status)
     {
         string sql = "UPDATE unit SET status = @status WHERE unittype != 2;";
 
