@@ -13,13 +13,13 @@ public class ClientWantsToTurnOnAlarmsWindowDoorDto : BaseDto
     public HistoryModel historyModel { get; set; }
 }
 
-public class ClientWantsToTurnOnAlarmsWindowDoor : BaseEventHandler<ClientWantsToTurnOnAlarmsWindowDoorDto>
+public class ClientWantsToTurnOnMotionAlarm : BaseEventHandler<ClientWantsToTurnOnAlarmsWindowDoorDto>
 {
     private readonly HistoryService _historyService;
     private readonly MQTTPublishService _mqttPublishService;
     private readonly UnitService _unitService;
 
-    public ClientWantsToTurnOnAlarmsWindowDoor(HistoryService historyService, MQTTPublishService mqttPublishService, UnitService unitService)
+    public ClientWantsToTurnOnMotionAlarm(HistoryService historyService, MQTTPublishService mqttPublishService, UnitService unitService)
     {
         _historyService = historyService;
         _mqttPublishService = mqttPublishService;
@@ -42,7 +42,7 @@ public class ClientWantsToTurnOnAlarmsWindowDoor : BaseEventHandler<ClientWantsT
             };
             _historyService.CreateHistory(history);
         }
-        await _mqttPublishService.AlarmTurnOnWindowDoorPublish();
+        await _mqttPublishService.AlarmTurnOnMotionPublish();
         var turnOnAlarm = new ResponseDto()
         {
             ResponseData = loggedEvent

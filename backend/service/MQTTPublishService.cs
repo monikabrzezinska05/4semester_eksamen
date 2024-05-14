@@ -58,7 +58,7 @@ public class MQTTPublishService
         Console.WriteLine("Alarm turn on has been published");
     }
 
-    public async Task AlarmTurnOffWindowDoorPublish()
+    public async Task AlarmTurnOffMotionPublish()
     {
         var mqttFactory = new MqttFactory();
         var mqttClient = mqttFactory.CreateMqttClient();
@@ -73,8 +73,8 @@ public class MQTTPublishService
         await mqttClient.ConnectAsync(mqttClientOptions, CancellationToken.None);
 
         var alarmOff = new MqttApplicationMessageBuilder()
-            .WithTopic("Security/Alarm/1")
-            .WithPayload("WINDOW DOOR OFF")
+            .WithTopic("Security/Motion/Toggle")
+            .WithPayload("OFF")
             .Build();
 
         await mqttClient.PublishAsync(alarmOff, CancellationToken.None);
@@ -84,7 +84,7 @@ public class MQTTPublishService
         Console.WriteLine("Alarm turn off has been published");
     }
     
-    public async Task AlarmTurnOnWindowDoorPublish()
+    public async Task AlarmTurnOnMotionPublish()
     {
         var mqttFactory = new MqttFactory();
         var mqttClient = mqttFactory.CreateMqttClient();
@@ -99,8 +99,8 @@ public class MQTTPublishService
         await mqttClient.ConnectAsync(mqttClientOptions, CancellationToken.None);
 
         var alarmOn = new MqttApplicationMessageBuilder()
-            .WithTopic("Security/Alarm/1")
-            .WithPayload("WINDOW DOOR ON")
+            .WithTopic("Security/Motion/Toggle")
+            .WithPayload("ON")
             .Build();
 
         await mqttClient.PublishAsync(alarmOn, CancellationToken.None);
