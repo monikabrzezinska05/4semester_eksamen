@@ -1,10 +1,23 @@
+<body>
 <div class="sidebarMain">
   <img src="assets/securty_logo.png" class="sidebarImage">
   <button class="sidebarButton">Dashboard</button>
   <button class="sidebarButton">HistoryModel</button>
-  <button class="sidebarButton">Settings</button>
+  <button class="sidebarButton" (click)="onSettingsButtonPressed()">Settings</button>
   <div class="toggle-switch" #toggleSwitch>
     <div class="toggle-knob"></div>
   </div>
   <button type="logoff" class="sidebarButton" (click)="Logoff()"> Sign out</button>
+</div>
+
+
+<div id="settingsModal" class="modal">
+  <div class="modal-content">
+    <span class="close" (click)="onModalClosePressed()">&times;</span>
+    <p>Dark mode:</p>
+    <div class="toggle-switch" #toggleDarkmode>
+      <div class="toggle-knob"></div>
+    </div>
+    <p>noget andet her</p>
+  </div>
 </div>

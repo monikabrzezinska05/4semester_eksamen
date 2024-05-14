@@ -12,6 +12,8 @@ import {ServerDeAuthenticatesUserDto} from "../../models/BaseDto";
 })
 export class SidebarComponent implements OnInit, AfterViewInit {
   @ViewChild('toggleSwitch') toggleSwitch!: ElementRef;
+  @ViewChild('toggleDarkmode') toggleDarkmodeSwitch!: ElementRef;
+  private modal! : HTMLElement;
 
   constructor(private renderer: Renderer2,
               private state: State,
@@ -31,7 +33,20 @@ export class SidebarComponent implements OnInit, AfterViewInit {
           knob.style.left = '55px';
         }
       });
+      this.renderer.listen(this.toggleDarkmodeSwitch.nativeElement, 'click', (event) => {
+        const knob = this.toggleDarkmodeSwitch.nativeElement.querySelector('.toggle-knob') as HTMLElement;
+        if (knob.style.left === '55px') {
+          // KALD HER METODE DER SKAL DEAKTIVERE NOGET!!!!
+          this.toggleDarkmode();
+          knob.style.left = '5px';
+        } else {
+          // KALD HER METODE DER SKAL AKTIVERE NOGET!!!!
+          this.toggleDarkmode();
+          knob.style.left = '55px';
+        }
+      });
     }, 0);
+    this.modal = document.getElementById("settingsModal")!;
   }
 
   Logoff() {
@@ -40,5 +55,18 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       eventType: "ClientWantsToDeAuthenticate"
     }
     this.state.ws.send(JSON.stringify(dto));
+  }
+
+  onSettingsButtonPressed() {
+    this.modal.style.display = "block";
+  }
+
+  onModalClosePressed() {
+    this.modal.style.display = "none";
+  }
+
+  toggleDarkmode() {
+    let element = document.body;
+    element.classList.toggle("dark-mode");
   }
 }
