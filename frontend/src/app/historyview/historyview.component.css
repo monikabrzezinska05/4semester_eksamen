@@ -1,0 +1,17 @@
+.mainDiv {
+  display: flex;
+  flex-direction: column;
+}
+.filters {
+  width: 90%;
+  height: 20px;
+}
+
+.historyElement {
+  margin: 10px;
+  width: 90%;
+  height: 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}

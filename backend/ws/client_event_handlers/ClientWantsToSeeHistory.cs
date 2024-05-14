@@ -1,9 +1,11 @@
+
 using System.Text.Json;
 using api.transfer_models;
 using Fleck;
 using infrastructure.models;
 using lib;
 using service;
+using ws.transfer_models.server_models;
 
 namespace ws.client_event_handlers;
 
@@ -27,7 +29,11 @@ public class ClientWantsToSeeHistory : BaseEventHandler<ClientWantsToSeeHistoryD
         {
             ResponseData = theCompleteHistory
         };
-        var historyToClient = JsonSerializer.Serialize(history);
+        
+        var historyToClient = JsonSerializer.Serialize(new ServerShowsHistory()
+        {
+            ResponseDto = history
+        }, StateService.JsonOptions());
         socket.Send(historyToClient);
         return Task.CompletedTask;
     }

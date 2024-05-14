@@ -1,9 +1,9 @@
 export interface HistoryModel {
   historyId?: number;
-  userId: number;
+  UserEmail: String;
   unitId: number;
   date: Date;
-  EventType: EventType;
+  eventTypeId: EventType;
 }
 
 export enum EventType{

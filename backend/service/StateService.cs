@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Fleck;
 using infrastructure.models;
 
@@ -38,5 +39,13 @@ public static class StateService
     public static bool RemoveConnection(IWebSocketConnection ws)
     {
         return Connections.Remove(ws.ConnectionInfo.Id);
+    }
+
+    public static JsonSerializerOptions JsonOptions()
+    {
+        return new JsonSerializerOptions()
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
     }
 }

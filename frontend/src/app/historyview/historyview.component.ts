@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AsyncPipe, NgForOf} from "@angular/common";
+import {CommonModule} from "@angular/common";
 import { HistoryModel } from "../../models/HistoryModel";
 import { Observable } from "rxjs";
 import {State} from "../../services/state.service";
@@ -8,8 +8,7 @@ import {State} from "../../services/state.service";
   selector: 'app-historyview',
   standalone: true,
   imports: [
-    NgForOf,
-    AsyncPipe
+    CommonModule
   ],
   templateUrl: './historyview.component.html',
   styleUrl: './historyview.component.css'
