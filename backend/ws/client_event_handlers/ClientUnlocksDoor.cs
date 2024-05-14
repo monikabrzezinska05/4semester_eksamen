@@ -24,10 +24,10 @@ public class ClientUnlocksDoor : BaseEventHandler<ClientUnlocksDoorDto>
 
     public override Task Handle(ClientUnlocksDoorDto dto, IWebSocketConnection socket)
     {
-        HistoryModel logedEvent = _historyService.CreateHistory(dto.historyModel);
+        HistoryModel loggedEvent = _historyService.CreateHistory(dto.historyModel);
         var unlockDoorHistory = new ResponseDto()
         {
-            ResponseData = logedEvent
+            ResponseData = loggedEvent
         };
         var unlockDoorHistoryToClient = JsonSerializer.Serialize(new ServerHistoryMqtt()
             {
