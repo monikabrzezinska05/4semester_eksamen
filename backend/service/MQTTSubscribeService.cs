@@ -3,7 +3,7 @@ using MQTTnet.Client;
 using MQTTnet.Formatter;
 using Newtonsoft.Json;
 
-namespace service;
+namespace service;  
 
 public class MQTTSubscribeService
 {
