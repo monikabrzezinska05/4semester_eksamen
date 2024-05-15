@@ -20,3 +20,7 @@ body.dark-mode {
 .toggle-switch {
   background-color: red;
 }
+
+.dark-mode .toggle-knob {
+  background-color: yellow;
+}
