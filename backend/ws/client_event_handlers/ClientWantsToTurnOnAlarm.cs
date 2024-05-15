@@ -29,6 +29,7 @@ public class ClientWantsToTurnOnAlarm : BaseEventHandler<ClientWantsToTurnOnAlar
 
     public override async Task Handle(ClientWantsToTurnOnAlarmDto dto, IWebSocketConnection socket)
     {
+        StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.historyModel);
         _unitService.SetUnitStatus(dto.historyModel.UnitId, Status.Armed);
         await _mqttPublishService.AlarmTurnOnPublish();

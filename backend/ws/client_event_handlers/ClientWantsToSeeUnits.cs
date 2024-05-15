@@ -23,10 +23,8 @@ public class ClientWantsToSeeUnits : BaseEventHandler<ClientWantsToSeeUnitsDto>
     
     public override Task Handle(ClientWantsToSeeUnitsDto dto, IWebSocketConnection socket)
     {
-        if (!StateService.GetClient(socket.ConnectionInfo.Id).IsAuthenticated)
-        {
-            Console.WriteLine("user not authenticated");
-        }
+        
+        StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
         var responseDto = new ResponseDto()
         {
             ResponseData = _unitService.GetAllUnits(),

@@ -1,12 +1,9 @@
-using System.Security.Authentication;
 using System.Text.Json;
 using api.transfer_models;
 using Fleck;
 using infrastructure.models;
-using infrastructure.repositories;
 using lib;
 using service;
-using ws;
 using ws.transfer_models.server_models;
 
 public class ClientWantsToLoginDto : BaseDto
@@ -28,11 +25,11 @@ public class ClientWantsToLogin() : BaseEventHandler<ClientWantsToLoginDto>
     public override Task Handle(ClientWantsToLoginDto request, IWebSocketConnection socket)
     {
         var user = _authenticationService.Authenticate(request.userLogin);
-
+        var jwt = _tokenService.IssueJwt(user!);
+        
         StateService.GetClient(socket.ConnectionInfo.Id).IsAuthenticated = true;
         StateService.GetClient(socket.ConnectionInfo.Id).user = user!;
-        var jwt = _tokenService.IssueJwt(user!);
-
+        
         var responseDto = new ResponseDto()
         {
             ResponseData = user,
