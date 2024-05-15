@@ -58,6 +58,11 @@ export class State {
       this.jwt = dto.jwt;
       localStorage.setItem('jwt', this.jwt);
       this.router.navigateByUrl('');
+
+      var getUnitsDto = {
+        eventType: "ClientWantsToSeeUnits"
+      }
+      this.ws.send(JSON.stringify(getUnitsDto))
     }
     this.ws.onopen = () => {
     };
@@ -90,11 +95,11 @@ export class State {
   }
 
   public getDoors(): Observable<Unit[]> {
-    return this.units$.pipe(map((units) => units.filter((unit) => unit.unitTypeId === UnitType.Door)));
+    return this.units$.pipe(map((units) => units.filter((unit) => unit.unitTypeId === UnitType.Doors)));
   }
 
   public getWindows() {
-    return this.units$.pipe(map((units) => units.filter((unit) => unit.unitTypeId === UnitType.Window)));
+    return this.units$.pipe(map((units) => units.filter((unit) => unit.unitTypeId === UnitType.Windows)));
   }
 
   public getMotionSensor() {

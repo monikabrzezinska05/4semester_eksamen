@@ -30,7 +30,7 @@ public class ClientWantsToSeeUnits : BaseEventHandler<ClientWantsToSeeUnitsDto>
         var responseDto = new ResponseDto()
         {
             ResponseData = _unitService.GetAllUnits(),
-            MessageToClient = "Connection opened"
+            MessageToClient = "Units retrieved successfully!"
         };
         var option = new JsonSerializerOptions()
         {

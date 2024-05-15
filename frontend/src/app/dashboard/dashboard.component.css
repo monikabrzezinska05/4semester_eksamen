@@ -1,0 +1,24 @@
+.headDiv {
+  display: flex;
+  justify-content: flex-start;
+  height: 100vh; /* This will make the container take the full viewport height */
+}
+
+.sidebar {
+  flex: 1;
+  max-width: 400px;
+  min-width: 350px;
+}
+
+.overview {
+  display: flex;
+  flex-direction: column;
+  flex: 3;
+}
+
+.vertical-line {
+  height: 98%; /* This will now take the full height of the .headDiv container */
+  width: 1px;
+  background-color: gray;
+  margin: 0 10px;
+}
