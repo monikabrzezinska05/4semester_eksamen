@@ -36,14 +36,6 @@ export class State {
       // @ts-ignore
       this[messageFromServer.eventType].call(this, messageFromServer);
     }
-
-    this.ws.onopen = () => {
-      /*console.log("connection opened");
-      console.log("jwt", this.jwt);
-      if (this.jwt !== null || this.jwt !== undefined) {
-        this.AuthenticateWithJwt();
-      }*/
-    }
   }
 
   ServerShowsHistory(dto: ServerShowsHistoryDto) {
