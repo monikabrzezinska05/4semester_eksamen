@@ -2,13 +2,12 @@ import {Component, Input, OnInit} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {Status, Unit, UnitType} from "../../models/Unit";
 import {State} from "../../services/state.service";
-import {NgArrayPipesModule} from "ngx-pipes";
 import {map, Observable} from "rxjs";
 
 @Component({
   selector: 'app-overview',
   standalone: true,
-  imports: [CommonModule, NgArrayPipesModule],
+  imports: [CommonModule],
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.css'
 })
