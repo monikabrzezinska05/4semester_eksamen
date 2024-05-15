@@ -14,13 +14,17 @@ body.dark-mode {
 }
 
 .dark-mode .toggle-switch {
-  background-color: green;
+  background-color: #ffffff;
 }
 
 .toggle-switch {
-  background-color: red;
+  background-color: #ccc;
 }
 
 .dark-mode .toggle-knob {
-  background-color: yellow;
+  background-color: #444444;
+}
+
+.toggle-knob {
+  background-color: #ffffff;
 }

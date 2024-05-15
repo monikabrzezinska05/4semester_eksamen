@@ -13,7 +13,7 @@ import {ServerDeAuthenticatesUserDto} from "../../models/BaseDto";
 export class SidebarComponent implements OnInit, AfterViewInit {
   @ViewChild('toggleSwitch') toggleSwitch!: ElementRef;
   @ViewChild('toggleDarkmode') toggleDarkmodeSwitch!: ElementRef;
-  private modal! : HTMLElement;
+  private modal!: HTMLElement;
   darkMode = false;
 
   constructor(private renderer: Renderer2,
@@ -29,9 +29,11 @@ export class SidebarComponent implements OnInit, AfterViewInit {
         if (knob.style.left === '55px') {
           // KALD HER METODE DER SKAL DEAKTIVERE NOGET!!!!
           knob.style.left = '5px';
+          knob.style.backgroundColor = '#ff0000'
         } else {
           // KALD HER METODE DER SKAL AKTIVERE NOGET!!!!
           knob.style.left = '55px';
+          knob.style.backgroundColor = '#08ff00';
         }
       });
       //til modal
@@ -41,10 +43,12 @@ export class SidebarComponent implements OnInit, AfterViewInit {
           // KALD HER METODE DER SKAL DEAKTIVERE NOGET!!!!
           this.toggleDarkmode();
           knob.style.left = '5px';
+          knob.style.backgroundColor = '#ff0000'
         } else {
           // KALD HER METODE DER SKAL AKTIVERE NOGET!!!!
           this.toggleDarkmode();
           knob.style.left = '55px';
+          knob.style.backgroundColor = '#08ff00';
         }
       });
     }, 0);
@@ -71,10 +75,8 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     this.darkMode = !this.darkMode;
     if (this.darkMode) {
       this.renderer.addClass(document.body, 'dark-mode');
-      this.renderer.addClass(this.modal, 'dark-mode');
     } else {
       this.renderer.removeClass(document.body, 'dark-mode');
-      this.renderer.removeClass(this.modal, 'dark-mode');
     }
   }
 }
