@@ -21,4 +21,19 @@ public class UnitService
     {
         return _unitRepository.GetAllUnits();
     }
+
+    public Unit SetUnitStatus(int unitId, Status status)
+    {
+        return _unitRepository.SetUnitStatus(unitId, status);
+    }
+
+    public List<Unit> SetAllUnitStatus(int status)
+    {
+        return _unitRepository.SetAllUnitStatus(status);
+    }
+
+    public List<Unit> SetAllWindowDoorStatus(Status status)
+    {
+        return _unitRepository.SetAllWindowDoorStatus(status);
+    }
 }

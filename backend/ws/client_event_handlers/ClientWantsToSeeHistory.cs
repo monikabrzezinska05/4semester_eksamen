@@ -1,4 +1,4 @@
-
+using System.Security.Authentication;
 using System.Text.Json;
 using api.transfer_models;
 using Fleck;
@@ -24,6 +24,7 @@ public class ClientWantsToSeeHistory : BaseEventHandler<ClientWantsToSeeHistoryD
     }
     public override Task Handle(ClientWantsToSeeHistoryDto dto, IWebSocketConnection socket)
     {
+        StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
         List<HistoryModel> theCompleteHistory = _historyService.GetHistory(dto.TimePeriod);
         var history = new ResponseDto()
         {

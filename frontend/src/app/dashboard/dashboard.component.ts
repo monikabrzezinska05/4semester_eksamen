@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {OverviewComponent} from "../overview/overview.component";
 import {SidebarComponent} from "../sidebar/sidebar.component";
+import {UnitType} from "../../models/Unit";
 
 @Component({
   selector: 'app-dashboard',
@@ -19,4 +20,5 @@ export class DashboardComponent implements OnInit {
 
   }
 
+    protected readonly UnitType = UnitType;
 }

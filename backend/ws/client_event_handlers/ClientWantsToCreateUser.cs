@@ -27,6 +27,7 @@ public class ClientWantsToCreateUser : BaseEventHandler<ClientWantsToCreateUserD
     
     public override async Task Handle(ClientWantsToCreateUserDto dto, IWebSocketConnection socket)
     {
+        StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
         var newUser = new User()
         {
             Name = dto.name,

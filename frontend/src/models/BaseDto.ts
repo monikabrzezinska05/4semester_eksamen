@@ -46,8 +46,7 @@ export class ServerShowsUnitsDto extends BaseDto<ServerShowsUnitsDto>{
 }
 
 export class ServerAuthenticatesUserDto extends BaseDto<ServerAuthenticatesUserDto>{
-  responseDto!: UserModel;
-  jwt!: string;
+  responseDto!: ResponseDto<UserModel>;
 }
 
 export class ServerDeAuthenticatesUserDto extends BaseDto<ServerDeAuthenticatesUserDto>{
