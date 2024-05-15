@@ -24,6 +24,7 @@ public class ClientClosesWindowDoor : BaseEventHandler<ClientClosesWindowDoorDto
     
     public override Task Handle(ClientClosesWindowDoorDto dto, IWebSocketConnection socket)
     {
+        StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.HistoryModel);
         var windowDoorHistory = new ResponseDto()
         {

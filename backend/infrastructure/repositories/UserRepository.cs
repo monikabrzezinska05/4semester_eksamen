@@ -51,4 +51,13 @@ public class UserRepository
             return response;
         }
     }
+
+    public User GetUser(string mail)
+    {
+        var sql = "SELECT * FROM public.\"User\" WHERE mail = @mail;";
+        using (var conn = _dataSource.OpenConnection())
+        {
+            return conn.QueryFirstOrDefault<User>(sql, new {mail});
+        }
+    }
 }

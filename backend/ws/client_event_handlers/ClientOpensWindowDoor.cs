@@ -23,6 +23,7 @@ public class ClientOpensWindowDoor : BaseEventHandler<ClientOpensWindowDoorDto>
     }
     public override Task Handle(ClientOpensWindowDoorDto dto, IWebSocketConnection socket)
     {
+        StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.historyModel);
         var windowDoorHistory = new ResponseDto()
         {

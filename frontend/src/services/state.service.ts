@@ -20,7 +20,8 @@ import {BehaviorSubject, combineLatest, map, Observable} from "rxjs";
 export class State {
   private authenticated: boolean = false;
   currentUser?: UserModel;
-
+  jwt?: string | null = localStorage.getItem('jwt');
+  currentUserId?: string | null = localStorage.getItem('currentUserId');
   ws: WebSocket = new WebSocket(environment.websocketBaseUrl);
 
   history$: BehaviorSubject<HistoryModel[]> = new BehaviorSubject<HistoryModel[]>([]);
@@ -43,18 +44,23 @@ export class State {
   }
 
   ServerAuthenticatesUser(dto: ServerAuthenticatesUserDto) {
-    if (dto.responseDto !== null && dto.jwt !== null) {
+    if (dto.responseDto.responseData !== null && dto.responseDto.jwt !== null) {
       this.authenticated = true;
-      this.currentUser = dto.responseDto;
-      console.log("authentication happens in frontend");
+      this.currentUser = dto.responseDto.responseData;
+      console.log("authentication happened in frontend");
+      this.jwt = dto.responseDto.jwt;
+      localStorage.setItem('jwt', this.jwt);
+      localStorage.setItem('currentUserId', this.currentUser.mail);
       this.router.navigateByUrl('');
-
       var getUnitsDto = {
         eventType: "ClientWantsToSeeUnits"
       }
       this.ws.send(JSON.stringify(getUnitsDto))
     }
-    this.ws.onopen = () => {};
+    else {
+      console.log("authentication failed in frontend");
+      this.router.navigateByUrl('/login');
+    }
   }
 
   ServerDeAuthenticatesUser(dto: ServerDeAuthenticatesUserDto) {
@@ -93,5 +99,14 @@ export class State {
 
   public getMotionSensor() {
     return this.units$.pipe(map((units) => units.filter((unit) => unit.unitTypeId === UnitType.MotionSensor)));
+  }
+
+  public AuthenticateWithJwt() {
+    var dto = {
+      eventType: "ClientAuthenticateWithJwt",
+      jwt: this.jwt,
+      user: this.currentUserId
+    }
+    this.ws.send(JSON.stringify(dto));
   }
 }

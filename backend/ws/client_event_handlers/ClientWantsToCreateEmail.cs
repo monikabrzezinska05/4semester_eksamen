@@ -24,6 +24,7 @@ public class ClientWantsToCreateEmail : BaseEventHandler<ClientWantsToCreateEmai
     }
     public override Task Handle(ClientWantsToCreateEmailDto dto, IWebSocketConnection socket)
     {
+        StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
         EmailModel loggedEvent = _emailService.createEmail(dto.EmailModel);
         var newEmail = new ResponseDto()
         {
