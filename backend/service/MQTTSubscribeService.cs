@@ -2,6 +2,9 @@ using System.Text.Json;
 using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Formatter;
+using Newtonsoft.Json;
+using service.mqtt_dto;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace service;
 
@@ -37,9 +40,19 @@ public class MQTTSubscribeService
             try
             {
                 //Få beskeden.
-                var message = receivedMessage.ApplicationMessage.ConvertPayloadToString();
-                Console.WriteLine("Received message" + message);
+                var message = JsonSerializer.Serialize(receivedMessage.ApplicationMessage.ConvertPayloadToString());
+          //    var message = "{\n    \"eventType\": \"ClientClosesWindowDoor\",\n    \"historyModel\" : {\n        \"userEmail\": \"boobie@email.dk\",\n        \"unitId\" : 1,\n        \"date\" : \"2024-04-30\",\n        \"eventTypeId\" : 1\n    }\n}";
+                Console.WriteLine(message);
+        
 
+             //   var str ="{\n    \"eventType\": \"ClientClosesWindowDoor\",\n    \"historyModel\" : {\n        \"userEmail\": \"boobie@email.dk\",\n        \"unitId\" : 1,\n        \"date\" : \"2024-04-30\",\n        \"eventTypeId\" : 1\n    }\n}";
+            
+                var deMessage = JsonConvert.DeserializeObject<Root>(message);
+
+            //    var deMessage = JsonSerializer.Deserialize<Root>(JSONresult);
+                Console.WriteLine("Message: " + deMessage.eventType);
+                Console.WriteLine("Received message: " + receivedMessage.ApplicationMessage.ConvertPayloadToString());
+                Console.WriteLine("Application message test 2: " + receivedMessage.ApplicationMessage.Topic);
             }
             catch (Exception exc)
             {
@@ -53,3 +66,19 @@ public class MQTTSubscribeService
 
     }
 }
+
+// Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
+public class HistoryModelD
+{
+    public string userEmail { get; set; }
+    public int unitId { get; set; }
+   // public string date { get; set; }
+    public int eventTypeId { get; set; }
+}
+
+public class Root
+{
+    public string? eventType { get; set; }
+    public HistoryModelD? historyModel { get; set; }
+}
+
