@@ -20,7 +20,7 @@ import {BehaviorSubject, combineLatest, map, Observable} from "rxjs";
 export class State {
   private authenticated: boolean = false;
   currentUser?: UserModel;
-
+  jwt?: string;
   ws: WebSocket = new WebSocket(environment.websocketBaseUrl);
 
   history$: BehaviorSubject<HistoryModel[]> = new BehaviorSubject<HistoryModel[]>([]);
@@ -35,6 +35,14 @@ export class State {
       // @ts-ignore
       this[messageFromServer.eventType].call(this, messageFromServer);
     }
+
+    this.ws.onopen = () => {
+      console.log("connection opened");
+      if (this.jwt !== undefined) {
+        this.jwt = localStorage.getItem('jwt')!;
+        this.AuthenticateWithJwt();
+      }
+    }
   }
 
   ServerShowsHistory(dto: ServerShowsHistoryDto) {
@@ -46,10 +54,13 @@ export class State {
     if (dto.responseDto !== null && dto.jwt !== null) {
       this.authenticated = true;
       this.currentUser = dto.responseDto;
-      console.log("authentication happens in frontend");
+      console.log("authentication happened in frontend");
+      this.jwt = dto.jwt;
+      localStorage.setItem('jwt', this.jwt);
       this.router.navigateByUrl('');
     }
-    this.ws.onopen = () => {};
+    this.ws.onopen = () => {
+    };
   }
 
   ServerDeAuthenticatesUser(dto: ServerDeAuthenticatesUserDto) {
@@ -88,5 +99,13 @@ export class State {
 
   public getMotionSensor() {
     return this.units$.pipe(map((units) => units.filter((unit) => unit.unitTypeId === UnitType.MotionSensor)));
+  }
+
+  private AuthenticateWithJwt() {
+    var dto = {
+      eventType: "ClientAuthenticateWithJwt",
+      jwt: this.jwt
+    }
+    this.ws.send(JSON.stringify(dto));
   }
 }
