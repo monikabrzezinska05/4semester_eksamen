@@ -10,9 +10,9 @@ import 'home_page.dart';
 final wsUri = Uri.parse('ws://localhost:8181');
 final channel = WebSocketChannel.connect(wsUri);
 
-// void main() async {
-//   runApp(const MyApp());
-// }
+ void main() async {
+   runApp(const MyApp());
+ }
 
 // void main() async {
 //   runApp(BlocProvider(
@@ -64,8 +64,8 @@ class _MainPageState extends State<MainPage> {
     super.initState();
     _widgetOptions = <Widget>[
       HistoryPage(),
-      SettingsPage(),
-      HomePage()
+      HomePage(),
+      SettingsPage()
     ];
   }
 
