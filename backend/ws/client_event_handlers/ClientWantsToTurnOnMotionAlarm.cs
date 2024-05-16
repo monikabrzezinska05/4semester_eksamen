@@ -38,7 +38,7 @@ public class ClientWantsToTurnOnMotionAlarm : BaseEventHandler<ClientWantsToTurn
             {
                 UnitId = unit.UnitId,
                 Date = DateTime.Now,
-                EventTypeId = EventType.AlarmArmed
+                EventType = EventType.AlarmArmed
 
             };
             _historyService.CreateHistory(history);

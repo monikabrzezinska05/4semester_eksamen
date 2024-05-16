@@ -44,7 +44,7 @@ public class HistoryRepo
         const string sql = "INSERT INTO history(useremail, unitId, date, eventtype) VALUES(@UserEmail, @unitid, @date, @EventTypeId) RETURNING *";
         using (var conn = _dataSource.OpenConnection())
         {
-            var response = conn.QueryFirst<HistoryModel>(sql, new {model.UserEmail, model.UnitId, model.Date, model.EventTypeId});
+            var response = conn.QueryFirst<HistoryModel>(sql, new {model.UserEmail, model.UnitId, model.Date, EventTypeId = model.EventType});
             return response;
         }
     }

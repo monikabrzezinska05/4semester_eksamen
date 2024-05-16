@@ -8,5 +8,5 @@ public class HistoryModel
     public string? UnitTable { get; set; }
     public Unit? Unit {get; set;}
     public DateTime Date { get; set; }
-    public EventType EventTypeId { get; set; }
+    public EventType EventType { get; set; }
 }

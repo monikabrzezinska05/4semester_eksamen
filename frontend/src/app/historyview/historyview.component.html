@@ -1,6 +1,13 @@
 <header>
-  <h1>History</h1>
+  <h1>Here is your latest history: </h1>
 </header>
+
+
 <div *ngFor="let historyItem of History$ | async">
-  <h2>{{  }}</h2>
+  <div class="theActualHistory">
+    <h3>{{ historyItem.unit.name }}</h3>
+    <p>{{ "Day: " + historyItem.date.toDateString() + ", Time: " + historyItem.date.getHours() }}</p>
+    <p>{{ "Status: " + Status[historyItem.unit.status] }}</p>
+    <p>{{ "Card scanned: " + historyItem.personName}}</p>   <!--somehow get the person-name here !?!?!?!??!?!?!-->
+  </div>
 </div>

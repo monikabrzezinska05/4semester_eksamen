@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import { HistoryModel } from "../../models/HistoryModel";
-import { Observable } from "rxjs";
+import {interval, map, Observable} from "rxjs";
 import {State} from "../../services/state.service";
-import {Unit} from "../../models/Unit";
+import {Status} from "../../models/Unit";
 
 @Component({
   selector: 'app-historyview',
@@ -16,6 +16,7 @@ import {Unit} from "../../models/Unit";
 })
 export class HistoryviewComponent implements OnInit{
   History$!: Observable<HistoryModel[]>;
+  Status = Status;
 
   constructor(private state: State) {}
 
@@ -24,6 +25,18 @@ export class HistoryviewComponent implements OnInit{
   }
 
   private getHistoryObservable(): Observable<HistoryModel[]> {
-    return this.state.getAllHistory();
+    return this.state.getAllHistory().pipe(
+      map(historyItems => historyItems.map(item => (
+        console.log(item),
+          {
+        ...item,
+        date: new Date(item.date)
+      })))
+    );
   }
+
+  protected readonly interval = interval;
+  protected readonly Number = Number;
+  protected readonly String = String;
 }
+
