@@ -12,7 +12,7 @@ class HistoryModel with _$HistoryModel {
    factory HistoryModel({
     required int historyId,
     required UnitModel unit,
-    required String personName,
+    required String? personName,
     required EventType eventType,
     required DateTime date,
   }) = _HistoryElementModel;
@@ -22,10 +22,10 @@ class HistoryModel with _$HistoryModel {
 
 
 enum EventType {
-  Open,
-  Close,
-  AlarmTriggered,
-  AlarmStopped,
-  AlarmArmed,
-  AlarmDisarmed,
+  @JsonValue(0)Open,
+  @JsonValue(1)Close,
+  @JsonValue(2)AlarmTriggered,
+  @JsonValue(3)AlarmStopped,
+  @JsonValue(4)AlarmArmed,
+  @JsonValue(5)AlarmDisarmed,
 }

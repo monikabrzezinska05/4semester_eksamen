@@ -147,11 +147,11 @@ class HistoryElement extends StatelessWidget {
   String generateSubtitle(HistoryModel historyElement) {
     switch (historyElement.eventType) {
       case EventType.AlarmStopped:
-        return "Alarm stopped by " + historyElement.personName;
+        return "Alarm stopped by ${historyElement.personName}" ;
       case EventType.AlarmArmed:
-        return "Alarm armed by " + historyElement.personName;
+        return "Alarm armed by ${historyElement.personName}" ;
       case EventType.AlarmDisarmed:
-        return "Alarm disarmed by " + historyElement.personName;
+        return "Alarm disarmed by ${historyElement.personName}" ;
       default:
         return "Event: " + historyElement.eventType.toString();
     }

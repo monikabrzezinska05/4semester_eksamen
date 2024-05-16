@@ -582,7 +582,6 @@ ClientWantsToSeeHistory _$ClientWantsToSeeHistoryFromJson(
 /// @nodoc
 mixin _$ClientWantsToSeeHistory {
   String get eventType => throw _privateConstructorUsedError;
-  DateTime get timePeriod => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -596,7 +595,7 @@ abstract class $ClientWantsToSeeHistoryCopyWith<$Res> {
           $Res Function(ClientWantsToSeeHistory) then) =
       _$ClientWantsToSeeHistoryCopyWithImpl<$Res, ClientWantsToSeeHistory>;
   @useResult
-  $Res call({String eventType, DateTime timePeriod});
+  $Res call({String eventType});
 }
 
 /// @nodoc
@@ -614,17 +613,12 @@ class _$ClientWantsToSeeHistoryCopyWithImpl<$Res,
   @override
   $Res call({
     Object? eventType = null,
-    Object? timePeriod = null,
   }) {
     return _then(_value.copyWith(
       eventType: null == eventType
           ? _value.eventType
           : eventType // ignore: cast_nullable_to_non_nullable
               as String,
-      timePeriod: null == timePeriod
-          ? _value.timePeriod
-          : timePeriod // ignore: cast_nullable_to_non_nullable
-              as DateTime,
     ) as $Val);
   }
 }
@@ -638,7 +632,7 @@ abstract class _$$ClientWantsToSeeHistoryImplCopyWith<$Res>
       __$$ClientWantsToSeeHistoryImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String eventType, DateTime timePeriod});
+  $Res call({String eventType});
 }
 
 /// @nodoc
@@ -655,17 +649,12 @@ class __$$ClientWantsToSeeHistoryImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? eventType = null,
-    Object? timePeriod = null,
   }) {
     return _then(_$ClientWantsToSeeHistoryImpl(
       eventType: null == eventType
           ? _value.eventType
           : eventType // ignore: cast_nullable_to_non_nullable
               as String,
-      timePeriod: null == timePeriod
-          ? _value.timePeriod
-          : timePeriod // ignore: cast_nullable_to_non_nullable
-              as DateTime,
     ));
   }
 }
@@ -675,20 +664,17 @@ class __$$ClientWantsToSeeHistoryImplCopyWithImpl<$Res>
 class _$ClientWantsToSeeHistoryImpl
     with DiagnosticableTreeMixin
     implements _ClientWantsToSeeHistory {
-  const _$ClientWantsToSeeHistoryImpl(
-      {required this.eventType, required this.timePeriod});
+  const _$ClientWantsToSeeHistoryImpl({required this.eventType});
 
   factory _$ClientWantsToSeeHistoryImpl.fromJson(Map<String, dynamic> json) =>
       _$$ClientWantsToSeeHistoryImplFromJson(json);
 
   @override
   final String eventType;
-  @override
-  final DateTime timePeriod;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ClientWantsToSeeHistory(eventType: $eventType, timePeriod: $timePeriod)';
+    return 'ClientWantsToSeeHistory(eventType: $eventType)';
   }
 
   @override
@@ -696,8 +682,7 @@ class _$ClientWantsToSeeHistoryImpl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'ClientWantsToSeeHistory'))
-      ..add(DiagnosticsProperty('eventType', eventType))
-      ..add(DiagnosticsProperty('timePeriod', timePeriod));
+      ..add(DiagnosticsProperty('eventType', eventType));
   }
 
   @override
@@ -706,14 +691,12 @@ class _$ClientWantsToSeeHistoryImpl
         (other.runtimeType == runtimeType &&
             other is _$ClientWantsToSeeHistoryImpl &&
             (identical(other.eventType, eventType) ||
-                other.eventType == eventType) &&
-            (identical(other.timePeriod, timePeriod) ||
-                other.timePeriod == timePeriod));
+                other.eventType == eventType));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, eventType, timePeriod);
+  int get hashCode => Object.hash(runtimeType, eventType);
 
   @JsonKey(ignore: true)
   @override
@@ -731,9 +714,8 @@ class _$ClientWantsToSeeHistoryImpl
 }
 
 abstract class _ClientWantsToSeeHistory implements ClientWantsToSeeHistory {
-  const factory _ClientWantsToSeeHistory(
-      {required final String eventType,
-      required final DateTime timePeriod}) = _$ClientWantsToSeeHistoryImpl;
+  const factory _ClientWantsToSeeHistory({required final String eventType}) =
+      _$ClientWantsToSeeHistoryImpl;
 
   factory _ClientWantsToSeeHistory.fromJson(Map<String, dynamic> json) =
       _$ClientWantsToSeeHistoryImpl.fromJson;
@@ -741,9 +723,184 @@ abstract class _ClientWantsToSeeHistory implements ClientWantsToSeeHistory {
   @override
   String get eventType;
   @override
-  DateTime get timePeriod;
-  @override
   @JsonKey(ignore: true)
   _$$ClientWantsToSeeHistoryImplCopyWith<_$ClientWantsToSeeHistoryImpl>
       get copyWith => throw _privateConstructorUsedError;
+}
+
+ServerShowsHistory _$ServerShowsHistoryFromJson(Map<String, dynamic> json) {
+  return _ServerShowsHistory.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ServerShowsHistory {
+  String get eventType => throw _privateConstructorUsedError;
+  List<HistoryModel> get historyList => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ServerShowsHistoryCopyWith<ServerShowsHistory> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ServerShowsHistoryCopyWith<$Res> {
+  factory $ServerShowsHistoryCopyWith(
+          ServerShowsHistory value, $Res Function(ServerShowsHistory) then) =
+      _$ServerShowsHistoryCopyWithImpl<$Res, ServerShowsHistory>;
+  @useResult
+  $Res call({String eventType, List<HistoryModel> historyList});
+}
+
+/// @nodoc
+class _$ServerShowsHistoryCopyWithImpl<$Res, $Val extends ServerShowsHistory>
+    implements $ServerShowsHistoryCopyWith<$Res> {
+  _$ServerShowsHistoryCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? historyList = null,
+  }) {
+    return _then(_value.copyWith(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      historyList: null == historyList
+          ? _value.historyList
+          : historyList // ignore: cast_nullable_to_non_nullable
+              as List<HistoryModel>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ServerShowsHistoryImplCopyWith<$Res>
+    implements $ServerShowsHistoryCopyWith<$Res> {
+  factory _$$ServerShowsHistoryImplCopyWith(_$ServerShowsHistoryImpl value,
+          $Res Function(_$ServerShowsHistoryImpl) then) =
+      __$$ServerShowsHistoryImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String eventType, List<HistoryModel> historyList});
+}
+
+/// @nodoc
+class __$$ServerShowsHistoryImplCopyWithImpl<$Res>
+    extends _$ServerShowsHistoryCopyWithImpl<$Res, _$ServerShowsHistoryImpl>
+    implements _$$ServerShowsHistoryImplCopyWith<$Res> {
+  __$$ServerShowsHistoryImplCopyWithImpl(_$ServerShowsHistoryImpl _value,
+      $Res Function(_$ServerShowsHistoryImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? historyList = null,
+  }) {
+    return _then(_$ServerShowsHistoryImpl(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      historyList: null == historyList
+          ? _value._historyList
+          : historyList // ignore: cast_nullable_to_non_nullable
+              as List<HistoryModel>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ServerShowsHistoryImpl
+    with DiagnosticableTreeMixin
+    implements _ServerShowsHistory {
+  const _$ServerShowsHistoryImpl(
+      {required this.eventType, required final List<HistoryModel> historyList})
+      : _historyList = historyList;
+
+  factory _$ServerShowsHistoryImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ServerShowsHistoryImplFromJson(json);
+
+  @override
+  final String eventType;
+  final List<HistoryModel> _historyList;
+  @override
+  List<HistoryModel> get historyList {
+    if (_historyList is EqualUnmodifiableListView) return _historyList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_historyList);
+  }
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ServerShowsHistory(eventType: $eventType, historyList: $historyList)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ServerShowsHistory'))
+      ..add(DiagnosticsProperty('eventType', eventType))
+      ..add(DiagnosticsProperty('historyList', historyList));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ServerShowsHistoryImpl &&
+            (identical(other.eventType, eventType) ||
+                other.eventType == eventType) &&
+            const DeepCollectionEquality()
+                .equals(other._historyList, _historyList));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, eventType,
+      const DeepCollectionEquality().hash(_historyList));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ServerShowsHistoryImplCopyWith<_$ServerShowsHistoryImpl> get copyWith =>
+      __$$ServerShowsHistoryImplCopyWithImpl<_$ServerShowsHistoryImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ServerShowsHistoryImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ServerShowsHistory implements ServerShowsHistory {
+  const factory _ServerShowsHistory(
+          {required final String eventType,
+          required final List<HistoryModel> historyList}) =
+      _$ServerShowsHistoryImpl;
+
+  factory _ServerShowsHistory.fromJson(Map<String, dynamic> json) =
+      _$ServerShowsHistoryImpl.fromJson;
+
+  @override
+  String get eventType;
+  @override
+  List<HistoryModel> get historyList;
+  @override
+  @JsonKey(ignore: true)
+  _$$ServerShowsHistoryImplCopyWith<_$ServerShowsHistoryImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

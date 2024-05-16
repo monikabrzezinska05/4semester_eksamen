@@ -56,12 +56,26 @@ _$ClientWantsToSeeHistoryImpl _$$ClientWantsToSeeHistoryImplFromJson(
         Map<String, dynamic> json) =>
     _$ClientWantsToSeeHistoryImpl(
       eventType: json['eventType'] as String,
-      timePeriod: DateTime.parse(json['timePeriod'] as String),
     );
 
 Map<String, dynamic> _$$ClientWantsToSeeHistoryImplToJson(
         _$ClientWantsToSeeHistoryImpl instance) =>
     <String, dynamic>{
       'eventType': instance.eventType,
-      'timePeriod': instance.timePeriod.toIso8601String(),
+    };
+
+_$ServerShowsHistoryImpl _$$ServerShowsHistoryImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ServerShowsHistoryImpl(
+      eventType: json['eventType'] as String,
+      historyList: (json['historyList'] as List<dynamic>)
+          .map((e) => HistoryModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$$ServerShowsHistoryImplToJson(
+        _$ServerShowsHistoryImpl instance) =>
+    <String, dynamic>{
+      'eventType': instance.eventType,
+      'historyList': instance.historyList,
     };

@@ -11,7 +11,7 @@ _$HistoryElementModelImpl _$$HistoryElementModelImplFromJson(
     _$HistoryElementModelImpl(
       historyId: (json['historyId'] as num).toInt(),
       unit: UnitModel.fromJson(json['unit'] as Map<String, dynamic>),
-      personName: json['personName'] as String,
+      personName: json['personName'] as String?,
       eventType: $enumDecode(_$EventTypeEnumMap, json['eventType']),
       date: DateTime.parse(json['date'] as String),
     );
@@ -27,10 +27,10 @@ Map<String, dynamic> _$$HistoryElementModelImplToJson(
     };
 
 const _$EventTypeEnumMap = {
-  EventType.Open: 'Open',
-  EventType.Close: 'Close',
-  EventType.AlarmTriggered: 'AlarmTriggered',
-  EventType.AlarmStopped: 'AlarmStopped',
-  EventType.AlarmArmed: 'AlarmArmed',
-  EventType.AlarmDisarmed: 'AlarmDisarmed',
+  EventType.Open: 0,
+  EventType.Close: 1,
+  EventType.AlarmTriggered: 2,
+  EventType.AlarmStopped: 3,
+  EventType.AlarmArmed: 4,
+  EventType.AlarmDisarmed: 5,
 };

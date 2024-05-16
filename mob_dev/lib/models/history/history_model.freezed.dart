@@ -22,7 +22,7 @@ HistoryModel _$HistoryModelFromJson(Map<String, dynamic> json) {
 mixin _$HistoryModel {
   int get historyId => throw _privateConstructorUsedError;
   UnitModel get unit => throw _privateConstructorUsedError;
-  String get personName => throw _privateConstructorUsedError;
+  String? get personName => throw _privateConstructorUsedError;
   EventType get eventType => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
 
@@ -41,7 +41,7 @@ abstract class $HistoryModelCopyWith<$Res> {
   $Res call(
       {int historyId,
       UnitModel unit,
-      String personName,
+      String? personName,
       EventType eventType,
       DateTime date});
 
@@ -63,7 +63,7 @@ class _$HistoryModelCopyWithImpl<$Res, $Val extends HistoryModel>
   $Res call({
     Object? historyId = null,
     Object? unit = null,
-    Object? personName = null,
+    Object? personName = freezed,
     Object? eventType = null,
     Object? date = null,
   }) {
@@ -76,10 +76,10 @@ class _$HistoryModelCopyWithImpl<$Res, $Val extends HistoryModel>
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
               as UnitModel,
-      personName: null == personName
+      personName: freezed == personName
           ? _value.personName
           : personName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       eventType: null == eventType
           ? _value.eventType
           : eventType // ignore: cast_nullable_to_non_nullable
@@ -111,7 +111,7 @@ abstract class _$$HistoryElementModelImplCopyWith<$Res>
   $Res call(
       {int historyId,
       UnitModel unit,
-      String personName,
+      String? personName,
       EventType eventType,
       DateTime date});
 
@@ -132,7 +132,7 @@ class __$$HistoryElementModelImplCopyWithImpl<$Res>
   $Res call({
     Object? historyId = null,
     Object? unit = null,
-    Object? personName = null,
+    Object? personName = freezed,
     Object? eventType = null,
     Object? date = null,
   }) {
@@ -145,10 +145,10 @@ class __$$HistoryElementModelImplCopyWithImpl<$Res>
           ? _value.unit
           : unit // ignore: cast_nullable_to_non_nullable
               as UnitModel,
-      personName: null == personName
+      personName: freezed == personName
           ? _value.personName
           : personName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       eventType: null == eventType
           ? _value.eventType
           : eventType // ignore: cast_nullable_to_non_nullable
@@ -181,7 +181,7 @@ class _$HistoryElementModelImpl
   @override
   final UnitModel unit;
   @override
-  final String personName;
+  final String? personName;
   @override
   final EventType eventType;
   @override
@@ -243,7 +243,7 @@ abstract class _HistoryElementModel implements HistoryModel {
   factory _HistoryElementModel(
       {required final int historyId,
       required final UnitModel unit,
-      required final String personName,
+      required final String? personName,
       required final EventType eventType,
       required final DateTime date}) = _$HistoryElementModelImpl;
 
@@ -255,7 +255,7 @@ abstract class _HistoryElementModel implements HistoryModel {
   @override
   UnitModel get unit;
   @override
-  String get personName;
+  String? get personName;
   @override
   EventType get eventType;
   @override

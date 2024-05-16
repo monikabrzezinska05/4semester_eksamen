@@ -61,7 +61,7 @@ public class HistoryRepo
         using (var conn = _dataSource.OpenConnection())
         {
             var response = conn.QueryFirst<HistoryModel>(sql,
-                new { model.UserEmail, model.Unit.UnitId, model.Date, model.EventTypeId });
+                new { UserEmail = model.PersonName, model.Unit.UnitId, model.Date, EventTypeId = model.EventType });
             return response;
         }
     }

@@ -23,7 +23,7 @@ mixin _$UnitModel {
   int get unitId => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   UnitType get unitType => throw _privateConstructorUsedError;
-  bool get status => throw _privateConstructorUsedError;
+  Status get status => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +36,7 @@ abstract class $UnitModelCopyWith<$Res> {
   factory $UnitModelCopyWith(UnitModel value, $Res Function(UnitModel) then) =
       _$UnitModelCopyWithImpl<$Res, UnitModel>;
   @useResult
-  $Res call({int unitId, String name, UnitType unitType, bool status});
+  $Res call({int unitId, String name, UnitType unitType, Status status});
 }
 
 /// @nodoc
@@ -73,7 +73,7 @@ class _$UnitModelCopyWithImpl<$Res, $Val extends UnitModel>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as Status,
     ) as $Val);
   }
 }
@@ -86,7 +86,7 @@ abstract class _$$UnitModelImplCopyWith<$Res>
       __$$UnitModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int unitId, String name, UnitType unitType, bool status});
+  $Res call({int unitId, String name, UnitType unitType, Status status});
 }
 
 /// @nodoc
@@ -121,7 +121,7 @@ class __$$UnitModelImplCopyWithImpl<$Res>
       status: null == status
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as Status,
     ));
   }
 }
@@ -145,7 +145,7 @@ class _$UnitModelImpl with DiagnosticableTreeMixin implements _UnitModel {
   @override
   final UnitType unitType;
   @override
-  final bool status;
+  final Status status;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -198,7 +198,7 @@ abstract class _UnitModel implements UnitModel {
       {required final int unitId,
       required final String name,
       required final UnitType unitType,
-      required final bool status}) = _$UnitModelImpl;
+      required final Status status}) = _$UnitModelImpl;
 
   factory _UnitModel.fromJson(Map<String, dynamic> json) =
       _$UnitModelImpl.fromJson;
@@ -210,7 +210,7 @@ abstract class _UnitModel implements UnitModel {
   @override
   UnitType get unitType;
   @override
-  bool get status;
+  Status get status;
   @override
   @JsonKey(ignore: true)
   _$$UnitModelImplCopyWith<_$UnitModelImpl> get copyWith =>

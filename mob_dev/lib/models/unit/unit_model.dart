@@ -10,14 +10,20 @@ class UnitModel with _$UnitModel {
     required int unitId,
     required String name,
     required UnitType unitType,
-    required bool status,
+    required Status status,
   }) = _UnitModel;
 
   factory UnitModel.fromJson(Map<String, Object?> json) => _$UnitModelFromJson(json);
 }
 
+enum Status {
+  @JsonValue(0)armed,
+  @JsonValue(1)Disarmed,
+  @JsonValue(2)Triggeret,
+}
+
 enum UnitType {
-  Door,
-  Window,
-  MotionSensor,
+  @JsonValue(0)Door,
+  @JsonValue(1)Window,
+  @JsonValue(2)MotionSensor,
 }

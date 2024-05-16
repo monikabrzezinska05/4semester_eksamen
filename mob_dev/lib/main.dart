@@ -125,6 +125,4 @@ class BroadcastWsChannel {
   late Stream<ServerEvent> stream;
 
   WebSocketSink get sink => _channel.sink;
-
-
 }

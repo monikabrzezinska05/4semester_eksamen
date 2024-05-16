@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../main.dart';
@@ -14,17 +16,22 @@ class HistoryCubit extends Cubit<HistoryState> {
       switch (event) {
         case ServerAlarmTriggered(eventType: _, historyModel: var model):
             print(model);
-
+        case ServerShowsHistory(eventType: _, historyList: var model):
+            _onHistoryReceived(model);
       }
     },  onError: (error)
     {
       //DO SOMETHING HERE
+      print('Error: $error');
     });
-
   }
 
    Future<void> init() async {
-    emit(state.copyWith(allHistory: historyElements, shownHistory: historyElements, isLoading: false));
+    _send(ClientWantsToSeeHistory(eventType: ClientWantsToSeeHistory.name));
+  }
+
+  _send(ClientEvent event) {
+    wsChannel.sink.add(jsonEncode( event.toJson()));
   }
 
   void onUnitSelected(String unit) {
@@ -84,11 +91,18 @@ class HistoryCubit extends Cubit<HistoryState> {
       shownHistory: state.allHistory,
     ));
   }
+
+  void _onHistoryReceived(List<HistoryModel> model) {
+    emit(state.copyWith(allHistory: model, shownHistory: model, isLoading: false));
+  }
+}
+
+class ClientShowsHistory {
 }
 
 
 
-final List<HistoryModel> historyElements = [
+/*final List<HistoryModel> historyElements = [
   HistoryModel(
     historyId: 1,
     unit: UnitModel(
@@ -137,4 +151,4 @@ final List<HistoryModel> historyElements = [
     personName: 'John Doe',
     date: DateTime.now(),
   ),
-];
+];*/

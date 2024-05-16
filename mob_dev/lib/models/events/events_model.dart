@@ -81,7 +81,6 @@ class ClientWantsToSeeHistory extends ClientEvent
 
   const factory ClientWantsToSeeHistory({
     required String eventType,
-    required DateTime timePeriod,
   }) = _ClientWantsToSeeHistory;
 
   factory ClientWantsToSeeHistory.fromJson(Map<String, Object?> json) =>
@@ -102,6 +101,7 @@ class ServerEvent extends BaseEvent {
   static ServerEvent fromJson(Map<String, Object?> json) {
     final type = json['eventType'];
     return switch (type) {
+      ServerShowsHistory.name => ServerShowsHistory.fromJson(json),
       _ => throw "Unknown event type: $type in $json"
     };
   }
@@ -116,6 +116,30 @@ class ServerAlarmTriggered extends ServerEvent  {
   });
   final String eventType;
   final HistoryModel historyModel;
+}
+
+class ServerShowsEmailList extends ServerEvent {
+  static const String name = "ServerShowsEmailList";
+
+  ServerShowsEmailList({
+    required this.eventType,
+    required this.emails,
+  });
+  final String eventType;
+  final List<String> emails;
+}
+
+@freezed
+class ServerShowsHistory extends ServerEvent  with _$ServerShowsHistory{
+  static const String name = "ServerShowsHistory";
+
+  const factory ServerShowsHistory({
+    required String eventType,
+    required  List<HistoryModel> historyList,
+  }) = _ServerShowsHistory;
+
+  factory ServerShowsHistory.fromJson(Map<String, Object?> json) =>
+      _$ServerShowsHistoryFromJson(json);
 }
 /*
 class ServerAlarmTriggered extends ServerEvent with _$ServerAlarmTriggered {

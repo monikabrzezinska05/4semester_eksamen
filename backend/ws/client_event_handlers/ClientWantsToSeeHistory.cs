@@ -5,6 +5,7 @@ using Fleck;
 using infrastructure.models;
 using lib;
 using service;
+using ws.transfer_models.server_models;
 
 namespace ws.client_event_handlers;
 
@@ -23,14 +24,22 @@ public class ClientWantsToSeeHistory : BaseEventHandler<ClientWantsToSeeHistoryD
     }
     public override Task Handle(ClientWantsToSeeHistoryDto dto, IWebSocketConnection socket)
     {
-        StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
+        //StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
         List<HistoryModel> theCompleteHistory = _historyService.GetHistory(dto.TimePeriod);
         var history = new ResponseDto()
         {
             ResponseData = theCompleteHistory
         };
-        var historyToClient = JsonSerializer.Serialize(history);
-        socket.Send(historyToClient);
+        var option = new JsonSerializerOptions()
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
+        var response = JsonSerializer.Serialize(new ServerShowsHistory()
+        {
+            HistoryList = theCompleteHistory
+        }, option);
+        var historyToClient = JsonSerializer.Serialize(response);
+        socket.Send(response);
         return Task.CompletedTask;
     }
 }

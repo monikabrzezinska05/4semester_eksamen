@@ -11,7 +11,7 @@ _$UnitModelImpl _$$UnitModelImplFromJson(Map<String, dynamic> json) =>
       unitId: (json['unitId'] as num).toInt(),
       name: json['name'] as String,
       unitType: $enumDecode(_$UnitTypeEnumMap, json['unitType']),
-      status: json['status'] as bool,
+      status: $enumDecode(_$StatusEnumMap, json['status']),
     );
 
 Map<String, dynamic> _$$UnitModelImplToJson(_$UnitModelImpl instance) =>
@@ -19,11 +19,17 @@ Map<String, dynamic> _$$UnitModelImplToJson(_$UnitModelImpl instance) =>
       'unitId': instance.unitId,
       'name': instance.name,
       'unitType': _$UnitTypeEnumMap[instance.unitType]!,
-      'status': instance.status,
+      'status': _$StatusEnumMap[instance.status]!,
     };
 
 const _$UnitTypeEnumMap = {
-  UnitType.Door: 'Door',
-  UnitType.Window: 'Window',
-  UnitType.MotionSensor: 'MotionSensor',
+  UnitType.Door: 0,
+  UnitType.Window: 1,
+  UnitType.MotionSensor: 2,
+};
+
+const _$StatusEnumMap = {
+  Status.armed: 0,
+  Status.Disarmed: 1,
+  Status.Triggeret: 2,
 };

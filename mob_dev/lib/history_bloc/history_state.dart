@@ -5,7 +5,7 @@ class HistoryState {
   final List<HistoryModel> shownHistory;
   List<String> get units => allHistory.map((historyModel) => historyModel.unit.name).toSet().toList();
   List<String> get eventTypes => allHistory.map((historyModel) => historyModel.eventType.name).toSet().toList();
-  List<String> get persons => allHistory.map((historyModel) => historyModel.personName).toSet().toList();
+  List<String> get persons => allHistory.map((historyModel) => historyModel.personName).where((p) => p != null).map((e) => e!).toSet().toList();
   final bool isLoading;
 
   final String selectedUnit;
