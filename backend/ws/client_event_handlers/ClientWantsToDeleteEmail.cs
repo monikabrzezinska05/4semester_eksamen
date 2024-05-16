@@ -24,6 +24,7 @@ public class ClientWantsToDeleteEmail : BaseEventHandler<ClientWantsToDeleteEmai
     
     public override Task Handle(ClientWantsToDeleteEmailDto dto, IWebSocketConnection socket)
     {
+        StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
         int emailId = dto.EmailModel.id;
         
         _emailService.deleteEmail(emailId);

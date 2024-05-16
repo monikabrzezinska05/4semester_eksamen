@@ -1,8 +1,9 @@
-<div style="display: flex; justify-content: flex-start">
-  <app-sidebar style="flex: 1"></app-sidebar>
-  <div style="display: flex; flex-direction: column; flex: 3">
-    <app-overview [unitType]="0"></app-overview>
-    <app-overview [unitType]="1"></app-overview>
-    <app-overview [unitType]="2"></app-overview>
+<div class="headDiv">
+  <app-sidebar class="sidebar"></app-sidebar>
+  <div class="vertical-line"></div>
+  <div class="overview">
+    <app-overview [unitType]="UnitType.Doors"></app-overview>
+    <app-overview [unitType]="UnitType.Windows"></app-overview>
+    <app-overview [unitType]="UnitType.MotionSensor"></app-overview>
   </div>
 </div>

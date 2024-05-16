@@ -26,6 +26,7 @@ public class TokenService(IConfiguration configuration)
         }
         catch (Exception e)
         {
+            Console.WriteLine(e);
             Log.Error(e, "IssueJWT");
             throw new InvalidOperationException();
         }

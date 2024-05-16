@@ -1,5 +1,5 @@
 export  class UserModel {
   name!: string;
-  email!: string;
+  mail!: string;
   isChild!: boolean;
 }

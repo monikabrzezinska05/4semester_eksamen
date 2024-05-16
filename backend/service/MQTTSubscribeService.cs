@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using service.mqtt_dto;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
-namespace service;
+namespace service;  
 
 public class MQTTSubscribeService
 {

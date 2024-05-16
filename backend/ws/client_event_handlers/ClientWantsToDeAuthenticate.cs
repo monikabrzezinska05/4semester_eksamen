@@ -24,6 +24,7 @@ public class ClientWantsToDeAuthenticate() : BaseEventHandler<ClientWantsToDeAut
 
     public override Task Handle(ClientWantsToDeAuthenticateDto dto, IWebSocketConnection socket)
     {
+        StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
         Console.WriteLine(StateService.GetClient(socket.ConnectionInfo.Id).IsAuthenticated);
         if (!StateService.GetClient(socket.ConnectionInfo.Id).IsAuthenticated)
         {

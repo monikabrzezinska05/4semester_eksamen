@@ -29,6 +29,7 @@ public class ClientWantsToTurnOffMotionAlarm : BaseEventHandler<ClientWantsToTur
 
     public override async Task Handle(ClientWantsToTurnOffAlarmsWindowDoorDto dto, IWebSocketConnection socket)
     {
+        StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.historyModel);
         _unitService.SetAllWindowDoorStatus(Status.Disarmed);
         await _mqttPublishService.AlarmTurnOffMotionPublish();
