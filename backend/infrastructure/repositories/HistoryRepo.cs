@@ -22,7 +22,15 @@ public class HistoryRepo
         }
         else
         {
-            sql = "SELECT * FROM history";
+            sql = "SELECT historyid, " +
+                    "json_agg(json_build_object('unitid', u.unitid, 'name', u.name, 'unittype', u.unittype, 'status', u.status)) as \"UnitTable\", " +
+                    "\"User\".name, " +
+                    "eventtype, " +
+                    "date " +
+                  "FROM history " +
+                  "JOIN public.unit u on u.unitid = history.unitid " +
+                  "LEFT JOIN public.\"User\" on \"User\".mail = history.useremail " +
+                  "group by historyid, \"User\".name, eventtype, date";
         }
 
         using (var conn = _dataSource.OpenConnection())
@@ -36,7 +44,7 @@ public class HistoryRepo
         const string sql = "INSERT INTO history(useremail, unitId, date, eventtype) VALUES(@UserEmail, @unitid, @date, @EventTypeId) RETURNING *";
         using (var conn = _dataSource.OpenConnection())
         {
-            var response = conn.QueryFirst<HistoryModel>(sql, new {model.UserEmail, model.UnitId, model.Date, model.EventTypeId});
+            var response = conn.QueryFirst<HistoryModel>(sql, new {model.UserEmail, model.UnitId, model.Date, EventTypeId = model.EventType});
             return response;
         }
     }

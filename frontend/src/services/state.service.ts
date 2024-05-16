@@ -61,6 +61,22 @@ export class State {
       console.log("authentication failed in frontend");
       this.router.navigateByUrl('/login');
     }
+    this.getUnitsFromServer();
+    this.getHistoryFromServer();
+  }
+
+  private getUnitsFromServer() {
+    var dto = {
+      eventType: "ClientWantsToSeeUnits"
+    }
+    this.ws.send(JSON.stringify(dto));
+  }
+
+  private getHistoryFromServer() {
+    var dto = {
+      eventType: "ClientWantsToSeeHistory"
+    }
+    this.ws.send(JSON.stringify(dto));
   }
 
   ServerDeAuthenticatesUser(dto: ServerDeAuthenticatesUserDto) {
@@ -100,6 +116,7 @@ export class State {
   public getMotionSensor() {
     return this.units$.pipe(map((units) => units.filter((unit) => unit.unitTypeId === UnitType.MotionSensor)));
   }
+
 
   public AuthenticateWithJwt() {
     var dto = {

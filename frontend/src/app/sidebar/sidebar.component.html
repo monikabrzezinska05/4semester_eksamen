@@ -1,7 +1,7 @@
 <div class="sidebarMain">
   <img src="assets/securty_logo.png" class="sidebarImage">
-  <button class="sidebarButton">Dashboard</button>
-  <button class="sidebarButton">HistoryModel</button>
+  <button class="sidebarButton" (click)="onDashboardButtonPressed()">Dashboard</button>
+  <button class="sidebarButton" (click)="onHistoryButtonPress()">HistoryModel</button>
   <button class="sidebarButton">Settings</button>
   <div class="toggle-switch" #toggleSwitch>
     <div class="toggle-knob"></div>

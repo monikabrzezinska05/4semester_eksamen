@@ -5,16 +5,8 @@ public class HistoryModel
     public int? HistoryId { get; set; }
     public string? UserEmail { get; set; }
     public int UnitId { get; set; }
+    public string? UnitTable { get; set; }
+    public Unit? Unit {get; set;}
     public DateTime Date { get; set; }
-    public EventType EventTypeId { get; set; }
-}
-
-public enum EventType
-{
-    Open,
-    Close,
-    AlarmTriggered,
-    AlarmStopped,
-    AlarmArmed,
-    AlarmDisarmed,
+    public EventType EventType { get; set; }
 }
