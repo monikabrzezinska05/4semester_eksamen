@@ -101,8 +101,35 @@ class ClientWantsToSeeHistory extends ClientEvent
 class ServerEvent extends BaseEvent {
   static ServerEvent fromJson(Map<String, Object?> json) {
     final type = json['eventType'];
-    return switch (type) { _ => throw "Unknown event type: $type in $json" };
+    return switch (type) {
+      _ => throw "Unknown event type: $type in $json"
+    };
   }
+}
+
+class ServerAlarmTriggered extends ServerEvent  {
+  static const String name = "ServerAlarmTriggered";
+
+  ServerAlarmTriggered({
+    required this.eventType,
+    required this. historyModel,
+  });
+  final String eventType;
+  final HistoryModel historyModel;
+}
+/*
+class ServerAlarmTriggered extends ServerEvent with _$ServerAlarmTriggered {
+  static const String name = "ServerAlarmTriggered";
+
+   ServerAlarmTriggered({
+    required String eventType,
+    required HistoryModel historyModel,
+  });
+
+  Map<String, dynamic> toJson() => _$ServerAlarmTriggeredToJson(this);
+}
+
+ */
 
   // class ServerAlarmTriggered extends ServerEvent with _$ServerAlarmTriggered {
   //
@@ -143,4 +170,3 @@ class ServerEvent extends BaseEvent {
   // class ServerShowsHistory extends ServerEvent with _$ServerShowsHistory {
   //
   // }
-}

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:mob_dev/history_bloc/history_state.dart';
+import 'package:mob_dev/main.dart';
 
 import 'history_bloc/history_cubit.dart';
 import 'models/history/history_model.dart';
@@ -12,7 +13,10 @@ class HistoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<HistoryCubit>(
-      create: (context) => HistoryCubit()..init(),
+      create: (context) {
+        final channel = context.read<BroadcastWsChannel>();
+        return HistoryCubit(channel)..init();
+      },
       child: Scaffold(
         appBar: AppBar(
           title: const Text('history'),

@@ -1,11 +1,27 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../main.dart';
+import '../models/events/events_model.dart';
 import '../models/history/history_model.dart';
 import '../models/unit/unit_model.dart';
 import 'history_state.dart';
 
 class HistoryCubit extends Cubit<HistoryState> {
-  HistoryCubit() : super(HistoryState.initial());
+  final BroadcastWsChannel wsChannel;
+
+  HistoryCubit(this.wsChannel) : super(HistoryState.initial()) {
+    wsChannel.stream.listen((event) {
+      switch (event) {
+        case ServerAlarmTriggered(eventType: _, historyModel: var model):
+            print(model);
+
+      }
+    },  onError: (error)
+    {
+      //DO SOMETHING HERE
+    });
+
+  }
 
    Future<void> init() async {
     emit(state.copyWith(allHistory: historyElements, shownHistory: historyElements, isLoading: false));
@@ -69,6 +85,8 @@ class HistoryCubit extends Cubit<HistoryState> {
     ));
   }
 }
+
+
 
 final List<HistoryModel> historyElements = [
   HistoryModel(

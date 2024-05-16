@@ -1,24 +1,30 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mob_dev/email_list_bloc/email_list_cubit.dart';
 import 'package:mob_dev/history_page.dart';
+import 'package:mob_dev/home_bloc/home_cubit.dart';
 import 'package:mob_dev/settings_page.dart';
+import 'package:provider/provider.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
+import 'history_bloc/history_cubit.dart';
 import 'home_page.dart';
+import 'models/events/events_model.dart';
 
-final wsUri = Uri.parse('ws://localhost:8181');
-final channel = WebSocketChannel.connect(wsUri);
+void main() async {
+  final wsUrl = Uri.parse('ws://localhost:8181');
+  final channel = WebSocketChannel.connect(wsUrl);
 
- void main() async {
-   runApp(const MyApp());
- }
-
-// void main() async {
-//   runApp(BlocProvider(
-//     create: (context) => ,
-//   ))
-// }
+  runApp(
+    Provider<BroadcastWsChannel>(
+      create: (_) => BroadcastWsChannel(wsUrl),
+        child: const MyApp(),
+      ),
+  );
+}
 
 class MyApp extends StatelessWidget {
   static final ValueNotifier<ThemeMode> themeNotifier =
@@ -55,18 +61,13 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-
   int _selectedIndex = 1;
   late List<Widget> _widgetOptions;
 
   @override
   void initState() {
     super.initState();
-    _widgetOptions = <Widget>[
-      HistoryPage(),
-      HomePage(),
-      SettingsPage()
-    ];
+    _widgetOptions = <Widget>[HistoryPage(), HomePage(), SettingsPage()];
   }
 
   @override
@@ -110,4 +111,20 @@ class _MainPageState extends State<MainPage> {
       _selectedIndex = index;
     });
   }
+}
+
+class BroadcastWsChannel {
+  BroadcastWsChannel(Uri uri) : _channel = WebSocketChannel.connect(uri) {
+     stream = _channel.stream
+        .map((event) => jsonDecode(event))
+        .map((event) => ServerEvent.fromJson(event))
+        .asBroadcastStream();
+  }
+
+  final WebSocketChannel _channel;
+  late Stream<ServerEvent> stream;
+
+  WebSocketSink get sink => _channel.sink;
+
+
 }
