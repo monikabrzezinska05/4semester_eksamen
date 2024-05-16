@@ -1,5 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:mob_dev/models/email_list/email_model.dart';
+import 'package:mob_dev/models/unit/unit_model.dart';
 
 import '../history/history_model.dart';
 
@@ -11,50 +13,6 @@ sealed class BaseEvent {}
 abstract class ClientEvent extends BaseEvent {
   Map<String, dynamic> toJson();
 }
-
-@freezed
-class ClientClosesWindowDoor extends ClientEvent with _$ClientClosesWindowDoor {
-  static const String name = "ClientClosesWindowDoor";
-
-  const factory ClientClosesWindowDoor({
-    required String eventType,
-    required HistoryModel historyModel,
-  }) = _ClientClosesWindowDoor;
-
-  factory ClientClosesWindowDoor.fromJson(Map<String, Object?> json) =>
-      _$ClientClosesWindowDoorFromJson(json);
-}
-
-@freezed
-class ClientOpensWindowDoor extends ClientEvent with _$ClientOpensWindowDoor {
-  static const String name = "ClientOpensWindowDoor";
-
-  const factory ClientOpensWindowDoor({
-    required String eventType,
-    required HistoryModel historyModel,
-  }) = _ClientOpensWindowDoor;
-
-  factory ClientOpensWindowDoor.fromJson(Map<String, Object?> json) =>
-      _$ClientOpensWindowDoorFromJson(json);
-}
-// Ved ikke om vi skal have dette på mobil siden.
-//
-// @freezed
-// class ClientWantsToCreateUser extends ClientEvent
-//     with _$ClientWantsToCreateUser {
-//   static const String name = "ClientWantsToCreateUser";
-//
-//   const factory ClientWantsToCreateUser({
-//     required String eventType,
-//     required String name,
-//     required String password,
-//     required bool isChild,
-//     required String email,
-//   }) = _ClientWantsToCreateUser;
-//
-//   factory ClientWantsToCreateUser.fromJson(Map<String, Object?> json) =>
-//       _$ClientWantsToCreateUser(json);
-// }
 
 @freezed
 class ClientWantsToLogin extends ClientEvent with _$ClientWantsToLogin {
@@ -70,9 +28,17 @@ class ClientWantsToLogin extends ClientEvent with _$ClientWantsToLogin {
       _$ClientWantsToLoginFromJson(json);
 }
 
-  // class ClientWantsToLogoff extends ClientEvent with _$ClientWantsToLogoff {
-  //
-  // }
+@freezed
+class ClientWantsToSeeUnits extends ClientEvent with _$ClientWantsToSeeUnits {
+  static const String name = "ClientWantsToSeeUnits";
+
+  const factory ClientWantsToSeeUnits({
+    required String eventType,
+  }) = _ClientWantsToSeeUnits;
+
+  factory ClientWantsToSeeUnits.fromJson(Map<String, Object?> json) =>
+      _$ClientWantsToSeeUnitsFromJson(json);
+}
 
 @freezed
 class ClientWantsToSeeHistory extends ClientEvent
@@ -87,15 +53,19 @@ class ClientWantsToSeeHistory extends ClientEvent
       _$ClientWantsToSeeHistoryFromJson(json);
 }
 
-// class ClientWantsToTurnOffAlarm extends ClientEvent
-//     with _$ClientWantsToTurnOffAlarm {
-//
-// }
+@freezed
+class ClientWantsToSeeEmails extends ClientEvent with _$ClientWantsToSeeEmails {
+  static const String name = "ClientWantsToSeeEmails";
 
-// class ClientWantsToTurnOnAlarm extends ClientEvent
-//     with _$ClientWantsToTurnOnAlarm {
-//
-// }
+  const factory ClientWantsToSeeEmails({
+    required String eventType,
+  }) = _ClientWantsToSeeEmails;
+
+  factory ClientWantsToSeeEmails.fromJson(Map<String, Object?> json) =>
+      _$ClientWantsToSeeEmailsFromJson(json);
+}
+
+
 
 class ServerEvent extends BaseEvent {
   static ServerEvent fromJson(Map<String, Object?> json) {
@@ -118,15 +88,17 @@ class ServerAlarmTriggered extends ServerEvent  {
   final HistoryModel historyModel;
 }
 
-class ServerShowsEmailList extends ServerEvent {
+@freezed
+class ServerShowsEmailList extends ServerEvent with _$ServerShowsEmailList {
   static const String name = "ServerShowsEmailList";
 
-  ServerShowsEmailList({
-    required this.eventType,
-    required this.emails,
-  });
-  final String eventType;
-  final List<String> emails;
+  const factory ServerShowsEmailList({
+    required String eventType,
+    required List<EmailModel> emails,
+  }) = _ServerShowsEmailList;
+
+  factory ServerShowsEmailList.fromJson(Map<String, Object?> json) =>
+      _$ServerShowsEmailListFromJson(json);
 }
 
 @freezed
@@ -141,56 +113,16 @@ class ServerShowsHistory extends ServerEvent  with _$ServerShowsHistory{
   factory ServerShowsHistory.fromJson(Map<String, Object?> json) =>
       _$ServerShowsHistoryFromJson(json);
 }
-/*
-class ServerAlarmTriggered extends ServerEvent with _$ServerAlarmTriggered {
-  static const String name = "ServerAlarmTriggered";
 
-   ServerAlarmTriggered({
+@freezed
+class ServerShowsUnits extends ServerEvent with _$ServerShowsUnits {
+  static const String name = "ServerShowsUnits";
+
+ const factory ServerShowsUnits({
     required String eventType,
-    required HistoryModel historyModel,
-  });
+    required List<UnitModel> units,
+  }) = _ServerShowsUnits;
 
-  Map<String, dynamic> toJson() => _$ServerAlarmTriggeredToJson(this);
+  factory ServerShowsUnits.fromJson(Map<String, Object?> json) =>
+      _$ServerShowsUnitsFromJson(json);
 }
-
- */
-
-  // class ServerAlarmTriggered extends ServerEvent with _$ServerAlarmTriggered {
-  //
-  // }
-
-  // class ServerClosesWindowDoor extends ServerEvent with _$ServerClosesWindowDoor {
-  //
-  // }
-
-  // class ServerOpensWindowDoor extends ServerEvent with _$ServerOpensWindowDoor {
-  //
-  // }
-
-  // class ServerCreatesNewUser extends ServerEvent with _$ServerCreatesNewUser {
-  //
-  // }
-
-  // class ServerHasActivatedAlarm extends ServerEvent with _$ServerHasActivatedAlarm {
-  //
-  // }
-
-  // class ServerHasDeactivatedAlarm extends ServerEvent with _$ServerClosesWindowDoor {
-  //
-  // }
-
-  // class ServerLogIn extends ServerEvent with _$ServerLogIn {
-  //
-  // }
-
-  // class ServerLogoff extends ServerEvent with _$ServerLogoff {
-  //
-  // }
-
-  // class ServerShowsEmailList extends ServerEvent with _$ServerShowsEmailList {
-  //
-  // }
-
-  // class ServerShowsHistory extends ServerEvent with _$ServerShowsHistory {
-  //
-  // }

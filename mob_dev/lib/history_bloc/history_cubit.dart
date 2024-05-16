@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../main.dart';
 import '../models/events/events_model.dart';
 import '../models/history/history_model.dart';
-import '../models/unit/unit_model.dart';
 import 'history_state.dart';
 
 class HistoryCubit extends Cubit<HistoryState> {

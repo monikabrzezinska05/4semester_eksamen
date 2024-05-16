@@ -1,5 +1,4 @@
 using System.Text.Json;
-using api.transfer_models;
 using Fleck;
 using infrastructure.models;
 using lib;
@@ -19,12 +18,12 @@ public class ClientWantsToCreateUserDto : BaseDto
 public class ClientWantsToCreateUser : BaseEventHandler<ClientWantsToCreateUserDto>
 {
     private readonly UserService _userService;
-    
+
     public ClientWantsToCreateUser(UserService userService)
     {
         _userService = userService;
     }
-    
+
     public override async Task Handle(ClientWantsToCreateUserDto dto, IWebSocketConnection socket)
     {
         StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
@@ -34,28 +33,25 @@ public class ClientWantsToCreateUser : BaseEventHandler<ClientWantsToCreateUserD
             IsChild = dto.isChild,
             Mail = dto.email
         };
-        
+
         var user = _userService.CreateUser(newUser, dto.password);
-        ResponseDto createUserMessage;
+        var createUserMessage = new ServerCreatesNewUser();
         if (user == null)
         {
-            createUserMessage = new ResponseDto()
+            createUserMessage = new ServerCreatesNewUser()
             {
                 MessageToClient = "User already exists"
             };
-        } else 
+        }
+        else
         {
-            createUserMessage = new ResponseDto()
+            createUserMessage = new ServerCreatesNewUser()
             {
                 MessageToClient = "User created",
-                ResponseData = user
+                User = user
             };
         }
-        
-        var serverCreateUser = new ServerCreatesNewUser()
-        {
-            ResponseDto = createUserMessage
-        };
-        socket.Send(JsonSerializer.Serialize(serverCreateUser));
+
+        socket.Send(JsonSerializer.Serialize(createUserMessage, StateService.JsonOptions()));
     }
 }

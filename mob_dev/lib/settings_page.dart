@@ -22,7 +22,8 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(create: (context) => EmailListCubit(),
+    final channel = context.read<BroadcastWsChannel>();
+    return BlocProvider(create: (context) => EmailListCubit(channel)..init(),
       child: ListView(
         children: [
           Padding(

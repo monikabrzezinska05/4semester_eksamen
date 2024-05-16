@@ -1,13 +1,33 @@
+import 'dart:convert';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mob_dev/email_list_bloc/email_list_state.dart';
-import 'package:mob_dev/models/email_list/email_list_model.dart';
+import 'package:mob_dev/models/email_list/email_model.dart';
+
+import '../main.dart';
+import '../models/events/events_model.dart';
 
 class EmailListCubit extends Cubit<EmailListState> {
-  EmailListCubit() : super(EmailListState(allEmails: [], isLoading: true));
+  final BroadcastWsChannel wsChannel;
+  EmailListCubit(this.wsChannel) : super(EmailListState(allEmails: [], isLoading: true)) {
+    wsChannel.stream.listen((event) {
+      switch (event) {
+        case ServerShowsEmailList(eventType: _, emails: var model):
+          _onEmailListReceived(model);
+      }
+    },  onError: (error)
+    {
+      //DO SOMETHING HERE
+      print('Error: $error');
+    });
+  }
 
-  //Todo - Change once we have valid data.
   Future<void> init() async {
-    emit(state.copyWith(allEmails: [], isLoading: false));
+    _send(ClientWantsToSeeEmails(eventType: ClientWantsToSeeEmails.name));
+  }
+
+  _send(ClientEvent event) {
+    wsChannel.sink.add(jsonEncode( event.toJson()));
   }
 
   //TODO - Opdater til når vi har funktionalitet til at update emails i emaillist table.
@@ -16,7 +36,7 @@ class EmailListCubit extends Cubit<EmailListState> {
   void addEmail(String email) {
     emit(state.copyWith(allEmails: [
       ...state.allEmails,
-      EmailListModel(id: _id++, mail: email)
+      EmailModel(id: _id++, mail: email)
     ]));
   }
 
@@ -24,5 +44,9 @@ class EmailListCubit extends Cubit<EmailListState> {
     emit(state.copyWith(
         allEmails:
             state.allEmails.where((emailModel) => emailModel.id != id).toList()));
+  }
+
+  void _onEmailListReceived(List<EmailModel> model) {
+    emit(state.copyWith(allEmails: model, isLoading: false));
   }
 }

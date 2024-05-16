@@ -27,7 +27,7 @@ public class EmailService
 
 Best Regards, Securty Home Security"
         };
-        foreach (var email in getMails().ToList())
+        foreach (var email in GetMails().ToList())
         {
             message.To.Add(new MailboxAddress(email.mail, email.mail));
             using (var client = new SmtpClient())
@@ -41,17 +41,17 @@ Best Regards, Securty Home Security"
         }
     }
 
-    public IEnumerable<EmailModel> getMails()
+    public IEnumerable<EmailModel> GetMails()
     {
         return _emailRepository.getMails();
     }
 
-    public EmailModel createEmail(EmailModel model)
+    public EmailModel CreateEmail(EmailModel model)
     {
         return _emailRepository.createEmail(model);
     }
 
-    public bool deleteEmail(int id)
+    public bool DeleteEmail(int id)
     {
         return _emailRepository.deleteEmail(id);
     }

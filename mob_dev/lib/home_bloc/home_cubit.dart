@@ -2,8 +2,27 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mob_dev/home_bloc/home_state.dart';
 import 'package:mob_dev/models/unit/unit_model.dart';
 
+import '../main.dart';
+import '../models/events/events_model.dart';
+
 class HomeCubit extends Cubit<HomeState>{
-  HomeCubit(): super(HomeState(units: units, isLoading: false));
+  final BroadcastWsChannel wsChannel;
+
+  HomeCubit(this.wsChannel): super(HomeState(units: units, isLoading: false)){
+    wsChannel.stream.listen((event) {
+      switch (event) {
+        case ServerShowsUnits(eventType: _, units: var model):
+            _onUnitsReceived(model);
+      }
+    }, onError: (error){
+      //DO SOMETHING HERE
+      print('Error: $error');
+    });
+  }
+//TODO -> Lav en form for map til de tre typer at units...
+  void _onUnitsReceived(List<UnitModel> model) {
+    emit(state.copyWith(units: model));
+  }
 
 }
 

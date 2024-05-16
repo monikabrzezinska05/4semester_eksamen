@@ -6,36 +6,6 @@ part of 'events_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$ClientClosesWindowDoorImpl _$$ClientClosesWindowDoorImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ClientClosesWindowDoorImpl(
-      eventType: json['eventType'] as String,
-      historyModel:
-          HistoryModel.fromJson(json['historyModel'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$$ClientClosesWindowDoorImplToJson(
-        _$ClientClosesWindowDoorImpl instance) =>
-    <String, dynamic>{
-      'eventType': instance.eventType,
-      'historyModel': instance.historyModel,
-    };
-
-_$ClientOpensWindowDoorImpl _$$ClientOpensWindowDoorImplFromJson(
-        Map<String, dynamic> json) =>
-    _$ClientOpensWindowDoorImpl(
-      eventType: json['eventType'] as String,
-      historyModel:
-          HistoryModel.fromJson(json['historyModel'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$$ClientOpensWindowDoorImplToJson(
-        _$ClientOpensWindowDoorImpl instance) =>
-    <String, dynamic>{
-      'eventType': instance.eventType,
-      'historyModel': instance.historyModel,
-    };
-
 _$ClientWantsToLoginImpl _$$ClientWantsToLoginImplFromJson(
         Map<String, dynamic> json) =>
     _$ClientWantsToLoginImpl(
@@ -52,6 +22,18 @@ Map<String, dynamic> _$$ClientWantsToLoginImplToJson(
       'password': instance.password,
     };
 
+_$ClientWantsToSeeUnitsImpl _$$ClientWantsToSeeUnitsImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ClientWantsToSeeUnitsImpl(
+      eventType: json['eventType'] as String,
+    );
+
+Map<String, dynamic> _$$ClientWantsToSeeUnitsImplToJson(
+        _$ClientWantsToSeeUnitsImpl instance) =>
+    <String, dynamic>{
+      'eventType': instance.eventType,
+    };
+
 _$ClientWantsToSeeHistoryImpl _$$ClientWantsToSeeHistoryImplFromJson(
         Map<String, dynamic> json) =>
     _$ClientWantsToSeeHistoryImpl(
@@ -62,6 +44,34 @@ Map<String, dynamic> _$$ClientWantsToSeeHistoryImplToJson(
         _$ClientWantsToSeeHistoryImpl instance) =>
     <String, dynamic>{
       'eventType': instance.eventType,
+    };
+
+_$ClientWantsToSeeEmailsImpl _$$ClientWantsToSeeEmailsImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ClientWantsToSeeEmailsImpl(
+      eventType: json['eventType'] as String,
+    );
+
+Map<String, dynamic> _$$ClientWantsToSeeEmailsImplToJson(
+        _$ClientWantsToSeeEmailsImpl instance) =>
+    <String, dynamic>{
+      'eventType': instance.eventType,
+    };
+
+_$ServerShowsEmailListImpl _$$ServerShowsEmailListImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ServerShowsEmailListImpl(
+      eventType: json['eventType'] as String,
+      emails: (json['emails'] as List<dynamic>)
+          .map((e) => EmailModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$$ServerShowsEmailListImplToJson(
+        _$ServerShowsEmailListImpl instance) =>
+    <String, dynamic>{
+      'eventType': instance.eventType,
+      'emails': instance.emails,
     };
 
 _$ServerShowsHistoryImpl _$$ServerShowsHistoryImplFromJson(
@@ -78,4 +88,20 @@ Map<String, dynamic> _$$ServerShowsHistoryImplToJson(
     <String, dynamic>{
       'eventType': instance.eventType,
       'historyList': instance.historyList,
+    };
+
+_$ServerShowsUnitsImpl _$$ServerShowsUnitsImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ServerShowsUnitsImpl(
+      eventType: json['eventType'] as String,
+      units: (json['units'] as List<dynamic>)
+          .map((e) => UnitModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$$ServerShowsUnitsImplToJson(
+        _$ServerShowsUnitsImpl instance) =>
+    <String, dynamic>{
+      'eventType': instance.eventType,
+      'units': instance.units,
     };

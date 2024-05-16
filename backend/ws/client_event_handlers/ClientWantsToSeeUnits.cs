@@ -9,9 +9,9 @@ namespace ws;
 
 public class ClientWantsToSeeUnitsDto : BaseDto
 {
-    // Skal nok laves om til at passe med noget JWT, men skal bare lige have det til at virke...
-    public string? ConnectionId { get; set; }
+    
 }
+
 
 public class ClientWantsToSeeUnits : BaseEventHandler<ClientWantsToSeeUnitsDto>
 {

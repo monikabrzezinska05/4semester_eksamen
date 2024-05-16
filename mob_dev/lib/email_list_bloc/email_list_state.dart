@@ -1,7 +1,7 @@
-import '../models/email_list/email_list_model.dart';
+import '../models/email_list/email_model.dart';
 
 class EmailListState {
-  final List<EmailListModel> allEmails;
+  final List<EmailModel> allEmails;
   final bool isLoading;
 
   const EmailListState({
@@ -10,7 +10,7 @@ class EmailListState {
   });
 
   EmailListState copyWith({
-    List<EmailListModel>? allEmails,
+    List<EmailModel>? allEmails,
     bool? isLoading
 
   }) {

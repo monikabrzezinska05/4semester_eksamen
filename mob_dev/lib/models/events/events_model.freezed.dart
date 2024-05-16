@@ -14,379 +14,6 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
-ClientClosesWindowDoor _$ClientClosesWindowDoorFromJson(
-    Map<String, dynamic> json) {
-  return _ClientClosesWindowDoor.fromJson(json);
-}
-
-/// @nodoc
-mixin _$ClientClosesWindowDoor {
-  String get eventType => throw _privateConstructorUsedError;
-  HistoryModel get historyModel => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $ClientClosesWindowDoorCopyWith<ClientClosesWindowDoor> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ClientClosesWindowDoorCopyWith<$Res> {
-  factory $ClientClosesWindowDoorCopyWith(ClientClosesWindowDoor value,
-          $Res Function(ClientClosesWindowDoor) then) =
-      _$ClientClosesWindowDoorCopyWithImpl<$Res, ClientClosesWindowDoor>;
-  @useResult
-  $Res call({String eventType, HistoryModel historyModel});
-
-  $HistoryModelCopyWith<$Res> get historyModel;
-}
-
-/// @nodoc
-class _$ClientClosesWindowDoorCopyWithImpl<$Res,
-        $Val extends ClientClosesWindowDoor>
-    implements $ClientClosesWindowDoorCopyWith<$Res> {
-  _$ClientClosesWindowDoorCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? eventType = null,
-    Object? historyModel = null,
-  }) {
-    return _then(_value.copyWith(
-      eventType: null == eventType
-          ? _value.eventType
-          : eventType // ignore: cast_nullable_to_non_nullable
-              as String,
-      historyModel: null == historyModel
-          ? _value.historyModel
-          : historyModel // ignore: cast_nullable_to_non_nullable
-              as HistoryModel,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $HistoryModelCopyWith<$Res> get historyModel {
-    return $HistoryModelCopyWith<$Res>(_value.historyModel, (value) {
-      return _then(_value.copyWith(historyModel: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$ClientClosesWindowDoorImplCopyWith<$Res>
-    implements $ClientClosesWindowDoorCopyWith<$Res> {
-  factory _$$ClientClosesWindowDoorImplCopyWith(
-          _$ClientClosesWindowDoorImpl value,
-          $Res Function(_$ClientClosesWindowDoorImpl) then) =
-      __$$ClientClosesWindowDoorImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String eventType, HistoryModel historyModel});
-
-  @override
-  $HistoryModelCopyWith<$Res> get historyModel;
-}
-
-/// @nodoc
-class __$$ClientClosesWindowDoorImplCopyWithImpl<$Res>
-    extends _$ClientClosesWindowDoorCopyWithImpl<$Res,
-        _$ClientClosesWindowDoorImpl>
-    implements _$$ClientClosesWindowDoorImplCopyWith<$Res> {
-  __$$ClientClosesWindowDoorImplCopyWithImpl(
-      _$ClientClosesWindowDoorImpl _value,
-      $Res Function(_$ClientClosesWindowDoorImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? eventType = null,
-    Object? historyModel = null,
-  }) {
-    return _then(_$ClientClosesWindowDoorImpl(
-      eventType: null == eventType
-          ? _value.eventType
-          : eventType // ignore: cast_nullable_to_non_nullable
-              as String,
-      historyModel: null == historyModel
-          ? _value.historyModel
-          : historyModel // ignore: cast_nullable_to_non_nullable
-              as HistoryModel,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$ClientClosesWindowDoorImpl
-    with DiagnosticableTreeMixin
-    implements _ClientClosesWindowDoor {
-  const _$ClientClosesWindowDoorImpl(
-      {required this.eventType, required this.historyModel});
-
-  factory _$ClientClosesWindowDoorImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ClientClosesWindowDoorImplFromJson(json);
-
-  @override
-  final String eventType;
-  @override
-  final HistoryModel historyModel;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ClientClosesWindowDoor(eventType: $eventType, historyModel: $historyModel)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'ClientClosesWindowDoor'))
-      ..add(DiagnosticsProperty('eventType', eventType))
-      ..add(DiagnosticsProperty('historyModel', historyModel));
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ClientClosesWindowDoorImpl &&
-            (identical(other.eventType, eventType) ||
-                other.eventType == eventType) &&
-            (identical(other.historyModel, historyModel) ||
-                other.historyModel == historyModel));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, eventType, historyModel);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ClientClosesWindowDoorImplCopyWith<_$ClientClosesWindowDoorImpl>
-      get copyWith => __$$ClientClosesWindowDoorImplCopyWithImpl<
-          _$ClientClosesWindowDoorImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ClientClosesWindowDoorImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _ClientClosesWindowDoor implements ClientClosesWindowDoor {
-  const factory _ClientClosesWindowDoor(
-      {required final String eventType,
-      required final HistoryModel historyModel}) = _$ClientClosesWindowDoorImpl;
-
-  factory _ClientClosesWindowDoor.fromJson(Map<String, dynamic> json) =
-      _$ClientClosesWindowDoorImpl.fromJson;
-
-  @override
-  String get eventType;
-  @override
-  HistoryModel get historyModel;
-  @override
-  @JsonKey(ignore: true)
-  _$$ClientClosesWindowDoorImplCopyWith<_$ClientClosesWindowDoorImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
-ClientOpensWindowDoor _$ClientOpensWindowDoorFromJson(
-    Map<String, dynamic> json) {
-  return _ClientOpensWindowDoor.fromJson(json);
-}
-
-/// @nodoc
-mixin _$ClientOpensWindowDoor {
-  String get eventType => throw _privateConstructorUsedError;
-  HistoryModel get historyModel => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $ClientOpensWindowDoorCopyWith<ClientOpensWindowDoor> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $ClientOpensWindowDoorCopyWith<$Res> {
-  factory $ClientOpensWindowDoorCopyWith(ClientOpensWindowDoor value,
-          $Res Function(ClientOpensWindowDoor) then) =
-      _$ClientOpensWindowDoorCopyWithImpl<$Res, ClientOpensWindowDoor>;
-  @useResult
-  $Res call({String eventType, HistoryModel historyModel});
-
-  $HistoryModelCopyWith<$Res> get historyModel;
-}
-
-/// @nodoc
-class _$ClientOpensWindowDoorCopyWithImpl<$Res,
-        $Val extends ClientOpensWindowDoor>
-    implements $ClientOpensWindowDoorCopyWith<$Res> {
-  _$ClientOpensWindowDoorCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? eventType = null,
-    Object? historyModel = null,
-  }) {
-    return _then(_value.copyWith(
-      eventType: null == eventType
-          ? _value.eventType
-          : eventType // ignore: cast_nullable_to_non_nullable
-              as String,
-      historyModel: null == historyModel
-          ? _value.historyModel
-          : historyModel // ignore: cast_nullable_to_non_nullable
-              as HistoryModel,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $HistoryModelCopyWith<$Res> get historyModel {
-    return $HistoryModelCopyWith<$Res>(_value.historyModel, (value) {
-      return _then(_value.copyWith(historyModel: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$ClientOpensWindowDoorImplCopyWith<$Res>
-    implements $ClientOpensWindowDoorCopyWith<$Res> {
-  factory _$$ClientOpensWindowDoorImplCopyWith(
-          _$ClientOpensWindowDoorImpl value,
-          $Res Function(_$ClientOpensWindowDoorImpl) then) =
-      __$$ClientOpensWindowDoorImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String eventType, HistoryModel historyModel});
-
-  @override
-  $HistoryModelCopyWith<$Res> get historyModel;
-}
-
-/// @nodoc
-class __$$ClientOpensWindowDoorImplCopyWithImpl<$Res>
-    extends _$ClientOpensWindowDoorCopyWithImpl<$Res,
-        _$ClientOpensWindowDoorImpl>
-    implements _$$ClientOpensWindowDoorImplCopyWith<$Res> {
-  __$$ClientOpensWindowDoorImplCopyWithImpl(_$ClientOpensWindowDoorImpl _value,
-      $Res Function(_$ClientOpensWindowDoorImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? eventType = null,
-    Object? historyModel = null,
-  }) {
-    return _then(_$ClientOpensWindowDoorImpl(
-      eventType: null == eventType
-          ? _value.eventType
-          : eventType // ignore: cast_nullable_to_non_nullable
-              as String,
-      historyModel: null == historyModel
-          ? _value.historyModel
-          : historyModel // ignore: cast_nullable_to_non_nullable
-              as HistoryModel,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$ClientOpensWindowDoorImpl
-    with DiagnosticableTreeMixin
-    implements _ClientOpensWindowDoor {
-  const _$ClientOpensWindowDoorImpl(
-      {required this.eventType, required this.historyModel});
-
-  factory _$ClientOpensWindowDoorImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ClientOpensWindowDoorImplFromJson(json);
-
-  @override
-  final String eventType;
-  @override
-  final HistoryModel historyModel;
-
-  @override
-  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ClientOpensWindowDoor(eventType: $eventType, historyModel: $historyModel)';
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('type', 'ClientOpensWindowDoor'))
-      ..add(DiagnosticsProperty('eventType', eventType))
-      ..add(DiagnosticsProperty('historyModel', historyModel));
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$ClientOpensWindowDoorImpl &&
-            (identical(other.eventType, eventType) ||
-                other.eventType == eventType) &&
-            (identical(other.historyModel, historyModel) ||
-                other.historyModel == historyModel));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, eventType, historyModel);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$ClientOpensWindowDoorImplCopyWith<_$ClientOpensWindowDoorImpl>
-      get copyWith => __$$ClientOpensWindowDoorImplCopyWithImpl<
-          _$ClientOpensWindowDoorImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$ClientOpensWindowDoorImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _ClientOpensWindowDoor implements ClientOpensWindowDoor {
-  const factory _ClientOpensWindowDoor(
-      {required final String eventType,
-      required final HistoryModel historyModel}) = _$ClientOpensWindowDoorImpl;
-
-  factory _ClientOpensWindowDoor.fromJson(Map<String, dynamic> json) =
-      _$ClientOpensWindowDoorImpl.fromJson;
-
-  @override
-  String get eventType;
-  @override
-  HistoryModel get historyModel;
-  @override
-  @JsonKey(ignore: true)
-  _$$ClientOpensWindowDoorImplCopyWith<_$ClientOpensWindowDoorImpl>
-      get copyWith => throw _privateConstructorUsedError;
-}
-
 ClientWantsToLogin _$ClientWantsToLoginFromJson(Map<String, dynamic> json) {
   return _ClientWantsToLogin.fromJson(json);
 }
@@ -574,6 +201,159 @@ abstract class _ClientWantsToLogin implements ClientWantsToLogin {
       throw _privateConstructorUsedError;
 }
 
+ClientWantsToSeeUnits _$ClientWantsToSeeUnitsFromJson(
+    Map<String, dynamic> json) {
+  return _ClientWantsToSeeUnits.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ClientWantsToSeeUnits {
+  String get eventType => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ClientWantsToSeeUnitsCopyWith<ClientWantsToSeeUnits> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ClientWantsToSeeUnitsCopyWith<$Res> {
+  factory $ClientWantsToSeeUnitsCopyWith(ClientWantsToSeeUnits value,
+          $Res Function(ClientWantsToSeeUnits) then) =
+      _$ClientWantsToSeeUnitsCopyWithImpl<$Res, ClientWantsToSeeUnits>;
+  @useResult
+  $Res call({String eventType});
+}
+
+/// @nodoc
+class _$ClientWantsToSeeUnitsCopyWithImpl<$Res,
+        $Val extends ClientWantsToSeeUnits>
+    implements $ClientWantsToSeeUnitsCopyWith<$Res> {
+  _$ClientWantsToSeeUnitsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+  }) {
+    return _then(_value.copyWith(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ClientWantsToSeeUnitsImplCopyWith<$Res>
+    implements $ClientWantsToSeeUnitsCopyWith<$Res> {
+  factory _$$ClientWantsToSeeUnitsImplCopyWith(
+          _$ClientWantsToSeeUnitsImpl value,
+          $Res Function(_$ClientWantsToSeeUnitsImpl) then) =
+      __$$ClientWantsToSeeUnitsImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String eventType});
+}
+
+/// @nodoc
+class __$$ClientWantsToSeeUnitsImplCopyWithImpl<$Res>
+    extends _$ClientWantsToSeeUnitsCopyWithImpl<$Res,
+        _$ClientWantsToSeeUnitsImpl>
+    implements _$$ClientWantsToSeeUnitsImplCopyWith<$Res> {
+  __$$ClientWantsToSeeUnitsImplCopyWithImpl(_$ClientWantsToSeeUnitsImpl _value,
+      $Res Function(_$ClientWantsToSeeUnitsImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+  }) {
+    return _then(_$ClientWantsToSeeUnitsImpl(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ClientWantsToSeeUnitsImpl
+    with DiagnosticableTreeMixin
+    implements _ClientWantsToSeeUnits {
+  const _$ClientWantsToSeeUnitsImpl({required this.eventType});
+
+  factory _$ClientWantsToSeeUnitsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ClientWantsToSeeUnitsImplFromJson(json);
+
+  @override
+  final String eventType;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ClientWantsToSeeUnits(eventType: $eventType)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ClientWantsToSeeUnits'))
+      ..add(DiagnosticsProperty('eventType', eventType));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ClientWantsToSeeUnitsImpl &&
+            (identical(other.eventType, eventType) ||
+                other.eventType == eventType));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, eventType);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ClientWantsToSeeUnitsImplCopyWith<_$ClientWantsToSeeUnitsImpl>
+      get copyWith => __$$ClientWantsToSeeUnitsImplCopyWithImpl<
+          _$ClientWantsToSeeUnitsImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ClientWantsToSeeUnitsImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ClientWantsToSeeUnits implements ClientWantsToSeeUnits {
+  const factory _ClientWantsToSeeUnits({required final String eventType}) =
+      _$ClientWantsToSeeUnitsImpl;
+
+  factory _ClientWantsToSeeUnits.fromJson(Map<String, dynamic> json) =
+      _$ClientWantsToSeeUnitsImpl.fromJson;
+
+  @override
+  String get eventType;
+  @override
+  @JsonKey(ignore: true)
+  _$$ClientWantsToSeeUnitsImplCopyWith<_$ClientWantsToSeeUnitsImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
 ClientWantsToSeeHistory _$ClientWantsToSeeHistoryFromJson(
     Map<String, dynamic> json) {
   return _ClientWantsToSeeHistory.fromJson(json);
@@ -725,6 +505,337 @@ abstract class _ClientWantsToSeeHistory implements ClientWantsToSeeHistory {
   @override
   @JsonKey(ignore: true)
   _$$ClientWantsToSeeHistoryImplCopyWith<_$ClientWantsToSeeHistoryImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+ClientWantsToSeeEmails _$ClientWantsToSeeEmailsFromJson(
+    Map<String, dynamic> json) {
+  return _ClientWantsToSeeEmails.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ClientWantsToSeeEmails {
+  String get eventType => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ClientWantsToSeeEmailsCopyWith<ClientWantsToSeeEmails> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ClientWantsToSeeEmailsCopyWith<$Res> {
+  factory $ClientWantsToSeeEmailsCopyWith(ClientWantsToSeeEmails value,
+          $Res Function(ClientWantsToSeeEmails) then) =
+      _$ClientWantsToSeeEmailsCopyWithImpl<$Res, ClientWantsToSeeEmails>;
+  @useResult
+  $Res call({String eventType});
+}
+
+/// @nodoc
+class _$ClientWantsToSeeEmailsCopyWithImpl<$Res,
+        $Val extends ClientWantsToSeeEmails>
+    implements $ClientWantsToSeeEmailsCopyWith<$Res> {
+  _$ClientWantsToSeeEmailsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+  }) {
+    return _then(_value.copyWith(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ClientWantsToSeeEmailsImplCopyWith<$Res>
+    implements $ClientWantsToSeeEmailsCopyWith<$Res> {
+  factory _$$ClientWantsToSeeEmailsImplCopyWith(
+          _$ClientWantsToSeeEmailsImpl value,
+          $Res Function(_$ClientWantsToSeeEmailsImpl) then) =
+      __$$ClientWantsToSeeEmailsImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String eventType});
+}
+
+/// @nodoc
+class __$$ClientWantsToSeeEmailsImplCopyWithImpl<$Res>
+    extends _$ClientWantsToSeeEmailsCopyWithImpl<$Res,
+        _$ClientWantsToSeeEmailsImpl>
+    implements _$$ClientWantsToSeeEmailsImplCopyWith<$Res> {
+  __$$ClientWantsToSeeEmailsImplCopyWithImpl(
+      _$ClientWantsToSeeEmailsImpl _value,
+      $Res Function(_$ClientWantsToSeeEmailsImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+  }) {
+    return _then(_$ClientWantsToSeeEmailsImpl(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ClientWantsToSeeEmailsImpl
+    with DiagnosticableTreeMixin
+    implements _ClientWantsToSeeEmails {
+  const _$ClientWantsToSeeEmailsImpl({required this.eventType});
+
+  factory _$ClientWantsToSeeEmailsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ClientWantsToSeeEmailsImplFromJson(json);
+
+  @override
+  final String eventType;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ClientWantsToSeeEmails(eventType: $eventType)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ClientWantsToSeeEmails'))
+      ..add(DiagnosticsProperty('eventType', eventType));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ClientWantsToSeeEmailsImpl &&
+            (identical(other.eventType, eventType) ||
+                other.eventType == eventType));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, eventType);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ClientWantsToSeeEmailsImplCopyWith<_$ClientWantsToSeeEmailsImpl>
+      get copyWith => __$$ClientWantsToSeeEmailsImplCopyWithImpl<
+          _$ClientWantsToSeeEmailsImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ClientWantsToSeeEmailsImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ClientWantsToSeeEmails implements ClientWantsToSeeEmails {
+  const factory _ClientWantsToSeeEmails({required final String eventType}) =
+      _$ClientWantsToSeeEmailsImpl;
+
+  factory _ClientWantsToSeeEmails.fromJson(Map<String, dynamic> json) =
+      _$ClientWantsToSeeEmailsImpl.fromJson;
+
+  @override
+  String get eventType;
+  @override
+  @JsonKey(ignore: true)
+  _$$ClientWantsToSeeEmailsImplCopyWith<_$ClientWantsToSeeEmailsImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+ServerShowsEmailList _$ServerShowsEmailListFromJson(Map<String, dynamic> json) {
+  return _ServerShowsEmailList.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ServerShowsEmailList {
+  String get eventType => throw _privateConstructorUsedError;
+  List<EmailModel> get emails => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ServerShowsEmailListCopyWith<ServerShowsEmailList> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ServerShowsEmailListCopyWith<$Res> {
+  factory $ServerShowsEmailListCopyWith(ServerShowsEmailList value,
+          $Res Function(ServerShowsEmailList) then) =
+      _$ServerShowsEmailListCopyWithImpl<$Res, ServerShowsEmailList>;
+  @useResult
+  $Res call({String eventType, List<EmailModel> emails});
+}
+
+/// @nodoc
+class _$ServerShowsEmailListCopyWithImpl<$Res,
+        $Val extends ServerShowsEmailList>
+    implements $ServerShowsEmailListCopyWith<$Res> {
+  _$ServerShowsEmailListCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? emails = null,
+  }) {
+    return _then(_value.copyWith(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      emails: null == emails
+          ? _value.emails
+          : emails // ignore: cast_nullable_to_non_nullable
+              as List<EmailModel>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ServerShowsEmailListImplCopyWith<$Res>
+    implements $ServerShowsEmailListCopyWith<$Res> {
+  factory _$$ServerShowsEmailListImplCopyWith(_$ServerShowsEmailListImpl value,
+          $Res Function(_$ServerShowsEmailListImpl) then) =
+      __$$ServerShowsEmailListImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String eventType, List<EmailModel> emails});
+}
+
+/// @nodoc
+class __$$ServerShowsEmailListImplCopyWithImpl<$Res>
+    extends _$ServerShowsEmailListCopyWithImpl<$Res, _$ServerShowsEmailListImpl>
+    implements _$$ServerShowsEmailListImplCopyWith<$Res> {
+  __$$ServerShowsEmailListImplCopyWithImpl(_$ServerShowsEmailListImpl _value,
+      $Res Function(_$ServerShowsEmailListImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? emails = null,
+  }) {
+    return _then(_$ServerShowsEmailListImpl(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      emails: null == emails
+          ? _value._emails
+          : emails // ignore: cast_nullable_to_non_nullable
+              as List<EmailModel>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ServerShowsEmailListImpl
+    with DiagnosticableTreeMixin
+    implements _ServerShowsEmailList {
+  const _$ServerShowsEmailListImpl(
+      {required this.eventType, required final List<EmailModel> emails})
+      : _emails = emails;
+
+  factory _$ServerShowsEmailListImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ServerShowsEmailListImplFromJson(json);
+
+  @override
+  final String eventType;
+  final List<EmailModel> _emails;
+  @override
+  List<EmailModel> get emails {
+    if (_emails is EqualUnmodifiableListView) return _emails;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_emails);
+  }
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ServerShowsEmailList(eventType: $eventType, emails: $emails)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ServerShowsEmailList'))
+      ..add(DiagnosticsProperty('eventType', eventType))
+      ..add(DiagnosticsProperty('emails', emails));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ServerShowsEmailListImpl &&
+            (identical(other.eventType, eventType) ||
+                other.eventType == eventType) &&
+            const DeepCollectionEquality().equals(other._emails, _emails));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, eventType, const DeepCollectionEquality().hash(_emails));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ServerShowsEmailListImplCopyWith<_$ServerShowsEmailListImpl>
+      get copyWith =>
+          __$$ServerShowsEmailListImplCopyWithImpl<_$ServerShowsEmailListImpl>(
+              this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ServerShowsEmailListImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ServerShowsEmailList implements ServerShowsEmailList {
+  const factory _ServerShowsEmailList(
+      {required final String eventType,
+      required final List<EmailModel> emails}) = _$ServerShowsEmailListImpl;
+
+  factory _ServerShowsEmailList.fromJson(Map<String, dynamic> json) =
+      _$ServerShowsEmailListImpl.fromJson;
+
+  @override
+  String get eventType;
+  @override
+  List<EmailModel> get emails;
+  @override
+  @JsonKey(ignore: true)
+  _$$ServerShowsEmailListImplCopyWith<_$ServerShowsEmailListImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -902,5 +1013,180 @@ abstract class _ServerShowsHistory implements ServerShowsHistory {
   @override
   @JsonKey(ignore: true)
   _$$ServerShowsHistoryImplCopyWith<_$ServerShowsHistoryImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ServerShowsUnits _$ServerShowsUnitsFromJson(Map<String, dynamic> json) {
+  return _ServerShowsUnits.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ServerShowsUnits {
+  String get eventType => throw _privateConstructorUsedError;
+  List<UnitModel> get units => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ServerShowsUnitsCopyWith<ServerShowsUnits> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ServerShowsUnitsCopyWith<$Res> {
+  factory $ServerShowsUnitsCopyWith(
+          ServerShowsUnits value, $Res Function(ServerShowsUnits) then) =
+      _$ServerShowsUnitsCopyWithImpl<$Res, ServerShowsUnits>;
+  @useResult
+  $Res call({String eventType, List<UnitModel> units});
+}
+
+/// @nodoc
+class _$ServerShowsUnitsCopyWithImpl<$Res, $Val extends ServerShowsUnits>
+    implements $ServerShowsUnitsCopyWith<$Res> {
+  _$ServerShowsUnitsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? units = null,
+  }) {
+    return _then(_value.copyWith(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      units: null == units
+          ? _value.units
+          : units // ignore: cast_nullable_to_non_nullable
+              as List<UnitModel>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ServerShowsUnitsImplCopyWith<$Res>
+    implements $ServerShowsUnitsCopyWith<$Res> {
+  factory _$$ServerShowsUnitsImplCopyWith(_$ServerShowsUnitsImpl value,
+          $Res Function(_$ServerShowsUnitsImpl) then) =
+      __$$ServerShowsUnitsImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String eventType, List<UnitModel> units});
+}
+
+/// @nodoc
+class __$$ServerShowsUnitsImplCopyWithImpl<$Res>
+    extends _$ServerShowsUnitsCopyWithImpl<$Res, _$ServerShowsUnitsImpl>
+    implements _$$ServerShowsUnitsImplCopyWith<$Res> {
+  __$$ServerShowsUnitsImplCopyWithImpl(_$ServerShowsUnitsImpl _value,
+      $Res Function(_$ServerShowsUnitsImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? units = null,
+  }) {
+    return _then(_$ServerShowsUnitsImpl(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      units: null == units
+          ? _value._units
+          : units // ignore: cast_nullable_to_non_nullable
+              as List<UnitModel>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ServerShowsUnitsImpl
+    with DiagnosticableTreeMixin
+    implements _ServerShowsUnits {
+  const _$ServerShowsUnitsImpl(
+      {required this.eventType, required final List<UnitModel> units})
+      : _units = units;
+
+  factory _$ServerShowsUnitsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ServerShowsUnitsImplFromJson(json);
+
+  @override
+  final String eventType;
+  final List<UnitModel> _units;
+  @override
+  List<UnitModel> get units {
+    if (_units is EqualUnmodifiableListView) return _units;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_units);
+  }
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ServerShowsUnits(eventType: $eventType, units: $units)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ServerShowsUnits'))
+      ..add(DiagnosticsProperty('eventType', eventType))
+      ..add(DiagnosticsProperty('units', units));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ServerShowsUnitsImpl &&
+            (identical(other.eventType, eventType) ||
+                other.eventType == eventType) &&
+            const DeepCollectionEquality().equals(other._units, _units));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, eventType, const DeepCollectionEquality().hash(_units));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ServerShowsUnitsImplCopyWith<_$ServerShowsUnitsImpl> get copyWith =>
+      __$$ServerShowsUnitsImplCopyWithImpl<_$ServerShowsUnitsImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ServerShowsUnitsImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ServerShowsUnits implements ServerShowsUnits {
+  const factory _ServerShowsUnits(
+      {required final String eventType,
+      required final List<UnitModel> units}) = _$ServerShowsUnitsImpl;
+
+  factory _ServerShowsUnits.fromJson(Map<String, dynamic> json) =
+      _$ServerShowsUnitsImpl.fromJson;
+
+  @override
+  String get eventType;
+  @override
+  List<UnitModel> get units;
+  @override
+  @JsonKey(ignore: true)
+  _$$ServerShowsUnitsImplCopyWith<_$ServerShowsUnitsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

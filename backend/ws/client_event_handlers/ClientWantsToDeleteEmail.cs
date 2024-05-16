@@ -27,7 +27,7 @@ public class ClientWantsToDeleteEmail : BaseEventHandler<ClientWantsToDeleteEmai
         StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
         int emailId = dto.EmailModel.id;
         
-        _emailService.deleteEmail(emailId);
+        _emailService.DeleteEmail(emailId);
         var deleteEmail = new ResponseDto()
         {
             MessageToClient = "Email has been successfully deleted"
