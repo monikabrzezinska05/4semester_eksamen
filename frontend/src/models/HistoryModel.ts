@@ -1,9 +1,12 @@
+import {Unit} from "./Unit";
+
 export interface HistoryModel {
   historyId?: number;
-  userId: number;
+  unit: Unit;
+  personName: String;
   unitId: number;
   date: Date;
-  EventType: EventType;
+  eventType: EventType;
 }
 
 export enum EventType{

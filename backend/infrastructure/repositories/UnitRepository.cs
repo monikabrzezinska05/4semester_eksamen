@@ -71,4 +71,14 @@ public class UnitRepository
             return conn.Query<Unit>(sql, new { @status, @type }).ToList();
         }
     }
+
+    public List<Unit> getUnitsById(List<int> unitIds)
+    {
+        string sql = "SELECT * FROM unit WHERE unitid IN @values;";
+        
+        using (var conn = _dataSource.OpenConnection())
+        {
+            return conn.Query<Unit>(sql, new[] {unitIds}).ToList();
+        }
+    }
 }
