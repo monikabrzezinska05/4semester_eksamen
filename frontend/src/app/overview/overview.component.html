@@ -1,16 +1,15 @@
 <div class="header">
-  <div style="height: 50px; width: 50px">
-  </div>
-  <div style="height: 50px; width: 50px">
-  </div>
+  <p class="headline">{{ unitTypeName }}</p>
+  <div class="status-circle" [style.border-color]="getAllStatusColor()"></div>
 </div>
 <hr>
-<div *ngFor="let unit of listOfUnits">
-  <div class="body">
-    <div style="height: 50px; width: 50px">
-      <p>{{unit}}</p>
-    </div>
-    <div style="height: 50px; width: 50px">
+<ng-container *ngFor="let unit of units$ | async">
+  <div>
+    <div class="body">
+      <div style="height: 30px; width: 50px">
+        <p>{{ unit.name }}</p>
+      </div>
+      <div class="status-circle" [style.border-color]="getStatusColor(unit)"></div>
     </div>
   </div>
-</div>
+</ng-container>
