@@ -1,8 +1,8 @@
 using System.Text.Json;
+using infrastructure.models;
 using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Formatter;
-using Newtonsoft.Json;
 using service.mqtt_dto;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
@@ -10,6 +10,13 @@ namespace service;
 
 public class MQTTSubscribeService
 {
+    private readonly HistoryService _historyService;
+
+    public MQTTSubscribeService(HistoryService historyService)
+    {
+        _historyService = historyService;
+    }
+
     public async Task CommunicateWithBroker()
     {
         var mqttFactory = new MqttFactory();
@@ -40,19 +47,17 @@ public class MQTTSubscribeService
             try
             {
                 //Få beskeden.
-                var message = JsonSerializer.Serialize(receivedMessage.ApplicationMessage.ConvertPayloadToString());
-          //    var message = "{\n    \"eventType\": \"ClientClosesWindowDoor\",\n    \"historyModel\" : {\n        \"userEmail\": \"boobie@email.dk\",\n        \"unitId\" : 1,\n        \"date\" : \"2024-04-30\",\n        \"eventTypeId\" : 1\n    }\n}";
+                var message = receivedMessage.ApplicationMessage.ConvertPayloadToString();
                 Console.WriteLine(message);
-        
+                var deserialized = JsonSerializer.Deserialize<Root>(message);
+                //Console.WriteLine(JsonSerializer.Serialize(deserialized));
+                Console.WriteLine(deserialized.eventType);
+                switch (deserialized.eventType)
+                {
+                    case "ClientOpensWindowDoor" : 
+                }
 
-             //   var str ="{\n    \"eventType\": \"ClientClosesWindowDoor\",\n    \"historyModel\" : {\n        \"userEmail\": \"boobie@email.dk\",\n        \"unitId\" : 1,\n        \"date\" : \"2024-04-30\",\n        \"eventTypeId\" : 1\n    }\n}";
-            
-                var deMessage = JsonConvert.DeserializeObject<Root>(message);
 
-            //    var deMessage = JsonSerializer.Deserialize<Root>(JSONresult);
-                Console.WriteLine("Message: " + deMessage.eventType);
-                Console.WriteLine("Received message: " + receivedMessage.ApplicationMessage.ConvertPayloadToString());
-                Console.WriteLine("Application message test 2: " + receivedMessage.ApplicationMessage.Topic);
             }
             catch (Exception exc)
             {
@@ -63,7 +68,7 @@ public class MQTTSubscribeService
 
             return Task.CompletedTask;
         };
-
+        
     }
 }
 

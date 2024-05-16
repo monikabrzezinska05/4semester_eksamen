@@ -1,6 +1,4 @@
-using System.Net.Sockets;
 using System.Reflection;
-using System.Text.Json;
 using Fleck;
 using infrastructure;
 using infrastructure.repositories;
@@ -21,6 +19,8 @@ public static class Startup
     public static void Statup(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        
+        builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 
         builder.Services.AddNpgsqlDataSource(Utilities.connectionString,
             dataSourceBuilder => dataSourceBuilder.EnableParameterLogging());
