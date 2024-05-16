@@ -36,4 +36,9 @@ public class UnitService
     {
         return _unitRepository.SetAllWindowDoorStatus(status);
     }
+
+    public List<Unit> getUnitsById(List<int> unitIds)
+    {
+        return _unitRepository.getUnitsById(unitIds);
+    }
 }

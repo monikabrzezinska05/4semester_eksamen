@@ -4,6 +4,7 @@ import {Status, Unit, UnitType} from "../../models/Unit";
 import {State} from "../../services/state.service";
 import {map, Observable} from "rxjs";
 
+
 @Component({
   selector: 'app-overview',
   standalone: true,
@@ -17,8 +18,8 @@ export class OverviewComponent implements OnInit {
   unitTypeName!: string;
   units$?: Observable<Unit[]>;
 
-  constructor(public state: State) {
-  }
+
+  constructor(public state: State) {}
 
   ngOnInit(): void {
     this.units$ = this.getUnitsObservable(this.unitType);

@@ -30,16 +30,14 @@ public class ClientWantsToSeeHistory : BaseEventHandler<ClientWantsToSeeHistoryD
         {
             ResponseData = theCompleteHistory
         };
-        var option = new JsonSerializerOptions()
+        
+        var historyToClient = JsonSerializer.Serialize(new ServerShowsHistory()
         {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-        };
-        var response = JsonSerializer.Serialize(new ServerShowsHistory()
-        {
-            HistoryList = theCompleteHistory
-        }, option);
-        var historyToClient = JsonSerializer.Serialize(response);
-        socket.Send(response);
+            ResponseDto = history
+        }, StateService.JsonOptions());
+        
+        socket.Send(historyToClient);
+
         return Task.CompletedTask;
     }
 }

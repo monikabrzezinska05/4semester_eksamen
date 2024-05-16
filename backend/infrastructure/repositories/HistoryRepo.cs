@@ -26,31 +26,20 @@ public class HistoryRepo
         }
         else
         {
-            sql =
-                "SELECT historyid, unitid, \"User\".name, eventtype, date\n" +
-                "FROM history\n" +
-                "LEFT JOIN public.\"User\" on \"User\".mail = history.useremail";
+            sql = "SELECT historyid, " +
+                  "json_agg(json_build_object('unitid', u.unitid, 'name', u.name, 'unittype', u.unittype, 'status', u.status)) as \"UnitTable\", " +
+                  "\"User\".name, " +
+                  "eventtype, " +
+                  "date " +
+                  "FROM history " +
+                  "JOIN public.unit u on u.unitid = history.unitid " +
+                  "LEFT JOIN public.\"User\" on \"User\".mail = history.useremail " +
+                  "group by historyid, \"User\".name, eventtype, date";
         }
 
         using (var conn = _dataSource.OpenConnection())
         {
-            List<HistoryModel> historyModels = conn.Query<HistoryModel>(sql).ToList();
-            
-            List<int> unitIds = historyModels.Select(historyModel => historyModel.UnitId).ToList();
-            
-            var unitIdParameters = new DynamicParameters();
-            foreach (var unitId in unitIds)
-            {
-                unitIdParameters.Add($"{unitId}", unitId);
-            }
-            List<Unit> units = conn.Query<Unit>(sqlGetUnit, unitIdParameters).ToList();
-            
-            foreach (var historyModel in historyModels)
-            {
-                historyModel.Unit = units.Find(unit => unit.UnitId == historyModel.UnitId);
-            }
-
-            return historyModels;
+            return conn.Query<HistoryModel>(sql).ToList();
         }
     }
 
