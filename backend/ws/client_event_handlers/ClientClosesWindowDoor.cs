@@ -4,6 +4,7 @@ using Fleck;
 using infrastructure.models;
 using lib;
 using service;
+using ws.transfer_models.server_models;
 
 namespace ws;
 
@@ -23,13 +24,17 @@ public class ClientClosesWindowDoor : BaseEventHandler<ClientClosesWindowDoorDto
     
     public override Task Handle(ClientClosesWindowDoorDto dto, IWebSocketConnection socket)
     {
+        StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.HistoryModel);
         var windowDoorHistory = new ResponseDto()
         {
             ResponseData = loggedEvent
         };
-        var windowdoorHistoryToClient = JsonSerializer.Serialize(windowDoorHistory);
-        socket.Send(windowdoorHistoryToClient);
+        var windowDoorHistoryToClient = JsonSerializer.Serialize(new ServerClosesWindowDoor()
+        {
+            ResponseDto = windowDoorHistory
+        });
+        socket.Send(windowDoorHistoryToClient);
         return Task.CompletedTask;
     }
 }

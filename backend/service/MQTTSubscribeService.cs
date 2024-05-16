@@ -3,9 +3,9 @@ using MQTTnet.Client;
 using MQTTnet.Formatter;
 using Newtonsoft.Json;
 
-namespace service;
+namespace service;  
 
-public class MQTTService
+public class MQTTSubscribeService
 {
     public async Task CommunicateWithBroker()
     {
