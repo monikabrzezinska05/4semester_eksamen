@@ -1,8 +1,6 @@
-<div class="mainDiv">
-  <div class="filters">
-  </div>
-  <div *ngFor="let historyItem of History$ | async">
-    <div class="historyElement">
-      <p>{{historyItem.eventTypeId}}</p>
-    </div>
+<header>
+  <h1>History</h1>
+</header>
+<div *ngFor="let historyItem of History$ | async">
+  <h2>{{  }}</h2>
 </div>

@@ -117,6 +117,10 @@ export class State {
     return this.units$.pipe(map((units) => units.filter((unit) => unit.unitTypeId === UnitType.MotionSensor)));
   }
 
+  public getUnitById(unitId: number): Observable<Unit> {
+    return this.units$.pipe(map((units) => units.filter((unit) => unit.unitId === unitId)[0]));
+  }
+
   public AuthenticateWithJwt() {
     var dto = {
       eventType: "ClientAuthenticateWithJwt",

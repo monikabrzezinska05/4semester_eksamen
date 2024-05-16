@@ -3,6 +3,7 @@ import {CommonModule} from "@angular/common";
 import { HistoryModel } from "../../models/HistoryModel";
 import { Observable } from "rxjs";
 import {State} from "../../services/state.service";
+import {Unit} from "../../models/Unit";
 
 @Component({
   selector: 'app-historyview',

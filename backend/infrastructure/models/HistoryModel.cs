@@ -8,13 +8,3 @@ public class HistoryModel
     public DateTime Date { get; set; }
     public EventType EventTypeId { get; set; }
 }
-
-public enum EventType
-{
-    Open,
-    Close,
-    AlarmTriggered,
-    AlarmStopped,
-    AlarmArmed,
-    AlarmDisarmed,
-}
