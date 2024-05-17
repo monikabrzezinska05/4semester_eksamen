@@ -10,16 +10,15 @@ _$ClientWantsToLoginImpl _$$ClientWantsToLoginImplFromJson(
         Map<String, dynamic> json) =>
     _$ClientWantsToLoginImpl(
       eventType: json['eventType'] as String,
-      email: json['email'] as String,
-      password: json['password'] as String,
+      userLogin:
+          UserLoginModel.fromJson(json['userLogin'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$ClientWantsToLoginImplToJson(
         _$ClientWantsToLoginImpl instance) =>
     <String, dynamic>{
       'eventType': instance.eventType,
-      'email': instance.email,
-      'password': instance.password,
+      'userLogin': instance.userLogin,
     };
 
 _$ClientWantsToSeeUnitsImpl _$$ClientWantsToSeeUnitsImplFromJson(
@@ -58,20 +57,78 @@ Map<String, dynamic> _$$ClientWantsToSeeEmailsImplToJson(
       'eventType': instance.eventType,
     };
 
-_$ServerShowsEmailListImpl _$$ServerShowsEmailListImplFromJson(
+_$ClientWantsToCreateEmailImpl _$$ClientWantsToCreateEmailImplFromJson(
         Map<String, dynamic> json) =>
-    _$ServerShowsEmailListImpl(
+    _$ClientWantsToCreateEmailImpl(
+      eventType: json['eventType'] as String,
+      email: json['email'] as String,
+    );
+
+Map<String, dynamic> _$$ClientWantsToCreateEmailImplToJson(
+        _$ClientWantsToCreateEmailImpl instance) =>
+    <String, dynamic>{
+      'eventType': instance.eventType,
+      'email': instance.email,
+    };
+
+_$ClientWantsToDeleteEmailImpl _$$ClientWantsToDeleteEmailImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ClientWantsToDeleteEmailImpl(
+      eventType: json['eventType'] as String,
+      emailId: (json['emailId'] as num).toInt(),
+    );
+
+Map<String, dynamic> _$$ClientWantsToDeleteEmailImplToJson(
+        _$ClientWantsToDeleteEmailImpl instance) =>
+    <String, dynamic>{
+      'eventType': instance.eventType,
+      'emailId': instance.emailId,
+    };
+
+_$ServerShowsEmailsImpl _$$ServerShowsEmailsImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ServerShowsEmailsImpl(
       eventType: json['eventType'] as String,
       emails: (json['emails'] as List<dynamic>)
           .map((e) => EmailModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$$ServerShowsEmailListImplToJson(
-        _$ServerShowsEmailListImpl instance) =>
+Map<String, dynamic> _$$ServerShowsEmailsImplToJson(
+        _$ServerShowsEmailsImpl instance) =>
     <String, dynamic>{
       'eventType': instance.eventType,
       'emails': instance.emails,
+    };
+
+_$ServerCreatesEmailImpl _$$ServerCreatesEmailImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ServerCreatesEmailImpl(
+      eventType: json['eventType'] as String,
+      email: EmailModel.fromJson(json['email'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$ServerCreatesEmailImplToJson(
+        _$ServerCreatesEmailImpl instance) =>
+    <String, dynamic>{
+      'eventType': instance.eventType,
+      'email': instance.email,
+    };
+
+_$ServerDeletesEmailImpl _$$ServerDeletesEmailImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ServerDeletesEmailImpl(
+      eventType: json['eventType'] as String,
+      success: json['success'] as bool,
+      emailId: (json['emailId'] as num).toInt(),
+    );
+
+Map<String, dynamic> _$$ServerDeletesEmailImplToJson(
+        _$ServerDeletesEmailImpl instance) =>
+    <String, dynamic>{
+      'eventType': instance.eventType,
+      'success': instance.success,
+      'emailId': instance.emailId,
     };
 
 _$ServerShowsHistoryImpl _$$ServerShowsHistoryImplFromJson(

@@ -46,9 +46,9 @@ Best Regards, Securty Home Security"
         return _emailRepository.getMails();
     }
 
-    public EmailModel CreateEmail(EmailModel model)
+    public EmailModel CreateEmail(string mail)
     {
-        return _emailRepository.createEmail(model);
+        return _emailRepository.createEmail(mail);
     }
 
     public bool DeleteEmail(int? id)

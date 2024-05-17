@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mob_dev/email_list_bloc/email_list_cubit.dart';
 import 'package:mob_dev/history_page.dart';
 import 'package:mob_dev/home_bloc/home_cubit.dart';
+import 'package:mob_dev/login_page.dart';
 import 'package:mob_dev/settings_page.dart';
 import 'package:provider/provider.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -52,7 +53,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(
                 seedColor: Colors.deepPurple, brightness: Brightness.dark)),
         themeMode: themeMode,
-        home: MainPage(),
+        home: LoginPage(),
       ),
     );
   }

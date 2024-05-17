@@ -21,8 +21,7 @@ ClientWantsToLogin _$ClientWantsToLoginFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ClientWantsToLogin {
   String get eventType => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
-  String get password => throw _privateConstructorUsedError;
+  UserLoginModel get userLogin => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +35,9 @@ abstract class $ClientWantsToLoginCopyWith<$Res> {
           ClientWantsToLogin value, $Res Function(ClientWantsToLogin) then) =
       _$ClientWantsToLoginCopyWithImpl<$Res, ClientWantsToLogin>;
   @useResult
-  $Res call({String eventType, String email, String password});
+  $Res call({String eventType, UserLoginModel userLogin});
+
+  $UserLoginModelCopyWith<$Res> get userLogin;
 }
 
 /// @nodoc
@@ -53,23 +54,26 @@ class _$ClientWantsToLoginCopyWithImpl<$Res, $Val extends ClientWantsToLogin>
   @override
   $Res call({
     Object? eventType = null,
-    Object? email = null,
-    Object? password = null,
+    Object? userLogin = null,
   }) {
     return _then(_value.copyWith(
       eventType: null == eventType
           ? _value.eventType
           : eventType // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
+      userLogin: null == userLogin
+          ? _value.userLogin
+          : userLogin // ignore: cast_nullable_to_non_nullable
+              as UserLoginModel,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserLoginModelCopyWith<$Res> get userLogin {
+    return $UserLoginModelCopyWith<$Res>(_value.userLogin, (value) {
+      return _then(_value.copyWith(userLogin: value) as $Val);
+    });
   }
 }
 
@@ -81,7 +85,10 @@ abstract class _$$ClientWantsToLoginImplCopyWith<$Res>
       __$$ClientWantsToLoginImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String eventType, String email, String password});
+  $Res call({String eventType, UserLoginModel userLogin});
+
+  @override
+  $UserLoginModelCopyWith<$Res> get userLogin;
 }
 
 /// @nodoc
@@ -96,22 +103,17 @@ class __$$ClientWantsToLoginImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? eventType = null,
-    Object? email = null,
-    Object? password = null,
+    Object? userLogin = null,
   }) {
     return _then(_$ClientWantsToLoginImpl(
       eventType: null == eventType
           ? _value.eventType
           : eventType // ignore: cast_nullable_to_non_nullable
               as String,
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
+      userLogin: null == userLogin
+          ? _value.userLogin
+          : userLogin // ignore: cast_nullable_to_non_nullable
+              as UserLoginModel,
     ));
   }
 }
@@ -122,7 +124,7 @@ class _$ClientWantsToLoginImpl
     with DiagnosticableTreeMixin
     implements _ClientWantsToLogin {
   const _$ClientWantsToLoginImpl(
-      {required this.eventType, required this.email, required this.password});
+      {required this.eventType, required this.userLogin});
 
   factory _$ClientWantsToLoginImpl.fromJson(Map<String, dynamic> json) =>
       _$$ClientWantsToLoginImplFromJson(json);
@@ -130,13 +132,11 @@ class _$ClientWantsToLoginImpl
   @override
   final String eventType;
   @override
-  final String email;
-  @override
-  final String password;
+  final UserLoginModel userLogin;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ClientWantsToLogin(eventType: $eventType, email: $email, password: $password)';
+    return 'ClientWantsToLogin(eventType: $eventType, userLogin: $userLogin)';
   }
 
   @override
@@ -145,8 +145,7 @@ class _$ClientWantsToLoginImpl
     properties
       ..add(DiagnosticsProperty('type', 'ClientWantsToLogin'))
       ..add(DiagnosticsProperty('eventType', eventType))
-      ..add(DiagnosticsProperty('email', email))
-      ..add(DiagnosticsProperty('password', password));
+      ..add(DiagnosticsProperty('userLogin', userLogin));
   }
 
   @override
@@ -156,14 +155,13 @@ class _$ClientWantsToLoginImpl
             other is _$ClientWantsToLoginImpl &&
             (identical(other.eventType, eventType) ||
                 other.eventType == eventType) &&
-            (identical(other.email, email) || other.email == email) &&
-            (identical(other.password, password) ||
-                other.password == password));
+            (identical(other.userLogin, userLogin) ||
+                other.userLogin == userLogin));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, eventType, email, password);
+  int get hashCode => Object.hash(runtimeType, eventType, userLogin);
 
   @JsonKey(ignore: true)
   @override
@@ -183,8 +181,7 @@ class _$ClientWantsToLoginImpl
 abstract class _ClientWantsToLogin implements ClientWantsToLogin {
   const factory _ClientWantsToLogin(
       {required final String eventType,
-      required final String email,
-      required final String password}) = _$ClientWantsToLoginImpl;
+      required final UserLoginModel userLogin}) = _$ClientWantsToLoginImpl;
 
   factory _ClientWantsToLogin.fromJson(Map<String, dynamic> json) =
       _$ClientWantsToLoginImpl.fromJson;
@@ -192,9 +189,7 @@ abstract class _ClientWantsToLogin implements ClientWantsToLogin {
   @override
   String get eventType;
   @override
-  String get email;
-  @override
-  String get password;
+  UserLoginModel get userLogin;
   @override
   @JsonKey(ignore: true)
   _$$ClientWantsToLoginImplCopyWith<_$ClientWantsToLoginImpl> get copyWith =>
@@ -662,35 +657,380 @@ abstract class _ClientWantsToSeeEmails implements ClientWantsToSeeEmails {
       get copyWith => throw _privateConstructorUsedError;
 }
 
-ServerShowsEmailList _$ServerShowsEmailListFromJson(Map<String, dynamic> json) {
-  return _ServerShowsEmailList.fromJson(json);
+ClientWantsToCreateEmail _$ClientWantsToCreateEmailFromJson(
+    Map<String, dynamic> json) {
+  return _ClientWantsToCreateEmail.fromJson(json);
 }
 
 /// @nodoc
-mixin _$ServerShowsEmailList {
+mixin _$ClientWantsToCreateEmail {
+  String get eventType => throw _privateConstructorUsedError;
+  String get email => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ClientWantsToCreateEmailCopyWith<ClientWantsToCreateEmail> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ClientWantsToCreateEmailCopyWith<$Res> {
+  factory $ClientWantsToCreateEmailCopyWith(ClientWantsToCreateEmail value,
+          $Res Function(ClientWantsToCreateEmail) then) =
+      _$ClientWantsToCreateEmailCopyWithImpl<$Res, ClientWantsToCreateEmail>;
+  @useResult
+  $Res call({String eventType, String email});
+}
+
+/// @nodoc
+class _$ClientWantsToCreateEmailCopyWithImpl<$Res,
+        $Val extends ClientWantsToCreateEmail>
+    implements $ClientWantsToCreateEmailCopyWith<$Res> {
+  _$ClientWantsToCreateEmailCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? email = null,
+  }) {
+    return _then(_value.copyWith(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ClientWantsToCreateEmailImplCopyWith<$Res>
+    implements $ClientWantsToCreateEmailCopyWith<$Res> {
+  factory _$$ClientWantsToCreateEmailImplCopyWith(
+          _$ClientWantsToCreateEmailImpl value,
+          $Res Function(_$ClientWantsToCreateEmailImpl) then) =
+      __$$ClientWantsToCreateEmailImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String eventType, String email});
+}
+
+/// @nodoc
+class __$$ClientWantsToCreateEmailImplCopyWithImpl<$Res>
+    extends _$ClientWantsToCreateEmailCopyWithImpl<$Res,
+        _$ClientWantsToCreateEmailImpl>
+    implements _$$ClientWantsToCreateEmailImplCopyWith<$Res> {
+  __$$ClientWantsToCreateEmailImplCopyWithImpl(
+      _$ClientWantsToCreateEmailImpl _value,
+      $Res Function(_$ClientWantsToCreateEmailImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? email = null,
+  }) {
+    return _then(_$ClientWantsToCreateEmailImpl(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ClientWantsToCreateEmailImpl
+    with DiagnosticableTreeMixin
+    implements _ClientWantsToCreateEmail {
+  const _$ClientWantsToCreateEmailImpl(
+      {required this.eventType, required this.email});
+
+  factory _$ClientWantsToCreateEmailImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ClientWantsToCreateEmailImplFromJson(json);
+
+  @override
+  final String eventType;
+  @override
+  final String email;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ClientWantsToCreateEmail(eventType: $eventType, email: $email)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ClientWantsToCreateEmail'))
+      ..add(DiagnosticsProperty('eventType', eventType))
+      ..add(DiagnosticsProperty('email', email));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ClientWantsToCreateEmailImpl &&
+            (identical(other.eventType, eventType) ||
+                other.eventType == eventType) &&
+            (identical(other.email, email) || other.email == email));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, eventType, email);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ClientWantsToCreateEmailImplCopyWith<_$ClientWantsToCreateEmailImpl>
+      get copyWith => __$$ClientWantsToCreateEmailImplCopyWithImpl<
+          _$ClientWantsToCreateEmailImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ClientWantsToCreateEmailImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ClientWantsToCreateEmail implements ClientWantsToCreateEmail {
+  const factory _ClientWantsToCreateEmail(
+      {required final String eventType,
+      required final String email}) = _$ClientWantsToCreateEmailImpl;
+
+  factory _ClientWantsToCreateEmail.fromJson(Map<String, dynamic> json) =
+      _$ClientWantsToCreateEmailImpl.fromJson;
+
+  @override
+  String get eventType;
+  @override
+  String get email;
+  @override
+  @JsonKey(ignore: true)
+  _$$ClientWantsToCreateEmailImplCopyWith<_$ClientWantsToCreateEmailImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+ClientWantsToDeleteEmail _$ClientWantsToDeleteEmailFromJson(
+    Map<String, dynamic> json) {
+  return _ClientWantsToDeleteEmail.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ClientWantsToDeleteEmail {
+  String get eventType => throw _privateConstructorUsedError;
+  int get emailId => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ClientWantsToDeleteEmailCopyWith<ClientWantsToDeleteEmail> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ClientWantsToDeleteEmailCopyWith<$Res> {
+  factory $ClientWantsToDeleteEmailCopyWith(ClientWantsToDeleteEmail value,
+          $Res Function(ClientWantsToDeleteEmail) then) =
+      _$ClientWantsToDeleteEmailCopyWithImpl<$Res, ClientWantsToDeleteEmail>;
+  @useResult
+  $Res call({String eventType, int emailId});
+}
+
+/// @nodoc
+class _$ClientWantsToDeleteEmailCopyWithImpl<$Res,
+        $Val extends ClientWantsToDeleteEmail>
+    implements $ClientWantsToDeleteEmailCopyWith<$Res> {
+  _$ClientWantsToDeleteEmailCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? emailId = null,
+  }) {
+    return _then(_value.copyWith(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      emailId: null == emailId
+          ? _value.emailId
+          : emailId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ClientWantsToDeleteEmailImplCopyWith<$Res>
+    implements $ClientWantsToDeleteEmailCopyWith<$Res> {
+  factory _$$ClientWantsToDeleteEmailImplCopyWith(
+          _$ClientWantsToDeleteEmailImpl value,
+          $Res Function(_$ClientWantsToDeleteEmailImpl) then) =
+      __$$ClientWantsToDeleteEmailImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String eventType, int emailId});
+}
+
+/// @nodoc
+class __$$ClientWantsToDeleteEmailImplCopyWithImpl<$Res>
+    extends _$ClientWantsToDeleteEmailCopyWithImpl<$Res,
+        _$ClientWantsToDeleteEmailImpl>
+    implements _$$ClientWantsToDeleteEmailImplCopyWith<$Res> {
+  __$$ClientWantsToDeleteEmailImplCopyWithImpl(
+      _$ClientWantsToDeleteEmailImpl _value,
+      $Res Function(_$ClientWantsToDeleteEmailImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? emailId = null,
+  }) {
+    return _then(_$ClientWantsToDeleteEmailImpl(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      emailId: null == emailId
+          ? _value.emailId
+          : emailId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ClientWantsToDeleteEmailImpl
+    with DiagnosticableTreeMixin
+    implements _ClientWantsToDeleteEmail {
+  const _$ClientWantsToDeleteEmailImpl(
+      {required this.eventType, required this.emailId});
+
+  factory _$ClientWantsToDeleteEmailImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ClientWantsToDeleteEmailImplFromJson(json);
+
+  @override
+  final String eventType;
+  @override
+  final int emailId;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ClientWantsToDeleteEmail(eventType: $eventType, emailId: $emailId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ClientWantsToDeleteEmail'))
+      ..add(DiagnosticsProperty('eventType', eventType))
+      ..add(DiagnosticsProperty('emailId', emailId));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ClientWantsToDeleteEmailImpl &&
+            (identical(other.eventType, eventType) ||
+                other.eventType == eventType) &&
+            (identical(other.emailId, emailId) || other.emailId == emailId));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, eventType, emailId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ClientWantsToDeleteEmailImplCopyWith<_$ClientWantsToDeleteEmailImpl>
+      get copyWith => __$$ClientWantsToDeleteEmailImplCopyWithImpl<
+          _$ClientWantsToDeleteEmailImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ClientWantsToDeleteEmailImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ClientWantsToDeleteEmail implements ClientWantsToDeleteEmail {
+  const factory _ClientWantsToDeleteEmail(
+      {required final String eventType,
+      required final int emailId}) = _$ClientWantsToDeleteEmailImpl;
+
+  factory _ClientWantsToDeleteEmail.fromJson(Map<String, dynamic> json) =
+      _$ClientWantsToDeleteEmailImpl.fromJson;
+
+  @override
+  String get eventType;
+  @override
+  int get emailId;
+  @override
+  @JsonKey(ignore: true)
+  _$$ClientWantsToDeleteEmailImplCopyWith<_$ClientWantsToDeleteEmailImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+ServerShowsEmails _$ServerShowsEmailsFromJson(Map<String, dynamic> json) {
+  return _ServerShowsEmails.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ServerShowsEmails {
   String get eventType => throw _privateConstructorUsedError;
   List<EmailModel> get emails => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ServerShowsEmailListCopyWith<ServerShowsEmailList> get copyWith =>
+  $ServerShowsEmailsCopyWith<ServerShowsEmails> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ServerShowsEmailListCopyWith<$Res> {
-  factory $ServerShowsEmailListCopyWith(ServerShowsEmailList value,
-          $Res Function(ServerShowsEmailList) then) =
-      _$ServerShowsEmailListCopyWithImpl<$Res, ServerShowsEmailList>;
+abstract class $ServerShowsEmailsCopyWith<$Res> {
+  factory $ServerShowsEmailsCopyWith(
+          ServerShowsEmails value, $Res Function(ServerShowsEmails) then) =
+      _$ServerShowsEmailsCopyWithImpl<$Res, ServerShowsEmails>;
   @useResult
   $Res call({String eventType, List<EmailModel> emails});
 }
 
 /// @nodoc
-class _$ServerShowsEmailListCopyWithImpl<$Res,
-        $Val extends ServerShowsEmailList>
-    implements $ServerShowsEmailListCopyWith<$Res> {
-  _$ServerShowsEmailListCopyWithImpl(this._value, this._then);
+class _$ServerShowsEmailsCopyWithImpl<$Res, $Val extends ServerShowsEmails>
+    implements $ServerShowsEmailsCopyWith<$Res> {
+  _$ServerShowsEmailsCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -717,22 +1057,22 @@ class _$ServerShowsEmailListCopyWithImpl<$Res,
 }
 
 /// @nodoc
-abstract class _$$ServerShowsEmailListImplCopyWith<$Res>
-    implements $ServerShowsEmailListCopyWith<$Res> {
-  factory _$$ServerShowsEmailListImplCopyWith(_$ServerShowsEmailListImpl value,
-          $Res Function(_$ServerShowsEmailListImpl) then) =
-      __$$ServerShowsEmailListImplCopyWithImpl<$Res>;
+abstract class _$$ServerShowsEmailsImplCopyWith<$Res>
+    implements $ServerShowsEmailsCopyWith<$Res> {
+  factory _$$ServerShowsEmailsImplCopyWith(_$ServerShowsEmailsImpl value,
+          $Res Function(_$ServerShowsEmailsImpl) then) =
+      __$$ServerShowsEmailsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String eventType, List<EmailModel> emails});
 }
 
 /// @nodoc
-class __$$ServerShowsEmailListImplCopyWithImpl<$Res>
-    extends _$ServerShowsEmailListCopyWithImpl<$Res, _$ServerShowsEmailListImpl>
-    implements _$$ServerShowsEmailListImplCopyWith<$Res> {
-  __$$ServerShowsEmailListImplCopyWithImpl(_$ServerShowsEmailListImpl _value,
-      $Res Function(_$ServerShowsEmailListImpl) _then)
+class __$$ServerShowsEmailsImplCopyWithImpl<$Res>
+    extends _$ServerShowsEmailsCopyWithImpl<$Res, _$ServerShowsEmailsImpl>
+    implements _$$ServerShowsEmailsImplCopyWith<$Res> {
+  __$$ServerShowsEmailsImplCopyWithImpl(_$ServerShowsEmailsImpl _value,
+      $Res Function(_$ServerShowsEmailsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -741,7 +1081,7 @@ class __$$ServerShowsEmailListImplCopyWithImpl<$Res>
     Object? eventType = null,
     Object? emails = null,
   }) {
-    return _then(_$ServerShowsEmailListImpl(
+    return _then(_$ServerShowsEmailsImpl(
       eventType: null == eventType
           ? _value.eventType
           : eventType // ignore: cast_nullable_to_non_nullable
@@ -756,15 +1096,15 @@ class __$$ServerShowsEmailListImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$ServerShowsEmailListImpl
+class _$ServerShowsEmailsImpl
     with DiagnosticableTreeMixin
-    implements _ServerShowsEmailList {
-  const _$ServerShowsEmailListImpl(
+    implements _ServerShowsEmails {
+  const _$ServerShowsEmailsImpl(
       {required this.eventType, required final List<EmailModel> emails})
       : _emails = emails;
 
-  factory _$ServerShowsEmailListImpl.fromJson(Map<String, dynamic> json) =>
-      _$$ServerShowsEmailListImplFromJson(json);
+  factory _$ServerShowsEmailsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ServerShowsEmailsImplFromJson(json);
 
   @override
   final String eventType;
@@ -778,14 +1118,14 @@ class _$ServerShowsEmailListImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ServerShowsEmailList(eventType: $eventType, emails: $emails)';
+    return 'ServerShowsEmails(eventType: $eventType, emails: $emails)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'ServerShowsEmailList'))
+      ..add(DiagnosticsProperty('type', 'ServerShowsEmails'))
       ..add(DiagnosticsProperty('eventType', eventType))
       ..add(DiagnosticsProperty('emails', emails));
   }
@@ -794,7 +1134,7 @@ class _$ServerShowsEmailListImpl
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ServerShowsEmailListImpl &&
+            other is _$ServerShowsEmailsImpl &&
             (identical(other.eventType, eventType) ||
                 other.eventType == eventType) &&
             const DeepCollectionEquality().equals(other._emails, _emails));
@@ -808,26 +1148,25 @@ class _$ServerShowsEmailListImpl
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ServerShowsEmailListImplCopyWith<_$ServerShowsEmailListImpl>
-      get copyWith =>
-          __$$ServerShowsEmailListImplCopyWithImpl<_$ServerShowsEmailListImpl>(
-              this, _$identity);
+  _$$ServerShowsEmailsImplCopyWith<_$ServerShowsEmailsImpl> get copyWith =>
+      __$$ServerShowsEmailsImplCopyWithImpl<_$ServerShowsEmailsImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ServerShowsEmailListImplToJson(
+    return _$$ServerShowsEmailsImplToJson(
       this,
     );
   }
 }
 
-abstract class _ServerShowsEmailList implements ServerShowsEmailList {
-  const factory _ServerShowsEmailList(
+abstract class _ServerShowsEmails implements ServerShowsEmails {
+  const factory _ServerShowsEmails(
       {required final String eventType,
-      required final List<EmailModel> emails}) = _$ServerShowsEmailListImpl;
+      required final List<EmailModel> emails}) = _$ServerShowsEmailsImpl;
 
-  factory _ServerShowsEmailList.fromJson(Map<String, dynamic> json) =
-      _$ServerShowsEmailListImpl.fromJson;
+  factory _ServerShowsEmails.fromJson(Map<String, dynamic> json) =
+      _$ServerShowsEmailsImpl.fromJson;
 
   @override
   String get eventType;
@@ -835,8 +1174,375 @@ abstract class _ServerShowsEmailList implements ServerShowsEmailList {
   List<EmailModel> get emails;
   @override
   @JsonKey(ignore: true)
-  _$$ServerShowsEmailListImplCopyWith<_$ServerShowsEmailListImpl>
-      get copyWith => throw _privateConstructorUsedError;
+  _$$ServerShowsEmailsImplCopyWith<_$ServerShowsEmailsImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ServerCreatesEmail _$ServerCreatesEmailFromJson(Map<String, dynamic> json) {
+  return _ServerCreatesEmail.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ServerCreatesEmail {
+  String get eventType => throw _privateConstructorUsedError;
+  EmailModel get email => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ServerCreatesEmailCopyWith<ServerCreatesEmail> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ServerCreatesEmailCopyWith<$Res> {
+  factory $ServerCreatesEmailCopyWith(
+          ServerCreatesEmail value, $Res Function(ServerCreatesEmail) then) =
+      _$ServerCreatesEmailCopyWithImpl<$Res, ServerCreatesEmail>;
+  @useResult
+  $Res call({String eventType, EmailModel email});
+
+  $EmailModelCopyWith<$Res> get email;
+}
+
+/// @nodoc
+class _$ServerCreatesEmailCopyWithImpl<$Res, $Val extends ServerCreatesEmail>
+    implements $ServerCreatesEmailCopyWith<$Res> {
+  _$ServerCreatesEmailCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? email = null,
+  }) {
+    return _then(_value.copyWith(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as EmailModel,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $EmailModelCopyWith<$Res> get email {
+    return $EmailModelCopyWith<$Res>(_value.email, (value) {
+      return _then(_value.copyWith(email: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$ServerCreatesEmailImplCopyWith<$Res>
+    implements $ServerCreatesEmailCopyWith<$Res> {
+  factory _$$ServerCreatesEmailImplCopyWith(_$ServerCreatesEmailImpl value,
+          $Res Function(_$ServerCreatesEmailImpl) then) =
+      __$$ServerCreatesEmailImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String eventType, EmailModel email});
+
+  @override
+  $EmailModelCopyWith<$Res> get email;
+}
+
+/// @nodoc
+class __$$ServerCreatesEmailImplCopyWithImpl<$Res>
+    extends _$ServerCreatesEmailCopyWithImpl<$Res, _$ServerCreatesEmailImpl>
+    implements _$$ServerCreatesEmailImplCopyWith<$Res> {
+  __$$ServerCreatesEmailImplCopyWithImpl(_$ServerCreatesEmailImpl _value,
+      $Res Function(_$ServerCreatesEmailImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? email = null,
+  }) {
+    return _then(_$ServerCreatesEmailImpl(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as EmailModel,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ServerCreatesEmailImpl
+    with DiagnosticableTreeMixin
+    implements _ServerCreatesEmail {
+  const _$ServerCreatesEmailImpl(
+      {required this.eventType, required this.email});
+
+  factory _$ServerCreatesEmailImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ServerCreatesEmailImplFromJson(json);
+
+  @override
+  final String eventType;
+  @override
+  final EmailModel email;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ServerCreatesEmail(eventType: $eventType, email: $email)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ServerCreatesEmail'))
+      ..add(DiagnosticsProperty('eventType', eventType))
+      ..add(DiagnosticsProperty('email', email));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ServerCreatesEmailImpl &&
+            (identical(other.eventType, eventType) ||
+                other.eventType == eventType) &&
+            (identical(other.email, email) || other.email == email));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, eventType, email);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ServerCreatesEmailImplCopyWith<_$ServerCreatesEmailImpl> get copyWith =>
+      __$$ServerCreatesEmailImplCopyWithImpl<_$ServerCreatesEmailImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ServerCreatesEmailImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ServerCreatesEmail implements ServerCreatesEmail {
+  const factory _ServerCreatesEmail(
+      {required final String eventType,
+      required final EmailModel email}) = _$ServerCreatesEmailImpl;
+
+  factory _ServerCreatesEmail.fromJson(Map<String, dynamic> json) =
+      _$ServerCreatesEmailImpl.fromJson;
+
+  @override
+  String get eventType;
+  @override
+  EmailModel get email;
+  @override
+  @JsonKey(ignore: true)
+  _$$ServerCreatesEmailImplCopyWith<_$ServerCreatesEmailImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ServerDeletesEmail _$ServerDeletesEmailFromJson(Map<String, dynamic> json) {
+  return _ServerDeletesEmail.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ServerDeletesEmail {
+  String get eventType => throw _privateConstructorUsedError;
+  bool get success => throw _privateConstructorUsedError;
+  int get emailId => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ServerDeletesEmailCopyWith<ServerDeletesEmail> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ServerDeletesEmailCopyWith<$Res> {
+  factory $ServerDeletesEmailCopyWith(
+          ServerDeletesEmail value, $Res Function(ServerDeletesEmail) then) =
+      _$ServerDeletesEmailCopyWithImpl<$Res, ServerDeletesEmail>;
+  @useResult
+  $Res call({String eventType, bool success, int emailId});
+}
+
+/// @nodoc
+class _$ServerDeletesEmailCopyWithImpl<$Res, $Val extends ServerDeletesEmail>
+    implements $ServerDeletesEmailCopyWith<$Res> {
+  _$ServerDeletesEmailCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? success = null,
+    Object? emailId = null,
+  }) {
+    return _then(_value.copyWith(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      success: null == success
+          ? _value.success
+          : success // ignore: cast_nullable_to_non_nullable
+              as bool,
+      emailId: null == emailId
+          ? _value.emailId
+          : emailId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ServerDeletesEmailImplCopyWith<$Res>
+    implements $ServerDeletesEmailCopyWith<$Res> {
+  factory _$$ServerDeletesEmailImplCopyWith(_$ServerDeletesEmailImpl value,
+          $Res Function(_$ServerDeletesEmailImpl) then) =
+      __$$ServerDeletesEmailImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String eventType, bool success, int emailId});
+}
+
+/// @nodoc
+class __$$ServerDeletesEmailImplCopyWithImpl<$Res>
+    extends _$ServerDeletesEmailCopyWithImpl<$Res, _$ServerDeletesEmailImpl>
+    implements _$$ServerDeletesEmailImplCopyWith<$Res> {
+  __$$ServerDeletesEmailImplCopyWithImpl(_$ServerDeletesEmailImpl _value,
+      $Res Function(_$ServerDeletesEmailImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? success = null,
+    Object? emailId = null,
+  }) {
+    return _then(_$ServerDeletesEmailImpl(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      success: null == success
+          ? _value.success
+          : success // ignore: cast_nullable_to_non_nullable
+              as bool,
+      emailId: null == emailId
+          ? _value.emailId
+          : emailId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ServerDeletesEmailImpl
+    with DiagnosticableTreeMixin
+    implements _ServerDeletesEmail {
+  const _$ServerDeletesEmailImpl(
+      {required this.eventType, required this.success, required this.emailId});
+
+  factory _$ServerDeletesEmailImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ServerDeletesEmailImplFromJson(json);
+
+  @override
+  final String eventType;
+  @override
+  final bool success;
+  @override
+  final int emailId;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ServerDeletesEmail(eventType: $eventType, success: $success, emailId: $emailId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ServerDeletesEmail'))
+      ..add(DiagnosticsProperty('eventType', eventType))
+      ..add(DiagnosticsProperty('success', success))
+      ..add(DiagnosticsProperty('emailId', emailId));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ServerDeletesEmailImpl &&
+            (identical(other.eventType, eventType) ||
+                other.eventType == eventType) &&
+            (identical(other.success, success) || other.success == success) &&
+            (identical(other.emailId, emailId) || other.emailId == emailId));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, eventType, success, emailId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ServerDeletesEmailImplCopyWith<_$ServerDeletesEmailImpl> get copyWith =>
+      __$$ServerDeletesEmailImplCopyWithImpl<_$ServerDeletesEmailImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ServerDeletesEmailImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ServerDeletesEmail implements ServerDeletesEmail {
+  const factory _ServerDeletesEmail(
+      {required final String eventType,
+      required final bool success,
+      required final int emailId}) = _$ServerDeletesEmailImpl;
+
+  factory _ServerDeletesEmail.fromJson(Map<String, dynamic> json) =
+      _$ServerDeletesEmailImpl.fromJson;
+
+  @override
+  String get eventType;
+  @override
+  bool get success;
+  @override
+  int get emailId;
+  @override
+  @JsonKey(ignore: true)
+  _$$ServerDeletesEmailImplCopyWith<_$ServerDeletesEmailImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 ServerShowsHistory _$ServerShowsHistoryFromJson(Map<String, dynamic> json) {

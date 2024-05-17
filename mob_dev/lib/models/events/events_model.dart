@@ -3,6 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:mob_dev/models/email_list/email_model.dart';
 import 'package:mob_dev/models/unit/unit_model.dart';
 import 'package:mob_dev/models/user/user_model.dart';
+import 'package:mob_dev/models/user_login/user_login_model.dart';
 
 import '../history/history_model.dart';
 
@@ -22,8 +23,7 @@ class ClientWantsToLogin extends ClientEvent with _$ClientWantsToLogin {
 
   const factory ClientWantsToLogin({
     required String eventType,
-    required String email,
-    required String password,
+    required UserLoginModel userLogin,
   }) = _ClientWantsToLogin;
 
   factory ClientWantsToLogin.fromJson(Map<String, Object?> json) =>
@@ -67,13 +67,45 @@ class ClientWantsToSeeEmails extends ClientEvent with _$ClientWantsToSeeEmails {
       _$ClientWantsToSeeEmailsFromJson(json);
 }
 
+@freezed
+class ClientWantsToCreateEmail extends ClientEvent
+    with _$ClientWantsToCreateEmail {
+  static const String name = "ClientWantsToCreateEmail";
+
+  const factory ClientWantsToCreateEmail({
+    required String eventType,
+    required String email,
+  }) = _ClientWantsToCreateEmail;
+
+  factory ClientWantsToCreateEmail.fromJson(Map<String, Object?> json) =>
+      _$ClientWantsToCreateEmailFromJson(json);
+}
+
+@freezed
+class ClientWantsToDeleteEmail extends ClientEvent
+    with _$ClientWantsToDeleteEmail {
+  static const String name = "ClientWantsToDeleteEmail";
+
+  const factory ClientWantsToDeleteEmail({
+    required String eventType,
+    required int emailId,
+  }) = _ClientWantsToDeleteEmail;
+
+  factory ClientWantsToDeleteEmail.fromJson(Map<String, Object?> json) =>
+      _$ClientWantsToDeleteEmailFromJson(json);
+}
+
 class ServerEvent extends BaseEvent {
   static ServerEvent fromJson(Map<String, Object?> json) {
     final type = json['eventType'];
     return switch (type) {
       ServerShowsHistory.name => ServerShowsHistory.fromJson(json),
       ServerShowsUnits.name => ServerShowsUnits.fromJson(json),
-      ServerShowsEmailList.name => ServerShowsEmailList.fromJson(json),
+      ServerShowsEmails.name => ServerShowsEmails.fromJson(json),
+      ServerAuthenticatesUser.name => ServerAuthenticatesUser.fromJson(json),
+      ServerShowsEmails.name => ServerShowsEmails.fromJson(json),
+      ServerCreatesEmail.name => ServerCreatesEmail.fromJson(json),
+      ServerDeletesEmail.name => ServerDeletesEmail.fromJson(json),
       _ => throw "Unknown event type: $type in $json"
     };
   }
@@ -92,16 +124,43 @@ class ServerAlarmTriggered extends ServerEvent {
 }
 
 @freezed
-class ServerShowsEmailList extends ServerEvent with _$ServerShowsEmailList {
-  static const String name = "ServerShowsEmailList";
+class ServerShowsEmails extends ServerEvent with _$ServerShowsEmails {
+  static const String name = "ServerShowsEmails";
 
-  const factory ServerShowsEmailList({
+  const factory ServerShowsEmails({
     required String eventType,
     required List<EmailModel> emails,
-  }) = _ServerShowsEmailList;
+  }) = _ServerShowsEmails;
 
-  factory ServerShowsEmailList.fromJson(Map<String, Object?> json) =>
-      _$ServerShowsEmailListFromJson(json);
+  factory ServerShowsEmails.fromJson(Map<String, Object?> json) =>
+      _$ServerShowsEmailsFromJson(json);
+}
+
+@freezed
+class ServerCreatesEmail extends ServerEvent with _$ServerCreatesEmail {
+  static const String name = "ServerCreatesEmail";
+
+  const factory ServerCreatesEmail({
+    required String eventType,
+    required EmailModel email,
+  }) = _ServerCreatesEmail;
+
+  factory ServerCreatesEmail.fromJson(Map<String, Object?> json) =>
+      _$ServerCreatesEmailFromJson(json);
+}
+
+@freezed
+class ServerDeletesEmail extends ServerEvent with _$ServerDeletesEmail {
+  static const String name = "ServerDeletesEmail";
+
+  const factory ServerDeletesEmail({
+    required String eventType,
+    required bool success,
+    required int emailId,
+  }) = _ServerDeletesEmail;
+
+  factory ServerDeletesEmail.fromJson(Map<String, Object?> json) =>
+      _$ServerDeletesEmailFromJson(json);
 }
 
 @freezed
@@ -131,7 +190,8 @@ class ServerShowsUnits extends ServerEvent with _$ServerShowsUnits {
 }
 
 @freezed
-class ServerAuthenticatesUser with _$ServerAuthenticatesUser {
+class ServerAuthenticatesUser extends ServerEvent
+    with _$ServerAuthenticatesUser {
   static const String name = "ServerAuthenticatesUser";
 
   const factory ServerAuthenticatesUser({

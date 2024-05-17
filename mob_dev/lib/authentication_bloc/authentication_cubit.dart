@@ -6,6 +6,7 @@ import 'package:mob_dev/models/user/user_model.dart';
 
 import '../main.dart';
 import '../models/events/events_model.dart';
+import '../models/user_login/user_login_model.dart';
 
 class AuthenticationCubit extends Cubit<AuthenticationState> {
   final BroadcastWsChannel wsChannel;
@@ -33,15 +34,14 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   login(String email, String password) {
     _send(ClientWantsToLogin(
       eventType: ClientWantsToLogin.name,
-      email: email,
-      password: password,
+      userLogin: UserLoginModel(email: email, password: password),
     ));
   }
 
   void _onDeAuthentication() {}
 
   void _onAuthentication(UserModel model, String jwt) {
-    emit(state.copyWith(user: model, jwt: jwt));
+    emit(state.copyWith(user: model, jwt: jwt, isAuthenticated: true));
   }
 
   _send(ClientEvent event) {

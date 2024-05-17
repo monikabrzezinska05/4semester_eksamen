@@ -22,12 +22,12 @@ public class EmailRepository
         }
     }
 
-    public EmailModel createEmail(EmailModel model)
+    public EmailModel createEmail(string mail)
     {
         const string sql = "INSERT INTO emaillist(mail) VALUES(@Mail) RETURNING *";
         using (var conn = _dataSource.OpenConnection())
         {
-            var response = conn.QueryFirst<EmailModel>(sql, new { model.mail });
+            var response = conn.QueryFirst<EmailModel>(sql, new { mail });
             return response;
         }
     }

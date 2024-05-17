@@ -9,7 +9,7 @@ namespace ws.client_event_handlers;
 
 public class ClientWantsToCreateEmailDto : BaseDto
 {
-    public EmailModel EmailModel { get; set; }
+    public string Email { get; set; }
 }
 
 public class ClientWantsToCreateEmail : BaseEventHandler<ClientWantsToCreateEmailDto>
@@ -24,7 +24,7 @@ public class ClientWantsToCreateEmail : BaseEventHandler<ClientWantsToCreateEmai
     public override Task Handle(ClientWantsToCreateEmailDto dto, IWebSocketConnection socket)
     {
         StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
-        EmailModel loggedEvent = _emailService.CreateEmail(dto.EmailModel);
+        EmailModel loggedEvent = _emailService.CreateEmail(dto.Email);
 
         var newEmailToClient = JsonSerializer.Serialize(new ServerCreatesEmail()
             {

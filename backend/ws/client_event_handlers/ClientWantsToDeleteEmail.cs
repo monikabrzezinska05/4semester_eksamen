@@ -9,7 +9,7 @@ namespace ws.client_event_handlers;
 
 public class ClientWantsToDeleteEmailDto : BaseDto
 {
-    public EmailModel EmailModel { get; set; }
+    public int EmailId { get; set; }
 }
 
 public class ClientWantsToDeleteEmail : BaseEventHandler<ClientWantsToDeleteEmailDto>
@@ -20,17 +20,20 @@ public class ClientWantsToDeleteEmail : BaseEventHandler<ClientWantsToDeleteEmai
     {
         _emailService = emailService;
     }
-    
+
     public override Task Handle(ClientWantsToDeleteEmailDto dto, IWebSocketConnection socket)
     {
         StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
-        int? emailId = dto.EmailModel.id;
-        
-        _emailService.DeleteEmail(emailId);
+        var emailDeleted = _emailService.DeleteEmail(dto.EmailId);
+
         var deleteEmailToClient = JsonSerializer.Serialize(new ServerDeletesEmail()
-        {
-            Email = dto.EmailModel
-        });
+            {
+                Success = emailDeleted,
+                EmailId = dto.EmailId
+            },
+            StateService.JsonOptions()
+        );
+
         socket.Send(deleteEmailToClient);
         return Task.CompletedTask;
     }

@@ -12,8 +12,12 @@ class EmailListCubit extends Cubit<EmailListState> {
   EmailListCubit(this.wsChannel) : super(EmailListState(allEmails: [], isLoading: true)) {
     wsChannel.stream.listen((event) {
       switch (event) {
-        case ServerShowsEmailList(eventType: _, emails: var model):
+        case ServerShowsEmails(eventType: _, emails: var model):
           _onEmailListReceived(model);
+        case ServerCreatesEmail(eventType: _, email: var model):
+          _onEmailCreated(model);
+        case ServerDeletesEmail(eventType: _, success: var model, emailId: var id):
+          _onEmailDeleted(model, id);
       }
     },  onError: (error)
     {
@@ -30,23 +34,28 @@ class EmailListCubit extends Cubit<EmailListState> {
     wsChannel.sink.add(jsonEncode( event.toJson()));
   }
 
-  //TODO - Opdater til når vi har funktionalitet til at update emails i emaillist table.
-  int _id = 0;
 
   void addEmail(String email) {
-    emit(state.copyWith(allEmails: [
-      ...state.allEmails,
-      EmailModel(id: _id++, mail: email)
-    ]));
+    _send(ClientWantsToCreateEmail(eventType: ClientWantsToCreateEmail.name, email: email));
   }
 
   void removeEmail(int id) {
-    emit(state.copyWith(
-        allEmails:
-            state.allEmails.where((emailModel) => emailModel.id != id).toList()));
+    _send(ClientWantsToDeleteEmail(eventType: ClientWantsToDeleteEmail.name, emailId: id));
   }
 
   void _onEmailListReceived(List<EmailModel> model) {
     emit(state.copyWith(allEmails: model, isLoading: false));
+  }
+
+  void _onEmailCreated(EmailModel model) {
+    emit(state.copyWith(allEmails: [...state.allEmails, model]));
+  }
+
+  void _onEmailDeleted(bool model, int id) {
+    if (model) {
+      emit(state.copyWith(
+          allEmails:
+          state.allEmails.where((emailModel) => emailModel.id != id).toList()));
+    }
   }
 }
