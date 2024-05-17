@@ -1,31 +1,33 @@
+import 'package:mob_dev/models/user/user_model.dart';
+
 class AuthenticationState {
   final bool isAuthenticated;
   final String jwt;
-  final String email;
+  final UserModel user;
 
   const AuthenticationState({
     required this.isAuthenticated,
     required this.jwt,
-    required this.email,
+    required this.user,
   });
 
   factory AuthenticationState.initial() {
     return AuthenticationState(
       isAuthenticated: false,
       jwt: '',
-      email: '',
+      user: UserModel(name: '', mail: '', isChild: false)
     );
   }
 
   AuthenticationState copyWith({
     bool? isAuthenticated,
     String? jwt,
-    String? email,
+    UserModel? user,
   }) {
     return AuthenticationState(
       isAuthenticated: isAuthenticated ?? this.isAuthenticated,
       jwt: jwt ?? this.jwt,
-      email: email ?? this.email,
+      user: user ?? this.user,
     );
   }
 }

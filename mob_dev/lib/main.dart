@@ -10,6 +10,7 @@ import 'package:mob_dev/settings_page.dart';
 import 'package:provider/provider.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
+import 'authentication_bloc/authentication_cubit.dart';
 import 'history_bloc/history_cubit.dart';
 import 'home_page.dart';
 import 'models/events/events_model.dart';
@@ -19,8 +20,10 @@ void main() async {
   final channel = WebSocketChannel.connect(wsUrl);
 
   runApp(
-    Provider<BroadcastWsChannel>(
-      create: (_) => BroadcastWsChannel(wsUrl),
+    MultiProvider(providers: [
+      Provider<BroadcastWsChannel>(create: (_) => BroadcastWsChannel(wsUrl)),
+      BlocProvider(create: (context) => AuthenticationCubit(context.read())),
+    ],
         child: const MyApp(),
       ),
   );

@@ -105,3 +105,31 @@ Map<String, dynamic> _$$ServerShowsUnitsImplToJson(
       'eventType': instance.eventType,
       'unitList': instance.unitList,
     };
+
+_$ServerAuthenticatesUserImpl _$$ServerAuthenticatesUserImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ServerAuthenticatesUserImpl(
+      eventType: json['eventType'] as String,
+      user: UserModel.fromJson(json['user'] as Map<String, dynamic>),
+      jwt: json['jwt'] as String,
+    );
+
+Map<String, dynamic> _$$ServerAuthenticatesUserImplToJson(
+        _$ServerAuthenticatesUserImpl instance) =>
+    <String, dynamic>{
+      'eventType': instance.eventType,
+      'user': instance.user,
+      'jwt': instance.jwt,
+    };
+
+_$ServerDeAuthenticatesUserImpl _$$ServerDeAuthenticatesUserImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ServerDeAuthenticatesUserImpl(
+      eventType: json['eventType'] as String,
+    );
+
+Map<String, dynamic> _$$ServerDeAuthenticatesUserImplToJson(
+        _$ServerDeAuthenticatesUserImpl instance) =>
+    <String, dynamic>{
+      'eventType': instance.eventType,
+    };

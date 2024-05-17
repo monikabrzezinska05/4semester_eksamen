@@ -2,6 +2,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mob_dev/models/email_list/email_model.dart';
 import 'package:mob_dev/models/unit/unit_model.dart';
+import 'package:mob_dev/models/user/user_model.dart';
 
 import '../history/history_model.dart';
 
@@ -127,4 +128,30 @@ class ServerShowsUnits extends ServerEvent with _$ServerShowsUnits {
 
   factory ServerShowsUnits.fromJson(Map<String, Object?> json) =>
       _$ServerShowsUnitsFromJson(json);
+}
+
+@freezed
+class ServerAuthenticatesUser with _$ServerAuthenticatesUser {
+  static const String name = "ServerAuthenticatesUser";
+
+  const factory ServerAuthenticatesUser({
+    required String eventType,
+    required UserModel user,
+    required String jwt,
+  }) = _ServerAuthenticatesUser;
+
+  factory ServerAuthenticatesUser.fromJson(Map<String, Object?> json) =>
+      _$ServerAuthenticatesUserFromJson(json);
+}
+
+@freezed
+class ServerDeAuthenticatesUser with _$ServerDeAuthenticatesUser {
+  static const String name = "ServerDeAuthenticatesUser";
+
+  const factory ServerDeAuthenticatesUser({
+    required String eventType,
+  }) = _ServerDeAuthenticatesUser;
+
+  factory ServerDeAuthenticatesUser.fromJson(Map<String, Object?> json) =>
+      _$ServerDeAuthenticatesUserFromJson(json);
 }

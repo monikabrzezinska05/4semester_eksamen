@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:mob_dev/history_bloc/history_state.dart';
 import 'package:mob_dev/main.dart';
 
+import 'authentication_bloc/authentication_cubit.dart';
 import 'history_bloc/history_cubit.dart';
 import 'models/history/history_model.dart';
 
@@ -15,6 +16,7 @@ class HistoryPage extends StatelessWidget {
     return BlocProvider<HistoryCubit>(
       create: (context) {
         final channel = context.read<BroadcastWsChannel>();
+        final authentication = context.read<AuthenticationCubit>();
         return HistoryCubit(channel)..init();
       },
       child: Scaffold(

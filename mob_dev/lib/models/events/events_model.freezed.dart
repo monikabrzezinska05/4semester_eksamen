@@ -1190,3 +1190,361 @@ abstract class _ServerShowsUnits implements ServerShowsUnits {
   _$$ServerShowsUnitsImplCopyWith<_$ServerShowsUnitsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+ServerAuthenticatesUser _$ServerAuthenticatesUserFromJson(
+    Map<String, dynamic> json) {
+  return _ServerAuthenticatesUser.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ServerAuthenticatesUser {
+  String get eventType => throw _privateConstructorUsedError;
+  UserModel get user => throw _privateConstructorUsedError;
+  String get jwt => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ServerAuthenticatesUserCopyWith<ServerAuthenticatesUser> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ServerAuthenticatesUserCopyWith<$Res> {
+  factory $ServerAuthenticatesUserCopyWith(ServerAuthenticatesUser value,
+          $Res Function(ServerAuthenticatesUser) then) =
+      _$ServerAuthenticatesUserCopyWithImpl<$Res, ServerAuthenticatesUser>;
+  @useResult
+  $Res call({String eventType, UserModel user, String jwt});
+
+  $UserModelCopyWith<$Res> get user;
+}
+
+/// @nodoc
+class _$ServerAuthenticatesUserCopyWithImpl<$Res,
+        $Val extends ServerAuthenticatesUser>
+    implements $ServerAuthenticatesUserCopyWith<$Res> {
+  _$ServerAuthenticatesUserCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? user = null,
+    Object? jwt = null,
+  }) {
+    return _then(_value.copyWith(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserModel,
+      jwt: null == jwt
+          ? _value.jwt
+          : jwt // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserModelCopyWith<$Res> get user {
+    return $UserModelCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$ServerAuthenticatesUserImplCopyWith<$Res>
+    implements $ServerAuthenticatesUserCopyWith<$Res> {
+  factory _$$ServerAuthenticatesUserImplCopyWith(
+          _$ServerAuthenticatesUserImpl value,
+          $Res Function(_$ServerAuthenticatesUserImpl) then) =
+      __$$ServerAuthenticatesUserImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String eventType, UserModel user, String jwt});
+
+  @override
+  $UserModelCopyWith<$Res> get user;
+}
+
+/// @nodoc
+class __$$ServerAuthenticatesUserImplCopyWithImpl<$Res>
+    extends _$ServerAuthenticatesUserCopyWithImpl<$Res,
+        _$ServerAuthenticatesUserImpl>
+    implements _$$ServerAuthenticatesUserImplCopyWith<$Res> {
+  __$$ServerAuthenticatesUserImplCopyWithImpl(
+      _$ServerAuthenticatesUserImpl _value,
+      $Res Function(_$ServerAuthenticatesUserImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? user = null,
+    Object? jwt = null,
+  }) {
+    return _then(_$ServerAuthenticatesUserImpl(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserModel,
+      jwt: null == jwt
+          ? _value.jwt
+          : jwt // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ServerAuthenticatesUserImpl
+    with DiagnosticableTreeMixin
+    implements _ServerAuthenticatesUser {
+  const _$ServerAuthenticatesUserImpl(
+      {required this.eventType, required this.user, required this.jwt});
+
+  factory _$ServerAuthenticatesUserImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ServerAuthenticatesUserImplFromJson(json);
+
+  @override
+  final String eventType;
+  @override
+  final UserModel user;
+  @override
+  final String jwt;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ServerAuthenticatesUser(eventType: $eventType, user: $user, jwt: $jwt)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ServerAuthenticatesUser'))
+      ..add(DiagnosticsProperty('eventType', eventType))
+      ..add(DiagnosticsProperty('user', user))
+      ..add(DiagnosticsProperty('jwt', jwt));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ServerAuthenticatesUserImpl &&
+            (identical(other.eventType, eventType) ||
+                other.eventType == eventType) &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.jwt, jwt) || other.jwt == jwt));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, eventType, user, jwt);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ServerAuthenticatesUserImplCopyWith<_$ServerAuthenticatesUserImpl>
+      get copyWith => __$$ServerAuthenticatesUserImplCopyWithImpl<
+          _$ServerAuthenticatesUserImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ServerAuthenticatesUserImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ServerAuthenticatesUser implements ServerAuthenticatesUser {
+  const factory _ServerAuthenticatesUser(
+      {required final String eventType,
+      required final UserModel user,
+      required final String jwt}) = _$ServerAuthenticatesUserImpl;
+
+  factory _ServerAuthenticatesUser.fromJson(Map<String, dynamic> json) =
+      _$ServerAuthenticatesUserImpl.fromJson;
+
+  @override
+  String get eventType;
+  @override
+  UserModel get user;
+  @override
+  String get jwt;
+  @override
+  @JsonKey(ignore: true)
+  _$$ServerAuthenticatesUserImplCopyWith<_$ServerAuthenticatesUserImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+ServerDeAuthenticatesUser _$ServerDeAuthenticatesUserFromJson(
+    Map<String, dynamic> json) {
+  return _ServerDeAuthenticatesUser.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ServerDeAuthenticatesUser {
+  String get eventType => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ServerDeAuthenticatesUserCopyWith<ServerDeAuthenticatesUser> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ServerDeAuthenticatesUserCopyWith<$Res> {
+  factory $ServerDeAuthenticatesUserCopyWith(ServerDeAuthenticatesUser value,
+          $Res Function(ServerDeAuthenticatesUser) then) =
+      _$ServerDeAuthenticatesUserCopyWithImpl<$Res, ServerDeAuthenticatesUser>;
+  @useResult
+  $Res call({String eventType});
+}
+
+/// @nodoc
+class _$ServerDeAuthenticatesUserCopyWithImpl<$Res,
+        $Val extends ServerDeAuthenticatesUser>
+    implements $ServerDeAuthenticatesUserCopyWith<$Res> {
+  _$ServerDeAuthenticatesUserCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+  }) {
+    return _then(_value.copyWith(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ServerDeAuthenticatesUserImplCopyWith<$Res>
+    implements $ServerDeAuthenticatesUserCopyWith<$Res> {
+  factory _$$ServerDeAuthenticatesUserImplCopyWith(
+          _$ServerDeAuthenticatesUserImpl value,
+          $Res Function(_$ServerDeAuthenticatesUserImpl) then) =
+      __$$ServerDeAuthenticatesUserImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String eventType});
+}
+
+/// @nodoc
+class __$$ServerDeAuthenticatesUserImplCopyWithImpl<$Res>
+    extends _$ServerDeAuthenticatesUserCopyWithImpl<$Res,
+        _$ServerDeAuthenticatesUserImpl>
+    implements _$$ServerDeAuthenticatesUserImplCopyWith<$Res> {
+  __$$ServerDeAuthenticatesUserImplCopyWithImpl(
+      _$ServerDeAuthenticatesUserImpl _value,
+      $Res Function(_$ServerDeAuthenticatesUserImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+  }) {
+    return _then(_$ServerDeAuthenticatesUserImpl(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ServerDeAuthenticatesUserImpl
+    with DiagnosticableTreeMixin
+    implements _ServerDeAuthenticatesUser {
+  const _$ServerDeAuthenticatesUserImpl({required this.eventType});
+
+  factory _$ServerDeAuthenticatesUserImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ServerDeAuthenticatesUserImplFromJson(json);
+
+  @override
+  final String eventType;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ServerDeAuthenticatesUser(eventType: $eventType)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ServerDeAuthenticatesUser'))
+      ..add(DiagnosticsProperty('eventType', eventType));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ServerDeAuthenticatesUserImpl &&
+            (identical(other.eventType, eventType) ||
+                other.eventType == eventType));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, eventType);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ServerDeAuthenticatesUserImplCopyWith<_$ServerDeAuthenticatesUserImpl>
+      get copyWith => __$$ServerDeAuthenticatesUserImplCopyWithImpl<
+          _$ServerDeAuthenticatesUserImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ServerDeAuthenticatesUserImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ServerDeAuthenticatesUser implements ServerDeAuthenticatesUser {
+  const factory _ServerDeAuthenticatesUser({required final String eventType}) =
+      _$ServerDeAuthenticatesUserImpl;
+
+  factory _ServerDeAuthenticatesUser.fromJson(Map<String, dynamic> json) =
+      _$ServerDeAuthenticatesUserImpl.fromJson;
+
+  @override
+  String get eventType;
+  @override
+  @JsonKey(ignore: true)
+  _$$ServerDeAuthenticatesUserImplCopyWith<_$ServerDeAuthenticatesUserImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
