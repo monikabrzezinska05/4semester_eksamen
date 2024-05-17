@@ -1,9 +1,9 @@
 using System.Text.Json;
-using api.transfer_models;
 using Fleck;
 using infrastructure.models;
 using lib;
 using service;
+using ws.transfer_models.server_models;
 
 namespace ws;
 
@@ -32,9 +32,9 @@ public class ClientTriggersAlarm : BaseEventHandler<ClientTriggersAlarmDto>
         _unitService.SetUnitStatus(unitId, Status.Triggered);
         Unit unit = _unitService.GetUnitById(unitId);
         _emailService.SendEmail(loggedEvent, unit);
-        var alarmTriggerDto = new ResponseDto()
-        {   
-            ResponseData = loggedEvent
+        var alarmTriggerDto = new ServerAlarmTriggered()
+        {
+            History = loggedEvent
         };
         var alarmTriggerToClient = JsonSerializer.Serialize(alarmTriggerDto);
         socket.Send(alarmTriggerToClient);

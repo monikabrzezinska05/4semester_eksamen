@@ -1,5 +1,4 @@
 using System.Text.Json;
-using api.transfer_models;
 using Fleck;
 using infrastructure.models;
 using lib;
@@ -33,13 +32,10 @@ public class ClientWantsToTurnOnAlarm : BaseEventHandler<ClientWantsToTurnOnAlar
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.historyModel);
         _unitService.SetUnitStatus(dto.historyModel.UnitId, Status.Armed);
         await _mqttPublishService.AlarmTurnOnPublish();
-        var turnOnAlarm = new ResponseDto()
-        {
-            ResponseData = loggedEvent
-        };
+        
         var turnOnAlarmToClient = JsonSerializer.Serialize(new ServerHasActivatedAlarm()
         {
-            ResponseDto = turnOnAlarm
+            historyModel = loggedEvent
         });
         await socket.Send(turnOnAlarmToClient);
     }

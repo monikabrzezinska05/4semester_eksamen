@@ -1,3 +1,4 @@
+using System.Security.Authentication;
 using System.Text.Json;
 using Fleck;
 using infrastructure.models;
@@ -22,16 +23,14 @@ public class ClientWantsToSeeHistory : BaseEventHandler<ClientWantsToSeeHistoryD
     }
     public override Task Handle(ClientWantsToSeeHistoryDto dto, IWebSocketConnection socket)
     {
-        //StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
+        StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
         List<HistoryModel> theCompleteHistory = _historyService.GetHistory(dto.TimePeriod);
-
+        
         var historyToClient = JsonSerializer.Serialize(new ServerShowsHistory()
         {
             HistoryList = theCompleteHistory
         }, StateService.JsonOptions());
-        
         socket.Send(historyToClient);
-
         return Task.CompletedTask;
     }
 }

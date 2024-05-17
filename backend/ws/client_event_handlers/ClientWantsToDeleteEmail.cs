@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using api.transfer_models;
 using Fleck;
 using infrastructure.models;
 using lib;
@@ -28,13 +27,9 @@ public class ClientWantsToDeleteEmail : BaseEventHandler<ClientWantsToDeleteEmai
         int emailId = dto.EmailModel.id;
         
         _emailService.DeleteEmail(emailId);
-        var deleteEmail = new ResponseDto()
-        {
-            MessageToClient = "Email has been successfully deleted"
-        };
         var deleteEmailToClient = JsonSerializer.Serialize(new ServerDeletesEmail()
         {
-            ResponseDto = deleteEmail
+            Email = dto.EmailModel
         });
         socket.Send(deleteEmailToClient);
         return Task.CompletedTask;

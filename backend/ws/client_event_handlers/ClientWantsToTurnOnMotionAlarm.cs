@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using api.transfer_models;
 using Fleck;
 using infrastructure.models;
 using lib;
@@ -44,13 +43,10 @@ public class ClientWantsToTurnOnMotionAlarm : BaseEventHandler<ClientWantsToTurn
             _historyService.CreateHistory(history);
         }
         await _mqttPublishService.AlarmTurnOnMotionPublish();
-        var turnOnAlarm = new ResponseDto()
-        {
-            ResponseData = loggedEvent
-        };
+        
         var turnOffAlarmToClient = JsonSerializer.Serialize(new ServerHasActivatedWindowDoorAlarm()
         {
-            ResponseDto = turnOnAlarm
+            historyModel = loggedEvent
         });
         await socket.Send(turnOffAlarmToClient);
     }

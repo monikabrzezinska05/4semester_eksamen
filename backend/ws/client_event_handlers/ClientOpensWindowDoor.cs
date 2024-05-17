@@ -1,5 +1,4 @@
 using System.Text.Json;
-using api.transfer_models;
 using Fleck;
 using infrastructure.models;
 using lib;
@@ -25,13 +24,10 @@ public class ClientOpensWindowDoor : BaseEventHandler<ClientOpensWindowDoorDto>
     {
         StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.historyModel);
-        var windowDoorHistory = new ResponseDto()
-        {
-            ResponseData = loggedEvent
-        };
+        
         var windowDoorHistoryToClient = JsonSerializer.Serialize(new ServerOpensWindowDoor()
         {
-            ResponseDto = windowDoorHistory
+            historyModel = loggedEvent
         });
         socket.Send(windowDoorHistoryToClient);
         return Task.CompletedTask;
