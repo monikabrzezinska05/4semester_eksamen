@@ -94,7 +94,7 @@ _$ServerShowsUnitsImpl _$$ServerShowsUnitsImplFromJson(
         Map<String, dynamic> json) =>
     _$ServerShowsUnitsImpl(
       eventType: json['eventType'] as String,
-      units: (json['units'] as List<dynamic>)
+      unitList: (json['unitList'] as List<dynamic>)
           .map((e) => UnitModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
@@ -103,5 +103,5 @@ Map<String, dynamic> _$$ServerShowsUnitsImplToJson(
         _$ServerShowsUnitsImpl instance) =>
     <String, dynamic>{
       'eventType': instance.eventType,
-      'units': instance.units,
+      'unitList': instance.unitList,
     };

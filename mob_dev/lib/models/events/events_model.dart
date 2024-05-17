@@ -6,6 +6,7 @@ import 'package:mob_dev/models/unit/unit_model.dart';
 import '../history/history_model.dart';
 
 part 'events_model.freezed.dart';
+
 part 'events_model.g.dart';
 
 sealed class BaseEvent {}
@@ -65,25 +66,26 @@ class ClientWantsToSeeEmails extends ClientEvent with _$ClientWantsToSeeEmails {
       _$ClientWantsToSeeEmailsFromJson(json);
 }
 
-
-
 class ServerEvent extends BaseEvent {
   static ServerEvent fromJson(Map<String, Object?> json) {
     final type = json['eventType'];
     return switch (type) {
       ServerShowsHistory.name => ServerShowsHistory.fromJson(json),
+      ServerShowsUnits.name => ServerShowsUnits.fromJson(json),
+      ServerShowsEmailList.name => ServerShowsEmailList.fromJson(json),
       _ => throw "Unknown event type: $type in $json"
     };
   }
 }
 
-class ServerAlarmTriggered extends ServerEvent  {
+class ServerAlarmTriggered extends ServerEvent {
   static const String name = "ServerAlarmTriggered";
 
   ServerAlarmTriggered({
     required this.eventType,
-    required this. historyModel,
+    required this.historyModel,
   });
+
   final String eventType;
   final HistoryModel historyModel;
 }
@@ -102,12 +104,12 @@ class ServerShowsEmailList extends ServerEvent with _$ServerShowsEmailList {
 }
 
 @freezed
-class ServerShowsHistory extends ServerEvent  with _$ServerShowsHistory{
+class ServerShowsHistory extends ServerEvent with _$ServerShowsHistory {
   static const String name = "ServerShowsHistory";
 
   const factory ServerShowsHistory({
     required String eventType,
-    required  List<HistoryModel> historyList,
+    required List<HistoryModel> historyList,
   }) = _ServerShowsHistory;
 
   factory ServerShowsHistory.fromJson(Map<String, Object?> json) =>
@@ -118,9 +120,9 @@ class ServerShowsHistory extends ServerEvent  with _$ServerShowsHistory{
 class ServerShowsUnits extends ServerEvent with _$ServerShowsUnits {
   static const String name = "ServerShowsUnits";
 
- const factory ServerShowsUnits({
+  const factory ServerShowsUnits({
     required String eventType,
-    required List<UnitModel> units,
+    required List<UnitModel> unitList,
   }) = _ServerShowsUnits;
 
   factory ServerShowsUnits.fromJson(Map<String, Object?> json) =>

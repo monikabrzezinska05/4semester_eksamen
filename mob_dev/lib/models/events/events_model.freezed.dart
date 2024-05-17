@@ -1023,7 +1023,7 @@ ServerShowsUnits _$ServerShowsUnitsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ServerShowsUnits {
   String get eventType => throw _privateConstructorUsedError;
-  List<UnitModel> get units => throw _privateConstructorUsedError;
+  List<UnitModel> get unitList => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -1037,7 +1037,7 @@ abstract class $ServerShowsUnitsCopyWith<$Res> {
           ServerShowsUnits value, $Res Function(ServerShowsUnits) then) =
       _$ServerShowsUnitsCopyWithImpl<$Res, ServerShowsUnits>;
   @useResult
-  $Res call({String eventType, List<UnitModel> units});
+  $Res call({String eventType, List<UnitModel> unitList});
 }
 
 /// @nodoc
@@ -1054,16 +1054,16 @@ class _$ServerShowsUnitsCopyWithImpl<$Res, $Val extends ServerShowsUnits>
   @override
   $Res call({
     Object? eventType = null,
-    Object? units = null,
+    Object? unitList = null,
   }) {
     return _then(_value.copyWith(
       eventType: null == eventType
           ? _value.eventType
           : eventType // ignore: cast_nullable_to_non_nullable
               as String,
-      units: null == units
-          ? _value.units
-          : units // ignore: cast_nullable_to_non_nullable
+      unitList: null == unitList
+          ? _value.unitList
+          : unitList // ignore: cast_nullable_to_non_nullable
               as List<UnitModel>,
     ) as $Val);
   }
@@ -1077,7 +1077,7 @@ abstract class _$$ServerShowsUnitsImplCopyWith<$Res>
       __$$ServerShowsUnitsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String eventType, List<UnitModel> units});
+  $Res call({String eventType, List<UnitModel> unitList});
 }
 
 /// @nodoc
@@ -1092,16 +1092,16 @@ class __$$ServerShowsUnitsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? eventType = null,
-    Object? units = null,
+    Object? unitList = null,
   }) {
     return _then(_$ServerShowsUnitsImpl(
       eventType: null == eventType
           ? _value.eventType
           : eventType // ignore: cast_nullable_to_non_nullable
               as String,
-      units: null == units
-          ? _value._units
-          : units // ignore: cast_nullable_to_non_nullable
+      unitList: null == unitList
+          ? _value._unitList
+          : unitList // ignore: cast_nullable_to_non_nullable
               as List<UnitModel>,
     ));
   }
@@ -1113,25 +1113,25 @@ class _$ServerShowsUnitsImpl
     with DiagnosticableTreeMixin
     implements _ServerShowsUnits {
   const _$ServerShowsUnitsImpl(
-      {required this.eventType, required final List<UnitModel> units})
-      : _units = units;
+      {required this.eventType, required final List<UnitModel> unitList})
+      : _unitList = unitList;
 
   factory _$ServerShowsUnitsImpl.fromJson(Map<String, dynamic> json) =>
       _$$ServerShowsUnitsImplFromJson(json);
 
   @override
   final String eventType;
-  final List<UnitModel> _units;
+  final List<UnitModel> _unitList;
   @override
-  List<UnitModel> get units {
-    if (_units is EqualUnmodifiableListView) return _units;
+  List<UnitModel> get unitList {
+    if (_unitList is EqualUnmodifiableListView) return _unitList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_units);
+    return EqualUnmodifiableListView(_unitList);
   }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ServerShowsUnits(eventType: $eventType, units: $units)';
+    return 'ServerShowsUnits(eventType: $eventType, unitList: $unitList)';
   }
 
   @override
@@ -1140,7 +1140,7 @@ class _$ServerShowsUnitsImpl
     properties
       ..add(DiagnosticsProperty('type', 'ServerShowsUnits'))
       ..add(DiagnosticsProperty('eventType', eventType))
-      ..add(DiagnosticsProperty('units', units));
+      ..add(DiagnosticsProperty('unitList', unitList));
   }
 
   @override
@@ -1150,13 +1150,13 @@ class _$ServerShowsUnitsImpl
             other is _$ServerShowsUnitsImpl &&
             (identical(other.eventType, eventType) ||
                 other.eventType == eventType) &&
-            const DeepCollectionEquality().equals(other._units, _units));
+            const DeepCollectionEquality().equals(other._unitList, _unitList));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, eventType, const DeepCollectionEquality().hash(_units));
+      runtimeType, eventType, const DeepCollectionEquality().hash(_unitList));
 
   @JsonKey(ignore: true)
   @override
@@ -1176,7 +1176,7 @@ class _$ServerShowsUnitsImpl
 abstract class _ServerShowsUnits implements ServerShowsUnits {
   const factory _ServerShowsUnits(
       {required final String eventType,
-      required final List<UnitModel> units}) = _$ServerShowsUnitsImpl;
+      required final List<UnitModel> unitList}) = _$ServerShowsUnitsImpl;
 
   factory _ServerShowsUnits.fromJson(Map<String, dynamic> json) =
       _$ServerShowsUnitsImpl.fromJson;
@@ -1184,7 +1184,7 @@ abstract class _ServerShowsUnits implements ServerShowsUnits {
   @override
   String get eventType;
   @override
-  List<UnitModel> get units;
+  List<UnitModel> get unitList;
   @override
   @JsonKey(ignore: true)
   _$$ServerShowsUnitsImplCopyWith<_$ServerShowsUnitsImpl> get copyWith =>

@@ -1,7 +1,7 @@
 import 'package:mob_dev/models/unit/unit_model.dart';
 
 class HomeState {
-  final Map<String, List<UnitModel>> units;
+  final Map<UnitType, List<UnitModel>> units;
   final bool isLoading;
 
   const HomeState({
@@ -10,7 +10,8 @@ class HomeState {
   });
 
   copyWith({
-    Map<String, List<UnitModel>>? units,
+    Map<UnitType, List<UnitModel>>? units,
+    List<UnitModel>? allUnits,
     bool? isLoading,
   }) {
     return HomeState(
