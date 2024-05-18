@@ -17,6 +17,8 @@ class HistoryCubit extends Cubit<HistoryState> {
             print(model);
         case ServerShowsHistory(eventType: _, historyList: var model):
             _onHistoryReceived(model);
+          case ServerClosesWindowDoor(history: var model, unit: _):
+            _onUnitClosed(model);
       }
     },  onError: (error)
     {
@@ -94,7 +96,10 @@ class HistoryCubit extends Cubit<HistoryState> {
   void _onHistoryReceived(List<HistoryModel> model) {
     emit(state.copyWith(allHistory: model, shownHistory: model, isLoading: false));
   }
-}
 
-class ClientShowsHistory {
+  void _onUnitClosed(HistoryModel model) {
+    List<HistoryModel> historyList = List.from(state.allHistory);
+    historyList.add(model);
+    emit(state.copyWith(allHistory: historyList));
+  }
 }

@@ -2254,3 +2254,199 @@ abstract class _ServerDeAuthenticatesUser implements ServerDeAuthenticatesUser {
   _$$ServerDeAuthenticatesUserImplCopyWith<_$ServerDeAuthenticatesUserImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
+
+ServerClosesWindowDoor _$ServerClosesWindowDoorFromJson(
+    Map<String, dynamic> json) {
+  return _ServerClosesWindowDoor.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ServerClosesWindowDoor {
+  HistoryModel get history => throw _privateConstructorUsedError;
+  UnitModel get unit => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ServerClosesWindowDoorCopyWith<ServerClosesWindowDoor> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ServerClosesWindowDoorCopyWith<$Res> {
+  factory $ServerClosesWindowDoorCopyWith(ServerClosesWindowDoor value,
+          $Res Function(ServerClosesWindowDoor) then) =
+      _$ServerClosesWindowDoorCopyWithImpl<$Res, ServerClosesWindowDoor>;
+  @useResult
+  $Res call({HistoryModel history, UnitModel unit});
+
+  $HistoryModelCopyWith<$Res> get history;
+  $UnitModelCopyWith<$Res> get unit;
+}
+
+/// @nodoc
+class _$ServerClosesWindowDoorCopyWithImpl<$Res,
+        $Val extends ServerClosesWindowDoor>
+    implements $ServerClosesWindowDoorCopyWith<$Res> {
+  _$ServerClosesWindowDoorCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? history = null,
+    Object? unit = null,
+  }) {
+    return _then(_value.copyWith(
+      history: null == history
+          ? _value.history
+          : history // ignore: cast_nullable_to_non_nullable
+              as HistoryModel,
+      unit: null == unit
+          ? _value.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as UnitModel,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $HistoryModelCopyWith<$Res> get history {
+    return $HistoryModelCopyWith<$Res>(_value.history, (value) {
+      return _then(_value.copyWith(history: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UnitModelCopyWith<$Res> get unit {
+    return $UnitModelCopyWith<$Res>(_value.unit, (value) {
+      return _then(_value.copyWith(unit: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$ServerClosesWindowDoorImplCopyWith<$Res>
+    implements $ServerClosesWindowDoorCopyWith<$Res> {
+  factory _$$ServerClosesWindowDoorImplCopyWith(
+          _$ServerClosesWindowDoorImpl value,
+          $Res Function(_$ServerClosesWindowDoorImpl) then) =
+      __$$ServerClosesWindowDoorImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({HistoryModel history, UnitModel unit});
+
+  @override
+  $HistoryModelCopyWith<$Res> get history;
+  @override
+  $UnitModelCopyWith<$Res> get unit;
+}
+
+/// @nodoc
+class __$$ServerClosesWindowDoorImplCopyWithImpl<$Res>
+    extends _$ServerClosesWindowDoorCopyWithImpl<$Res,
+        _$ServerClosesWindowDoorImpl>
+    implements _$$ServerClosesWindowDoorImplCopyWith<$Res> {
+  __$$ServerClosesWindowDoorImplCopyWithImpl(
+      _$ServerClosesWindowDoorImpl _value,
+      $Res Function(_$ServerClosesWindowDoorImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? history = null,
+    Object? unit = null,
+  }) {
+    return _then(_$ServerClosesWindowDoorImpl(
+      history: null == history
+          ? _value.history
+          : history // ignore: cast_nullable_to_non_nullable
+              as HistoryModel,
+      unit: null == unit
+          ? _value.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as UnitModel,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ServerClosesWindowDoorImpl
+    with DiagnosticableTreeMixin
+    implements _ServerClosesWindowDoor {
+  const _$ServerClosesWindowDoorImpl(
+      {required this.history, required this.unit});
+
+  factory _$ServerClosesWindowDoorImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ServerClosesWindowDoorImplFromJson(json);
+
+  @override
+  final HistoryModel history;
+  @override
+  final UnitModel unit;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ServerClosesWindowDoor(history: $history, unit: $unit)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ServerClosesWindowDoor'))
+      ..add(DiagnosticsProperty('history', history))
+      ..add(DiagnosticsProperty('unit', unit));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ServerClosesWindowDoorImpl &&
+            (identical(other.history, history) || other.history == history) &&
+            (identical(other.unit, unit) || other.unit == unit));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, history, unit);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ServerClosesWindowDoorImplCopyWith<_$ServerClosesWindowDoorImpl>
+      get copyWith => __$$ServerClosesWindowDoorImplCopyWithImpl<
+          _$ServerClosesWindowDoorImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ServerClosesWindowDoorImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ServerClosesWindowDoor implements ServerClosesWindowDoor {
+  const factory _ServerClosesWindowDoor(
+      {required final HistoryModel history,
+      required final UnitModel unit}) = _$ServerClosesWindowDoorImpl;
+
+  factory _ServerClosesWindowDoor.fromJson(Map<String, dynamic> json) =
+      _$ServerClosesWindowDoorImpl.fromJson;
+
+  @override
+  HistoryModel get history;
+  @override
+  UnitModel get unit;
+  @override
+  @JsonKey(ignore: true)
+  _$$ServerClosesWindowDoorImplCopyWith<_$ServerClosesWindowDoorImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}

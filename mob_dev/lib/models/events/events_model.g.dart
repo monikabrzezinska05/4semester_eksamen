@@ -190,3 +190,17 @@ Map<String, dynamic> _$$ServerDeAuthenticatesUserImplToJson(
     <String, dynamic>{
       'eventType': instance.eventType,
     };
+
+_$ServerClosesWindowDoorImpl _$$ServerClosesWindowDoorImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ServerClosesWindowDoorImpl(
+      history: HistoryModel.fromJson(json['history'] as Map<String, dynamic>),
+      unit: UnitModel.fromJson(json['unit'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$ServerClosesWindowDoorImplToJson(
+        _$ServerClosesWindowDoorImpl instance) =>
+    <String, dynamic>{
+      'history': instance.history,
+      'unit': instance.unit,
+    };

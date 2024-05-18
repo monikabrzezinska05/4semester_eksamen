@@ -13,6 +13,8 @@ public enum Status
     Armed,
     Disarmed,
     Triggered,
+    Closed,
+    Opened
 }
 
 public enum UnitType

@@ -106,6 +106,7 @@ class ServerEvent extends BaseEvent {
       ServerShowsEmails.name => ServerShowsEmails.fromJson(json),
       ServerCreatesEmail.name => ServerCreatesEmail.fromJson(json),
       ServerDeletesEmail.name => ServerDeletesEmail.fromJson(json),
+      ServerClosesWindowDoor.name => ServerClosesWindowDoor.fromJson(json),
       _ => throw "Unknown event type: $type in $json"
     };
   }
@@ -214,4 +215,17 @@ class ServerDeAuthenticatesUser with _$ServerDeAuthenticatesUser {
 
   factory ServerDeAuthenticatesUser.fromJson(Map<String, Object?> json) =>
       _$ServerDeAuthenticatesUserFromJson(json);
+}
+
+@freezed
+class ServerClosesWindowDoor  extends ServerEvent with _$ServerClosesWindowDoor {
+  static const String name = "ServerClosesWindowDoor";
+
+  const factory ServerClosesWindowDoor({
+    required HistoryModel history,
+    required UnitModel unit,
+  }) = _ServerClosesWindowDoor;
+
+  factory ServerClosesWindowDoor.fromJson(Map<String, Object?> json) =>
+      _$ServerClosesWindowDoorFromJson(json);
 }
