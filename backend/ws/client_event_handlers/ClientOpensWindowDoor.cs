@@ -9,8 +9,8 @@ namespace ws;
 
 public class ClientOpensWindowDoorDto: BaseDto
 {
-    public HistoryModel historyModel { get; set; }
-    public Unit unit { get; set; }
+    public HistoryModel HistoryModel { get; set; }
+    public Unit Unit { get; set; }
 }
 
 public class ClientOpensWindowDoor : BaseEventHandler<ClientOpensWindowDoorDto>
@@ -24,13 +24,13 @@ public class ClientOpensWindowDoor : BaseEventHandler<ClientOpensWindowDoorDto>
     public override Task Handle(ClientOpensWindowDoorDto dto, IWebSocketConnection socket)
     {
         StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
-        HistoryModel loggedEvent = _historyService.CreateHistory(dto.historyModel);
-        
+        HistoryModel loggedEvent = _historyService.CreateHistory(dto.HistoryModel);
+
         var windowDoorHistoryToClient = JsonSerializer.Serialize(new ServerOpensWindowDoor()
         {
             History = loggedEvent,
-            Unit = dto.unit
-        });
+            Unit = dto.Unit
+        }, StateService.JsonOptions());
         socket.Send(windowDoorHistoryToClient);
         return Task.CompletedTask;
     }

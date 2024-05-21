@@ -37,7 +37,7 @@ public class ClientTriggersAlarm : BaseEventHandler<ClientTriggersAlarmDto>
             History = loggedEvent,
             Unit = unit
         };
-        var alarmTriggerToClient = JsonSerializer.Serialize(alarmTriggerDto);
+        var alarmTriggerToClient = JsonSerializer.Serialize(alarmTriggerDto, StateService.JsonOptions());
         socket.Send(alarmTriggerToClient);
         return Task.CompletedTask;
     }

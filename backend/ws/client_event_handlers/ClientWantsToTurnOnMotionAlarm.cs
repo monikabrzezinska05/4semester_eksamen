@@ -9,7 +9,7 @@ namespace ws.client_event_handlers;
 
 public class ClientWantsToTurnOnAlarmsWindowDoorDto : BaseDto
 {
-    public HistoryModel historyModel { get; set; }
+    public HistoryModel HistoryModel { get; set; }
 }
 
 public class ClientWantsToTurnOnMotionAlarm : BaseEventHandler<ClientWantsToTurnOnAlarmsWindowDoorDto>
@@ -28,7 +28,7 @@ public class ClientWantsToTurnOnMotionAlarm : BaseEventHandler<ClientWantsToTurn
     public override async Task Handle(ClientWantsToTurnOnAlarmsWindowDoorDto dto, IWebSocketConnection socket)
     {
         StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
-        HistoryModel loggedEvent = _historyService.CreateHistory(dto.historyModel);
+        HistoryModel loggedEvent = _historyService.CreateHistory(dto.HistoryModel);
         var units = _unitService.SetAllWindowDoorStatus(Status.Armed);
         foreach (var unit in units)
         {

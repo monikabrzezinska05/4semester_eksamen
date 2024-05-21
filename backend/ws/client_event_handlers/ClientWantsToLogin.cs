@@ -7,7 +7,7 @@ using ws.transfer_models.server_models;
 
 public class ClientWantsToLoginDto : BaseDto
 {
-    public UserLogin userLogin { get; set; }
+    public UserLogin UserLogin { get; set; }
 }
 
 public class ClientWantsToLogin() : BaseEventHandler<ClientWantsToLoginDto>
@@ -23,7 +23,7 @@ public class ClientWantsToLogin() : BaseEventHandler<ClientWantsToLoginDto>
 
     public override Task Handle(ClientWantsToLoginDto request, IWebSocketConnection socket)
     {
-        var user = _authenticationService.Authenticate(request.userLogin);
+        var user = _authenticationService.Authenticate(request.UserLogin);
         var jwt = _tokenService.IssueJwt(user!);
 
         StateService.GetClient(socket.ConnectionInfo.Id).IsAuthenticated = true;

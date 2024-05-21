@@ -21,16 +21,11 @@ public class ClientWantsToSeeUnits : BaseEventHandler<ClientWantsToSeeUnitsDto>
         
         StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
         var units = _unitService.GetAllUnits().ToList();
-        
-        var option = new JsonSerializerOptions()
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-        };
+
         var responseToClient = JsonSerializer.Serialize(new ServerShowsUnits()
         {
-            MessageToClient = "Here are the units",
             UnitList = units
-        }, option);
+        }, StateService.JsonOptions());
         socket.Send(responseToClient);
         return Task.CompletedTask;
     }

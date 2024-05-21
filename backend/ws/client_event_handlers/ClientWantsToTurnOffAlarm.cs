@@ -9,7 +9,7 @@ namespace ws;
 
 public class ClientWantsToTurnOffAlarmDto: BaseDto
 {
-    public HistoryModel historyModel { get; set; }
+    public HistoryModel HistoryModel { get; set; }
 }
 
 public class ClientWantsToTurnOffAlarm : BaseEventHandler<ClientWantsToTurnOffAlarmDto>
@@ -29,14 +29,14 @@ public class ClientWantsToTurnOffAlarm : BaseEventHandler<ClientWantsToTurnOffAl
     {
         
         StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
-        HistoryModel loggedEvent = _historyService.CreateHistory(dto.historyModel);
+        HistoryModel loggedEvent = _historyService.CreateHistory(dto.HistoryModel);
         _unitService.SetAllUnitStatus(Status.Disarmed);
         await _mqttPublishService.AlarmTurnOffPublish();
-        
+
         var turnOffAlarmToClient = JsonSerializer.Serialize(new ServerHasDeactivatedAlarm()
         {
             History = loggedEvent
-        });
+        }, StateService.JsonOptions());
         await socket.Send(turnOffAlarmToClient);
     }
 }

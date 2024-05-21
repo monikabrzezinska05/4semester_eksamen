@@ -9,7 +9,7 @@ namespace ws;
 
 public class ClientWantsToTurnOnAlarmDto: BaseDto
 {
-    public HistoryModel historyModel { get; set; }
+    public HistoryModel HistoryModel { get; set; }
 }
 
 public class ClientWantsToTurnOnAlarm : BaseEventHandler<ClientWantsToTurnOnAlarmDto>
@@ -28,7 +28,7 @@ public class ClientWantsToTurnOnAlarm : BaseEventHandler<ClientWantsToTurnOnAlar
     public override async Task Handle(ClientWantsToTurnOnAlarmDto dto, IWebSocketConnection socket)
     {
         StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
-        HistoryModel loggedEvent = _historyService.CreateHistory(dto.historyModel);
+        HistoryModel loggedEvent = _historyService.CreateHistory(dto.HistoryModel);
         _unitService.SetAllUnitStatus(Status.Armed);
         await _mqttPublishService.AlarmTurnOnPublish();
         

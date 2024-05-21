@@ -9,8 +9,8 @@ namespace ws;
 
 public class ClientWantsToCreateUserDto : BaseDto
 {
-    public User userModel { get; set; }
-    public string password { get; set; }
+    public User UserModel { get; set; }
+    public string Password { get; set; }
 }
 
 public class ClientWantsToCreateUser : BaseEventHandler<ClientWantsToCreateUserDto>
@@ -26,9 +26,9 @@ public class ClientWantsToCreateUser : BaseEventHandler<ClientWantsToCreateUserD
     {
         StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
 
-        var newUser = dto.userModel;
+        var newUser = dto.UserModel;
         
-        var user = _userService.CreateUser(newUser, dto.password);
+        var user = _userService.CreateUser(newUser, dto.Password);
         var createUserMessage = new ServerCreatesNewUser();
         
         

@@ -9,7 +9,7 @@ namespace ws.client_event_handlers;
 
 public class ClientWantsToTurnOffAlarmsWindowDoorDto : BaseDto
 {
-    public HistoryModel historyModel { get; set; }
+    public HistoryModel HistoryModel { get; set; }
 }
 
 public class ClientWantsToTurnOffMotionAlarm : BaseEventHandler<ClientWantsToTurnOffAlarmsWindowDoorDto>
@@ -29,7 +29,7 @@ public class ClientWantsToTurnOffMotionAlarm : BaseEventHandler<ClientWantsToTur
     public override async Task Handle(ClientWantsToTurnOffAlarmsWindowDoorDto dto, IWebSocketConnection socket)
     {
         StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
-        HistoryModel loggedEvent = _historyService.CreateHistory(dto.historyModel);
+        HistoryModel loggedEvent = _historyService.CreateHistory(dto.HistoryModel);
         _unitService.SetAllWindowDoorStatus(Status.Disarmed);
         await _mqttPublishService.AlarmTurnOffMotionPublish();
         
