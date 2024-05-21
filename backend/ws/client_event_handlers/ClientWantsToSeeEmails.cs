@@ -19,7 +19,7 @@ public class ClientWantsToSeeEmails : BaseEventHandler<ClientWantsToSeeEmailsDto
     
     public override Task Handle(ClientWantsToSeeEmailsDto dto, IWebSocketConnection socket)
     {
-        //StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
+        StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
         var emails = _emailService.GetMails().ToList();
         
         var response = new ServerShowsEmails()

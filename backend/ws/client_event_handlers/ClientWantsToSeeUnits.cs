@@ -19,7 +19,7 @@ public class ClientWantsToSeeUnits : BaseEventHandler<ClientWantsToSeeUnitsDto>
     public override Task Handle(ClientWantsToSeeUnitsDto dto, IWebSocketConnection socket)
     {
         
-        //StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
+        StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
         var units = _unitService.GetAllUnits().ToList();
         
         var option = new JsonSerializerOptions()
