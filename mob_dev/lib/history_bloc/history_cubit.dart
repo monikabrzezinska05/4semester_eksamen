@@ -21,6 +21,10 @@ class HistoryCubit extends Cubit<HistoryState> {
             _onAddToHistory(model);
           case ServerOpensWindowDoor(history: var model, unit: _):
             _onAddToHistory(model);
+          case ServerHasActivatedAlarm(history: var model):
+            _onAddToHistory(model);
+          case ServerHasDeactivatedAlarm(history: var model):
+            _onAddToHistory(model);
       }
     },  onError: (error)
     {

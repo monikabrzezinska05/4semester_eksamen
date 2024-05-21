@@ -107,6 +107,45 @@ class ClientWantsToTurnOffAlarm extends ClientEvent  with _$ClientWantsToTurnOff
       _$ClientWantsToTurnOffAlarmFromJson(json);
   }
 
+  @freezed
+  class ClientWantsToTurnOnAlarm extends ClientEvent with _$ClientWantsToTurnOnAlarm {
+    static const String name = "ClientWantsToTurnOnAlarm";
+
+    const factory ClientWantsToTurnOnAlarm({
+      required String eventType,
+      required HistoryModel historyModel,
+    }) = _ClientWantsToTurnOnAlarm;
+
+    factory ClientWantsToTurnOnAlarm.fromJson(Map<String, Object?> json) =>
+        _$ClientWantsToTurnOnAlarmFromJson(json);
+  }
+
+  @freezed
+class ClientWantsToTurnOffMotionAlarm extends ClientEvent with _$ClientWantsToTurnOffMotionAlarm {
+  static const String name = "ClientWantsToTurnOffMotionAlarm";
+
+  const factory ClientWantsToTurnOffMotionAlarm({
+    required String eventType,
+    required HistoryModel historyModel,
+  }) = _ClientWantsToTurnOffMotionAlarm;
+
+  factory ClientWantsToTurnOffMotionAlarm.fromJson(Map<String, Object?> json) =>
+      _$ClientWantsToTurnOffMotionAlarmFromJson(json);
+}
+
+@freezed
+class ClientWantsToTurnOnMotionAlarm extends ClientEvent with _$ClientWantsToTurnOnMotionAlarm {
+  static const String name = "ClientWantsToTurnOnMotionAlarm";
+
+  const factory ClientWantsToTurnOnMotionAlarm({
+    required String eventType,
+    required HistoryModel historyModel,
+  }) = _ClientWantsToTurnOnMotionAlarm;
+
+  factory ClientWantsToTurnOnMotionAlarm.fromJson(Map<String, Object?> json) =>
+      _$ClientWantsToTurnOnMotionAlarmFromJson(json);
+}
+
 class ServerEvent extends BaseEvent {
   static ServerEvent fromJson(Map<String, Object?> json) {
     final type = json['eventType'];
@@ -120,6 +159,8 @@ class ServerEvent extends BaseEvent {
       ServerDeletesEmail.name => ServerDeletesEmail.fromJson(json),
       ServerClosesWindowDoor.name => ServerClosesWindowDoor.fromJson(json),
       ServerOpensWindowDoor.name => ServerOpensWindowDoor.fromJson(json),
+      ServerHasActivatedAlarm.name => ServerHasActivatedAlarm.fromJson(json),
+      ServerHasDeactivatedAlarm.name => ServerHasDeactivatedAlarm.fromJson(json),
       _ => throw "Unknown event type: $type in $json"
     };
   }
@@ -256,3 +297,28 @@ class ServerOpensWindowDoor extends ServerEvent with _$ServerOpensWindowDoor {
       _$ServerOpensWindowDoorFromJson(json);
 }
 
+@freezed
+class ServerHasActivatedAlarm extends ServerEvent with _$ServerHasActivatedAlarm {
+  static const String name = "ServerHasActivatedAlarm";
+
+  const factory ServerHasActivatedAlarm({
+    required String eventType,
+    required HistoryModel history,
+  }) = _ServerHasActivatedAlarm;
+
+  factory ServerHasActivatedAlarm.fromJson(Map<String, Object?> json) =>
+      _$ServerHasActivatedAlarmFromJson(json);
+}
+
+@freezed
+class ServerHasDeactivatedAlarm extends ServerEvent with _$ServerHasDeactivatedAlarm {
+  static const String name = "ServerHasDeactivatedAlarm";
+
+  const factory ServerHasDeactivatedAlarm({
+    required String eventType,
+    required HistoryModel history,
+  }) = _ServerHasDeactivatedAlarm;
+
+  factory ServerHasDeactivatedAlarm.fromJson(Map<String, Object?> json) =>
+      _$ServerHasDeactivatedAlarmFromJson(json);
+}

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mob_dev/home_bloc/home_state.dart';
+import 'package:mob_dev/models/history/history_model.dart';
 import 'package:mob_dev/models/unit/unit_model.dart';
 
 import '../main.dart';
@@ -9,7 +10,6 @@ import '../models/events/events_model.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   final BroadcastWsChannel wsChannel;
-
 
   HomeCubit(this.wsChannel) : super(HomeState(units: {}, isLoading: true)) {
     wsChannel.stream.listen((event) {
@@ -20,6 +20,10 @@ class HomeCubit extends Cubit<HomeState> {
           _onUnitStatusChanged(model);
         case ServerOpensWindowDoor(history: _, unit: var model):
           _onUnitStatusChanged(model);
+        case ServerHasActivatedAlarm(history: _):
+          _onArmAlarmOnUnits();
+        case ServerHasDeactivatedAlarm(history: _):
+          _onDisarmAlarmOnUnits();
       }
     }, onError: (error) {
       //DO SOMETHING HERE
@@ -47,8 +51,6 @@ class HomeCubit extends Cubit<HomeState> {
     emit(state.copyWith(units: units));
   }
 
-
-
   void _onUnitStatusChanged(UnitModel model) {
     // Create new map and list with the units, to not modify the state directly
     Map<UnitType, List<UnitModel>> units = Map.from(state.units);
@@ -64,5 +66,33 @@ class HomeCubit extends Cubit<HomeState> {
       units[model.unitType] = unitList;
       emit(state.copyWith(units: units));
     }
+  }
+
+  void _onArmAlarmOnUnits() {
+    Map<UnitType, List<UnitModel>> units = Map.from(state.units);
+    units.forEach((key, value) {
+      List<UnitModel> unitList = List.from(value);
+      unitList.forEach((unit) {
+        unitList[unitList
+                .indexWhere((element) => element.unitId == unit.unitId)] =
+            unit.copyWith(status: Status.Armed);
+      });
+      units[key] = unitList;
+    });
+    emit(state.copyWith(units: units));
+  }
+
+  void _onDisarmAlarmOnUnits() {
+    Map<UnitType, List<UnitModel>> units = Map.from(state.units);
+    units.forEach((key, value) {
+      List<UnitModel> unitList = List.from(value);
+      unitList.forEach((unit) {
+        unitList[unitList
+                .indexWhere((element) => element.unitId == unit.unitId)] =
+            unit.copyWith(status: Status.Disarmed);
+      });
+      units[key] = unitList;
+    });
+    emit(state.copyWith(units: units));
   }
 }

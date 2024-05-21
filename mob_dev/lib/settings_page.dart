@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mob_dev/email_list_bloc/email_list_cubit.dart';
+import 'package:mob_dev/email_list_bloc/settings_cubit.dart';
 import 'package:mob_dev/main.dart';
 import 'package:email_validator/email_validator.dart';
 
