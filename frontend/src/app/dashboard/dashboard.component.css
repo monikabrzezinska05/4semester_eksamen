@@ -4,16 +4,11 @@
   height: 100vh; /* This will make the container take the full viewport height */
 }
 
-.sidebar {
-  flex: 1;
-  max-width: 400px;
-  min-width: 350px;
-}
-
 .overview {
   display: flex;
   flex-direction: column;
   flex: 3;
+  min-width: 400px;
 }
 
 .vertical-line {
@@ -21,4 +16,32 @@
   width: 1px;
   background-color: gray;
   margin: 0 10px;
+}
+.sidebar {
+  position: fixed;
+  left: 0;
+  transition: left 0.3s ease;
+}
+
+.sidebar.closed {
+  left: -350px;
+}
+
+.hamburgerMenu {
+  display: none;
+}
+
+@media only screen and (max-width: 790px) {
+  .sidebar {
+    visibility: hidden;
+  }
+  .sidebar.closed {
+    visibility: visible;
+  }
+  .hamburgerMenu {
+    display: block;
+  }
+  .overview{
+    min-width: 100%;
+  }
 }

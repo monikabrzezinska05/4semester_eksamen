@@ -13,12 +13,12 @@ import {UnitType} from "../../models/Unit";
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent{
+  sidebarOpen = true;
+  protected readonly UnitType = UnitType;
   constructor() { }
 
-  ngOnInit(): void {
-
+  toggleSidebar() {
+    this.sidebarOpen = !this.sidebarOpen;
   }
-
-    protected readonly UnitType = UnitType;
 }
