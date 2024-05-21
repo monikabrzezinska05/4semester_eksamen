@@ -10,7 +10,6 @@ namespace ws;
 public class ClientWantsToTurnOnAlarmDto: BaseDto
 {
     public HistoryModel historyModel { get; set; }
-    public Unit unit { get; set; }
 }
 
 public class ClientWantsToTurnOnAlarm : BaseEventHandler<ClientWantsToTurnOnAlarmDto>
