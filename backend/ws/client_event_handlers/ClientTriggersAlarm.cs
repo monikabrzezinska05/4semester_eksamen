@@ -34,7 +34,8 @@ public class ClientTriggersAlarm : BaseEventHandler<ClientTriggersAlarmDto>
         _emailService.SendEmail(loggedEvent, unit);
         var alarmTriggerDto = new ServerAlarmTriggered()
         {
-            History = loggedEvent
+            History = loggedEvent,
+            Unit = unit
         };
         var alarmTriggerToClient = JsonSerializer.Serialize(alarmTriggerDto);
         socket.Send(alarmTriggerToClient);

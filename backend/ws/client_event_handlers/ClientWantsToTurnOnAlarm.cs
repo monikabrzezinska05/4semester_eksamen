@@ -2,7 +2,6 @@ using System.Text.Json;
 using Fleck;
 using infrastructure.models;
 using lib;
-using Org.BouncyCastle.Asn1.Ocsp;
 using service;
 using ws.transfer_models.server_models;
 
@@ -11,6 +10,7 @@ namespace ws;
 public class ClientWantsToTurnOnAlarmDto: BaseDto
 {
     public HistoryModel historyModel { get; set; }
+    public Unit unit { get; set; }
 }
 
 public class ClientWantsToTurnOnAlarm : BaseEventHandler<ClientWantsToTurnOnAlarmDto>
@@ -30,7 +30,7 @@ public class ClientWantsToTurnOnAlarm : BaseEventHandler<ClientWantsToTurnOnAlar
     {
         StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.historyModel);
-        _unitService.SetUnitStatus(dto.historyModel.UnitId, Status.Armed);
+        _unitService.SetAllUnitStatus(Status.Armed);
         await _mqttPublishService.AlarmTurnOnPublish();
         
         var turnOnAlarmToClient = JsonSerializer.Serialize(new ServerHasActivatedAlarm()

@@ -42,7 +42,7 @@ public class UnitRepository
         }
     }
 
-    public List<Unit> SetAllUnitStatus(int status)
+    public List<Unit> SetAllUnitStatus(Status status)
     {
         string sql = "UPDATE unit SET status = @status;";
 

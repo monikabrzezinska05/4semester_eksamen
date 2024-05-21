@@ -10,6 +10,7 @@ namespace ws;
 public class ClientOpensWindowDoorDto: BaseDto
 {
     public HistoryModel historyModel { get; set; }
+    public Unit unit { get; set; }
 }
 
 public class ClientOpensWindowDoor : BaseEventHandler<ClientOpensWindowDoorDto>
@@ -27,7 +28,8 @@ public class ClientOpensWindowDoor : BaseEventHandler<ClientOpensWindowDoorDto>
         
         var windowDoorHistoryToClient = JsonSerializer.Serialize(new ServerOpensWindowDoor()
         {
-            historyModel = loggedEvent,
+            history = loggedEvent,
+            Unit = dto.unit
         });
         socket.Send(windowDoorHistoryToClient);
         return Task.CompletedTask;

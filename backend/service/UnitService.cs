@@ -27,7 +27,7 @@ public class UnitService
         return _unitRepository.SetUnitStatus(unitId, status);
     }
 
-    public List<Unit> SetAllUnitStatus(int status)
+    public List<Unit> SetAllUnitStatus(Status status)
     {
         return _unitRepository.SetAllUnitStatus(status);
     }

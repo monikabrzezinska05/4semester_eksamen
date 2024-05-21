@@ -10,6 +10,7 @@ namespace ws;
 public class ClientClosesWindowDoorDto : BaseDto
 {
     public HistoryModel HistoryModel { get; set; }
+    public Unit unit { get; set; }
 }
 
 public class ClientClosesWindowDoor : BaseEventHandler<ClientClosesWindowDoorDto>
@@ -28,7 +29,8 @@ public class ClientClosesWindowDoor : BaseEventHandler<ClientClosesWindowDoorDto
 
         var windowDoorHistoryToClient = JsonSerializer.Serialize(new ServerClosesWindowDoor()
             {
-                History = loggedEvent
+                History = loggedEvent,
+                Unit = dto.unit
             },
             StateService.JsonOptions()
         );
