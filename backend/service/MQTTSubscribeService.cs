@@ -3,7 +3,6 @@ using infrastructure.models;
 using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Formatter;
-using service.mqtt_dto;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace service;  

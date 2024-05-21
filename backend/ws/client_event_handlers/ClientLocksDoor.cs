@@ -29,7 +29,7 @@ public class ClientLocksDoor : BaseEventHandler<ClientLocksDoorDto>
         {
             ResponseData = loggedEvent
         };
-        var lockDoorHistoryToClient = JsonSerializer.Serialize(new ServerHistoryMqtt()
+        var lockDoorHistoryToClient = JsonSerializer.Serialize(new ServerLocksDoor()
         {
             ResponseDto = lockDoorHistory
         });

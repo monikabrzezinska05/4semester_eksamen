@@ -29,7 +29,7 @@ public class ClientStopsSensingMotion : BaseEventHandler<ClientStopsSensingMotio
         {
             ResponseData = loggedEvent
         };
-        var stopsSensingMotionHistoryToClient = JsonSerializer.Serialize(new ServerHistoryMqtt()
+        var stopsSensingMotionHistoryToClient = JsonSerializer.Serialize(new ServerStopsSendingMotion()
         {
             ResponseDto = stopsSensingMotionHistory
         });

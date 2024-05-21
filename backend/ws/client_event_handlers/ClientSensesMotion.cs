@@ -29,7 +29,7 @@ public class ClientSensesMotion : BaseEventHandler<ClientSensesMotionDto>
         {
             ResponseData = loggedEvent
         };
-        var sensingMotionHistoryToClient = JsonSerializer.Serialize(new ServerHistoryMqtt()
+        var sensingMotionHistoryToClient = JsonSerializer.Serialize(new ServerSensesMotion()
         {
             ResponseDto = sensingMotionHistory
         });

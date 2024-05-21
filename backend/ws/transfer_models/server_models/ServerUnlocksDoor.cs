@@ -3,7 +3,7 @@ using lib;
 
 namespace ws.transfer_models.server_models;
 
-public class ServerHistoryMqtt : BaseDto
+public class ServerUnlocksDoor : BaseDto
 {
     public ResponseDto ResponseDto { get; set; }
 }
