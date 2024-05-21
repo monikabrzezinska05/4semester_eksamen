@@ -23,7 +23,7 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     final channel = context.read<BroadcastWsChannel>();
-    return BlocProvider(create: (context) => EmailListCubit(channel)..init(),
+    return BlocProvider(create: (context) => SettingsCubit(channel)..init(),
       child: ListView(
         children: [
           Padding(
@@ -100,7 +100,7 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.watch<EmailListCubit>();
+    final cubit = context.watch<SettingsCubit>();
     final state = cubit.state;
     return ExpansionTile(
       title: Text("Alarm Email List", style: TextStyle(fontSize: 22)),
@@ -110,7 +110,7 @@ class _CustomExpansionTileState extends State<CustomExpansionTile> {
           trailing: IconButton(
             icon: Icon(Icons.delete),
             onPressed: () {
-              context.read<EmailListCubit>().removeEmail(item.id);
+              context.read<SettingsCubit>().removeEmail(item.id);
             },
           ),
         );

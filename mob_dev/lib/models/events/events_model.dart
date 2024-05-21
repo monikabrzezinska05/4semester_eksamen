@@ -8,7 +8,6 @@ import 'package:mob_dev/models/user_login/user_login_model.dart';
 import '../history/history_model.dart';
 
 part 'events_model.freezed.dart';
-
 part 'events_model.g.dart';
 
 sealed class BaseEvent {}
@@ -94,6 +93,19 @@ class ClientWantsToDeleteEmail extends ClientEvent
   factory ClientWantsToDeleteEmail.fromJson(Map<String, Object?> json) =>
       _$ClientWantsToDeleteEmailFromJson(json);
 }
+
+@freezed
+class ClientWantsToTurnOffAlarm extends ClientEvent  with _$ClientWantsToTurnOffAlarm{
+  static const String name = "ClientWantsToTurnOffAlarm";
+
+  const factory ClientWantsToTurnOffAlarm({
+    required String eventType,
+    required HistoryModel historyModel,
+  }) = _ClientWantsToTurnOffAlarm;
+
+  factory ClientWantsToTurnOffAlarm.fromJson(Map<String, Object?> json) =>
+      _$ClientWantsToTurnOffAlarmFromJson(json);
+  }
 
 class ServerEvent extends BaseEvent {
   static ServerEvent fromJson(Map<String, Object?> json) {
@@ -243,3 +255,4 @@ class ServerOpensWindowDoor extends ServerEvent with _$ServerOpensWindowDoor {
   factory ServerOpensWindowDoor.fromJson(Map<String, Object?> json) =>
       _$ServerOpensWindowDoorFromJson(json);
 }
+

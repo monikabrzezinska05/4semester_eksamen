@@ -17,7 +17,9 @@ class HomeCubit extends Cubit<HomeState> {
         case ServerShowsUnits(eventType: _, unitList: var model):
           _onUnitsReceived(model);
         case ServerClosesWindowDoor(history: _, unit: var model):
-          _onUnitClosed(model);
+          _onUnitStatusChanged(model);
+        case ServerOpensWindowDoor(history: _, unit: var model):
+          _onUnitStatusChanged(model);
       }
     }, onError: (error) {
       //DO SOMETHING HERE
@@ -47,7 +49,7 @@ class HomeCubit extends Cubit<HomeState> {
 
 
 
-  void _onUnitClosed(UnitModel model) {
+  void _onUnitStatusChanged(UnitModel model) {
     // Create new map and list with the units, to not modify the state directly
     Map<UnitType, List<UnitModel>> units = Map.from(state.units);
     List<UnitModel> unitList = List.from(units[model.unitType]!);
@@ -57,7 +59,7 @@ class HomeCubit extends Cubit<HomeState> {
 
     // Modify Unit if found, and replace the list in the map
     if (index != -1) {
-      UnitModel updatedUnit = unitList[index].copyWith(status: Status.Closed);
+      UnitModel updatedUnit = unitList[index].copyWith(status: model.status);
       unitList[index] = updatedUnit;
       units[model.unitType] = unitList;
       emit(state.copyWith(units: units));
