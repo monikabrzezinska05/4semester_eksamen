@@ -25,7 +25,6 @@ export class OverviewComponent implements OnInit {
     this.units$ = this.getUnitsObservable(this.unitType);
     this.unitTypeName = UnitType[this.unitType]
     this.checkIfMotionSensor(this.unitType);
-    console.log("Unittype: ", this.unitTypeName);
   }
 
   private checkIfMotionSensor(unitType: UnitType) {

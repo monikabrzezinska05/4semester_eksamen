@@ -28,7 +28,6 @@ export class State {
   units$: BehaviorSubject<Unit[]> = new BehaviorSubject<Unit[]>([]);
 
   constructor(private router: Router) {
-    console.log("something happened before connect");
     this.ws.onmessage = message => {
 
       const messageFromServer = JSON.parse(message.data) as BaseDto<any>
@@ -40,25 +39,19 @@ export class State {
 
   ServerShowsHistory(dto: ServerShowsHistoryDto) {
     var current = this.history$.getValue();
-    this.history$.next([...current, ...dto.responseDto.responseData]);
+    this.history$.next([...current, ...dto.historyList]);
   }
 
   ServerAuthenticatesUser(dto: ServerAuthenticatesUserDto) {
-    if (dto.responseDto.responseData !== null && dto.responseDto.jwt !== null) {
+    if (dto.user !== null && dto.jwt !== null) {
       this.authenticated = true;
-      this.currentUser = dto.responseDto.responseData;
-      console.log("authentication happened in frontend");
-      this.jwt = dto.responseDto.jwt;
+      this.currentUser = dto.user;
+      this.jwt = dto.jwt;
       localStorage.setItem('jwt', this.jwt);
       localStorage.setItem('currentUserId', this.currentUser.mail);
       this.router.navigateByUrl('');
-      var getUnitsDto = {
-        eventType: "ClientWantsToSeeUnits"
-      }
-      this.ws.send(JSON.stringify(getUnitsDto))
     }
     else {
-      console.log("authentication failed in frontend");
       this.router.navigateByUrl('/login');
     }
     this.getUnitsFromServer();
@@ -85,16 +78,11 @@ export class State {
     this.units$ = new BehaviorSubject<Unit[]>([]);
     this.history$ = new BehaviorSubject<HistoryModel[]>([]);
     this.router.navigateByUrl('/login');
-    console.log(" has happened deauthentication in frontend");
-  }
-
-  ServerLogsOffUser(dto: ServerDeAuthenticatesUserDto) {
-    this.ws.close();
   }
 
   ServerShowsUnits(dto: ServerShowsUnitsDto) {
     var current = this.units$.getValue();
-    this.units$.next([...current, ...dto.responseDto.responseData]);
+    this.units$.next([...current, ...dto.unitList]);
   }
 
   public getAllHistory(): Observable<HistoryModel[]> {
@@ -106,17 +94,16 @@ export class State {
   }
 
   public getDoors(): Observable<Unit[]> {
-    return this.units$.pipe(map((units) => units.filter((unit) => unit.unitTypeId === UnitType.Doors)));
+    return this.units$.pipe(map((units) => units.filter((unit) => unit.unitType === UnitType.Doors)));
   }
 
   public getWindows() {
-    return this.units$.pipe(map((units) => units.filter((unit) => unit.unitTypeId === UnitType.Windows)));
+    return this.units$.pipe(map((units) => units.filter((unit) => unit.unitType === UnitType.Windows)));
   }
 
   public getMotionSensor() {
-    return this.units$.pipe(map((units) => units.filter((unit) => unit.unitTypeId === UnitType.MotionSensor)));
+    return this.units$.pipe(map((units) => units.filter((unit) => unit.unitType === UnitType.MotionSensor)));
   }
-
 
   public AuthenticateWithJwt() {
     var dto = {

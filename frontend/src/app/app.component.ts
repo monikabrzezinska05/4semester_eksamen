@@ -16,7 +16,6 @@ export class AppComponent {
   constructor(private router: Router, private state: State) {
 
     this.state.ws.onopen = () => {
-      console.log("currentuser: " + this.state.currentUserId);
       if (this.state.jwt !== null || this.state.currentUserId !== null) {
         this.state.AuthenticateWithJwt();
       }
