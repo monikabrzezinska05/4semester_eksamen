@@ -24,6 +24,12 @@ class HomeCubit extends Cubit<HomeState> {
           _onArmAlarmOnUnits();
         case ServerHasDeactivatedAlarm(history: _):
           _onDisarmAlarmOnUnits();
+        case ServerHasActivatedMotionSensorAlarm(history: _):
+          _onArmMotionSensor();
+        case ServerHasDeactivatedMotionSensorAlarm(history: _):
+          _onDisarmMotionSensor();
+          case ServerAlarmTriggered(history: _, unit: var model):
+            _onUnitTriggered(model);
       }
     }, onError: (error) {
       //DO SOMETHING HERE
@@ -73,9 +79,11 @@ class HomeCubit extends Cubit<HomeState> {
     units.forEach((key, value) {
       List<UnitModel> unitList = List.from(value);
       unitList.forEach((unit) {
-        unitList[unitList
-                .indexWhere((element) => element.unitId == unit.unitId)] =
-            unit.copyWith(status: Status.Armed);
+        if (unit.unitType == UnitType.Window || unit.unitType == UnitType.Door) {
+          unitList[unitList
+              .indexWhere((element) => element.unitId == unit.unitId)] =
+              unit.copyWith(status: Status.Armed);
+        }
       });
       units[key] = unitList;
     });
@@ -87,12 +95,60 @@ class HomeCubit extends Cubit<HomeState> {
     units.forEach((key, value) {
       List<UnitModel> unitList = List.from(value);
       unitList.forEach((unit) {
-        unitList[unitList
-                .indexWhere((element) => element.unitId == unit.unitId)] =
-            unit.copyWith(status: Status.Disarmed);
+        if (unit.unitType == UnitType.Window || unit.unitType == UnitType.Door) {
+          unitList[unitList
+              .indexWhere((element) => element.unitId == unit.unitId)] =
+              unit.copyWith(status: Status.Disarmed);
+        }
       });
       units[key] = unitList;
     });
     emit(state.copyWith(units: units));
+  }
+
+  void _onArmMotionSensor() {
+    Map<UnitType, List<UnitModel>> units = Map.from(state.units);
+    units.forEach((key, value) {
+      List<UnitModel> unitList = List.from(value);
+      unitList.forEach((unit) {
+        if (unit.unitType == UnitType.MotionSensor) {
+          unitList[unitList
+                  .indexWhere((element) => element.unitId == unit.unitId)] =
+              unit.copyWith(status: Status.Armed);
+        }
+      });
+      units[key] = unitList;
+    });
+    emit(state.copyWith(units: units));
+  }
+
+  void _onDisarmMotionSensor() {
+    Map<UnitType, List<UnitModel>> units = Map.from(state.units);
+    units.forEach((key, value) {
+      List<UnitModel> unitList = List.from(value);
+      unitList.forEach((unit) {
+        if (unit.unitType == UnitType.MotionSensor) {
+          unitList[unitList
+                  .indexWhere((element) => element.unitId == unit.unitId)] =
+              unit.copyWith(status: Status.Disarmed);
+        }
+      });
+      units[key] = unitList;
+    });
+    emit(state.copyWith(units: units));
+  }
+
+  void _onUnitTriggered(UnitModel model) {
+    Map<UnitType, List<UnitModel>> units = Map.from(state.units);
+    List<UnitModel> unitList = List.from(units[model.unitType]!);
+
+    int index = unitList.indexWhere((unit) => unit.unitId == model.unitId);
+
+    if (index != -1) {
+      UnitModel updatedUnit = unitList[index].copyWith(status: Status.Triggeret);
+      unitList[index] = updatedUnit;
+      units[model.unitType] = unitList;
+      emit(state.copyWith(units: units));
+    }
   }
 }

@@ -161,22 +161,14 @@ class ServerEvent extends BaseEvent {
       ServerOpensWindowDoor.name => ServerOpensWindowDoor.fromJson(json),
       ServerHasActivatedAlarm.name => ServerHasActivatedAlarm.fromJson(json),
       ServerHasDeactivatedAlarm.name => ServerHasDeactivatedAlarm.fromJson(json),
+      ServerHasActivatedMotionSensorAlarm.name => ServerHasActivatedMotionSensorAlarm.fromJson(json),
+      ServerHasDeactivatedMotionSensorAlarm.name => ServerHasDeactivatedMotionSensorAlarm.fromJson(json),
+      ServerAlarmTriggered.name => ServerAlarmTriggered.fromJson(json),
       _ => throw "Unknown event type: $type in $json"
     };
   }
 }
 
-class ServerAlarmTriggered extends ServerEvent {
-  static const String name = "ServerAlarmTriggered";
-
-  ServerAlarmTriggered({
-    required this.eventType,
-    required this.historyModel,
-  });
-
-  final String eventType;
-  final HistoryModel historyModel;
-}
 
 @freezed
 class ServerShowsEmails extends ServerEvent with _$ServerShowsEmails {
@@ -321,4 +313,44 @@ class ServerHasDeactivatedAlarm extends ServerEvent with _$ServerHasDeactivatedA
 
   factory ServerHasDeactivatedAlarm.fromJson(Map<String, Object?> json) =>
       _$ServerHasDeactivatedAlarmFromJson(json);
+}
+
+@freezed
+class ServerHasActivatedMotionSensorAlarm extends ServerEvent with _$ServerHasActivatedMotionSensorAlarm {
+  static const String name = "ServerHasActivatedWindowDoorAlarm";
+
+  const factory ServerHasActivatedMotionSensorAlarm({
+    required String eventType,
+    required HistoryModel history,
+  }) = _ServerHasActivatedMotionSensorAlarm;
+
+  factory ServerHasActivatedMotionSensorAlarm.fromJson(Map<String, Object?> json) =>
+      _$ServerHasActivatedMotionSensorAlarmFromJson(json);
+}
+
+@freezed
+class ServerHasDeactivatedMotionSensorAlarm extends ServerEvent with _$ServerHasDeactivatedMotionSensorAlarm {
+  static const String name = "ServerHasDeactivatedMotionSensorAlarm";
+
+  const factory ServerHasDeactivatedMotionSensorAlarm({
+    required String eventType,
+    required HistoryModel history,
+  }) = _ServerHasDeactivatedMotionSensorAlarm;
+
+  factory ServerHasDeactivatedMotionSensorAlarm.fromJson(Map<String, Object?> json) =>
+      _$ServerHasDeactivatedMotionSensorAlarmFromJson(json);
+}
+
+@freezed
+class ServerAlarmTriggered extends ServerEvent with _$ServerAlarmTriggered {
+  static const String name = "ServerAlarmTriggered";
+
+  const factory ServerAlarmTriggered({
+    required String eventType,
+    required HistoryModel history,
+    required UnitModel unit,
+  }) = _ServerAlarmTriggered;
+
+  factory ServerAlarmTriggered.fromJson(Map<String, Object?> json) =>
+      _$ServerAlarmTriggeredFromJson(json);
 }

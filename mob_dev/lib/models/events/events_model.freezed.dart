@@ -3781,3 +3781,606 @@ abstract class _ServerHasDeactivatedAlarm implements ServerHasDeactivatedAlarm {
   _$$ServerHasDeactivatedAlarmImplCopyWith<_$ServerHasDeactivatedAlarmImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
+
+ServerHasActivatedMotionSensorAlarm
+    _$ServerHasActivatedMotionSensorAlarmFromJson(Map<String, dynamic> json) {
+  return _ServerHasActivatedMotionSensorAlarm.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ServerHasActivatedMotionSensorAlarm {
+  String get eventType => throw _privateConstructorUsedError;
+  HistoryModel get history => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ServerHasActivatedMotionSensorAlarmCopyWith<
+          ServerHasActivatedMotionSensorAlarm>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ServerHasActivatedMotionSensorAlarmCopyWith<$Res> {
+  factory $ServerHasActivatedMotionSensorAlarmCopyWith(
+          ServerHasActivatedMotionSensorAlarm value,
+          $Res Function(ServerHasActivatedMotionSensorAlarm) then) =
+      _$ServerHasActivatedMotionSensorAlarmCopyWithImpl<$Res,
+          ServerHasActivatedMotionSensorAlarm>;
+  @useResult
+  $Res call({String eventType, HistoryModel history});
+
+  $HistoryModelCopyWith<$Res> get history;
+}
+
+/// @nodoc
+class _$ServerHasActivatedMotionSensorAlarmCopyWithImpl<$Res,
+        $Val extends ServerHasActivatedMotionSensorAlarm>
+    implements $ServerHasActivatedMotionSensorAlarmCopyWith<$Res> {
+  _$ServerHasActivatedMotionSensorAlarmCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? history = null,
+  }) {
+    return _then(_value.copyWith(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      history: null == history
+          ? _value.history
+          : history // ignore: cast_nullable_to_non_nullable
+              as HistoryModel,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $HistoryModelCopyWith<$Res> get history {
+    return $HistoryModelCopyWith<$Res>(_value.history, (value) {
+      return _then(_value.copyWith(history: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$ServerHasActivatedMotionSensorAlarmImplCopyWith<$Res>
+    implements $ServerHasActivatedMotionSensorAlarmCopyWith<$Res> {
+  factory _$$ServerHasActivatedMotionSensorAlarmImplCopyWith(
+          _$ServerHasActivatedMotionSensorAlarmImpl value,
+          $Res Function(_$ServerHasActivatedMotionSensorAlarmImpl) then) =
+      __$$ServerHasActivatedMotionSensorAlarmImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String eventType, HistoryModel history});
+
+  @override
+  $HistoryModelCopyWith<$Res> get history;
+}
+
+/// @nodoc
+class __$$ServerHasActivatedMotionSensorAlarmImplCopyWithImpl<$Res>
+    extends _$ServerHasActivatedMotionSensorAlarmCopyWithImpl<$Res,
+        _$ServerHasActivatedMotionSensorAlarmImpl>
+    implements _$$ServerHasActivatedMotionSensorAlarmImplCopyWith<$Res> {
+  __$$ServerHasActivatedMotionSensorAlarmImplCopyWithImpl(
+      _$ServerHasActivatedMotionSensorAlarmImpl _value,
+      $Res Function(_$ServerHasActivatedMotionSensorAlarmImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? history = null,
+  }) {
+    return _then(_$ServerHasActivatedMotionSensorAlarmImpl(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      history: null == history
+          ? _value.history
+          : history // ignore: cast_nullable_to_non_nullable
+              as HistoryModel,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ServerHasActivatedMotionSensorAlarmImpl
+    with DiagnosticableTreeMixin
+    implements _ServerHasActivatedMotionSensorAlarm {
+  const _$ServerHasActivatedMotionSensorAlarmImpl(
+      {required this.eventType, required this.history});
+
+  factory _$ServerHasActivatedMotionSensorAlarmImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$ServerHasActivatedMotionSensorAlarmImplFromJson(json);
+
+  @override
+  final String eventType;
+  @override
+  final HistoryModel history;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ServerHasActivatedMotionSensorAlarm(eventType: $eventType, history: $history)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ServerHasActivatedMotionSensorAlarm'))
+      ..add(DiagnosticsProperty('eventType', eventType))
+      ..add(DiagnosticsProperty('history', history));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ServerHasActivatedMotionSensorAlarmImpl &&
+            (identical(other.eventType, eventType) ||
+                other.eventType == eventType) &&
+            (identical(other.history, history) || other.history == history));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, eventType, history);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ServerHasActivatedMotionSensorAlarmImplCopyWith<
+          _$ServerHasActivatedMotionSensorAlarmImpl>
+      get copyWith => __$$ServerHasActivatedMotionSensorAlarmImplCopyWithImpl<
+          _$ServerHasActivatedMotionSensorAlarmImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ServerHasActivatedMotionSensorAlarmImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ServerHasActivatedMotionSensorAlarm
+    implements ServerHasActivatedMotionSensorAlarm {
+  const factory _ServerHasActivatedMotionSensorAlarm(
+          {required final String eventType,
+          required final HistoryModel history}) =
+      _$ServerHasActivatedMotionSensorAlarmImpl;
+
+  factory _ServerHasActivatedMotionSensorAlarm.fromJson(
+          Map<String, dynamic> json) =
+      _$ServerHasActivatedMotionSensorAlarmImpl.fromJson;
+
+  @override
+  String get eventType;
+  @override
+  HistoryModel get history;
+  @override
+  @JsonKey(ignore: true)
+  _$$ServerHasActivatedMotionSensorAlarmImplCopyWith<
+          _$ServerHasActivatedMotionSensorAlarmImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+ServerHasDeactivatedMotionSensorAlarm
+    _$ServerHasDeactivatedMotionSensorAlarmFromJson(Map<String, dynamic> json) {
+  return _ServerHasDeactivatedMotionSensorAlarm.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ServerHasDeactivatedMotionSensorAlarm {
+  String get eventType => throw _privateConstructorUsedError;
+  HistoryModel get history => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ServerHasDeactivatedMotionSensorAlarmCopyWith<
+          ServerHasDeactivatedMotionSensorAlarm>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ServerHasDeactivatedMotionSensorAlarmCopyWith<$Res> {
+  factory $ServerHasDeactivatedMotionSensorAlarmCopyWith(
+          ServerHasDeactivatedMotionSensorAlarm value,
+          $Res Function(ServerHasDeactivatedMotionSensorAlarm) then) =
+      _$ServerHasDeactivatedMotionSensorAlarmCopyWithImpl<$Res,
+          ServerHasDeactivatedMotionSensorAlarm>;
+  @useResult
+  $Res call({String eventType, HistoryModel history});
+
+  $HistoryModelCopyWith<$Res> get history;
+}
+
+/// @nodoc
+class _$ServerHasDeactivatedMotionSensorAlarmCopyWithImpl<$Res,
+        $Val extends ServerHasDeactivatedMotionSensorAlarm>
+    implements $ServerHasDeactivatedMotionSensorAlarmCopyWith<$Res> {
+  _$ServerHasDeactivatedMotionSensorAlarmCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? history = null,
+  }) {
+    return _then(_value.copyWith(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      history: null == history
+          ? _value.history
+          : history // ignore: cast_nullable_to_non_nullable
+              as HistoryModel,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $HistoryModelCopyWith<$Res> get history {
+    return $HistoryModelCopyWith<$Res>(_value.history, (value) {
+      return _then(_value.copyWith(history: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$ServerHasDeactivatedMotionSensorAlarmImplCopyWith<$Res>
+    implements $ServerHasDeactivatedMotionSensorAlarmCopyWith<$Res> {
+  factory _$$ServerHasDeactivatedMotionSensorAlarmImplCopyWith(
+          _$ServerHasDeactivatedMotionSensorAlarmImpl value,
+          $Res Function(_$ServerHasDeactivatedMotionSensorAlarmImpl) then) =
+      __$$ServerHasDeactivatedMotionSensorAlarmImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String eventType, HistoryModel history});
+
+  @override
+  $HistoryModelCopyWith<$Res> get history;
+}
+
+/// @nodoc
+class __$$ServerHasDeactivatedMotionSensorAlarmImplCopyWithImpl<$Res>
+    extends _$ServerHasDeactivatedMotionSensorAlarmCopyWithImpl<$Res,
+        _$ServerHasDeactivatedMotionSensorAlarmImpl>
+    implements _$$ServerHasDeactivatedMotionSensorAlarmImplCopyWith<$Res> {
+  __$$ServerHasDeactivatedMotionSensorAlarmImplCopyWithImpl(
+      _$ServerHasDeactivatedMotionSensorAlarmImpl _value,
+      $Res Function(_$ServerHasDeactivatedMotionSensorAlarmImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? history = null,
+  }) {
+    return _then(_$ServerHasDeactivatedMotionSensorAlarmImpl(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      history: null == history
+          ? _value.history
+          : history // ignore: cast_nullable_to_non_nullable
+              as HistoryModel,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ServerHasDeactivatedMotionSensorAlarmImpl
+    with DiagnosticableTreeMixin
+    implements _ServerHasDeactivatedMotionSensorAlarm {
+  const _$ServerHasDeactivatedMotionSensorAlarmImpl(
+      {required this.eventType, required this.history});
+
+  factory _$ServerHasDeactivatedMotionSensorAlarmImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$ServerHasDeactivatedMotionSensorAlarmImplFromJson(json);
+
+  @override
+  final String eventType;
+  @override
+  final HistoryModel history;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ServerHasDeactivatedMotionSensorAlarm(eventType: $eventType, history: $history)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(
+          DiagnosticsProperty('type', 'ServerHasDeactivatedMotionSensorAlarm'))
+      ..add(DiagnosticsProperty('eventType', eventType))
+      ..add(DiagnosticsProperty('history', history));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ServerHasDeactivatedMotionSensorAlarmImpl &&
+            (identical(other.eventType, eventType) ||
+                other.eventType == eventType) &&
+            (identical(other.history, history) || other.history == history));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, eventType, history);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ServerHasDeactivatedMotionSensorAlarmImplCopyWith<
+          _$ServerHasDeactivatedMotionSensorAlarmImpl>
+      get copyWith => __$$ServerHasDeactivatedMotionSensorAlarmImplCopyWithImpl<
+          _$ServerHasDeactivatedMotionSensorAlarmImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ServerHasDeactivatedMotionSensorAlarmImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ServerHasDeactivatedMotionSensorAlarm
+    implements ServerHasDeactivatedMotionSensorAlarm {
+  const factory _ServerHasDeactivatedMotionSensorAlarm(
+          {required final String eventType,
+          required final HistoryModel history}) =
+      _$ServerHasDeactivatedMotionSensorAlarmImpl;
+
+  factory _ServerHasDeactivatedMotionSensorAlarm.fromJson(
+          Map<String, dynamic> json) =
+      _$ServerHasDeactivatedMotionSensorAlarmImpl.fromJson;
+
+  @override
+  String get eventType;
+  @override
+  HistoryModel get history;
+  @override
+  @JsonKey(ignore: true)
+  _$$ServerHasDeactivatedMotionSensorAlarmImplCopyWith<
+          _$ServerHasDeactivatedMotionSensorAlarmImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+ServerAlarmTriggered _$ServerAlarmTriggeredFromJson(Map<String, dynamic> json) {
+  return _ServerAlarmTriggered.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ServerAlarmTriggered {
+  String get eventType => throw _privateConstructorUsedError;
+  HistoryModel get history => throw _privateConstructorUsedError;
+  UnitModel get unit => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ServerAlarmTriggeredCopyWith<ServerAlarmTriggered> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ServerAlarmTriggeredCopyWith<$Res> {
+  factory $ServerAlarmTriggeredCopyWith(ServerAlarmTriggered value,
+          $Res Function(ServerAlarmTriggered) then) =
+      _$ServerAlarmTriggeredCopyWithImpl<$Res, ServerAlarmTriggered>;
+  @useResult
+  $Res call({String eventType, HistoryModel history, UnitModel unit});
+
+  $HistoryModelCopyWith<$Res> get history;
+  $UnitModelCopyWith<$Res> get unit;
+}
+
+/// @nodoc
+class _$ServerAlarmTriggeredCopyWithImpl<$Res,
+        $Val extends ServerAlarmTriggered>
+    implements $ServerAlarmTriggeredCopyWith<$Res> {
+  _$ServerAlarmTriggeredCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? history = null,
+    Object? unit = null,
+  }) {
+    return _then(_value.copyWith(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      history: null == history
+          ? _value.history
+          : history // ignore: cast_nullable_to_non_nullable
+              as HistoryModel,
+      unit: null == unit
+          ? _value.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as UnitModel,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $HistoryModelCopyWith<$Res> get history {
+    return $HistoryModelCopyWith<$Res>(_value.history, (value) {
+      return _then(_value.copyWith(history: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UnitModelCopyWith<$Res> get unit {
+    return $UnitModelCopyWith<$Res>(_value.unit, (value) {
+      return _then(_value.copyWith(unit: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$ServerAlarmTriggeredImplCopyWith<$Res>
+    implements $ServerAlarmTriggeredCopyWith<$Res> {
+  factory _$$ServerAlarmTriggeredImplCopyWith(_$ServerAlarmTriggeredImpl value,
+          $Res Function(_$ServerAlarmTriggeredImpl) then) =
+      __$$ServerAlarmTriggeredImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String eventType, HistoryModel history, UnitModel unit});
+
+  @override
+  $HistoryModelCopyWith<$Res> get history;
+  @override
+  $UnitModelCopyWith<$Res> get unit;
+}
+
+/// @nodoc
+class __$$ServerAlarmTriggeredImplCopyWithImpl<$Res>
+    extends _$ServerAlarmTriggeredCopyWithImpl<$Res, _$ServerAlarmTriggeredImpl>
+    implements _$$ServerAlarmTriggeredImplCopyWith<$Res> {
+  __$$ServerAlarmTriggeredImplCopyWithImpl(_$ServerAlarmTriggeredImpl _value,
+      $Res Function(_$ServerAlarmTriggeredImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? history = null,
+    Object? unit = null,
+  }) {
+    return _then(_$ServerAlarmTriggeredImpl(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      history: null == history
+          ? _value.history
+          : history // ignore: cast_nullable_to_non_nullable
+              as HistoryModel,
+      unit: null == unit
+          ? _value.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as UnitModel,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ServerAlarmTriggeredImpl
+    with DiagnosticableTreeMixin
+    implements _ServerAlarmTriggered {
+  const _$ServerAlarmTriggeredImpl(
+      {required this.eventType, required this.history, required this.unit});
+
+  factory _$ServerAlarmTriggeredImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ServerAlarmTriggeredImplFromJson(json);
+
+  @override
+  final String eventType;
+  @override
+  final HistoryModel history;
+  @override
+  final UnitModel unit;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ServerAlarmTriggered(eventType: $eventType, history: $history, unit: $unit)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ServerAlarmTriggered'))
+      ..add(DiagnosticsProperty('eventType', eventType))
+      ..add(DiagnosticsProperty('history', history))
+      ..add(DiagnosticsProperty('unit', unit));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ServerAlarmTriggeredImpl &&
+            (identical(other.eventType, eventType) ||
+                other.eventType == eventType) &&
+            (identical(other.history, history) || other.history == history) &&
+            (identical(other.unit, unit) || other.unit == unit));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, eventType, history, unit);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ServerAlarmTriggeredImplCopyWith<_$ServerAlarmTriggeredImpl>
+      get copyWith =>
+          __$$ServerAlarmTriggeredImplCopyWithImpl<_$ServerAlarmTriggeredImpl>(
+              this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ServerAlarmTriggeredImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ServerAlarmTriggered implements ServerAlarmTriggered {
+  const factory _ServerAlarmTriggered(
+      {required final String eventType,
+      required final HistoryModel history,
+      required final UnitModel unit}) = _$ServerAlarmTriggeredImpl;
+
+  factory _ServerAlarmTriggered.fromJson(Map<String, dynamic> json) =
+      _$ServerAlarmTriggeredImpl.fromJson;
+
+  @override
+  String get eventType;
+  @override
+  HistoryModel get history;
+  @override
+  UnitModel get unit;
+  @override
+  @JsonKey(ignore: true)
+  _$$ServerAlarmTriggeredImplCopyWith<_$ServerAlarmTriggeredImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}

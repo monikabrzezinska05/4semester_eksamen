@@ -306,3 +306,51 @@ Map<String, dynamic> _$$ServerHasDeactivatedAlarmImplToJson(
       'eventType': instance.eventType,
       'history': instance.history,
     };
+
+_$ServerHasActivatedMotionSensorAlarmImpl
+    _$$ServerHasActivatedMotionSensorAlarmImplFromJson(
+            Map<String, dynamic> json) =>
+        _$ServerHasActivatedMotionSensorAlarmImpl(
+          eventType: json['eventType'] as String,
+          history:
+              HistoryModel.fromJson(json['history'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$$ServerHasActivatedMotionSensorAlarmImplToJson(
+        _$ServerHasActivatedMotionSensorAlarmImpl instance) =>
+    <String, dynamic>{
+      'eventType': instance.eventType,
+      'history': instance.history,
+    };
+
+_$ServerHasDeactivatedMotionSensorAlarmImpl
+    _$$ServerHasDeactivatedMotionSensorAlarmImplFromJson(
+            Map<String, dynamic> json) =>
+        _$ServerHasDeactivatedMotionSensorAlarmImpl(
+          eventType: json['eventType'] as String,
+          history:
+              HistoryModel.fromJson(json['history'] as Map<String, dynamic>),
+        );
+
+Map<String, dynamic> _$$ServerHasDeactivatedMotionSensorAlarmImplToJson(
+        _$ServerHasDeactivatedMotionSensorAlarmImpl instance) =>
+    <String, dynamic>{
+      'eventType': instance.eventType,
+      'history': instance.history,
+    };
+
+_$ServerAlarmTriggeredImpl _$$ServerAlarmTriggeredImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ServerAlarmTriggeredImpl(
+      eventType: json['eventType'] as String,
+      history: HistoryModel.fromJson(json['history'] as Map<String, dynamic>),
+      unit: UnitModel.fromJson(json['unit'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$ServerAlarmTriggeredImplToJson(
+        _$ServerAlarmTriggeredImpl instance) =>
+    <String, dynamic>{
+      'eventType': instance.eventType,
+      'history': instance.history,
+      'unit': instance.unit,
+    };
