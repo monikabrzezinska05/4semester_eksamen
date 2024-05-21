@@ -29,9 +29,14 @@ public class HistoryService
 
     public HistoryModel CreateHistory(HistoryModel model)
     {
-        return _historyRepo.CreateHistory(model);
-    }
+        var history = _historyRepo.CreateHistory(model);
+        
+        List<Unit> units = JsonConvert.DeserializeObject<List<Unit>>(history.UnitTable);
+        history.Unit = units[0];
+        history.UnitTable = null;
 
+        return history;
+    }
 }
 
 
