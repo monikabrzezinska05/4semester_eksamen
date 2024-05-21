@@ -6,10 +6,11 @@ import 'package:mob_dev/models/email_list/email_model.dart';
 
 import '../main.dart';
 import '../models/events/events_model.dart';
+import '../models/history/history_model.dart';
 
-class EmailListCubit extends Cubit<EmailListState> {
+class SettingsCubit extends Cubit<SettingsState> {
   final BroadcastWsChannel wsChannel;
-  EmailListCubit(this.wsChannel) : super(EmailListState(allEmails: [], isLoading: true)) {
+  SettingsCubit(this.wsChannel) : super(SettingsState(allEmails: [], isLoading: true)) {
     wsChannel.stream.listen((event) {
       switch (event) {
         case ServerShowsEmails(eventType: _, emails: var model):
@@ -41,6 +42,10 @@ class EmailListCubit extends Cubit<EmailListState> {
 
   void removeEmail(int id) {
     _send(ClientWantsToDeleteEmail(eventType: ClientWantsToDeleteEmail.name, emailId: id));
+  }
+
+  void turnOffAlarm(HistoryModel historyModel) {
+    _send(ClientWantsToTurnOffAlarm(eventType: ClientWantsToTurnOffAlarm.name, historyModel: historyModel));
   }
 
   void _onEmailListReceived(List<EmailModel> model) {

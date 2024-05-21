@@ -1003,6 +1003,194 @@ abstract class _ClientWantsToDeleteEmail implements ClientWantsToDeleteEmail {
       get copyWith => throw _privateConstructorUsedError;
 }
 
+ClientWantsToTurnOffAlarm _$ClientWantsToTurnOffAlarmFromJson(
+    Map<String, dynamic> json) {
+  return _ClientWantsToTurnOffAlarm.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ClientWantsToTurnOffAlarm {
+  String get eventType => throw _privateConstructorUsedError;
+  HistoryModel get historyModel => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ClientWantsToTurnOffAlarmCopyWith<ClientWantsToTurnOffAlarm> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ClientWantsToTurnOffAlarmCopyWith<$Res> {
+  factory $ClientWantsToTurnOffAlarmCopyWith(ClientWantsToTurnOffAlarm value,
+          $Res Function(ClientWantsToTurnOffAlarm) then) =
+      _$ClientWantsToTurnOffAlarmCopyWithImpl<$Res, ClientWantsToTurnOffAlarm>;
+  @useResult
+  $Res call({String eventType, HistoryModel historyModel});
+
+  $HistoryModelCopyWith<$Res> get historyModel;
+}
+
+/// @nodoc
+class _$ClientWantsToTurnOffAlarmCopyWithImpl<$Res,
+        $Val extends ClientWantsToTurnOffAlarm>
+    implements $ClientWantsToTurnOffAlarmCopyWith<$Res> {
+  _$ClientWantsToTurnOffAlarmCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? historyModel = null,
+  }) {
+    return _then(_value.copyWith(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      historyModel: null == historyModel
+          ? _value.historyModel
+          : historyModel // ignore: cast_nullable_to_non_nullable
+              as HistoryModel,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $HistoryModelCopyWith<$Res> get historyModel {
+    return $HistoryModelCopyWith<$Res>(_value.historyModel, (value) {
+      return _then(_value.copyWith(historyModel: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$ClientWantsToTurnOffAlarmImplCopyWith<$Res>
+    implements $ClientWantsToTurnOffAlarmCopyWith<$Res> {
+  factory _$$ClientWantsToTurnOffAlarmImplCopyWith(
+          _$ClientWantsToTurnOffAlarmImpl value,
+          $Res Function(_$ClientWantsToTurnOffAlarmImpl) then) =
+      __$$ClientWantsToTurnOffAlarmImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String eventType, HistoryModel historyModel});
+
+  @override
+  $HistoryModelCopyWith<$Res> get historyModel;
+}
+
+/// @nodoc
+class __$$ClientWantsToTurnOffAlarmImplCopyWithImpl<$Res>
+    extends _$ClientWantsToTurnOffAlarmCopyWithImpl<$Res,
+        _$ClientWantsToTurnOffAlarmImpl>
+    implements _$$ClientWantsToTurnOffAlarmImplCopyWith<$Res> {
+  __$$ClientWantsToTurnOffAlarmImplCopyWithImpl(
+      _$ClientWantsToTurnOffAlarmImpl _value,
+      $Res Function(_$ClientWantsToTurnOffAlarmImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? historyModel = null,
+  }) {
+    return _then(_$ClientWantsToTurnOffAlarmImpl(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      historyModel: null == historyModel
+          ? _value.historyModel
+          : historyModel // ignore: cast_nullable_to_non_nullable
+              as HistoryModel,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ClientWantsToTurnOffAlarmImpl
+    with DiagnosticableTreeMixin
+    implements _ClientWantsToTurnOffAlarm {
+  const _$ClientWantsToTurnOffAlarmImpl(
+      {required this.eventType, required this.historyModel});
+
+  factory _$ClientWantsToTurnOffAlarmImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ClientWantsToTurnOffAlarmImplFromJson(json);
+
+  @override
+  final String eventType;
+  @override
+  final HistoryModel historyModel;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ClientWantsToTurnOffAlarm(eventType: $eventType, historyModel: $historyModel)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ClientWantsToTurnOffAlarm'))
+      ..add(DiagnosticsProperty('eventType', eventType))
+      ..add(DiagnosticsProperty('historyModel', historyModel));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ClientWantsToTurnOffAlarmImpl &&
+            (identical(other.eventType, eventType) ||
+                other.eventType == eventType) &&
+            (identical(other.historyModel, historyModel) ||
+                other.historyModel == historyModel));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, eventType, historyModel);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ClientWantsToTurnOffAlarmImplCopyWith<_$ClientWantsToTurnOffAlarmImpl>
+      get copyWith => __$$ClientWantsToTurnOffAlarmImplCopyWithImpl<
+          _$ClientWantsToTurnOffAlarmImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ClientWantsToTurnOffAlarmImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ClientWantsToTurnOffAlarm implements ClientWantsToTurnOffAlarm {
+  const factory _ClientWantsToTurnOffAlarm(
+          {required final String eventType,
+          required final HistoryModel historyModel}) =
+      _$ClientWantsToTurnOffAlarmImpl;
+
+  factory _ClientWantsToTurnOffAlarm.fromJson(Map<String, dynamic> json) =
+      _$ClientWantsToTurnOffAlarmImpl.fromJson;
+
+  @override
+  String get eventType;
+  @override
+  HistoryModel get historyModel;
+  @override
+  @JsonKey(ignore: true)
+  _$$ClientWantsToTurnOffAlarmImplCopyWith<_$ClientWantsToTurnOffAlarmImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
 ServerShowsEmails _$ServerShowsEmailsFromJson(Map<String, dynamic> json) {
   return _ServerShowsEmails.fromJson(json);
 }

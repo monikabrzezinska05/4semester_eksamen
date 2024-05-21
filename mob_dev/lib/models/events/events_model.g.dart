@@ -85,6 +85,21 @@ Map<String, dynamic> _$$ClientWantsToDeleteEmailImplToJson(
       'emailId': instance.emailId,
     };
 
+_$ClientWantsToTurnOffAlarmImpl _$$ClientWantsToTurnOffAlarmImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ClientWantsToTurnOffAlarmImpl(
+      eventType: json['eventType'] as String,
+      historyModel:
+          HistoryModel.fromJson(json['historyModel'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$ClientWantsToTurnOffAlarmImplToJson(
+        _$ClientWantsToTurnOffAlarmImpl instance) =>
+    <String, dynamic>{
+      'eventType': instance.eventType,
+      'historyModel': instance.historyModel,
+    };
+
 _$ServerShowsEmailsImpl _$$ServerShowsEmailsImplFromJson(
         Map<String, dynamic> json) =>
     _$ServerShowsEmailsImpl(
