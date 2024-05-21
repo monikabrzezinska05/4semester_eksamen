@@ -49,8 +49,9 @@ public class HistoryRepo
             "INSERT INTO history(useremail, unitId, date, eventtype) VALUES(@UserEmail, @unitid, @date, @EventTypeId) RETURNING *";
         using (var conn = _dataSource.OpenConnection())
         {
+            Console.WriteLine("kig her: " + model);
             var response = conn.QueryFirst<HistoryModel>(sql,
-                new { UserEmail = model.PersonName, model.Unit.UnitId, model.Date, EventTypeId = model.EventType });
+                new { UserEmail = model.PersonName, model.UnitId, model.Date, EventTypeId = model.EventType });
             return response;
         }
     }

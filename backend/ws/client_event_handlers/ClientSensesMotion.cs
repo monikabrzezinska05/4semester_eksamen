@@ -1,5 +1,4 @@
 using System.Text.Json;
-using api.transfer_models;
 using Fleck;
 using infrastructure.models;
 using lib;
@@ -11,6 +10,7 @@ namespace ws.client_event_handlers;
 public class ClientSensesMotionDto : BaseDto
 {
     public HistoryModel historyModel { get; set; }
+    public Unit unit { get; set; }
 }
 
 public class ClientSensesMotion : BaseEventHandler<ClientSensesMotionDto>
@@ -25,13 +25,11 @@ public class ClientSensesMotion : BaseEventHandler<ClientSensesMotionDto>
     public override Task Handle(ClientSensesMotionDto dto, IWebSocketConnection socket)
     {
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.historyModel);
-        var sensingMotionHistory = new ResponseDto()
-        {
-            ResponseData = loggedEvent
-        };
+
         var sensingMotionHistoryToClient = JsonSerializer.Serialize(new ServerSensesMotion()
         {
-            ResponseDto = sensingMotionHistory
+            History = loggedEvent,
+            Unit = dto.unit
         });
         socket.Send(sensingMotionHistoryToClient);
         return Task.CompletedTask;

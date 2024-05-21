@@ -1,16 +1,16 @@
+using System.Text.Json;
 using infrastructure;
 using MediatR;
 using service;
 using ws.transfer_models.server_models;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace ws.client_event_handlers.MediaIntroducedEvents;
 
-public class SensingMotionMediatR(HistoryService historyService) : INotificationHandler<SensingMotionMediatRDto>
+public class StopsSensingMotionMediatR(HistoryService historyService) : INotificationHandler<StopsSensingMotionMediatRDto>
 {
-    public Task Handle(SensingMotionMediatRDto notification, CancellationToken cancellationToken)
+    public Task Handle(StopsSensingMotionMediatRDto notification, CancellationToken cancellationToken)
     {
-        var dto = new ServerSensesMotion
+        var dto = new ServerStopsSendingMotion
         {
             History = notification.historyModel,
             Unit = notification.unit

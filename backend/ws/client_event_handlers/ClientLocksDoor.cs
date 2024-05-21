@@ -1,5 +1,4 @@
 using System.Text.Json;
-using api.transfer_models;
 using Fleck;
 using infrastructure.models;
 using lib;
@@ -11,6 +10,7 @@ namespace ws.client_event_handlers;
 public class ClientLocksDoorDto : BaseDto
 {
     public HistoryModel historyModel { get; set; }
+    public Unit unit { get; set; }
 }
 
 public class ClientLocksDoor : BaseEventHandler<ClientLocksDoorDto>
@@ -25,13 +25,10 @@ public class ClientLocksDoor : BaseEventHandler<ClientLocksDoorDto>
     public override Task Handle(ClientLocksDoorDto dto, IWebSocketConnection socket)
     {
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.historyModel);
-        var lockDoorHistory = new ResponseDto()
-        {
-            ResponseData = loggedEvent
-        };
         var lockDoorHistoryToClient = JsonSerializer.Serialize(new ServerLocksDoor()
         {
-            ResponseDto = lockDoorHistory
+            History = loggedEvent,
+            Unit = dto.unit
         });
         socket.Send(lockDoorHistoryToClient);
         return Task.CompletedTask;
