@@ -1,5 +1,7 @@
 using System.Text.Json;
+using infrastructure;
 using infrastructure.models;
+using MediatR;
 using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Formatter;
@@ -10,10 +12,12 @@ namespace service;
 public class MQTTSubscribeService
 {
     private readonly HistoryService _historyService;
+    private readonly Mediator _mediatr;
 
-    public MQTTSubscribeService(HistoryService historyService)
+    public MQTTSubscribeService(HistoryService historyService, Mediator mediator)
     {
         _historyService = historyService;
+        _mediatr = mediator;
     }
 
     public async Task CommunicateWithBroker()
@@ -53,7 +57,11 @@ public class MQTTSubscribeService
                 Console.WriteLine(deserialized.eventType);
                 switch (deserialized.eventType)
                 {
-                    case "ClientOpensWindowDoor" : 
+                    case "ClientOpensWindowDoor" :
+                        _mediatr.Publish(new SensingMotionMediatRDto
+                        {
+historyModel = 
+                        });
                 }
 
 
