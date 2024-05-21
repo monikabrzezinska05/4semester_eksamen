@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mob_dev/email_list_bloc/email_list_state.dart';
+import 'package:mob_dev/email_list_bloc/settings_state.dart';
 import 'package:mob_dev/models/email_list/email_model.dart';
 
 import '../main.dart';
@@ -46,6 +46,18 @@ class SettingsCubit extends Cubit<SettingsState> {
 
   void turnOffAlarm(HistoryModel historyModel) {
     _send(ClientWantsToTurnOffAlarm(eventType: ClientWantsToTurnOffAlarm.name, historyModel: historyModel));
+  }
+
+  void turnOnAlarm(HistoryModel historyModel) {
+    _send(ClientWantsToTurnOnAlarm(eventType: ClientWantsToTurnOnAlarm.name, historyModel: historyModel));
+  }
+
+  void turnOffMotionSensors(HistoryModel historyModel) {
+    _send(ClientWantsToTurnOffMotionAlarm(eventType: ClientWantsToTurnOffMotionAlarm.name, historyModel: historyModel));
+  }
+
+  void turnOnMotionSensors(HistoryModel historyModel) {
+    _send(ClientWantsToTurnOnMotionAlarm(eventType: ClientWantsToTurnOnMotionAlarm.name, historyModel: historyModel));
   }
 
   void _onEmailListReceived(List<EmailModel> model) {

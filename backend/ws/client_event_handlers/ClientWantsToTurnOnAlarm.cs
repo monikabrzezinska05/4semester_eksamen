@@ -34,7 +34,7 @@ public class ClientWantsToTurnOnAlarm : BaseEventHandler<ClientWantsToTurnOnAlar
         
         var turnOnAlarmToClient = JsonSerializer.Serialize(new ServerHasActivatedAlarm()
         {
-            historyModel = loggedEvent
+            History = loggedEvent
         });
         await socket.Send(turnOnAlarmToClient);
     }

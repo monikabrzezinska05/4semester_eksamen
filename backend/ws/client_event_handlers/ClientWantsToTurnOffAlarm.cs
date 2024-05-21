@@ -35,7 +35,7 @@ public class ClientWantsToTurnOffAlarm : BaseEventHandler<ClientWantsToTurnOffAl
         
         var turnOffAlarmToClient = JsonSerializer.Serialize(new ServerHasDeactivatedAlarm()
         {
-            historyModel = loggedEvent
+            History = loggedEvent
         });
         await socket.Send(turnOffAlarmToClient);
     }

@@ -1,9 +1,9 @@
-using infrastructure.models;
+﻿using infrastructure.models;
 using lib;
 
 namespace ws.transfer_models.server_models;
 
-public class ServerHasActivatedAlarm : BaseDto
+public class ServerHasDeactivatedMotionSensorAlarm : BaseDto
 {
     public HistoryModel History { get; set; }
 }

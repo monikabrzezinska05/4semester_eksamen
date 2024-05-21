@@ -5,6 +5,6 @@ namespace ws.transfer_models.server_models;
 
 public class ServerOpensWindowDoor : BaseDto
 {
-    public HistoryModel history { get; set; }
+    public HistoryModel History { get; set; }
     public Unit Unit { get; set; }
 }

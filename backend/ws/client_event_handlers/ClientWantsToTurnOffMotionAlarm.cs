@@ -33,9 +33,9 @@ public class ClientWantsToTurnOffMotionAlarm : BaseEventHandler<ClientWantsToTur
         _unitService.SetAllWindowDoorStatus(Status.Disarmed);
         await _mqttPublishService.AlarmTurnOffMotionPublish();
         
-        var turnOffAlarmToClient = JsonSerializer.Serialize(new ServerHasDeactivatedWindowDoorAlarm()
+        var turnOffAlarmToClient = JsonSerializer.Serialize(new ServerHasDeactivatedMotionSensorAlarm()
         {
-            historyModel = loggedEvent
+            History = loggedEvent
         });
         await socket.Send(turnOffAlarmToClient);
     }

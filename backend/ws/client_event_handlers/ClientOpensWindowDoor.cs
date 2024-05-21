@@ -28,7 +28,7 @@ public class ClientOpensWindowDoor : BaseEventHandler<ClientOpensWindowDoorDto>
         
         var windowDoorHistoryToClient = JsonSerializer.Serialize(new ServerOpensWindowDoor()
         {
-            history = loggedEvent,
+            History = loggedEvent,
             Unit = dto.unit
         });
         socket.Send(windowDoorHistoryToClient);

@@ -13,28 +13,37 @@ class HistoryCubit extends Cubit<HistoryState> {
   HistoryCubit(this.wsChannel) : super(HistoryState.initial()) {
     wsChannel.stream.listen((event) {
       switch (event) {
-        case ServerAlarmTriggered(eventType: _, historyModel: var model):
-            print(model);
+        case ServerAlarmTriggered(eventType: _, history: var model):
+          _onAddToHistory(model);
         case ServerShowsHistory(eventType: _, historyList: var model):
-            _onHistoryReceived(model);
-          case ServerClosesWindowDoor(history: var model, unit: _):
-            _onAddToHistory(model);
-          case ServerOpensWindowDoor(history: var model, unit: _):
-            _onAddToHistory(model);
+          _onHistoryReceived(model);
+        case ServerClosesWindowDoor(history: var model, unit: _):
+          _onAddToHistory(model);
+        case ServerOpensWindowDoor(history: var model, unit: _):
+          _onAddToHistory(model);
+        case ServerHasActivatedAlarm(history: var model):
+          _onAddToHistory(model);
+        case ServerHasDeactivatedAlarm(history: var model):
+          _onAddToHistory(model);
+        case ServerHasActivatedMotionSensorAlarm(history: var model):
+          _onAddToHistory(model);
+        case ServerHasDeactivatedMotionSensorAlarm(history: var model):
+          _onAddToHistory(model);
+        case ServerAlarmTriggered(history: var model, unit: _):
+          _onAddToHistory(model);
       }
-    },  onError: (error)
-    {
+    }, onError: (error) {
       //DO SOMETHING HERE
       print('Error: $error');
     });
   }
 
-   Future<void> init() async {
+  Future<void> init() async {
     _send(ClientWantsToSeeHistory(eventType: ClientWantsToSeeHistory.name));
   }
 
   _send(ClientEvent event) {
-    wsChannel.sink.add(jsonEncode( event.toJson()));
+    wsChannel.sink.add(jsonEncode(event.toJson()));
   }
 
   void onUnitSelected(String unit) {
@@ -81,7 +90,7 @@ class HistoryCubit extends Cubit<HistoryState> {
     emit(state.copyWith(
       selectedPerson: person,
       shownHistory: state.allHistory
-          .where((historyModel) =>  historyModel.personName == person)
+          .where((historyModel) => historyModel.personName == person)
           .toList(),
     ));
   }
@@ -96,7 +105,8 @@ class HistoryCubit extends Cubit<HistoryState> {
   }
 
   void _onHistoryReceived(List<HistoryModel> model) {
-    emit(state.copyWith(allHistory: model, shownHistory: model, isLoading: false));
+    emit(state.copyWith(
+        allHistory: model, shownHistory: model, isLoading: false));
   }
 
   void _onAddToHistory(HistoryModel model) {

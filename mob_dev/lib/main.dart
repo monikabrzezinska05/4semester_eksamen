@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:mob_dev/email_list_bloc/email_list_cubit.dart';
+import 'package:mob_dev/email_list_bloc/settings_cubit.dart';
 import 'package:mob_dev/history_page.dart';
 import 'package:mob_dev/home_bloc/home_cubit.dart';
 import 'package:mob_dev/login_page.dart';
