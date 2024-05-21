@@ -1,11 +1,7 @@
 using System.Security.Authentication;
-using api.transfer_models;
 using Fleck;
-using infrastructure.models;
 using lib;
-using Newtonsoft.Json;
 using service;
-using ws;
 using ws.transfer_models.server_models;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
@@ -33,15 +29,12 @@ public class ClientWantsToDeAuthenticate() : BaseEventHandler<ClientWantsToDeAut
         }
         StateService.GetClient(socket.ConnectionInfo.Id).IsAuthenticated = false;
         
-        var responseDto = new ResponseDto()
+        var response = new ServerDeAuthenticatesUser()
         {
             MessageToClient = "Connection closed"
         };
-        var response = JsonSerializer.Serialize(new ServerDeAuthenticatesUser()
-        {
-            ResponseDto = responseDto
-        });
-        socket.Send(response);
+        
+        socket.Send(JsonSerializer.Serialize(response, StateService.JsonOptions()));
         return Task.CompletedTask;
     }
 }

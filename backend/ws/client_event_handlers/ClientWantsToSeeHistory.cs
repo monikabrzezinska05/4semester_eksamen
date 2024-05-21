@@ -1,6 +1,5 @@
 using System.Security.Authentication;
 using System.Text.Json;
-using api.transfer_models;
 using Fleck;
 using infrastructure.models;
 using lib;
@@ -26,14 +25,10 @@ public class ClientWantsToSeeHistory : BaseEventHandler<ClientWantsToSeeHistoryD
     {
         StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
         List<HistoryModel> theCompleteHistory = _historyService.GetHistory(dto.TimePeriod);
-        var history = new ResponseDto()
-        {
-            ResponseData = theCompleteHistory
-        };
         
         var historyToClient = JsonSerializer.Serialize(new ServerShowsHistory()
         {
-            ResponseDto = history
+            HistoryList = theCompleteHistory
         }, StateService.JsonOptions());
         socket.Send(historyToClient);
         return Task.CompletedTask;

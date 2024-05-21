@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using api.transfer_models;
 using Fleck;
 using infrastructure.models;
 using lib;
@@ -10,7 +9,7 @@ namespace ws.client_event_handlers;
 
 public class ClientWantsToDeleteEmailDto : BaseDto
 {
-    public EmailModel EmailModel { get; set; }
+    public int EmailId { get; set; }
 }
 
 public class ClientWantsToDeleteEmail : BaseEventHandler<ClientWantsToDeleteEmailDto>
@@ -21,21 +20,20 @@ public class ClientWantsToDeleteEmail : BaseEventHandler<ClientWantsToDeleteEmai
     {
         _emailService = emailService;
     }
-    
+
     public override Task Handle(ClientWantsToDeleteEmailDto dto, IWebSocketConnection socket)
     {
         StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
-        int emailId = dto.EmailModel.id;
-        
-        _emailService.deleteEmail(emailId);
-        var deleteEmail = new ResponseDto()
-        {
-            MessageToClient = "Email has been successfully deleted"
-        };
+        var emailDeleted = _emailService.DeleteEmail(dto.EmailId);
+
         var deleteEmailToClient = JsonSerializer.Serialize(new ServerDeletesEmail()
-        {
-            ResponseDto = deleteEmail
-        });
+            {
+                Success = emailDeleted,
+                EmailId = dto.EmailId
+            },
+            StateService.JsonOptions()
+        );
+
         socket.Send(deleteEmailToClient);
         return Task.CompletedTask;
     }

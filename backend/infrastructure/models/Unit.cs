@@ -5,7 +5,7 @@ public class Unit
     public int UnitId { get; set; }
     public string Name { get; set; }
     public Status Status { get; set; }
-    public UnitType UnitTypeId { get; set; }
+    public UnitType UnitType { get; set; }
 }
 
 public enum Status
@@ -13,6 +13,8 @@ public enum Status
     Armed,
     Disarmed,
     Triggered,
+    Closed,
+    Opened
 }
 
 public enum UnitType

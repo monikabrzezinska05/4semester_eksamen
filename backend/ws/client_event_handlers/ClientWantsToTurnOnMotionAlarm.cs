@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using api.transfer_models;
 using Fleck;
 using infrastructure.models;
 using lib;
@@ -10,7 +9,7 @@ namespace ws.client_event_handlers;
 
 public class ClientWantsToTurnOnAlarmsWindowDoorDto : BaseDto
 {
-    public HistoryModel historyModel { get; set; }
+    public HistoryModel HistoryModel { get; set; }
 }
 
 public class ClientWantsToTurnOnMotionAlarm : BaseEventHandler<ClientWantsToTurnOnAlarmsWindowDoorDto>
@@ -26,11 +25,10 @@ public class ClientWantsToTurnOnMotionAlarm : BaseEventHandler<ClientWantsToTurn
         _unitService = unitService;
     }
 
-
     public override async Task Handle(ClientWantsToTurnOnAlarmsWindowDoorDto dto, IWebSocketConnection socket)
     {
         StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
-        HistoryModel loggedEvent = _historyService.CreateHistory(dto.historyModel);
+        HistoryModel loggedEvent = _historyService.CreateHistory(dto.HistoryModel);
         var units = _unitService.SetAllWindowDoorStatus(Status.Armed);
         foreach (var unit in units)
         {
@@ -44,13 +42,10 @@ public class ClientWantsToTurnOnMotionAlarm : BaseEventHandler<ClientWantsToTurn
             _historyService.CreateHistory(history);
         }
         await _mqttPublishService.AlarmTurnOnMotionPublish();
-        var turnOnAlarm = new ResponseDto()
+        
+        var turnOffAlarmToClient = JsonSerializer.Serialize(new ServerHasActivatedMotionSensorAlarm()
         {
-            ResponseData = loggedEvent
-        };
-        var turnOffAlarmToClient = JsonSerializer.Serialize(new ServerHasActivatedWindowDoorAlarm()
-        {
-            ResponseDto = turnOnAlarm
+            History = loggedEvent
         });
         await socket.Send(turnOffAlarmToClient);
     }

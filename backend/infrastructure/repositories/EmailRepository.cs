@@ -22,17 +22,17 @@ public class EmailRepository
         }
     }
 
-    public EmailModel createEmail(EmailModel model)
+    public EmailModel createEmail(string mail)
     {
-        const string sql = "INSERT INTO emaillist(id, mail) VALUES(@Id, @Mail) RETURNING *";
+        const string sql = "INSERT INTO emaillist(mail) VALUES(@Mail) RETURNING *";
         using (var conn = _dataSource.OpenConnection())
         {
-            var response = conn.QueryFirst<EmailModel>(sql, new { model.id, model.mail });
+            var response = conn.QueryFirst<EmailModel>(sql, new { mail });
             return response;
         }
     }
 
-    public bool deleteEmail(int id)
+    public bool deleteEmail(int? id)
     {
         const string sql = "DELETE FROM emaillist WHERE id = @id";
         using (var conn = _dataSource.OpenConnection())

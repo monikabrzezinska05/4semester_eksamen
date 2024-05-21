@@ -1,9 +1,10 @@
-using api.transfer_models;
+using infrastructure.models;
 using lib;
 
 namespace ws.transfer_models.server_models;
 
 public class ServerCreatesNewUser : BaseDto
 {
-    public ResponseDto ResponseDto { get; set; }
+    public string MessageToClient { get; set; }
+    public User? User { get; set; }
 }
