@@ -57,7 +57,7 @@ class HomeCubit extends Cubit<HomeState> {
 
     // Modify Unit if found, and replace the list in the map
     if (index != -1) {
-      UnitModel updatedUnit = unitList[index].copyWith(status: Status.Closed); // TODO - Add to Status enum!!!
+      UnitModel updatedUnit = unitList[index].copyWith(status: Status.Closed);
       unitList[index] = updatedUnit;
       units[model.unitType] = unitList;
       emit(state.copyWith(units: units));

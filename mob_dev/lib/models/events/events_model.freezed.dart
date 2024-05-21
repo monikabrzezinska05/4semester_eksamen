@@ -2450,3 +2450,198 @@ abstract class _ServerClosesWindowDoor implements ServerClosesWindowDoor {
   _$$ServerClosesWindowDoorImplCopyWith<_$ServerClosesWindowDoorImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
+
+ServerOpensWindowDoor _$ServerOpensWindowDoorFromJson(
+    Map<String, dynamic> json) {
+  return _ServerOpensWindowDoor.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ServerOpensWindowDoor {
+  HistoryModel get history => throw _privateConstructorUsedError;
+  UnitModel get unit => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ServerOpensWindowDoorCopyWith<ServerOpensWindowDoor> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ServerOpensWindowDoorCopyWith<$Res> {
+  factory $ServerOpensWindowDoorCopyWith(ServerOpensWindowDoor value,
+          $Res Function(ServerOpensWindowDoor) then) =
+      _$ServerOpensWindowDoorCopyWithImpl<$Res, ServerOpensWindowDoor>;
+  @useResult
+  $Res call({HistoryModel history, UnitModel unit});
+
+  $HistoryModelCopyWith<$Res> get history;
+  $UnitModelCopyWith<$Res> get unit;
+}
+
+/// @nodoc
+class _$ServerOpensWindowDoorCopyWithImpl<$Res,
+        $Val extends ServerOpensWindowDoor>
+    implements $ServerOpensWindowDoorCopyWith<$Res> {
+  _$ServerOpensWindowDoorCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? history = null,
+    Object? unit = null,
+  }) {
+    return _then(_value.copyWith(
+      history: null == history
+          ? _value.history
+          : history // ignore: cast_nullable_to_non_nullable
+              as HistoryModel,
+      unit: null == unit
+          ? _value.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as UnitModel,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $HistoryModelCopyWith<$Res> get history {
+    return $HistoryModelCopyWith<$Res>(_value.history, (value) {
+      return _then(_value.copyWith(history: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UnitModelCopyWith<$Res> get unit {
+    return $UnitModelCopyWith<$Res>(_value.unit, (value) {
+      return _then(_value.copyWith(unit: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$ServerOpensWindowDoorImplCopyWith<$Res>
+    implements $ServerOpensWindowDoorCopyWith<$Res> {
+  factory _$$ServerOpensWindowDoorImplCopyWith(
+          _$ServerOpensWindowDoorImpl value,
+          $Res Function(_$ServerOpensWindowDoorImpl) then) =
+      __$$ServerOpensWindowDoorImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({HistoryModel history, UnitModel unit});
+
+  @override
+  $HistoryModelCopyWith<$Res> get history;
+  @override
+  $UnitModelCopyWith<$Res> get unit;
+}
+
+/// @nodoc
+class __$$ServerOpensWindowDoorImplCopyWithImpl<$Res>
+    extends _$ServerOpensWindowDoorCopyWithImpl<$Res,
+        _$ServerOpensWindowDoorImpl>
+    implements _$$ServerOpensWindowDoorImplCopyWith<$Res> {
+  __$$ServerOpensWindowDoorImplCopyWithImpl(_$ServerOpensWindowDoorImpl _value,
+      $Res Function(_$ServerOpensWindowDoorImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? history = null,
+    Object? unit = null,
+  }) {
+    return _then(_$ServerOpensWindowDoorImpl(
+      history: null == history
+          ? _value.history
+          : history // ignore: cast_nullable_to_non_nullable
+              as HistoryModel,
+      unit: null == unit
+          ? _value.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as UnitModel,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ServerOpensWindowDoorImpl
+    with DiagnosticableTreeMixin
+    implements _ServerOpensWindowDoor {
+  const _$ServerOpensWindowDoorImpl(
+      {required this.history, required this.unit});
+
+  factory _$ServerOpensWindowDoorImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ServerOpensWindowDoorImplFromJson(json);
+
+  @override
+  final HistoryModel history;
+  @override
+  final UnitModel unit;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ServerOpensWindowDoor(history: $history, unit: $unit)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ServerOpensWindowDoor'))
+      ..add(DiagnosticsProperty('history', history))
+      ..add(DiagnosticsProperty('unit', unit));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ServerOpensWindowDoorImpl &&
+            (identical(other.history, history) || other.history == history) &&
+            (identical(other.unit, unit) || other.unit == unit));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, history, unit);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ServerOpensWindowDoorImplCopyWith<_$ServerOpensWindowDoorImpl>
+      get copyWith => __$$ServerOpensWindowDoorImplCopyWithImpl<
+          _$ServerOpensWindowDoorImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ServerOpensWindowDoorImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ServerOpensWindowDoor implements ServerOpensWindowDoor {
+  const factory _ServerOpensWindowDoor(
+      {required final HistoryModel history,
+      required final UnitModel unit}) = _$ServerOpensWindowDoorImpl;
+
+  factory _ServerOpensWindowDoor.fromJson(Map<String, dynamic> json) =
+      _$ServerOpensWindowDoorImpl.fromJson;
+
+  @override
+  HistoryModel get history;
+  @override
+  UnitModel get unit;
+  @override
+  @JsonKey(ignore: true)
+  _$$ServerOpensWindowDoorImplCopyWith<_$ServerOpensWindowDoorImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}

@@ -204,3 +204,17 @@ Map<String, dynamic> _$$ServerClosesWindowDoorImplToJson(
       'history': instance.history,
       'unit': instance.unit,
     };
+
+_$ServerOpensWindowDoorImpl _$$ServerOpensWindowDoorImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ServerOpensWindowDoorImpl(
+      history: HistoryModel.fromJson(json['history'] as Map<String, dynamic>),
+      unit: UnitModel.fromJson(json['unit'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$ServerOpensWindowDoorImplToJson(
+        _$ServerOpensWindowDoorImpl instance) =>
+    <String, dynamic>{
+      'history': instance.history,
+      'unit': instance.unit,
+    };
