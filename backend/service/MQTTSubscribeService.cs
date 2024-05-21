@@ -62,7 +62,7 @@ public class MQTTSubscribeService
                         {
                             historyModel = new HistoryModel
                             {
-                                UnitId = deserialized.historyModel.unitId,
+                                UnitId = deserialized.historyModel!.unitId,
                                 Date = DateTime.Now,
                                 EventType = (EventType)deserialized.historyModel.eventTypeId
                             }
@@ -73,7 +73,7 @@ public class MQTTSubscribeService
                         {
                             historyModel = new HistoryModel
                             {
-                                UnitId = deserialized.historyModel.unitId,
+                                UnitId = deserialized.historyModel!.unitId,
                                 Date = DateTime.Now,
                                 EventType = (EventType)deserialized.historyModel.eventTypeId
                             }
@@ -84,7 +84,7 @@ public class MQTTSubscribeService
                         {
                             historyModel = new HistoryModel
                             {
-                                UnitId = deserialized.historyModel.unitId,
+                                UnitId = deserialized.historyModel!.unitId,
                                 Date = DateTime.Now,
                                 EventType = (EventType)deserialized.historyModel.eventTypeId
                             }
@@ -95,7 +95,7 @@ public class MQTTSubscribeService
                         {
                             historyModel = new HistoryModel
                             {
-                                UnitId = deserialized.historyModel.unitId,
+                                UnitId = deserialized.historyModel!.unitId,
                                 Date = DateTime.Now,
                                 EventType = (EventType)deserialized.historyModel.eventTypeId
                             }
@@ -106,7 +106,7 @@ public class MQTTSubscribeService
                         {
                             historyModel = new HistoryModel
                             {
-                                UnitId = deserialized.historyModel.unitId,
+                                UnitId = deserialized.historyModel!.unitId,
                                 Date = DateTime.Now,
                                 EventType = (EventType)deserialized.historyModel.eventTypeId
                             }
@@ -117,7 +117,7 @@ public class MQTTSubscribeService
                         {
                             historyModel = new HistoryModel
                             {
-                                UnitId = deserialized.historyModel.unitId,
+                                UnitId = deserialized.historyModel!.unitId,
                                 Date = DateTime.Now,
                                 EventType = (EventType)deserialized.historyModel.eventTypeId
                             }
@@ -128,7 +128,7 @@ public class MQTTSubscribeService
                         {
                             historyModel = new HistoryModel
                             {
-                                UnitId = deserialized.historyModel.unitId,
+                                UnitId = deserialized.historyModel!.unitId,
                                 Date = DateTime.Now,
                                 EventType = (EventType)deserialized.historyModel.eventTypeId
                             }
@@ -139,7 +139,7 @@ public class MQTTSubscribeService
                         {
                             historyModel = new HistoryModel
                             {
-                                UnitId = deserialized.historyModel.unitId,
+                                UnitId = deserialized.historyModel!.unitId,
                                 Date = DateTime.Now,
                                 EventType = (EventType)deserialized.historyModel.eventTypeId
                             }
@@ -148,9 +148,10 @@ public class MQTTSubscribeService
                     case "ClientLocksDoor":
                         _mediatr.Publish(new LocksDoorMediatRDto()
                         {
+                            rfid = deserialized.rfid,
                             historyModel = new HistoryModel
                             {
-                                UnitId = deserialized.historyModel.unitId,
+                                UnitId = deserialized.historyModel!.unitId,
                                 Date = DateTime.Now,
                                 EventType = (EventType)deserialized.historyModel.eventTypeId
                             }
@@ -159,9 +160,10 @@ public class MQTTSubscribeService
                     case "ClientUnlocksDoor":
                         _mediatr.Publish(new UnlocksDoorMediatRDto()
                         {
+                            rfid = deserialized.rfid,
                             historyModel = new HistoryModel
                             {
-                                UnitId = deserialized.historyModel.unitId,
+                                UnitId = deserialized.historyModel!.unitId,
                                 Date = DateTime.Now,
                                 EventType = (EventType)deserialized.historyModel.eventTypeId
                             }
@@ -196,4 +198,5 @@ public class Root
 {
     public string? eventType { get; set; }
     public HistoryModelD? historyModel { get; set; }
+    public string? rfid { get; set; }
 }

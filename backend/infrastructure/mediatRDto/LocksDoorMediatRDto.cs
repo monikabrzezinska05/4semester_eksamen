@@ -6,6 +6,7 @@ namespace infrastructure;
 
 public class LocksDoorMediatRDto : INotification
 {
+    public string? rfid { get; set; }
     public HistoryModel historyModel { get; set; }
     public Unit unit { get; set; }
 }
