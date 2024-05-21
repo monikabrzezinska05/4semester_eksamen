@@ -1,5 +1,4 @@
 using System.Text.Json;
-using api.transfer_models;
 using Fleck;
 using infrastructure.models;
 using lib;
@@ -10,7 +9,7 @@ namespace ws;
 
 public class ClientWantsToTurnOffAlarmDto: BaseDto
 {
-    public HistoryModel historyModel { get; set; }
+    public HistoryModel HistoryModel { get; set; }
 }
 
 public class ClientWantsToTurnOffAlarm : BaseEventHandler<ClientWantsToTurnOffAlarmDto>
@@ -30,17 +29,14 @@ public class ClientWantsToTurnOffAlarm : BaseEventHandler<ClientWantsToTurnOffAl
     {
         
         StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
-        HistoryModel loggedEvent = _historyService.CreateHistory(dto.historyModel);
-        _unitService.SetUnitStatus(dto.historyModel.UnitId, Status.Disarmed);
+        HistoryModel loggedEvent = _historyService.CreateHistory(dto.HistoryModel);
+        _unitService.SetAllUnitStatus(Status.Disarmed);
         await _mqttPublishService.AlarmTurnOffPublish();
-        var turnOffAlarm = new ResponseDto()
-        {
-            ResponseData = loggedEvent
-        };
+
         var turnOffAlarmToClient = JsonSerializer.Serialize(new ServerHasDeactivatedAlarm()
         {
-            ResponseDto = turnOffAlarm
-        });
+            History = loggedEvent
+        }, StateService.JsonOptions());
         await socket.Send(turnOffAlarmToClient);
     }
 }

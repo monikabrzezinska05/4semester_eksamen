@@ -1,5 +1,4 @@
 using System.Text.Json;
-using api.transfer_models;
 using Fleck;
 using lib;
 using service;
@@ -32,20 +31,11 @@ public class ClientAuthenticateWithJwt : BaseEventHandler<ClientAuthenticateWith
         StateService.GetClient(socket.ConnectionInfo.Id).IsAuthenticated = true;
         StateService.GetClient(socket.ConnectionInfo.Id).user = user;
         
-        var responseDto = new ResponseDto()
-        {
-            ResponseData = user,
-            Jwt = dto.Jwt
-        };
-
-
         socket.Send(JsonSerializer.Serialize(new ServerAuthenticatesUser()
         {
-            ResponseDto = responseDto
-        }, new JsonSerializerOptions()
-        {
-            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-        }));
+            User = user,
+            Jwt = dto.Jwt
+        }, StateService.JsonOptions()));
         return Task.CompletedTask;
     }
 }

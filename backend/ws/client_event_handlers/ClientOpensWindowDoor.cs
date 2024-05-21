@@ -1,5 +1,4 @@
 using System.Text.Json;
-using api.transfer_models;
 using Fleck;
 using infrastructure.models;
 using lib;
@@ -10,7 +9,8 @@ namespace ws;
 
 public class ClientOpensWindowDoorDto: BaseDto
 {
-    public HistoryModel historyModel { get; set; }
+    public HistoryModel HistoryModel { get; set; }
+    public Unit Unit { get; set; }
 }
 
 public class ClientOpensWindowDoor : BaseEventHandler<ClientOpensWindowDoorDto>
@@ -24,15 +24,13 @@ public class ClientOpensWindowDoor : BaseEventHandler<ClientOpensWindowDoorDto>
     public override Task Handle(ClientOpensWindowDoorDto dto, IWebSocketConnection socket)
     {
         StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
-        HistoryModel loggedEvent = _historyService.CreateHistory(dto.historyModel);
-        var windowDoorHistory = new ResponseDto()
-        {
-            ResponseData = loggedEvent
-        };
+        HistoryModel loggedEvent = _historyService.CreateHistory(dto.HistoryModel);
+
         var windowDoorHistoryToClient = JsonSerializer.Serialize(new ServerOpensWindowDoor()
         {
-            ResponseDto = windowDoorHistory
-        });
+            History = loggedEvent,
+            Unit = dto.Unit
+        }, StateService.JsonOptions());
         socket.Send(windowDoorHistoryToClient);
         return Task.CompletedTask;
     }

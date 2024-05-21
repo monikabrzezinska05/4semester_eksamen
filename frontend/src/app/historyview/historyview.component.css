@@ -1,0 +1,15 @@
+.mainDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px;
+}
+
+.theActualHistory {
+  margin-bottom: 40px;
+}
