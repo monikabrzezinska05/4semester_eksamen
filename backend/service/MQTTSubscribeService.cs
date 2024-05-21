@@ -57,7 +57,7 @@ public class MQTTSubscribeService
                 Console.WriteLine(deserialized.eventType);
                 switch (deserialized.eventType)
                 {
-                    case "ClientOpensWindowDoor" :
+                    case "ClientSensesMotion" :
                         _mediatr.Publish(new SensingMotionMediatRDto
                         {
 historyModel = 
