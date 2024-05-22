@@ -14,41 +14,67 @@ export class BaseDto<T> {
 }
 
 export class ServerOpensWindowDoorDto extends BaseDto<ServerOpensWindowDoorDto>{
-  responseDto!: ResponseDto<HistoryModel>;
+  history!: HistoryModel;
+  unit!: Unit;
 }
 
 export class ServerClosesWindowDoorDto extends BaseDto<ServerClosesWindowDoorDto>{
-  responseDto!: ResponseDto<HistoryModel>;
+  history!: HistoryModel;
+  unit!: Unit;
 }
 
 export class ServerAlarmTriggeredDto extends BaseDto<ServerAlarmTriggeredDto>{
-  responseDto!: ResponseDto<HistoryModel>;
+  history!: HistoryModel;
+  unit!: Unit;
 }
 
-export class ServerLoginDto extends BaseDto<ServerLoginDto>{
-  responseDto!: ResponseDto<UserModel>;
+export class ServerCreatesEmailDto extends BaseDto<ServerCreatesEmailDto>{
+  email!: EmailModel;
 }
 
-export class ServerLogoffDto extends BaseDto<ServerLogoffDto>{
-  responseDto!: ResponseDto<HistoryModel[]>;
+export class ServerDeletesEmailDto extends BaseDto<ServerDeletesEmailDto>{
+  success!: boolean;
+  emailId!: number;
 }
 
-export class ServerShowsEmailListDto extends BaseDto<ServerShowsEmailListDto>{
-  responseDto!: ResponseDto<EmailModel[]>;
+export class ServerCreatesNewUserDto extends BaseDto<ServerCreatesNewUserDto>{
+  messageToClient!: string;
+  user!: UserModel;
+}
+
+export class ServerHasActivatedAlarmDto extends BaseDto<ServerHasActivatedAlarmDto>{
+  history!: HistoryModel;
+}
+
+export class ServerHasActivatedMotionSensorAlarmDto extends BaseDto<ServerHasActivatedMotionSensorAlarmDto>{
+  history!: HistoryModel;
+}
+
+export class ServerHasDeactivatedAlarmDto extends BaseDto<ServerHasDeactivatedAlarmDto>{
+  history!: HistoryModel;
+}
+
+export class ServerHasDeactivatedMotionSensorAlarmDto extends BaseDto<ServerHasDeactivatedMotionSensorAlarmDto>{
+  history!: HistoryModel;
+}
+
+export class ServerShowsEmailsDto extends BaseDto<ServerShowsEmailsDto>{
+  Emails!: EmailModel[];
 }
 
 export class ServerShowsHistoryDto extends BaseDto<ServerShowsHistoryDto>{
-  responseDto!: ResponseDto<HistoryModel[]>;
+  historyList!: HistoryModel[];
 }
 
 export class ServerShowsUnitsDto extends BaseDto<ServerShowsUnitsDto>{
-  responseDto!: ResponseDto<Unit[]>;
+  unitList!: Unit[];
 }
 
 export class ServerAuthenticatesUserDto extends BaseDto<ServerAuthenticatesUserDto>{
-  responseDto!: ResponseDto<UserModel>;
+  user!: UserModel;
+  jwt!: string;
 }
 
 export class ServerDeAuthenticatesUserDto extends BaseDto<ServerDeAuthenticatesUserDto>{
-  responseDto!: ResponseDto<undefined>;
+  messageToClient!: string;
 }

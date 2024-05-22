@@ -2,7 +2,7 @@ export interface Unit{
   unitId?: number;
   name: string;
   status: Status;
-  unitTypeId: UnitType;
+  unitType: UnitType;
 }
 
 export enum UnitType{
@@ -15,4 +15,6 @@ export enum Status{
   Armed,
   Disarmed,
   Triggered,
+  Open,
+  Closed,
 }
