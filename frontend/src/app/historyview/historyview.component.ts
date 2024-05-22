@@ -27,11 +27,12 @@ export class HistoryviewComponent implements OnInit{
   private getHistoryObservable(): Observable<HistoryModel[]> {
     return this.state.getAllHistory().pipe(
       map(historyItems => historyItems.map(item => (
-        console.log(item),
           {
         ...item,
-        date: new Date(item.date)
-      })))
+            date: new Date(item.date),
+          }))
+        .sort((a, b) => b.date.getTime() - a.date.getTime())
+      )
     );
   }
 
