@@ -30,7 +30,7 @@ public class MQTTSubscribeService
             .WithTcpServer("mqtt.flespi.io", 8883)
             .WithProtocolVersion(MqttProtocolVersion.V500)
             .WithTls()
-            .WithCredentials(Environment.GetEnvironmentVariable("mqttToken")) //Change to real token.
+            .WithCredentials(Environment.GetEnvironmentVariable("mqttToken"))
             .Build();
 
         //Connect med options.
@@ -51,10 +51,7 @@ public class MQTTSubscribeService
             {
                 //Få beskeden.
                 var message = receivedMessage.ApplicationMessage.ConvertPayloadToString();
-                Console.WriteLine(message);
                 var deserialized = JsonSerializer.Deserialize<Root>(message);
-                //Console.WriteLine(JsonSerializer.Serialize(deserialized));
-                Console.WriteLine(deserialized.eventType);
                 switch (deserialized.eventType)
                 {
                     case "ClientSensesMotion":

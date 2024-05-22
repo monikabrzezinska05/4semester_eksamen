@@ -29,7 +29,7 @@ public class ClientUnlocksDoor : BaseEventHandler<ClientUnlocksDoorDto>
             {
                 History = loggedEvent,
                 Unit = dto.unit
-            });
+            }, StateService.JsonOptions());
         socket.Send(unlockDoorHistoryToClient);
         return Task.CompletedTask;
     }

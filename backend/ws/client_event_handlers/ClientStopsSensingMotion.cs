@@ -29,7 +29,7 @@ public class ClientStopsSensingMotion : BaseEventHandler<ClientStopsSensingMotio
         {
             History = loggedEvent,
             Unit = dto.Unit
-        });
+        }, StateService.JsonOptions());
         socket.Send(stopsSensingMotionHistoryToClient);
         return Task.CompletedTask;
     }

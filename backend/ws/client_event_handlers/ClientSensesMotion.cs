@@ -30,7 +30,7 @@ public class ClientSensesMotion : BaseEventHandler<ClientSensesMotionDto>
         {
             History = loggedEvent,
             Unit = dto.unit
-        });
+        }, StateService.JsonOptions());
         socket.Send(sensingMotionHistoryToClient);
         return Task.CompletedTask;
     }
