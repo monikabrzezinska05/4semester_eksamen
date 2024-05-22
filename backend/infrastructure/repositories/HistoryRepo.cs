@@ -61,9 +61,9 @@ public class HistoryRepo
         using (var conn = _dataSource.OpenConnection())
         {
             Console.WriteLine("kig her: " + model);
-            var newHistory = conn.QueryFirst<HistoryModel>(sql,
+            var newHistory = conn.QuerySingle<HistoryModel>(sql,
                 new { UserEmail = model.PersonName, model.UnitId, model.Date, EventTypeId = model.EventType });
-            var response = conn.QueryFirst<HistoryModel>(sqlGetter, new { newHistory.HistoryId });
+            var response = conn.QuerySingle<HistoryModel>(sqlGetter, new { newHistory.HistoryId });
             return response;
         }
     }

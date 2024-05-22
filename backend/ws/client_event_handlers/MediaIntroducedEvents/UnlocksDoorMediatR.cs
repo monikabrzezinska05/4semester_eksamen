@@ -17,7 +17,7 @@ public class UnlocksDoorMediatR(HistoryService historyService) : INotificationHa
         {
             History = new HistoryModel
             {
-                PersonName = "Boobie",//Lav det med at bruge rfid til at finde navnet.
+                PersonName = "boobie@email.dk",//Lav det med at bruge rfid til at finde navnet.
                 UnitId = notification.historyModel.UnitId,
                 Date = notification.historyModel.Date,
                 EventType = notification.historyModel.EventType
