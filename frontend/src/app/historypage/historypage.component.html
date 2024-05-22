@@ -1,6 +1,10 @@
-<div style="display: flex; justify-content: flex-start">
-  <app-sidebar style="flex: 1"></app-sidebar>
-  <div style="display: flex; flex-direction: column; flex: 3">
+<div class="headDiv">
+  <div class="menuOpener" (click)="toggleSidebar()">
+    <img src="assets/hamburger.png" class="sidebarImage">
+  </div>
+  <app-sidebar class="sidebar" [class.open]="!sidebarOpen"></app-sidebar>
+  <div class="vertical-line"></div>
+  <div class="historyView">
     <app-historyview></app-historyview>
   </div>
 </div>

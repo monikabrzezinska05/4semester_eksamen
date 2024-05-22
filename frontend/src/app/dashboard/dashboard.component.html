@@ -1,5 +1,8 @@
 <div class="headDiv">
-  <app-sidebar class="sidebar"></app-sidebar>
+  <div class="menuOpener" (click)="toggleSidebar()">
+    <img src="assets/hamburger.png" class="sidebarImage">
+  </div>
+  <app-sidebar class="sidebar" [class.open]="!sidebarOpen"></app-sidebar>
   <div class="vertical-line"></div>
   <div class="overview">
     <app-overview [unitType]="UnitType.Doors"></app-overview>

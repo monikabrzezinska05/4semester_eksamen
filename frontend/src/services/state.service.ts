@@ -17,7 +17,7 @@ import {
 import {HistoryModel} from "../models/HistoryModel";
 import {UserModel} from "../models/UserModel";
 import {Router} from "@angular/router";
-import {BehaviorSubject, combineLatest, map, Observable} from "rxjs";
+import {BehaviorSubject, map, Observable} from "rxjs";
 import {EmailModel} from "../models/EmailModel";
 
 @Injectable({
