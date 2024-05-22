@@ -1,3 +1,5 @@
+using System.Text.Json;
+using System.Security.Authentication;
 using Fleck;
 using infrastructure.models;
 
@@ -12,22 +14,30 @@ public class WsWithMetadata(IWebSocketConnection connection)
 
 public static class StateService
 {
-    public static Dictionary<Guid, WsWithMetadata> _clients = new();
+    public static Dictionary<Guid, WsWithMetadata> Clients = new();
     public static Dictionary<Guid, IWebSocketConnection> Connections = new();
 
     public static WsWithMetadata GetClient(Guid clientId)
     {
-        return _clients[clientId];
+        return Clients[clientId];
     }
 
+    public static void IsClientAuthenticated(Guid clientId)
+    {
+        if (!Clients[clientId].IsAuthenticated)
+        {
+            throw new AuthenticationException("Client is not authenticated");
+        }
+    }
+    
     public static void AddClient(Guid clientId, IWebSocketConnection connection)
     {
-        _clients.TryAdd(clientId, new WsWithMetadata(connection));
+        Clients.TryAdd(clientId, new WsWithMetadata(connection));
     }
 
     public static void RemoveClient(Guid clientId)
     {
-        _clients.Remove(clientId);
+        Clients.Remove(clientId);
     }
     
     public static bool AddConnection(IWebSocketConnection ws)
@@ -38,5 +48,13 @@ public static class StateService
     public static bool RemoveConnection(IWebSocketConnection ws)
     {
         return Connections.Remove(ws.ConnectionInfo.Id);
+    }
+
+    public static JsonSerializerOptions JsonOptions()
+    {
+        return new JsonSerializerOptions()
+        {
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+        };
     }
 }

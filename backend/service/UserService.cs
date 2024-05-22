@@ -25,4 +25,9 @@ public class UserService
         _userRepository.CreatePassword(hash, salt, newUser.Mail);
         return newUser;
     }
+    
+    public User GetUser(string mail)
+    {
+        return _userRepository.GetUser(mail);
+    }
 }

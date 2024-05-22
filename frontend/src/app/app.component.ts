@@ -14,8 +14,14 @@ import {State} from "../services/state.service";
 })
 export class AppComponent {
   constructor(private router: Router, private state: State) {
-    if(this.state.currentUser == null && !this.isLoginRoute()) {
-      this.router.navigateByUrl('/login');
+
+    this.state.ws.onopen = () => {
+      if (this.state.jwt !== null || this.state.currentUserId !== null) {
+        this.state.AuthenticateWithJwt();
+      }
+      else {
+        this.router.navigate(['/login']);
+      }
     }
   }
 

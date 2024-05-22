@@ -1,9 +1,9 @@
-using api.transfer_models;
+using infrastructure.models;
 using lib;
 
 namespace ws.transfer_models.server_models;
 
 public class ServerShowsHistory : BaseDto
 {
-    public ResponseDto ResponseDto { get; set; }
+    public List<HistoryModel> HistoryList { get; set; }
 }

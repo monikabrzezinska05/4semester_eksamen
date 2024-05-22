@@ -1,9 +1,9 @@
 using System.Text.Json;
-using api.transfer_models;
 using Fleck;
 using infrastructure.models;
 using lib;
 using service;
+using ws.transfer_models.server_models;
 
 namespace ws;
 
@@ -26,14 +26,18 @@ public class ClientTriggersAlarm : BaseEventHandler<ClientTriggersAlarmDto>
 
     public override Task Handle(ClientTriggersAlarmDto dto, IWebSocketConnection socket)
     {
+        StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
+        var unitId = dto.HistoryModel.UnitId;
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.HistoryModel);
-        Unit unit = _unitService.GetUnitById(dto.HistoryModel.UnitId);
+        _unitService.SetUnitStatus(unitId, Status.Triggered);
+        Unit unit = _unitService.GetUnitById(unitId);
         _emailService.SendEmail(loggedEvent, unit);
-        var alarmTriggerDto = new ResponseDto()
-        {   
-            ResponseData = loggedEvent
+        var alarmTriggerDto = new ServerAlarmTriggered()
+        {
+            History = loggedEvent,
+            Unit = unit
         };
-        var alarmTriggerToClient = JsonSerializer.Serialize(alarmTriggerDto);
+        var alarmTriggerToClient = JsonSerializer.Serialize(alarmTriggerDto, StateService.JsonOptions());
         socket.Send(alarmTriggerToClient);
         return Task.CompletedTask;
     }

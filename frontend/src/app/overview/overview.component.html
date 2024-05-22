@@ -1,6 +1,6 @@
 <div class="header">
-  <p>{{ unitType }}</p>
-  <p>STATUS THINGY HERE!</p>
+  <p class="headline">{{ unitTypeName }}</p>
+  <div class="status-circle" [style.border-color]="getAllStatusColor()"></div>
 </div>
 <hr>
 <ng-container *ngFor="let unit of units$ | async">
@@ -9,8 +9,7 @@
       <div style="height: 30px; width: 50px">
         <p>{{ unit.name }}</p>
       </div>
-      <div style="height: 30px; width: 50px">
-      </div>
+      <div class="status-circle" [style.border-color]="getStatusColor(unit)"></div>
     </div>
   </div>
 </ng-container>

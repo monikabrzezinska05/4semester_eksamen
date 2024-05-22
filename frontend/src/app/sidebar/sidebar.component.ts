@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild, ElementRef, Renderer2, AfterViewInit} from
 import {FormBuilder, Validators} from "@angular/forms";
 import {State} from "../../services/state.service";
 import {ServerDeAuthenticatesUserDto} from "../../models/BaseDto";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-sidebar',
@@ -18,7 +19,8 @@ export class SidebarComponent implements OnInit, AfterViewInit {
 
   constructor(private renderer: Renderer2,
               private state: State,
-              private formBuilder: FormBuilder){ }
+              private formBuilder: FormBuilder,
+              private router: Router){ }
 
   ngOnInit(): void { }
 
@@ -77,6 +79,17 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       this.renderer.addClass(document.body, 'dark-mode');
     } else {
       this.renderer.removeClass(document.body, 'dark-mode');
+    }
+  }
+  onHistoryButtonPress() {
+    if(this.router.url !== '/history') {
+      this.router.navigateByUrl('/history');
+    }
+  }
+
+  onDashboardButtonPressed() {
+    if(this.router.url !== '') {
+      this.router.navigateByUrl('');
     }
   }
 }
