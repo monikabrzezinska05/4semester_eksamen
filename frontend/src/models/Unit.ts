@@ -1,12 +1,20 @@
 export interface Unit{
   unitId?: number;
   name: string;
-  status: boolean;
-  unitTypeId: UnitType;
+  status: Status;
+  unitType: UnitType;
 }
 
 export enum UnitType{
-  Door,
-  Window,
+  Doors,
+  Windows,
   MotionSensor,
+}
+
+export enum Status{
+  Armed,
+  Disarmed,
+  Triggered,
+  Open,
+  Closed,
 }

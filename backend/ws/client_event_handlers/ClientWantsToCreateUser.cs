@@ -1,5 +1,4 @@
 using System.Text.Json;
-using api.transfer_models;
 using Fleck;
 using infrastructure.models;
 using lib;
@@ -10,51 +9,45 @@ namespace ws;
 
 public class ClientWantsToCreateUserDto : BaseDto
 {
-    public string name { get; set; }
-    public string password { get; set; }
-    public bool isChild { get; set; }
-    public string email { get; set; }
+    public User UserModel { get; set; }
+    public string Password { get; set; }
 }
 
 public class ClientWantsToCreateUser : BaseEventHandler<ClientWantsToCreateUserDto>
 {
     private readonly UserService _userService;
-    
+
     public ClientWantsToCreateUser(UserService userService)
     {
         _userService = userService;
     }
-    
+
     public override async Task Handle(ClientWantsToCreateUserDto dto, IWebSocketConnection socket)
     {
-        var newUser = new User()
-        {
-            Name = dto.name,
-            IsChild = dto.isChild,
-            Mail = dto.email
-        };
+        StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
+
+        var newUser = dto.UserModel;
         
-        var user = _userService.CreateUser(newUser, dto.password);
-        ResponseDto createUserMessage;
+        var user = _userService.CreateUser(newUser, dto.Password);
+        var createUserMessage = new ServerCreatesNewUser();
+        
+        
         if (user == null)
         {
-            createUserMessage = new ResponseDto()
+            createUserMessage = new ServerCreatesNewUser()
             {
                 MessageToClient = "User already exists"
             };
-        } else 
+        }
+        else
         {
-            createUserMessage = new ResponseDto()
+            createUserMessage = new ServerCreatesNewUser()
             {
                 MessageToClient = "User created",
-                ResponseData = user
+                User = user
             };
         }
-        
-        var serverCreateUser = new ServerCreatesNewUser()
-        {
-            ResponseDto = createUserMessage
-        };
-        socket.Send(JsonSerializer.Serialize(serverCreateUser));
+
+        socket.Send(JsonSerializer.Serialize(createUserMessage, StateService.JsonOptions()));
     }
 }

@@ -1,30 +1,42 @@
 ﻿using infrastructure.models;
 using infrastructure.repositories;
-using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace service;
 
 public class HistoryService
 {
     private readonly HistoryRepo _historyRepo;
-    private readonly ILogger<HistoryService> _logger;
     
-    public HistoryService(HistoryRepo historyRepo, ILogger<HistoryService> logger)
+    public HistoryService(HistoryRepo historyRepo)
     {
         _historyRepo = historyRepo;
-        _logger = logger;
     }
 
     public List<HistoryModel> GetHistory(DateTime? timePeriod)
     {
-        return _historyRepo.GetHistory(timePeriod);
+        var histories = _historyRepo.GetHistory(timePeriod);
+
+        foreach (var history in histories)
+        {
+            List<Unit> units = JsonConvert.DeserializeObject<List<Unit>>(history.UnitTable);
+            history.Unit = units[0];
+            history.UnitTable = null;
+        }
+        
+        return histories;
     }
 
     public HistoryModel CreateHistory(HistoryModel model)
     {
-        return _historyRepo.CreateHistory(model);
-    }
+        var history = _historyRepo.CreateHistory(model);
+        
+        List<Unit> units = JsonConvert.DeserializeObject<List<Unit>>(history.UnitTable);
+        history.Unit = units[0];
+        history.UnitTable = null;
 
+        return history;
+    }
 }
 
 

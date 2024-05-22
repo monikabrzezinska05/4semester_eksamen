@@ -1,5 +1,4 @@
 using System.Text.Json;
-using api.transfer_models;
 using Fleck;
 using infrastructure.models;
 using lib;
@@ -10,32 +9,34 @@ namespace ws;
 
 public class ClientWantsToTurnOffAlarmDto: BaseDto
 {
-    public HistoryModel historyModel { get; set; }
+    public HistoryModel HistoryModel { get; set; }
 }
 
 public class ClientWantsToTurnOffAlarm : BaseEventHandler<ClientWantsToTurnOffAlarmDto>
 {
     private readonly HistoryService _historyService;
     private readonly MQTTPublishService _mqttPublishService;
+    private readonly UnitService _unitService;
 
-    public ClientWantsToTurnOffAlarm(HistoryService historyService, MQTTPublishService mqttPublishService)
+    public ClientWantsToTurnOffAlarm(HistoryService historyService, MQTTPublishService mqttPublishService, UnitService unitService)
     {
         _historyService = historyService;
         _mqttPublishService = mqttPublishService;
+        _unitService = unitService;
     }
 
     public override async Task Handle(ClientWantsToTurnOffAlarmDto dto, IWebSocketConnection socket)
     {
-        HistoryModel loggedEvent = _historyService.CreateHistory(dto.historyModel);
+        
+        StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
+        HistoryModel loggedEvent = _historyService.CreateHistory(dto.HistoryModel);
+        _unitService.SetAllUnitStatus(Status.Disarmed);
         await _mqttPublishService.AlarmTurnOffPublish();
-        var turnOffAlarm = new ResponseDto()
-        {
-            ResponseData = loggedEvent
-        };
+
         var turnOffAlarmToClient = JsonSerializer.Serialize(new ServerHasDeactivatedAlarm()
         {
-            ResponseDto = turnOffAlarm
-        });
+            History = loggedEvent
+        }, StateService.JsonOptions());
         await socket.Send(turnOffAlarmToClient);
     }
 }
