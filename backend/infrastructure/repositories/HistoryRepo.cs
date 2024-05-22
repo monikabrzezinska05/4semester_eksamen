@@ -56,14 +56,13 @@ public class HistoryRepo
             "FROM history " +
             "JOIN public.unit u on u.unitid = history.unitid " +
             "LEFT JOIN public.\"User\" on \"User\".mail = history.useremail " +
-            "WHERE historyid = @HistoryId" +
+            "WHERE historyid = @HistoryId " +
             "group by historyid, \"User\".name, eventtype, date";
         using (var conn = _dataSource.OpenConnection())
         {
-            Console.WriteLine("kig her: " + model);
-            var newHistory = conn.QuerySingle<HistoryModel>(sql,
+            var newHistory = conn.QueryFirst<HistoryModel>(sql,
                 new { UserEmail = model.PersonName, model.UnitId, model.Date, EventTypeId = model.EventType });
-            var response = conn.QuerySingle<HistoryModel>(sqlGetter, new { newHistory.HistoryId });
+            var response = conn.QueryFirst<HistoryModel>(sqlGetter, new { newHistory.HistoryId });
             return response;
         }
     }
