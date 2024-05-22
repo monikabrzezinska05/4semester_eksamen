@@ -32,7 +32,7 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   static final ValueNotifier<ThemeMode> themeNotifier =
-      ValueNotifier(ThemeMode.dark);
+      ValueNotifier(ThemeMode.system);
 
   const MyApp({super.key});
 
