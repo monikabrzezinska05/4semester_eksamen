@@ -31,26 +31,30 @@ export class SidebarComponent implements OnInit, AfterViewInit {
         if (knob.style.left === '55px') {
           // KALD HER METODE DER SKAL DEAKTIVERE NOGET!!!!
           knob.style.left = '5px';
-          knob.style.backgroundColor = '#ff0000'
+          knob.style.backgroundColor = '#ff0000';
         } else {
           // KALD HER METODE DER SKAL AKTIVERE NOGET!!!!
           knob.style.left = '55px';
           knob.style.backgroundColor = '#08ff00';
         }
       });
+
       //til modal
       this.renderer.listen(this.toggleDarkmodeSwitch.nativeElement, 'click', (event) => {
         const knob = this.toggleDarkmodeSwitch.nativeElement.querySelector('.toggle-knob') as HTMLElement;
+        const knobIcon = this.toggleDarkmodeSwitch.nativeElement.querySelector('.knob-icon') as HTMLElement;
+        var sun = '&#9728;';
+        var moon = '&#9789';
         if (knob.style.left === '55px') {
           // KALD HER METODE DER SKAL DEAKTIVERE NOGET!!!!
           this.toggleDarkmode();
           knob.style.left = '5px';
-          knob.style.backgroundColor = '#ff0000'
+          knobIcon.innerHTML = sun;
         } else {
           // KALD HER METODE DER SKAL AKTIVERE NOGET!!!!
           this.toggleDarkmode();
           knob.style.left = '55px';
-          knob.style.backgroundColor = '#08ff00';
+          knobIcon.innerHTML = moon;
         }
       });
     }, 0);

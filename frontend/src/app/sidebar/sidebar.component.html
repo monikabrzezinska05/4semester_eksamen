@@ -14,15 +14,28 @@
 <div id="settingsModal" class="modal">
   <div class="modal-content">
     <span class="close" (click)="onModalClosePressed()">&times;</span>
-    <p>Farve koder:</p>
-    <p></p>
-    <p>Skift pin kode:</p>
+    <p>Color Codes:</p>
+    <div [style.display]="'flex'">
+      <div class="status-circle" [style.border-color]="'green'"></div>
+      <p>Green indicates alarm is armed.</p>
+    </div>
+    <div [style.display]="'flex'">
+      <div class="status-circle" [style.border-color]="'yellow'"></div>
+      <p>Yellow indicates a unit is open.</p>
+    </div>
+    <div [style.display]="'flex'">
+      <div class="status-circle" [style.border-color]="'red'"></div>
+      <p>Red indicates an alarm is triggered.</p>
+    </div>
+    <p>Change Pin:</p>
     <input type="password"  placeholder="Pin kode" maxlength="4">
-    <p>Email liste til notifikation:</p>
+    <p>Email list for notifications:</p>
     <p></p>
     <p>Dark mode:</p>
     <div class="toggle-switch" #toggleDarkmode>
-      <div class="toggle-knob"></div>
+      <div class="toggle-knob">
+        <p class="knob-icon">&#9728;</p>
+      </div>
     </div>
   </div>
 </div>
