@@ -16,7 +16,7 @@ public class ClientOpensWindowDoorDto: BaseDto
 public class ClientOpensWindowDoor : BaseEventHandler<ClientOpensWindowDoorDto>
 {
     private readonly HistoryService _historyService;
-
+    
     public ClientOpensWindowDoor(HistoryService historyService)
     {
         _historyService = historyService;
