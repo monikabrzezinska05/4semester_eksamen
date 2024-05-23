@@ -15,14 +15,17 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   @ViewChild('toggleSwitch') toggleSwitch!: ElementRef;
   @ViewChild('toggleDarkmode') toggleDarkmodeSwitch!: ElementRef;
   private modal!: HTMLElement;
+  private modalContent!: HTMLElement;
   darkMode = false;
 
   constructor(private renderer: Renderer2,
               private state: State,
               private formBuilder: FormBuilder,
-              private router: Router){ }
+              private router: Router) {
+  }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
@@ -59,6 +62,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       });
     }, 0);
     this.modal = document.getElementById("settingsModal")!;
+    this.modalContent = document.getElementById("settingsModalContent")!;
   }
 
   Logoff() {
@@ -85,15 +89,24 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       this.renderer.removeClass(document.body, 'dark-mode');
     }
   }
+
   onHistoryButtonPress() {
-    if(this.router.url !== '/history') {
+    if (this.router.url !== '/history') {
       this.router.navigateByUrl('/history');
     }
   }
 
   onDashboardButtonPressed() {
-    if(this.router.url !== '') {
+    if (this.router.url !== '') {
       this.router.navigateByUrl('');
+    }
+  }
+
+  onOutsideModalPressed() {
+    window.onclick = (event: MouseEvent) => {
+      if (event.target === this.modal) {
+        this.modal.style.display = "none";
+      }
     }
   }
 }
