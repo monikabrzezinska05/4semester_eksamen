@@ -14,23 +14,34 @@
 <div id="settingsModal" class="modal">
   <div class="modal-content">
     <span class="close" (click)="onModalClosePressed()">&times;</span>
-    <p>Color Codes:</p>
-    <div [style.display]="'flex'">
-      <div class="status-circle" [style.border-color]="'green'"></div>
-      <p>Green indicates alarm is armed.</p>
-    </div>
-    <div [style.display]="'flex'">
-      <div class="status-circle" [style.border-color]="'yellow'"></div>
-      <p>Yellow indicates a unit is open.</p>
-    </div>
-    <div [style.display]="'flex'">
-      <div class="status-circle" [style.border-color]="'red'"></div>
-      <p>Red indicates an alarm is triggered.</p>
-    </div>
+    <details>
+      <summary>Color Codes</summary>
+      <div [style.display]="'flex'">
+        <div class="status-circle" [style.border-color]="'green'"></div>
+        <p>Green indicates alarm is armed.</p>
+      </div>
+      <div [style.display]="'flex'">
+        <div class="status-circle" [style.border-color]="'yellow'"></div>
+        <p>Yellow indicates a unit is open.</p>
+      </div>
+      <div [style.display]="'flex'">
+        <div class="status-circle" [style.border-color]="'red'"></div>
+        <p>Red indicates an alarm is triggered.</p>
+      </div>
+      <div [style.display]="'flex'">
+        <div class="status-circle" [style.border-color]="'black'"></div>
+        <p>If you see this call help.</p>
+      </div>
+    </details>
+
     <p>Change Pin:</p>
     <input type="password"  placeholder="Pin kode" maxlength="4">
-    <p>Email list for notifications:</p>
-    <p></p>
+    <button style="margin-left: 10px">Confirm</button>
+    <details>
+      <summary>Email list for notifications</summary>
+      <div>
+      </div>
+    </details>
     <p>Dark mode:</p>
     <div class="toggle-switch" #toggleDarkmode>
       <div class="toggle-knob">

@@ -88,7 +88,6 @@
 
 @keyframes swooshOut {
   from{top: 0px; opacity: 1}
-
   to{top: 500px; opacity: 0}
 }
 
@@ -112,4 +111,66 @@
   border-radius: 50%;
   background-color: transparent;
   margin-right: 10px;
+  margin-left: 10px;
+}
+
+details {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 80%;
+  border: 1px solid;
+  border-radius: 4px;
+  margin: 0;
+  margin-bottom: .5rem;
+  transition: height .2s;
+  background-color: #e05426;
+  color: #fff;
+  overflow: hidden;
+}
+
+summary {
+  display: block;
+  padding: 1rem;
+  padding-left: 2.2rem;
+  position: relative;
+  user-select: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+summary:before {
+  content: '';
+  border-width: .4rem;
+  border-style: solid;
+  border-color: transparent transparent transparent #fff;
+  position: absolute;
+  top: 1.3rem;
+  left: 1rem;
+  transform: rotate(0);
+  transform-origin: .2rem 50%;
+  transition: .25s transform ease-out;
+}
+
+details[open] > summary:before {
+  transform: rotate(90deg);
+}
+
+details:not([open]) {
+  height: 50px;
+}
+
+details[open] {
+  height: 260px;
+}
+
+details > p {
+  padding: 4px;
+  margin: 0;
+}
+
+details summary::-webkit-details-marker {
+  display:none;
 }
