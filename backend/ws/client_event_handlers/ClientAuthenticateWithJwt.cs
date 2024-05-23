@@ -26,8 +26,10 @@ public class ClientAuthenticateWithJwt : BaseEventHandler<ClientAuthenticateWith
     public override Task Handle(ClientAuthenticateWithJwtDto dto, IWebSocketConnection socket)
     {
         var isValid = _tokenService.ValidateJwtAndReturnClaims(dto.Jwt);
+        Console.WriteLine("tester 2");
         if (!isValid)
         {
+            Console.WriteLine("into the if");
             socket.Send(JsonSerializer.Serialize(new ServerAuthenticatesUser()
             {
                 User = null,
@@ -35,7 +37,7 @@ public class ClientAuthenticateWithJwt : BaseEventHandler<ClientAuthenticateWith
             }, StateService.JsonOptions()));
             return Task.CompletedTask;
         }
-        
+        Console.WriteLine("bare for sjov");
         var user = _userService.GetUser(dto.User);
         
         StateService.GetClient(socket.ConnectionInfo.Id).IsAuthenticated = true;

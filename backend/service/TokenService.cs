@@ -21,7 +21,6 @@ public class TokenService(IConfiguration configuration)
             IDateTimeProvider provider = new UtcDateTimeProvider();
             var now = provider.GetNow().AddMinutes(-5);
 
-            //double lifetime = configuration.GetValue<double>("JWT:Lifetime");
             double seconds = UnixEpoch.GetSecondsSince(now);
             
             var payload = new Dictionary<string, object>
@@ -53,23 +52,27 @@ public class TokenService(IConfiguration configuration)
             IBase64UrlEncoder urlEncoder = new JwtBase64UrlEncoder();
             IJwtValidator validator = new JwtValidator(serializer, provider);
             IJwtDecoder decoder = new JwtDecoder(serializer, validator, urlEncoder, new HMACSHA512Algorithm());
+            Console.WriteLine("before decode");
             var json = decoder.Decode(jwt, jwtKey);
+            Console.WriteLine("after decode");
             
             var claims = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
             if (claims.TryGetValue("exp", out string expValue))
             {
                 var expDate = DateTimeOffset.FromUnixTimeSeconds(long.Parse(expValue));
+                Console.WriteLine("tester 1");
                 return expDate.UtcDateTime <= DateTime.UtcNow.AddHours(-2);
             }
             else
             {
                 throw new Exception("JWT does not contain 'exp' claim.");
             }
+           
         }
         catch (Exception e)
         {
             Log.Error(e, "ValidateJwtAndReturnClaims");
-            throw new AuthenticationException("Authentication failed");
+            return false;
         }
     }
 }
