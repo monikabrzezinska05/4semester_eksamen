@@ -1,14 +1,13 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {Status, Unit, UnitType} from "../../models/Unit";
 import {State} from "../../services/state.service";
-import {map, Observable} from "rxjs";
+import {map, Observable, of} from "rxjs";
+import {ToastrModule, ToastrService} from "ngx-toastr";
 
 
 @Component({
   selector: 'app-overview',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.css'
 })
@@ -49,26 +48,30 @@ export class OverviewComponent implements OnInit {
     throw new Error(`Unknown unit type: ${unitType}`);
   }
 
-  getAllStatusColor() {
-    var statusYellow = this.units$?.pipe(map(units => units.filter(unit => unit.status === Status.Disarmed)));
-    var statusRed = this.units$?.pipe(map(units => units.filter(unit => unit.status === Status.Triggered)));
-    if (statusRed) {
-      return "red";
-    }
-    if (statusYellow) {
-      return "yellow";
-    }
-    return "green";
+  getAllStatusColor() : Observable<string> {
+    return this.units$?.pipe(
+      map(units => {
+        var statusYellow = units.filter(unit => unit.status === Status.Disarmed || unit.status === Status.Open);
+        var statusRed = units.filter(unit => unit.status === Status.Triggered);
+        if (statusRed.length > 0) {
+          return "red";
+        }
+        if (statusYellow.length > 0) {
+          return "yellow";
+        }
+        return "green";
+      })
+    ) || of("green");
   }
 
-  getStatusColor(Unit: Unit) {
-    if (Unit.status === Status.Armed) {
+  getStatusColor(unit: Unit) {
+    if (unit.status === Status.Armed || unit.status === Status.Closed) {
       return "green";
     }
-    if (Unit.status === Status.Disarmed) {
+    if (unit.status === Status.Disarmed || unit.status === Status.Open) {
       return "yellow";
     }
-    if (Unit.status === Status.Triggered) {
+    if (unit.status === Status.Triggered) {
       return "red";
     }
     return "black";
