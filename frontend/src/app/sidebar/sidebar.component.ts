@@ -121,7 +121,11 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onAddEmailPressed() {
-
+  onAddEmailPressed(email: String) {
+    var dto = {
+      eventType: "ClientWantsToCreateEmail",
+      email: email
+    }
+    this.state.ws.send(JSON.stringify(dto));
   }
 }
