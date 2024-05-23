@@ -13,16 +13,28 @@ namespace service;
 public class TokenService(IConfiguration configuration)
 {
     private readonly string jwtKey = configuration.GetValue<string>("JWT_KEY");
-
+    
     public string IssueJwt(User user)
     {
         try
         {
+            IDateTimeProvider provider = new UtcDateTimeProvider();
+            var now = provider.GetNow().AddMinutes(-5);
+
+            //double lifetime = configuration.GetValue<double>("JWT:Lifetime");
+            double seconds = UnixEpoch.GetSecondsSince(now);
+            
+            var payload = new Dictionary<string, object>
+            {
+                {"user", user},
+                {"exp", seconds}
+            };
+            
             IJwtAlgorithm algorithm = new HMACSHA512Algorithm();
             IJsonSerializer serializer = new JsonNetSerializer();
             IBase64UrlEncoder urlEncoder = new JwtBase64UrlEncoder();
             IJwtEncoder encoder = new JwtEncoder(algorithm, serializer, urlEncoder);
-            return encoder.Encode(user, jwtKey);
+            return encoder.Encode(payload, jwtKey);
         }
         catch (Exception e)
         {
@@ -32,7 +44,7 @@ public class TokenService(IConfiguration configuration)
         }
     }
 
-    public Dictionary<string, string> ValidateJwtAndReturnClaims(string jwt)
+    public bool ValidateJwtAndReturnClaims(string jwt)
     {
         try
         {
@@ -42,7 +54,17 @@ public class TokenService(IConfiguration configuration)
             IJwtValidator validator = new JwtValidator(serializer, provider);
             IJwtDecoder decoder = new JwtDecoder(serializer, validator, urlEncoder, new HMACSHA512Algorithm());
             var json = decoder.Decode(jwt, jwtKey);
-            return JsonConvert.DeserializeObject<Dictionary<string, string>>(json)!;
+            
+            var claims = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+            if (claims.TryGetValue("exp", out string expValue))
+            {
+                var expDate = DateTimeOffset.FromUnixTimeSeconds(long.Parse(expValue));
+                return expDate.UtcDateTime <= DateTime.UtcNow.AddHours(-2);
+            }
+            else
+            {
+                throw new Exception("JWT does not contain 'exp' claim.");
+            }
         }
         catch (Exception e)
         {
