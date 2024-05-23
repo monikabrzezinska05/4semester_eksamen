@@ -166,6 +166,17 @@ public class MQTTSubscribeService
                             }
                         });
                         break;
+                    case "ClientTriggersAlarm":
+                        _mediatr.Publish(new AlarmTriggerMediatRDto()
+                        {
+                            HistoryModel = new HistoryModel
+                            {
+                                UnitId = deserialized.historyModel!.unitId,
+                                Date = DateTime.Now,
+                                EventType = (EventType)deserialized.historyModel.eventTypeId
+                            }
+                        });
+                        break;
                 }
             }
             catch (Exception exc)
