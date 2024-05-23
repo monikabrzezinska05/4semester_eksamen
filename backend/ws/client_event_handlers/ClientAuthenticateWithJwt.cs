@@ -25,7 +25,16 @@ public class ClientAuthenticateWithJwt : BaseEventHandler<ClientAuthenticateWith
 
     public override Task Handle(ClientAuthenticateWithJwtDto dto, IWebSocketConnection socket)
     {
-        _tokenService.ValidateJwtAndReturnClaims(dto.Jwt);
+        var isValid = _tokenService.ValidateJwtAndReturnClaims(dto.Jwt);
+        if (!isValid)
+        {
+            socket.Send(JsonSerializer.Serialize(new ServerAuthenticatesUser()
+            {
+                User = null,
+                Jwt = null
+            }, StateService.JsonOptions()));
+            return Task.CompletedTask;
+        }
         var user = _userService.GetUser(dto.User);
         
         StateService.GetClient(socket.ConnectionInfo.Id).IsAuthenticated = true;

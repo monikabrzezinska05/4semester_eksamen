@@ -8,11 +8,6 @@ import {FormControl, ReactiveFormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-historyview',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule
-  ],
   templateUrl: './historyview.component.html',
   styleUrl: './historyview.component.css'
 })
@@ -67,35 +62,3 @@ export class HistoryviewComponent implements OnInit {
   protected readonly EventType = EventType;
 }
 
-
-/**
- *  // Filtering logic
- *   private filterLogs(historyItems: HistoryModel[], searchTerm: string): HistoryModel[] {
- *     if(!searchTerm){
- *       return historyItems;
- *     }
- *     const lowerCaseSearchTerm = searchTerm.toLowerCase();
- *
- *     return historyItems.filter(item => {
- *     const eventTypeString = EventType[item.eventType];
- *
- *     const dateString = item.date.toISOString();
- *
- *     const unitString = item.unit.toString();
- *
- *     return (
- *       eventTypeString.toLowerCase().includes(lowerCaseSearchTerm) ||
- *         dateString.toLowerCase().includes(lowerCaseSearchTerm) ||
- *         unitString.toLowerCase().includes(lowerCaseSearchTerm)
- *     );
- *     });
- *   }
- *
- *   //ngOnInit
- *       this.filteredHistory$ = combineLatest([
- *       this.getHistoryObservable(),
- *       this.searchControl.valueChanges.pipe(startWith(''))
- *     ]).pipe(
- *       map(([historyItems, searchTerm]) => this.filterLogs(historyItems, searchTerm!))
- *     );
- */

@@ -24,12 +24,25 @@ public class ClientWantsToLogin() : BaseEventHandler<ClientWantsToLoginDto>
     public override Task Handle(ClientWantsToLoginDto request, IWebSocketConnection socket)
     {
         var user = _authenticationService.Authenticate(request.UserLogin);
+        var responseToClient = "";
+        if (user == null)
+        {
+            responseToClient = JsonSerializer.Serialize(new ServerAuthenticatesUser()
+                {
+                    User = null,
+                    Jwt = null
+                },
+                StateService.JsonOptions()
+            );
+            socket.Send(responseToClient);
+            return Task.CompletedTask;
+        }
         var jwt = _tokenService.IssueJwt(user!);
 
         StateService.GetClient(socket.ConnectionInfo.Id).IsAuthenticated = true;
         StateService.GetClient(socket.ConnectionInfo.Id).user = user!;
 
-        var responseToClient = JsonSerializer.Serialize(new ServerAuthenticatesUser()
+        responseToClient = JsonSerializer.Serialize(new ServerAuthenticatesUser()
             {
                 User = user,
                 Jwt = jwt
