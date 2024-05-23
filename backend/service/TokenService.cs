@@ -55,7 +55,7 @@ public class TokenService(IConfiguration configuration)
             var json = decoder.Decode(jwt, jwtKey);
             Console.WriteLine("after decode");
             
-            var claims = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
+            /*var claims = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
             if (claims.TryGetValue("exp", out string expValue))
             {
                 var expDate = DateTimeOffset.FromUnixTimeSeconds(long.Parse(expValue));
@@ -66,7 +66,8 @@ public class TokenService(IConfiguration configuration)
             {
                 throw new Exception("JWT does not contain 'exp' claim.");
             }
-           
+           */
+            return true;
         }
         catch (Exception e)
         {
