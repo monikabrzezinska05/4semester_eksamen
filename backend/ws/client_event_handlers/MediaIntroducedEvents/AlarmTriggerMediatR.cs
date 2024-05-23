@@ -14,7 +14,7 @@ public class AlarmTriggerMediatR(HistoryService historyService, UnitService unit
         var dto = new ServerAlarmTriggered()
         {
             History = notification.HistoryModel,
-            Unit = notification.Unit
+            Unit = unitService.GetUnitById(notification.HistoryModel.UnitId)
         };
         historyService.CreateHistory(dto.History);
         Console.WriteLine("tjek 1");

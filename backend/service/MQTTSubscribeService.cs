@@ -6,6 +6,7 @@ using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Formatter;
 using JsonSerializer = System.Text.Json.JsonSerializer;
+using Unit = infrastructure.models.Unit;
 
 namespace service;
 
@@ -181,9 +182,7 @@ public class MQTTSubscribeService
             }
             catch (Exception exc)
             {
-                Console.WriteLine(exc.Message);
-                Console.WriteLine(exc.InnerException);
-                Console.WriteLine(exc.StackTrace);
+                Console.WriteLine(exc);
             }
 
             return Task.CompletedTask;

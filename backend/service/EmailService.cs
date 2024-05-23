@@ -23,6 +23,7 @@ public class EmailService
         Console.WriteLine(Environment.GetEnvironmentVariable("fromEmail") + "variable");
         
         message.Subject = "Alarm triggered";
+        Console.WriteLine(unit.Name + history.Date + "message");
         message.Body = new TextPart("plain")
         {
             Text = @$"{unit.Name} has been triggered at: {history.Date}.

@@ -24,7 +24,9 @@ public class UnitService
 
     public Unit SetUnitStatus(int unitId, Status status)
     {
-        return _unitRepository.SetUnitStatus(unitId, status);
+        var unit = _unitRepository.SetUnitStatus(unitId, status);
+        Console.WriteLine(unit.Name + "unitservice");
+        return unit;
     }
 
     public List<Unit> SetAllUnitStatus(Status status)
