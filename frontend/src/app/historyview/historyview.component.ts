@@ -7,10 +7,6 @@ import {Status} from "../../models/Unit";
 
 @Component({
   selector: 'app-historyview',
-  standalone: true,
-  imports: [
-    CommonModule
-  ],
   templateUrl: './historyview.component.html',
   styleUrl: './historyview.component.css'
 })
