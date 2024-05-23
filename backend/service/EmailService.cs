@@ -18,7 +18,7 @@ public class EmailService
     {
         var message = new MimeMessage();
         message.From.Add(new MailboxAddress("Securty", Environment.GetEnvironmentVariable("fromEmail")));
-
+        
         message.Subject = "Alarm triggered";
         message.Body = new TextPart("plain")
         {
@@ -27,6 +27,7 @@ public class EmailService
 
 Best Regards, Securty Home Security"
         };
+
         foreach (var email in GetMails().ToList())
         {
             message.To.Add(new MailboxAddress(email.mail, email.mail));

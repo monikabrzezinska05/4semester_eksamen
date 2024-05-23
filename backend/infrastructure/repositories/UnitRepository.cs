@@ -34,7 +34,7 @@ public class UnitRepository
 
     public Unit SetUnitStatus(int unitId, Status status)
     {
-        string sql = "UPDATE unit SET status = @status WHERE unitid = @unitId;";
+        string sql = "UPDATE unit SET status = @status WHERE unitid = @unitId RETURNING *;";
 
         using (var conn = _dataSource.OpenConnection())
         {
@@ -44,7 +44,7 @@ public class UnitRepository
 
     public List<Unit> SetAllUnitStatus(Status status)
     {
-        string sql = "UPDATE unit SET status = @status;";
+        string sql = "UPDATE unit SET status = @status RETURNING *;";
 
         using (var conn = _dataSource.OpenConnection())
         { 
@@ -54,7 +54,7 @@ public class UnitRepository
 
     public List<Unit> SetAllWindowDoorStatus(Status status)
     {
-        string sql = "UPDATE unit SET status = @status WHERE unittype != 2;";
+        string sql = "UPDATE unit SET status = @status WHERE unittype != 2 RETURNING *;";
 
         using (var conn = _dataSource.OpenConnection())
         {
@@ -64,7 +64,7 @@ public class UnitRepository
 
     public List<Unit> SetAllSpecificUnitStatus(int status, int type)
     {
-        string sql = "UPDATE unit SET status = @status WHERE unittype = @type;";
+        string sql = "UPDATE unit SET status = @status WHERE unittype = @type RETURNING *;";
 
         using (var conn = _dataSource.OpenConnection())
         {
