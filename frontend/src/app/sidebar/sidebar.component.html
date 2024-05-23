@@ -12,7 +12,7 @@
 
 
 <div id="settingsModal" class="modal" (click)="onOutsideModalPressed()">
-  <div id="settingsModalContent" class="modal-content">
+  <div class="modal-content">
     <span class="close" (click)="onModalClosePressed()">&times;</span>
     <details>
       <summary>Color Codes</summary>
@@ -35,13 +35,24 @@
     </details>
 
     <p>Change Pin:</p>
-    <input type="password"  placeholder="Pin kode" maxlength="4">
+    <input type="password" placeholder="Pin kode" maxlength="4">
     <button style="margin-left: 10px">Confirm</button>
+
     <details>
       <summary>Email list for notifications</summary>
+      <div class="email" *ngFor="let emailItem of Email$ | async">
+        <div class="email-content">
+          <p>{{ emailItem.mail }}</p>
+          <button class="button-delete-email">&times;</button>
+        </div>
+        <div class="line"></div>
+      </div>
       <div>
+        <input style="margin-left: 10px" type="email">
+        <button style="margin-left: 10px" (click)="onAddEmailPressed()">Add</button>
       </div>
     </details>
+
     <p>Dark mode:</p>
     <div class="toggle-switch" #toggleDarkmode>
       <div class="toggle-knob">

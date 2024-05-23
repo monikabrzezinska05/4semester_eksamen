@@ -175,3 +175,47 @@ details > p {
 details summary::-webkit-details-marker {
   display:none;
 }
+
+
+.email {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 10px;
+  width: 300px;
+}
+
+.email-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 30px;
+  width: 100%;
+}
+
+.line {
+  width: 98%;
+  height: 1px;
+  background-color: white;
+  margin: 5px 0 5px 0;
+}
+
+.button-delete-email {
+  background-color: red;
+  border-radius: 50%;
+  color: white;
+  width: 20px;
+  height: 20px;
+  border: none;
+  text-align: center;
+  align-self: center;
+  margin-right: 15px;
+}
+
+.button-delete-email:hover {
+  background-color: #c00000;
+}
+
+.button-delete-email:active {
+  background-color: red;
+}

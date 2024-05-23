@@ -12,7 +12,7 @@ import {
   ServerHasActivatedMotionSensorAlarmDto,
   ServerHasDeactivatedAlarmDto,
   ServerHasDeactivatedMotionSensorAlarmDto,
-  ServerCreatesEmailDto, ServerDeletesEmailDto, ServerCreatesNewUserDto
+  ServerCreatesEmailDto, ServerDeletesEmailDto, ServerCreatesNewUserDto, ServerShowsEmailsDto
 } from "../models/BaseDto";
 import {HistoryModel} from "../models/HistoryModel";
 import {UserModel} from "../models/UserModel";
@@ -51,6 +51,11 @@ export class State {
     this.history$.next([...current, ...dto.historyList]);
   }
 
+  ServerShowsEmails(dto: ServerShowsEmailsDto) {
+    let current = this.emails$.getValue();
+    this.emails$.next([...current, ...dto.emails]);
+  }
+
   ServerAuthenticatesUser(dto: ServerAuthenticatesUserDto) {
     if (dto.user !== null && dto.jwt !== null) {
       this.authenticated = true;
@@ -62,6 +67,7 @@ export class State {
 
       this.getUnitsFromServer();
       this.getHistoryFromServer();
+      this.getEmailsFromServer();
     }
     else {
       this.router.navigateByUrl('/login');
@@ -83,11 +89,19 @@ export class State {
     this.ws.send(JSON.stringify(dto));
   }
 
+  private getEmailsFromServer() {
+    let dto = {
+      eventType: "ClientWantsToSeeEmails"
+    }
+    this.ws.send(JSON.stringify(dto));
+  }
+
   ServerDeAuthenticatesUser(dto: ServerDeAuthenticatesUserDto) {
     this.authenticated = false;
     this.currentUser = undefined;
     this.units$ = new BehaviorSubject<Unit[]>([]);
     this.history$ = new BehaviorSubject<HistoryModel[]>([]);
+    this.emails$ = new BehaviorSubject<EmailModel[]>([]);
     this.router.navigateByUrl('/login');
   }
 
@@ -203,5 +217,9 @@ export class State {
       user: this.currentUserId
     }
     this.ws.send(JSON.stringify(dto));
+  }
+
+  getAllEmails() : Observable<EmailModel[]> {
+    return this.emails$.asObservable();
   }
 }

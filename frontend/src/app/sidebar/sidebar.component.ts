@@ -3,6 +3,8 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {State} from "../../services/state.service";
 import {ServerDeAuthenticatesUserDto} from "../../models/BaseDto";
 import {Router} from "@angular/router";
+import {map, Observable} from "rxjs";
+import {EmailModel} from "../../models/EmailModel";
 
 @Component({
   selector: 'app-sidebar',
@@ -13,7 +15,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   @ViewChild('toggleSwitch') toggleSwitch!: ElementRef;
   @ViewChild('toggleDarkmode') toggleDarkmodeSwitch!: ElementRef;
   private modal!: HTMLElement;
-  private modalContent!: HTMLElement;
+  Email$!: Observable<EmailModel[]>;
   darkMode = false;
 
   constructor(private renderer: Renderer2,
@@ -23,6 +25,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    this.Email$ = this.getEmailObservable();
   }
 
   ngAfterViewInit(): void {
@@ -60,7 +63,17 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       });
     }, 0);
     this.modal = document.getElementById("settingsModal")!;
-    this.modalContent = document.getElementById("settingsModalContent")!;
+  }
+
+  private getEmailObservable(): Observable<EmailModel[]> {
+    return this.state.getAllEmails().pipe(
+      map(emailItems => emailItems.map(item => (
+        console.log("email: "+item),
+        {
+          ...item
+        }
+      )))
+    );
   }
 
   Logoff() {
@@ -77,6 +90,14 @@ export class SidebarComponent implements OnInit, AfterViewInit {
 
   onModalClosePressed() {
     this.modal.style.display = "none";
+  }
+
+  onOutsideModalPressed() {
+    window.onclick = (event: MouseEvent) => {
+      if (event.target === this.modal) {
+        this.modal.style.display = "none";
+      }
+    }
   }
 
   toggleDarkmode() {
@@ -100,11 +121,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onOutsideModalPressed() {
-    window.onclick = (event: MouseEvent) => {
-      if (event.target === this.modal) {
-        this.modal.style.display = "none";
-      }
-    }
+  onAddEmailPressed() {
+
   }
 }

@@ -59,7 +59,7 @@ export class ServerHasDeactivatedMotionSensorAlarmDto extends BaseDto<ServerHasD
 }
 
 export class ServerShowsEmailsDto extends BaseDto<ServerShowsEmailsDto>{
-  Emails!: EmailModel[];
+  emails!: EmailModel[];
 }
 
 export class ServerShowsHistoryDto extends BaseDto<ServerShowsHistoryDto>{
