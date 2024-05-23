@@ -2,16 +2,12 @@ import {Component, inject} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Router, RouterOutlet} from "@angular/router";
-import {WsClientService} from "../../ws.client.service";
-import {ClientWantsToLogin} from "../../models/clientWantsToLogin";
 import {State} from "../../services/state.service";
 
 @Component({
   selector: 'app-loginpage',
-  imports: [CommonModule, ReactiveFormsModule, RouterOutlet],
   templateUrl: './loginpage.component.html',
   styleUrls: ['./loginpage.component.css'],
-  standalone: true
 })
 
 export class LoginpageComponent {

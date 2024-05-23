@@ -4,7 +4,6 @@ using JWT;
 using JWT.Algorithms;
 using JWT.Serializers;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Serilog;
 
