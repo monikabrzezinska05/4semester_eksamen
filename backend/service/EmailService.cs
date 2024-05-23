@@ -16,9 +16,12 @@ public class EmailService
 
     public void SendEmail(HistoryModel history, Unit unit)
     {
+        Console.WriteLine("from sendemail");
         var message = new MimeMessage();
         message.From.Add(new MailboxAddress("Securty", Environment.GetEnvironmentVariable("fromEmail")));
 
+        Console.WriteLine(Environment.GetEnvironmentVariable("fromEmail") + "variable");
+        
         message.Subject = "Alarm triggered";
         message.Body = new TextPart("plain")
         {
@@ -27,8 +30,11 @@ public class EmailService
 
 Best Regards, Securty Home Security"
         };
+        Console.WriteLine("somewhere idk");
+
         foreach (var email in GetMails().ToList())
         {
+            Console.WriteLine("from the loop");
             message.To.Add(new MailboxAddress(email.mail, email.mail));
             using (var client = new SmtpClient())
             {

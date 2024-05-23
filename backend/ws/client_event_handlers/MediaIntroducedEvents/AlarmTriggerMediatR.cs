@@ -17,8 +17,11 @@ public class AlarmTriggerMediatR(HistoryService historyService, UnitService unit
             Unit = notification.Unit
         };
         historyService.CreateHistory(dto.History);
-        unitService.SetUnitStatus(dto.Unit.UnitId, Status.Triggered);
+        Console.WriteLine("tjek 1");
         emailService.SendEmail(dto.History, dto.Unit);
+        Console.WriteLine("tjek 2");
+        unitService.SetUnitStatus(dto.History.UnitId, Status.Triggered);
+        Console.WriteLine("tjek 3");
         
         var dtoResult = JsonSerializer.Serialize(dto, StateService.JsonOptions());
         StateService.SendToAll(dtoResult);
