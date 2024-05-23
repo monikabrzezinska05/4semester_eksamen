@@ -2,12 +2,14 @@
   <h1>Here is your latest history: </h1>
 </header>
 
-
-<div *ngFor="let historyItem of History$ | async">
+<div>
+  <input type="text" placeholder="Search" [formControl]="searchControl">
+</div>
+<div *ngFor="let historyItem of ShownHistory$ | async">
   <div class="theActualHistory">
     <h3>{{ historyItem.unit.name }}</h3>
     <p>{{ "Day: " + historyItem.date.toDateString() + ", Time: " + historyItem.date.getHours() }}</p>
-    <p>{{ "Status: " + Status[historyItem.unit.status] }}</p>
-    <p>{{ "Card scanned: " + historyItem.personName}}</p>   <!--somehow get the person-name here !?!?!?!??!?!?!-->
+    <p>{{ "Status: " + EventType[historyItem.eventType] }}</p>
+    <p>{{ "Card scanned: " + historyItem.personName}}</p>
   </div>
 </div>
