@@ -19,6 +19,7 @@ import {UserModel} from "../models/UserModel";
 import {Router} from "@angular/router";
 import {BehaviorSubject, map, Observable} from "rxjs";
 import {EmailModel} from "../models/EmailModel";
+import {ToastrService} from "ngx-toastr";
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +36,7 @@ export class State {
   units$: BehaviorSubject<Unit[]> = new BehaviorSubject<Unit[]>([]);
   emails$: BehaviorSubject<EmailModel[]> = new BehaviorSubject<EmailModel[]>([]);
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private toastr: ToastrService) {
     this.ws.onmessage = message => {
 
       const messageFromServer = JSON.parse(message.data) as BaseDto<any>
@@ -58,12 +59,14 @@ export class State {
       localStorage.setItem('jwt', this.jwt);
       localStorage.setItem('currentUserId', this.currentUser.mail);
       this.router.navigateByUrl('');
+
+      this.getUnitsFromServer();
+      this.getHistoryFromServer();
     }
     else {
       this.router.navigateByUrl('/login');
+      this.toastr.error("Login failed, please try again.");
     }
-    this.getUnitsFromServer();
-    this.getHistoryFromServer();
   }
 
   private getUnitsFromServer() {

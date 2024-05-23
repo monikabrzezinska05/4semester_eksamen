@@ -14,11 +14,12 @@
 }
 
 .sidebarButton {
-    width: 60%;
-    height: 20px;
-    background-color: black;
+    width: 50%;
+    height: 30px;
+    background-color: #e05426;
     color: white;
     border: none;
+  border-radius: 10px;
     text-align: center;
     text-decoration: none;
     display: inline-block;

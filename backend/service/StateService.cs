@@ -57,4 +57,12 @@ public static class StateService
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase
         };
     }
+
+    public static void SendToAll(string dtoResult)
+    {
+        foreach (var connection in Connections.Values)
+        {
+            connection.Send(dtoResult);
+        }
+    }
 }
