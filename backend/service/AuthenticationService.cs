@@ -31,7 +31,6 @@ public class AuthenticationService
             hashAlgorithm.VerifyHashedPassword(userLogin.Password, pwHash.Password, pwHash.Salt);
         if (isValid)
         {
-            Console.WriteLine("email numero dos" + userLogin.Email);
             return _userRepository.GetUserByMail(userLogin.Email);
         }
         return null;
