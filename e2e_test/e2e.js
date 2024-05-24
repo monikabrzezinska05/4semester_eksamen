@@ -5,7 +5,7 @@ fixture(`Tests`).page("http://localhost:4200/login");
 test('Login and see the dashboard', async t => {
     await t
         .typeText('#usernameField', 'boobie@email.dk')
-        .typeText('#passwordField', process.env.SECRET)
+        .typeText('#passwordField', 'password')
         
         .click("#loginButton.login-button")
         .wait(2000)
