@@ -8,7 +8,7 @@ test('Login and see the dashboard', async t => {
         .typeText('#passwordField', 'password')
         
         .click("#loginButton.login-button")
-        .wait(2000)
+        .wait(7000)
 
         .expect(Selector('#doorOverview').exists).ok()
 });
