@@ -36,7 +36,7 @@ jobs:
 
             - uses: DevExpress/testcafe-action@latest
               with:
-                args: "chrome e2e_test/e2e.js"
+                args: "chrome:headless e2e_test/e2e.js"
               env:
                 SECRET: ${{ secrets.USERSECRET }}
 
