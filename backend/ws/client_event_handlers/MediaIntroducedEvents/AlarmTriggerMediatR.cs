@@ -11,14 +11,15 @@ public class AlarmTriggerMediatR(HistoryService historyService, UnitService unit
 {
     public Task Handle(AlarmTriggerMediatRDto notification, CancellationToken cancellationToken)
     {
+        var loggedHistory = historyService.CreateHistory(notification.HistoryModel);
+        var updatedUnit = unitService.SetUnitStatus(notification.HistoryModel.UnitId, Status.Triggered);
+        emailService.SendEmail(notification.HistoryModel, updatedUnit);
+        
         var dto = new ServerAlarmTriggered()
         {
-            History = notification.HistoryModel,
-            Unit = unitService.GetUnitById(notification.HistoryModel.UnitId)
+            History = loggedHistory,
+            Unit = updatedUnit
         };
-        historyService.CreateHistory(dto.History);
-        emailService.SendEmail(dto.History, dto.Unit);
-        unitService.SetUnitStatus(dto.History.UnitId, Status.Triggered);
         
         var dtoResult = JsonSerializer.Serialize(dto, StateService.JsonOptions());
         StateService.SendToAll(dtoResult);
