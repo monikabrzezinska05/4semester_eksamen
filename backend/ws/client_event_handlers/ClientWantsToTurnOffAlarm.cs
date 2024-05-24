@@ -30,7 +30,7 @@ public class ClientWantsToTurnOffAlarm : BaseEventHandler<ClientWantsToTurnOffAl
         
         StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.HistoryModel);
-        _unitService.SetAllUnitStatus(Status.Disarmed);
+        _unitService.SetAllWindowDoorStatus(Status.Disarmed);
         await _mqttPublishService.AlarmTurnOffPublish();
 
         var turnOffAlarmToClient = JsonSerializer.Serialize(new ServerHasDeactivatedAlarm()

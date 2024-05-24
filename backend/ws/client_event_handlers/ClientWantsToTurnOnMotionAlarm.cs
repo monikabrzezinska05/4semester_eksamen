@@ -29,7 +29,7 @@ public class ClientWantsToTurnOnMotionAlarm : BaseEventHandler<ClientWantsToTurn
     {
         StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.HistoryModel);
-        var units = _unitService.SetAllWindowDoorStatus(Status.Armed);
+        var units = _unitService.SetAllUnitStatus(Status.Armed);
         foreach (var unit in units)
         {
             var history = new HistoryModel()

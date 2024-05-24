@@ -62,16 +62,6 @@ public class UnitRepository
         }
     }
 
-    public List<Unit> SetAllSpecificUnitStatus(int status, int type)
-    {
-        string sql = "UPDATE unit SET status = @status WHERE unittype = @type RETURNING *;";
-
-        using (var conn = _dataSource.OpenConnection())
-        {
-            return conn.Query<Unit>(sql, new { @status, @type }).ToList();
-        }
-    }
-
     public List<Unit> getUnitsById(List<int> unitIds)
     {
         string sql = "SELECT * FROM unit WHERE unitid IN @values;";

@@ -29,7 +29,7 @@ public class ClientWantsToTurnOnAlarm : BaseEventHandler<ClientWantsToTurnOnAlar
     {
         StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.HistoryModel);
-        _unitService.SetAllUnitStatus(Status.Armed);
+        _unitService.SetAllWindowDoorStatus(Status.Armed);
         await _mqttPublishService.AlarmTurnOnPublish();
         
         var turnOnAlarmToClient = JsonSerializer.Serialize(new ServerHasActivatedAlarm()
