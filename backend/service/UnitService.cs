@@ -34,6 +34,8 @@ public class UnitService
 
     public List<Unit> SetAllWindowDoorStatus(Status status)
     {
+        Console.WriteLine("status service" + status);
+
         return _unitRepository.SetAllWindowDoorStatus(status);
     }
 
