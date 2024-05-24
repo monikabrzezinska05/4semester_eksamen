@@ -34,8 +34,9 @@ jobs:
             - name: Start frontend
               run: cd frontend && npm start & echo "FRONTEND_PID=$!" >> $GITHUB_ENV
 
-            - name: Run E2E tests
-              run: cd e2e_test && testcafe chrome:headless e2e.js
+            - uses: DevExpress/testcafe-action@latest
+              with:
+                args: "chrome e2e.js"
               env:
                 SECRET: ${{ secrets.USERSECRET }}
 
