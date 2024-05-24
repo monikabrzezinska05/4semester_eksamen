@@ -1,10 +1,10 @@
 <div class="sidebarMain">
   <img src="assets/securty_logo.png" class="sidebarImage">
   <button class="sidebarButton" (click)="onDashboardButtonPressed()">Dashboard</button>
-  <button class="sidebarButton" (click)="onHistoryButtonPress()">HistoryModel</button>
+  <button class="sidebarButton" (click)="onHistoryButtonPress()" id="historyButton">HistoryModel</button>
   <button class="sidebarButton">Settings</button>
   <div class="toggle-switch" #toggleSwitch>
     <div class="toggle-knob"></div>
   </div>
-  <button type="logoff" class="sidebarButton" (click)="Logoff()"> Sign out</button>
+  <button type="logoff" class="sidebarButton" (click)="Logoff()" id="logoutButton"> Sign out</button>
 </div>
