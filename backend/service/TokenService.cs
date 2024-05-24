@@ -1,10 +1,8 @@
-﻿using System.Security.Authentication;
-using infrastructure.models;
+﻿using infrastructure.models;
 using JWT;
 using JWT.Algorithms;
 using JWT.Serializers;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 using Serilog;
 
 namespace service;

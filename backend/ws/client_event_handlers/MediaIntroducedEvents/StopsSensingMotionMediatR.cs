@@ -10,7 +10,7 @@ public class StopsSensingMotionMediatR(HistoryService historyService) : INotific
 {
     public Task Handle(StopsSensingMotionMediatRDto notification, CancellationToken cancellationToken)
     {
-        var dto = new ServerStopsSendingMotion
+        var dto = new ServerStopsSensingMotion
         {
             History = notification.historyModel,
             Unit = notification.unit
