@@ -5,7 +5,7 @@ fixture(`Tests`).page("http://localhost:4200/login");
 test('Login and see the dashboard', async t => {
     await t
         .typeText('#usernameField', 'boobie@email.dk')
-        .typeText('#passwordField.ng-untouched.ng-pristine.ng-invalid', 'process.env.SECRET')
+        .typeText('#passwordField', process.env.SECRET)
         
         .click("#loginButton.login-button")
         .wait(2000)
@@ -17,7 +17,7 @@ test('Login and see the history page', async t => {
     await t
     .wait(2000)
     .typeText('#usernameField', 'boobie@email.dk')
-    .typeText('#passwordField', 'password')
+    .typeText('#passwordField', process.env.SECRET)
     
     .click("#loginButton.login-button")
     
@@ -31,7 +31,7 @@ test('Login and see the history page', async t => {
 test('Login and logout', async t => {
     await t
     .typeText('#usernameField', 'boobie@email.dk')
-    .typeText('#passwordField.ng-untouched.ng-pristine.ng-invalid', 'pasprocess.env.SECRET')
+    .typeText('#passwordField', process.env.SECRET)
     
     .click("#loginButton.login-button")
     .wait(3000)
