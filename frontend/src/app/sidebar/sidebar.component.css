@@ -93,14 +93,13 @@
 }
 
 .close {
-  color: #aaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
 
 .close:hover, .close:focus {
-  color: black;
+  color: #aaa;
   text-decoration: none;
   cursor: pointer;
 }
@@ -129,7 +128,8 @@ details {
   transition: height .2s;
   background-color: #e05426;
   color: #fff;
-  overflow: hidden;
+  overflow: auto;
+  position: relative;
 }
 
 summary {
@@ -165,6 +165,9 @@ details:not([open]) {
 
 details[open] {
   height: 260px;
+}
+.create-user-details[open] {
+  height: 320px;
 }
 
 details > p {
@@ -218,4 +221,27 @@ details summary::-webkit-details-marker {
 
 .button-delete-email:active {
   background-color: red;
+}
+
+.email-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 5px 0 5px 0;
+}
+
+.button-add {
+  padding: 5px;
+  border-radius: 10px;
+  width: 50px;
+  background-color: white;
+  border: none;
+}
+
+.button-add:hover {
+  background-color: #ececec;
+}
+
+.button-add:active {
+  background-color: white;
 }

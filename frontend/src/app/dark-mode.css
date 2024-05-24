@@ -28,3 +28,11 @@ body.dark-mode {
 .toggle-knob {
   background-color: #ffffff;
 }
+
+.dark-mode .close:hover {
+  color: white;
+}
+
+.close:hover {
+  color: black
+}

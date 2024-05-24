@@ -24,6 +24,18 @@ export class SidebarComponent implements OnInit, AfterViewInit {
               private router: Router) {
   }
 
+  readonly addEmail = this.formBuilder.group({
+    Email: ['', [Validators.required, Validators.email]],
+  })
+
+  readonly createUser = this.formBuilder.group({
+    Name: ['', [Validators.required]],
+    Email: ['', [Validators.required, Validators.email]],
+    Password: ['', [Validators.required, Validators.minLength(6)]],
+    ConfirmPassword: ['', [Validators.required, Validators.minLength(6)]],
+    IsChild: [false, Validators.required],
+  })
+
   ngOnInit(): void {
     this.Email$ = this.getEmailObservable();
   }
@@ -121,11 +133,37 @@ export class SidebarComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onAddEmailPressed(email: String) {
+  onAddEmailPressed() {
+    if (this.addEmail.valid){
+      var dto = {
+        eventType: "ClientWantsToCreateEmail",
+        Email: this.addEmail.value.Email
+      }
+      this.state.ws.send(JSON.stringify(dto));
+    }
+  }
+
+  onDeleteEmailPressed(id: number) {
     var dto = {
-      eventType: "ClientWantsToCreateEmail",
-      email: email
+      eventType: "ClientWantsToDeleteEmail",
+      emailid: id
     }
     this.state.ws.send(JSON.stringify(dto));
+  }
+
+  onCreateUserPressed() {
+    if (this.createUser.value.Password == this.createUser.value.ConfirmPassword && this.createUser.valid) {
+      var dto = {
+        eventType: "ClientWantsToCreateUser",
+        userModel: {
+          name: this.createUser.value.Name,
+          mail: this.createUser.value.Email,
+          isChild: this.createUser.value.IsChild
+        },
+        password: this.createUser.value.Password
+      }
+      console.log("user: " + dto);
+      this.state.ws.send(JSON.stringify(dto));
+    }
   }
 }
