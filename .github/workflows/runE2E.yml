@@ -32,7 +32,7 @@ jobs:
               run: cd frontend && npm install
 
             - name: Start frontend
-              run: cd frontend && node_modules/.bin/ng serve
+              run: cd frontend && npm start & echo "FRONTEND_PID=$!" >> $GITHUB_ENV
 
             - name: Run E2E tests
               run: cd e2e_test && testcafe chrome:headless e2e.js
@@ -41,3 +41,6 @@ jobs:
 
             - name: Stop backend
               run: kill $API_PID
+            
+            - name: Stop frontend
+              run: kill $FRONTEND_PID
