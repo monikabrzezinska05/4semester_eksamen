@@ -20,7 +20,7 @@ jobs:
             - name: Setup Node.js
               uses: actions/setup-node@v2
               with:
-                  node-version: '14'
+                  node-version: '18.13.x'
             
             - name: build and run backend
               run: cd backend/ws && dotnet run & echo "API_PID=$!" >> $GITHUB_ENV
