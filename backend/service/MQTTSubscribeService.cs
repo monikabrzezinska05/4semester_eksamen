@@ -1,4 +1,3 @@
-using System.Text.Json;
 using infrastructure;
 using infrastructure.models;
 using MediatR;
@@ -6,7 +5,6 @@ using MQTTnet;
 using MQTTnet.Client;
 using MQTTnet.Formatter;
 using JsonSerializer = System.Text.Json.JsonSerializer;
-using Unit = infrastructure.models.Unit;
 
 namespace service;
 
