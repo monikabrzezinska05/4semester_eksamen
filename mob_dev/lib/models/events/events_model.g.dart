@@ -145,6 +145,18 @@ Map<String, dynamic> _$$ClientWantsToTurnOnMotionAlarmImplToJson(
       'historyModel': instance.historyModel,
     };
 
+_$ClientWantsToDeAuthenticateImpl _$$ClientWantsToDeAuthenticateImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ClientWantsToDeAuthenticateImpl(
+      eventType: json['eventType'] as String,
+    );
+
+Map<String, dynamic> _$$ClientWantsToDeAuthenticateImplToJson(
+        _$ClientWantsToDeAuthenticateImpl instance) =>
+    <String, dynamic>{
+      'eventType': instance.eventType,
+    };
+
 _$ServerSensesMotionImpl _$$ServerSensesMotionImplFromJson(
         Map<String, dynamic> json) =>
     _$ServerSensesMotionImpl(

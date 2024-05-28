@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mob_dev/authentication_bloc/authentication_cubit.dart';
 import 'package:mob_dev/email_list_bloc/settings_cubit.dart';
 import 'package:mob_dev/main.dart';
 import 'package:email_validator/email_validator.dart';
+
+import 'login_page.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -84,8 +87,22 @@ class _SettingsPageState extends State<SettingsPage> {
             padding: const EdgeInsets.only(left: 14.5, right: 14.5, top: 10),
             child: CustomExpansionTile(),
           ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ElevatedButton(
+              onPressed: _logOff,
+              child: Text('Log off'),
+            )
+          )
         ],
       ),
+    );
+  }
+
+  void _logOff() {
+    context.read<AuthenticationCubit>().deAuthenticateUser();
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (context) => LoginPage()),
     );
   }
 }
