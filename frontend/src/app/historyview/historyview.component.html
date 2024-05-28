@@ -8,7 +8,7 @@
 <div *ngFor="let historyItem of ShownHistory$ | async">
   <div class="theActualHistory">
     <h3>{{ historyItem.unit.name }}</h3>
-    <p>{{ "Day: " + historyItem.date.toDateString() + ", Time: " + historyItem.date.getHours() }}</p>
+    <p>{{ "Day: " + historyItem.date.toDateString() + ", Time: " + historyItem.date.getHours() + ":" + historyItem.date.getMinutes()}}</p>
     <p>{{ "Status: " + EventType[historyItem.eventType] }}</p>
     <p>{{ "Card scanned: " + historyItem.personName}}</p>
   </div>
