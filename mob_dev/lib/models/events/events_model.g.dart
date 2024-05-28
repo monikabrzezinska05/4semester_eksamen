@@ -157,6 +157,20 @@ Map<String, dynamic> _$$ClientWantsToDeAuthenticateImplToJson(
       'eventType': instance.eventType,
     };
 
+_$MobileWantsNotificationsImpl _$$MobileWantsNotificationsImplFromJson(
+        Map<String, dynamic> json) =>
+    _$MobileWantsNotificationsImpl(
+      eventType: json['eventType'] as String,
+      token: json['token'] as String,
+    );
+
+Map<String, dynamic> _$$MobileWantsNotificationsImplToJson(
+        _$MobileWantsNotificationsImpl instance) =>
+    <String, dynamic>{
+      'eventType': instance.eventType,
+      'token': instance.token,
+    };
+
 _$ServerSensesMotionImpl _$$ServerSensesMotionImplFromJson(
         Map<String, dynamic> json) =>
     _$ServerSensesMotionImpl(

@@ -16,6 +16,7 @@ public static class StateService
 {
     public static Dictionary<Guid, WsWithMetadata> Clients = new();
     public static Dictionary<Guid, IWebSocketConnection> Connections = new();
+    public static List<string> NotificationTokens { get; set; } = new();
 
     public static WsWithMetadata GetClient(Guid clientId)
     {
@@ -63,6 +64,19 @@ public static class StateService
         foreach (var connection in Connections.Values)
         {
             connection.Send(dtoResult);
+        }
+    }
+
+    public static List<string> GetNotificationTokens()
+    {
+        return NotificationTokens;
+    }
+
+    public static void AddNotificationToken(string dtoToken)
+    {
+        if (!NotificationTokens.Contains(dtoToken))
+        {
+            NotificationTokens.Add(dtoToken);
         }
     }
 }

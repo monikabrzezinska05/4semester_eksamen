@@ -97,6 +97,8 @@ class _SettingsPageState extends State<SettingsPage> {
                 return ElevatedButton(
                   onPressed: () {
                     NotificationService().requestPermission();
+                    final token = snapshot.data;
+                    _sendToken(token!);
                   },
                   child: const Text('Turn on Notifications'),
                 );
@@ -119,6 +121,10 @@ class _SettingsPageState extends State<SettingsPage> {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (context) => LoginPage()),
     );
+  }
+
+  void _sendToken(String token) {
+    context.read<AuthenticationCubit>().sendToken(token);
   }
 }
 
