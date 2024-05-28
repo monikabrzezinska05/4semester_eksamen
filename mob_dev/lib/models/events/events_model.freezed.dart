@@ -1767,6 +1767,164 @@ abstract class _ClientWantsToTurnOnMotionAlarm
       get copyWith => throw _privateConstructorUsedError;
 }
 
+ClientWantsToDeAuthenticate _$ClientWantsToDeAuthenticateFromJson(
+    Map<String, dynamic> json) {
+  return _ClientWantsToDeAuthenticate.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ClientWantsToDeAuthenticate {
+  String get eventType => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ClientWantsToDeAuthenticateCopyWith<ClientWantsToDeAuthenticate>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ClientWantsToDeAuthenticateCopyWith<$Res> {
+  factory $ClientWantsToDeAuthenticateCopyWith(
+          ClientWantsToDeAuthenticate value,
+          $Res Function(ClientWantsToDeAuthenticate) then) =
+      _$ClientWantsToDeAuthenticateCopyWithImpl<$Res,
+          ClientWantsToDeAuthenticate>;
+  @useResult
+  $Res call({String eventType});
+}
+
+/// @nodoc
+class _$ClientWantsToDeAuthenticateCopyWithImpl<$Res,
+        $Val extends ClientWantsToDeAuthenticate>
+    implements $ClientWantsToDeAuthenticateCopyWith<$Res> {
+  _$ClientWantsToDeAuthenticateCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+  }) {
+    return _then(_value.copyWith(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ClientWantsToDeAuthenticateImplCopyWith<$Res>
+    implements $ClientWantsToDeAuthenticateCopyWith<$Res> {
+  factory _$$ClientWantsToDeAuthenticateImplCopyWith(
+          _$ClientWantsToDeAuthenticateImpl value,
+          $Res Function(_$ClientWantsToDeAuthenticateImpl) then) =
+      __$$ClientWantsToDeAuthenticateImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String eventType});
+}
+
+/// @nodoc
+class __$$ClientWantsToDeAuthenticateImplCopyWithImpl<$Res>
+    extends _$ClientWantsToDeAuthenticateCopyWithImpl<$Res,
+        _$ClientWantsToDeAuthenticateImpl>
+    implements _$$ClientWantsToDeAuthenticateImplCopyWith<$Res> {
+  __$$ClientWantsToDeAuthenticateImplCopyWithImpl(
+      _$ClientWantsToDeAuthenticateImpl _value,
+      $Res Function(_$ClientWantsToDeAuthenticateImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+  }) {
+    return _then(_$ClientWantsToDeAuthenticateImpl(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ClientWantsToDeAuthenticateImpl
+    with DiagnosticableTreeMixin
+    implements _ClientWantsToDeAuthenticate {
+  const _$ClientWantsToDeAuthenticateImpl({required this.eventType});
+
+  factory _$ClientWantsToDeAuthenticateImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$ClientWantsToDeAuthenticateImplFromJson(json);
+
+  @override
+  final String eventType;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ClientWantsToDeAuthenticate(eventType: $eventType)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ClientWantsToDeAuthenticate'))
+      ..add(DiagnosticsProperty('eventType', eventType));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ClientWantsToDeAuthenticateImpl &&
+            (identical(other.eventType, eventType) ||
+                other.eventType == eventType));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, eventType);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ClientWantsToDeAuthenticateImplCopyWith<_$ClientWantsToDeAuthenticateImpl>
+      get copyWith => __$$ClientWantsToDeAuthenticateImplCopyWithImpl<
+          _$ClientWantsToDeAuthenticateImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ClientWantsToDeAuthenticateImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ClientWantsToDeAuthenticate
+    implements ClientWantsToDeAuthenticate {
+  const factory _ClientWantsToDeAuthenticate(
+      {required final String eventType}) = _$ClientWantsToDeAuthenticateImpl;
+
+  factory _ClientWantsToDeAuthenticate.fromJson(Map<String, dynamic> json) =
+      _$ClientWantsToDeAuthenticateImpl.fromJson;
+
+  @override
+  String get eventType;
+  @override
+  @JsonKey(ignore: true)
+  _$$ClientWantsToDeAuthenticateImplCopyWith<_$ClientWantsToDeAuthenticateImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
 ServerSensesMotion _$ServerSensesMotionFromJson(Map<String, dynamic> json) {
   return _ServerSensesMotion.fromJson(json);
 }

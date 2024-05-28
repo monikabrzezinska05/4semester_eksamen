@@ -146,6 +146,18 @@ class ClientWantsToTurnOnMotionAlarm extends ClientEvent with _$ClientWantsToTur
       _$ClientWantsToTurnOnMotionAlarmFromJson(json);
 }
 
+@freezed
+class ClientWantsToDeAuthenticate extends ClientEvent with _$ClientWantsToDeAuthenticate {
+  static const String name = "ClientWantsToDeAuthenticate";
+
+  const factory ClientWantsToDeAuthenticate({
+    required String eventType,
+  }) = _ClientWantsToDeAuthenticate;
+
+  factory ClientWantsToDeAuthenticate.fromJson(Map<String, Object?> json) =>
+      _$ClientWantsToDeAuthenticateFromJson(json);
+}
+
 class ServerEvent extends BaseEvent {
   static ServerEvent fromJson(Map<String, Object?> json) {
     final type = json['eventType'];
