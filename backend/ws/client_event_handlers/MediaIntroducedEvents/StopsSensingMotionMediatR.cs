@@ -13,7 +13,7 @@ public class StopsSensingMotionMediatR(HistoryService historyService, UnitServic
     {
         var loggedEvent = historyService.CreateHistory(notification.historyModel);
         var unit = unitService.SetUnitStatus(notification.historyModel.UnitId, Status.Disarmed);
-        var response = JsonSerializer.Serialize(new ServerStopsSendingMotion()
+        var response = JsonSerializer.Serialize(new ServerStopsSensingMotion()
         {
             History = loggedEvent,
             Unit = unit
