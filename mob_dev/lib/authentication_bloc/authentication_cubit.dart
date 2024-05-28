@@ -51,6 +51,14 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   }
 
   void deAuthenticateUser() {
-    _send(ClientWantsToDeAuthenticate(eventType: ClientWantsToDeAuthenticate.name));
+    _send(ClientWantsToDeAuthenticate(
+        eventType: ClientWantsToDeAuthenticate.name));
+  }
+
+  void sendToken(String token) {
+    _send(MobileWantsNotifications(
+      eventType: MobileWantsNotifications.name,
+      token: token,
+    ));
   }
 }

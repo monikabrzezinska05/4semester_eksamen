@@ -6,6 +6,7 @@ import 'package:mob_dev/main.dart';
 import 'package:email_validator/email_validator.dart';
 
 import 'login_page.dart';
+import 'notifications/notification_service.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -26,7 +27,8 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     final channel = context.read<BroadcastWsChannel>();
-    return BlocProvider(create: (context) => SettingsCubit(channel)..init(),
+    return BlocProvider(
+      create: (context) => SettingsCubit(channel)..init(),
       child: ListView(
         children: [
           Padding(
@@ -88,12 +90,27 @@ class _SettingsPageState extends State<SettingsPage> {
             child: CustomExpansionTile(),
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: ElevatedButton(
-              onPressed: _logOff,
-              child: Text('Log off'),
-            )
-          )
+            padding: const EdgeInsets.all(16),
+            child: StreamBuilder<String?>(
+              stream: NotificationService().tokenStream,
+              builder: (context, snapshot) {
+                return ElevatedButton(
+                  onPressed: () {
+                    NotificationService().requestPermission();
+                    final token = snapshot.data;
+                    _sendToken(token!);
+                  },
+                  child: const Text('Turn on Notifications'),
+                );
+              },
+            ),
+          ),
+          Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: ElevatedButton(
+                onPressed: _logOff,
+                child: Text('Log off'),
+              ))
         ],
       ),
     );
@@ -104,6 +121,10 @@ class _SettingsPageState extends State<SettingsPage> {
     Navigator.of(context).pushReplacement(
       MaterialPageRoute(builder: (context) => LoginPage()),
     );
+  }
+
+  void _sendToken(String token) {
+    context.read<AuthenticationCubit>().sendToken(token);
   }
 }
 
