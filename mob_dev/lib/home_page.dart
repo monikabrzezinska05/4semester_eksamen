@@ -26,9 +26,9 @@ class HomePage extends StatelessWidget {
             itemBuilder: (context, index) {
               return Column(
                 children: <Widget>[
-                  IndicatorHeadline(headline: units[index].key.name),
+                  IndicatorHeadline(headline: units[index].key.name, indicatorColor: context.read<HomeCubit>().,),
                   ...units[index].value.map((unit) =>
-                     IndicatorLine(unitName: unit.name)),
+                     IndicatorLine(unitName: unit.name, unitStatus: unit.status,)),
                 ],
               );
             },

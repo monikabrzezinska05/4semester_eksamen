@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class IndicatorHeadline extends StatefulWidget {
-  String headline;
+  final String headline;
+  final String indicatorColor;
    IndicatorHeadline({
     required this.headline,
+     required this.indicatorColor,
     super.key,
   });
 
