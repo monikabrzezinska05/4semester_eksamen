@@ -35,6 +35,7 @@ public class UserRepository
 
     public User CreateUser(User user)
     {
+        Console.WriteLine("user: " + user.Name + " " + user.Mail + " " + user.IsChild);
         var sql = "INSERT INTO public.\"User\"" +
                   "(name, mail, child)" +
                   "VALUES (@name, @mail, @isChild) " +
@@ -43,6 +44,7 @@ public class UserRepository
 
         using (var conn = _dataSource.OpenConnection())
         {
+            
             var response = conn.QueryFirst<User?>(sql, new {user.Name, user.Mail, user.IsChild});
             if (response == null)
             {

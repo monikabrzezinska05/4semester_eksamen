@@ -12,7 +12,12 @@ import {
   ServerHasActivatedMotionSensorAlarmDto,
   ServerHasDeactivatedAlarmDto,
   ServerHasDeactivatedMotionSensorAlarmDto,
-  ServerCreatesEmailDto, ServerDeletesEmailDto, ServerCreatesNewUserDto
+  ServerCreatesEmailDto,
+  ServerDeletesEmailDto,
+  ServerCreatesNewUserDto,
+  ServerShowsEmailsDto,
+  ServerLocksDoorDto,
+  ServerUnlocksDoorDto, ServerSensesMotionDto, ServerStopsSensingMotionDto
 } from "../models/BaseDto";
 import {HistoryModel} from "../models/HistoryModel";
 import {UserModel} from "../models/UserModel";
@@ -31,6 +36,7 @@ export class State {
   jwt?: string | null = localStorage.getItem('jwt');
   currentUserId?: string | null = localStorage.getItem('currentUserId');
   ws: WebSocket = new WebSocket(environment.websocketBaseUrl);
+  messageToClient?: string | null = localStorage.getItem('messageToClient');
 
   history$: BehaviorSubject<HistoryModel[]> = new BehaviorSubject<HistoryModel[]>([]);
   units$: BehaviorSubject<Unit[]> = new BehaviorSubject<Unit[]>([]);
@@ -51,6 +57,11 @@ export class State {
     this.history$.next([...current, ...dto.historyList]);
   }
 
+  ServerShowsEmails(dto: ServerShowsEmailsDto) {
+    let current = this.emails$.getValue();
+    this.emails$.next([...current, ...dto.emails]);
+  }
+
   ServerAuthenticatesUser(dto: ServerAuthenticatesUserDto) {
     if (dto.user !== null && dto.jwt !== null) {
       this.authenticated = true;
@@ -62,6 +73,7 @@ export class State {
 
       this.getUnitsFromServer();
       this.getHistoryFromServer();
+      this.getEmailsFromServer();
     }
     else {
       this.router.navigateByUrl('/login');
@@ -83,11 +95,20 @@ export class State {
     this.ws.send(JSON.stringify(dto));
   }
 
+  private getEmailsFromServer() {
+    let dto = {
+      eventType: "ClientWantsToSeeEmails"
+    }
+    this.ws.send(JSON.stringify(dto));
+  }
+
   ServerDeAuthenticatesUser(dto: ServerDeAuthenticatesUserDto) {
     this.authenticated = false;
     this.currentUser = undefined;
     this.units$ = new BehaviorSubject<Unit[]>([]);
     this.history$ = new BehaviorSubject<HistoryModel[]>([]);
+    this.emails$ = new BehaviorSubject<EmailModel[]>([]);
+
     this.router.navigateByUrl('/login');
   }
 
@@ -121,6 +142,26 @@ export class State {
     this.setMotionSensorStatus(Status.Disarmed);
   }
 
+  ServerLocksDoor(dto: ServerLocksDoorDto) {
+    this.updateUnit(dto.unit);
+    this.addToHistory(dto.history);
+  }
+
+  ServerUnlocksDoor(dto: ServerUnlocksDoorDto) {
+    this.updateUnit(dto.unit);
+    this.addToHistory(dto.history);
+  }
+
+  ServerSensesMotion(dto: ServerSensesMotionDto) {
+    this.updateUnit(dto.unit);
+    this.addToHistory(dto.history);
+  }
+
+  ServerStopsSensingMotionDto(dto: ServerStopsSensingMotionDto) {
+    this.updateUnit(dto.unit);
+    this.addToHistory(dto.history);
+  }
+
   ServerOpensWindowDoor(dto: ServerClosesWindowDoorDto) {
     this.updateUnit(dto.unit);
     this.addToHistory(dto.history);
@@ -140,7 +181,7 @@ export class State {
   }
 
   ServerCreatesNewUser(dto: ServerCreatesNewUserDto) {
-    //TODO - implement this function.
+    this.messageToClient = dto.messageToClient;
   }
 
   private updateUnit(unit: Unit) {
@@ -203,5 +244,9 @@ export class State {
       user: this.currentUserId
     }
     this.ws.send(JSON.stringify(dto));
+  }
+
+  getAllEmails() : Observable<EmailModel[]> {
+    return this.emails$.asObservable();
   }
 }
