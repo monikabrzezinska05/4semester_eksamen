@@ -28,8 +28,16 @@ class HomeCubit extends Cubit<HomeState> {
           _onArmMotionSensor();
         case ServerHasDeactivatedMotionSensorAlarm(history: _):
           _onDisarmMotionSensor();
-          case ServerAlarmTriggered(history: _, unit: var model):
-            _onUnitTriggered(model);
+        case ServerAlarmTriggered(history: _, unit: var model):
+          _onUnitTriggered(model);
+        case ServerLocksDoor(history: _, unit: var model):
+          _onUnitStatusChanged(model);
+        case ServerUnlocksDoor(history: _, unit: var model):
+          _onUnitStatusChanged(model);
+        case ServerSensesMotion(history: _, unit: var model):
+          _onUnitStatusChanged(model);
+        case ServerStopsSensingMotion(history: _, unit: var model):
+          _onUnitStatusChanged(model);
       }
     }, onError: (error) {
       //DO SOMETHING HERE
@@ -79,9 +87,10 @@ class HomeCubit extends Cubit<HomeState> {
     units.forEach((key, value) {
       List<UnitModel> unitList = List.from(value);
       unitList.forEach((unit) {
-        if (unit.unitType == UnitType.Window || unit.unitType == UnitType.Door) {
+        if (unit.unitType == UnitType.Window ||
+            unit.unitType == UnitType.Door) {
           unitList[unitList
-              .indexWhere((element) => element.unitId == unit.unitId)] =
+                  .indexWhere((element) => element.unitId == unit.unitId)] =
               unit.copyWith(status: Status.Armed);
         }
       });
@@ -95,9 +104,10 @@ class HomeCubit extends Cubit<HomeState> {
     units.forEach((key, value) {
       List<UnitModel> unitList = List.from(value);
       unitList.forEach((unit) {
-        if (unit.unitType == UnitType.Window || unit.unitType == UnitType.Door) {
+        if (unit.unitType == UnitType.Window ||
+            unit.unitType == UnitType.Door) {
           unitList[unitList
-              .indexWhere((element) => element.unitId == unit.unitId)] =
+                  .indexWhere((element) => element.unitId == unit.unitId)] =
               unit.copyWith(status: Status.Disarmed);
         }
       });
@@ -145,7 +155,8 @@ class HomeCubit extends Cubit<HomeState> {
     int index = unitList.indexWhere((unit) => unit.unitId == model.unitId);
 
     if (index != -1) {
-      UnitModel updatedUnit = unitList[index].copyWith(status: Status.Triggeret);
+      UnitModel updatedUnit =
+          unitList[index].copyWith(status: Status.Triggeret);
       unitList[index] = updatedUnit;
       units[model.unitType] = unitList;
       emit(state.copyWith(units: units));

@@ -260,6 +260,7 @@ class ServerLocksDoor extends ServerEvent with _$ServerLocksDoor {
   static const String name = "ServerLocksDoor";
 
   const factory ServerLocksDoor({
+    required String eventType,
     required HistoryModel history,
     required UnitModel unit,
   }) = _ServerLocksDoor;
@@ -273,6 +274,7 @@ class ServerUnlocksDoor extends ServerEvent with _$ServerUnlocksDoor {
   static const String name = "ServerUnlocksDoor";
 
   const factory ServerUnlocksDoor({
+    required String eventType,
     required HistoryModel history,
     required UnitModel unit,
   }) = _ServerUnlocksDoor;

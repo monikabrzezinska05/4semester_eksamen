@@ -2917,6 +2917,7 @@ ServerLocksDoor _$ServerLocksDoorFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ServerLocksDoor {
+  String get eventType => throw _privateConstructorUsedError;
   HistoryModel get history => throw _privateConstructorUsedError;
   UnitModel get unit => throw _privateConstructorUsedError;
 
@@ -2932,7 +2933,7 @@ abstract class $ServerLocksDoorCopyWith<$Res> {
           ServerLocksDoor value, $Res Function(ServerLocksDoor) then) =
       _$ServerLocksDoorCopyWithImpl<$Res, ServerLocksDoor>;
   @useResult
-  $Res call({HistoryModel history, UnitModel unit});
+  $Res call({String eventType, HistoryModel history, UnitModel unit});
 
   $HistoryModelCopyWith<$Res> get history;
   $UnitModelCopyWith<$Res> get unit;
@@ -2951,10 +2952,15 @@ class _$ServerLocksDoorCopyWithImpl<$Res, $Val extends ServerLocksDoor>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? eventType = null,
     Object? history = null,
     Object? unit = null,
   }) {
     return _then(_value.copyWith(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
       history: null == history
           ? _value.history
           : history // ignore: cast_nullable_to_non_nullable
@@ -2991,7 +2997,7 @@ abstract class _$$ServerLocksDoorImplCopyWith<$Res>
       __$$ServerLocksDoorImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({HistoryModel history, UnitModel unit});
+  $Res call({String eventType, HistoryModel history, UnitModel unit});
 
   @override
   $HistoryModelCopyWith<$Res> get history;
@@ -3010,10 +3016,15 @@ class __$$ServerLocksDoorImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? eventType = null,
     Object? history = null,
     Object? unit = null,
   }) {
     return _then(_$ServerLocksDoorImpl(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
       history: null == history
           ? _value.history
           : history // ignore: cast_nullable_to_non_nullable
@@ -3031,11 +3042,14 @@ class __$$ServerLocksDoorImplCopyWithImpl<$Res>
 class _$ServerLocksDoorImpl
     with DiagnosticableTreeMixin
     implements _ServerLocksDoor {
-  const _$ServerLocksDoorImpl({required this.history, required this.unit});
+  const _$ServerLocksDoorImpl(
+      {required this.eventType, required this.history, required this.unit});
 
   factory _$ServerLocksDoorImpl.fromJson(Map<String, dynamic> json) =>
       _$$ServerLocksDoorImplFromJson(json);
 
+  @override
+  final String eventType;
   @override
   final HistoryModel history;
   @override
@@ -3043,7 +3057,7 @@ class _$ServerLocksDoorImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ServerLocksDoor(history: $history, unit: $unit)';
+    return 'ServerLocksDoor(eventType: $eventType, history: $history, unit: $unit)';
   }
 
   @override
@@ -3051,6 +3065,7 @@ class _$ServerLocksDoorImpl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'ServerLocksDoor'))
+      ..add(DiagnosticsProperty('eventType', eventType))
       ..add(DiagnosticsProperty('history', history))
       ..add(DiagnosticsProperty('unit', unit));
   }
@@ -3060,13 +3075,15 @@ class _$ServerLocksDoorImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ServerLocksDoorImpl &&
+            (identical(other.eventType, eventType) ||
+                other.eventType == eventType) &&
             (identical(other.history, history) || other.history == history) &&
             (identical(other.unit, unit) || other.unit == unit));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, history, unit);
+  int get hashCode => Object.hash(runtimeType, eventType, history, unit);
 
   @JsonKey(ignore: true)
   @override
@@ -3085,12 +3102,15 @@ class _$ServerLocksDoorImpl
 
 abstract class _ServerLocksDoor implements ServerLocksDoor {
   const factory _ServerLocksDoor(
-      {required final HistoryModel history,
+      {required final String eventType,
+      required final HistoryModel history,
       required final UnitModel unit}) = _$ServerLocksDoorImpl;
 
   factory _ServerLocksDoor.fromJson(Map<String, dynamic> json) =
       _$ServerLocksDoorImpl.fromJson;
 
+  @override
+  String get eventType;
   @override
   HistoryModel get history;
   @override
@@ -3107,6 +3127,7 @@ ServerUnlocksDoor _$ServerUnlocksDoorFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ServerUnlocksDoor {
+  String get eventType => throw _privateConstructorUsedError;
   HistoryModel get history => throw _privateConstructorUsedError;
   UnitModel get unit => throw _privateConstructorUsedError;
 
@@ -3122,7 +3143,7 @@ abstract class $ServerUnlocksDoorCopyWith<$Res> {
           ServerUnlocksDoor value, $Res Function(ServerUnlocksDoor) then) =
       _$ServerUnlocksDoorCopyWithImpl<$Res, ServerUnlocksDoor>;
   @useResult
-  $Res call({HistoryModel history, UnitModel unit});
+  $Res call({String eventType, HistoryModel history, UnitModel unit});
 
   $HistoryModelCopyWith<$Res> get history;
   $UnitModelCopyWith<$Res> get unit;
@@ -3141,10 +3162,15 @@ class _$ServerUnlocksDoorCopyWithImpl<$Res, $Val extends ServerUnlocksDoor>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? eventType = null,
     Object? history = null,
     Object? unit = null,
   }) {
     return _then(_value.copyWith(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
       history: null == history
           ? _value.history
           : history // ignore: cast_nullable_to_non_nullable
@@ -3181,7 +3207,7 @@ abstract class _$$ServerUnlocksDoorImplCopyWith<$Res>
       __$$ServerUnlocksDoorImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({HistoryModel history, UnitModel unit});
+  $Res call({String eventType, HistoryModel history, UnitModel unit});
 
   @override
   $HistoryModelCopyWith<$Res> get history;
@@ -3200,10 +3226,15 @@ class __$$ServerUnlocksDoorImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? eventType = null,
     Object? history = null,
     Object? unit = null,
   }) {
     return _then(_$ServerUnlocksDoorImpl(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
       history: null == history
           ? _value.history
           : history // ignore: cast_nullable_to_non_nullable
@@ -3221,11 +3252,14 @@ class __$$ServerUnlocksDoorImplCopyWithImpl<$Res>
 class _$ServerUnlocksDoorImpl
     with DiagnosticableTreeMixin
     implements _ServerUnlocksDoor {
-  const _$ServerUnlocksDoorImpl({required this.history, required this.unit});
+  const _$ServerUnlocksDoorImpl(
+      {required this.eventType, required this.history, required this.unit});
 
   factory _$ServerUnlocksDoorImpl.fromJson(Map<String, dynamic> json) =>
       _$$ServerUnlocksDoorImplFromJson(json);
 
+  @override
+  final String eventType;
   @override
   final HistoryModel history;
   @override
@@ -3233,7 +3267,7 @@ class _$ServerUnlocksDoorImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ServerUnlocksDoor(history: $history, unit: $unit)';
+    return 'ServerUnlocksDoor(eventType: $eventType, history: $history, unit: $unit)';
   }
 
   @override
@@ -3241,6 +3275,7 @@ class _$ServerUnlocksDoorImpl
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'ServerUnlocksDoor'))
+      ..add(DiagnosticsProperty('eventType', eventType))
       ..add(DiagnosticsProperty('history', history))
       ..add(DiagnosticsProperty('unit', unit));
   }
@@ -3250,13 +3285,15 @@ class _$ServerUnlocksDoorImpl
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ServerUnlocksDoorImpl &&
+            (identical(other.eventType, eventType) ||
+                other.eventType == eventType) &&
             (identical(other.history, history) || other.history == history) &&
             (identical(other.unit, unit) || other.unit == unit));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, history, unit);
+  int get hashCode => Object.hash(runtimeType, eventType, history, unit);
 
   @JsonKey(ignore: true)
   @override
@@ -3275,12 +3312,15 @@ class _$ServerUnlocksDoorImpl
 
 abstract class _ServerUnlocksDoor implements ServerUnlocksDoor {
   const factory _ServerUnlocksDoor(
-      {required final HistoryModel history,
+      {required final String eventType,
+      required final HistoryModel history,
       required final UnitModel unit}) = _$ServerUnlocksDoorImpl;
 
   factory _ServerUnlocksDoor.fromJson(Map<String, dynamic> json) =
       _$ServerUnlocksDoorImpl.fromJson;
 
+  @override
+  String get eventType;
   @override
   HistoryModel get history;
   @override

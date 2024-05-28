@@ -242,6 +242,7 @@ Map<String, dynamic> _$$ServerShowsHistoryImplToJson(
 _$ServerLocksDoorImpl _$$ServerLocksDoorImplFromJson(
         Map<String, dynamic> json) =>
     _$ServerLocksDoorImpl(
+      eventType: json['eventType'] as String,
       history: HistoryModel.fromJson(json['history'] as Map<String, dynamic>),
       unit: UnitModel.fromJson(json['unit'] as Map<String, dynamic>),
     );
@@ -249,6 +250,7 @@ _$ServerLocksDoorImpl _$$ServerLocksDoorImplFromJson(
 Map<String, dynamic> _$$ServerLocksDoorImplToJson(
         _$ServerLocksDoorImpl instance) =>
     <String, dynamic>{
+      'eventType': instance.eventType,
       'history': instance.history,
       'unit': instance.unit,
     };
@@ -256,6 +258,7 @@ Map<String, dynamic> _$$ServerLocksDoorImplToJson(
 _$ServerUnlocksDoorImpl _$$ServerUnlocksDoorImplFromJson(
         Map<String, dynamic> json) =>
     _$ServerUnlocksDoorImpl(
+      eventType: json['eventType'] as String,
       history: HistoryModel.fromJson(json['history'] as Map<String, dynamic>),
       unit: UnitModel.fromJson(json['unit'] as Map<String, dynamic>),
     );
@@ -263,6 +266,7 @@ _$ServerUnlocksDoorImpl _$$ServerUnlocksDoorImplFromJson(
 Map<String, dynamic> _$$ServerUnlocksDoorImplToJson(
         _$ServerUnlocksDoorImpl instance) =>
     <String, dynamic>{
+      'eventType': instance.eventType,
       'history': instance.history,
       'unit': instance.unit,
     };
