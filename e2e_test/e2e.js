@@ -17,7 +17,7 @@ test('Login and see the history page', async t => {
     await t
     .wait(2000)
     .typeText('#usernameField', 'boobie@email.dk')
-    .typeText('#passwordField', process.env.SECRET)
+    .typeText('#passwordField', 'password')
     
     .click("#loginButton.login-button")
     
@@ -31,7 +31,7 @@ test('Login and see the history page', async t => {
 test('Login and logout', async t => {
     await t
     .typeText('#usernameField', 'boobie@email.dk')
-    .typeText('#passwordField', process.env.SECRET)
+    .typeText('#passwordField', 'password')
     
     .click("#loginButton.login-button")
     .wait(3000)
