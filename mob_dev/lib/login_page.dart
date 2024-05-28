@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mob_dev/authentication_bloc/authentication_cubit.dart';
-import 'package:mob_dev/main.dart';
 
 import 'authentication_bloc/authentication_state.dart';
+import 'main_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -58,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    const SizedBox(height: 50),
+                    const SizedBox(height: 49),
                     const Header(),
                     Flexible(
                       child: Container(
@@ -75,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                           padding: const EdgeInsets.all(30),
                           child: Column(
                             children: <Widget>[
-                              const SizedBox(height: 60),
+                              const SizedBox(height: 50),
                               Container(
                                 decoration: BoxDecoration(
                                   color: Colors.orange.shade300,

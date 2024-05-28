@@ -49,7 +49,7 @@ public static class StateService
     {
         return Connections.Remove(ws.ConnectionInfo.Id);
     }
-
+    
     public static JsonSerializerOptions JsonOptions()
     {
         return new JsonSerializerOptions()

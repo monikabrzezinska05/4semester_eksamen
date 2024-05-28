@@ -5,11 +5,11 @@ using Npgsql;
 
 namespace infrastructure.repositories;
 
-public class HistoryRepo
+public class HistoryRepository
 {
     private readonly NpgsqlDataSource _dataSource;
 
-    public HistoryRepo(NpgsqlDataSource dataSource)
+    public HistoryRepository(NpgsqlDataSource dataSource)
     {
         _dataSource = dataSource;
     }
