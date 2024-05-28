@@ -29,18 +29,7 @@ public class ClientWantsToTurnOnMotionAlarm : BaseEventHandler<ClientWantsToTurn
     {
         StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.HistoryModel);
-        var units = _unitService.SetAllUnitStatus(Status.Armed);
-        foreach (var unit in units)
-        {
-            var history = new HistoryModel()
-            {
-                UnitId = unit.UnitId,
-                Date = DateTime.Now,
-                EventType = EventType.AlarmArmed
-
-            };
-            _historyService.CreateHistory(history);
-        }
+        _unitService.SetMotionSensorStatus(Status.Armed);
         await _mqttPublishService.AlarmTurnOnMotionPublish();
         
         var turnOffAlarmToClient = JsonSerializer.Serialize(new ServerHasActivatedMotionSensorAlarm()

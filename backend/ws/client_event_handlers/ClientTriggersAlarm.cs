@@ -10,6 +10,7 @@ namespace ws;
 public class ClientTriggersAlarmDto : BaseDto
 {
     public HistoryModel HistoryModel { get; set; }
+
 }
 public class ClientTriggersAlarm : BaseEventHandler<ClientTriggersAlarmDto>
 {
@@ -29,15 +30,14 @@ public class ClientTriggersAlarm : BaseEventHandler<ClientTriggersAlarmDto>
         StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
         var unitId = dto.HistoryModel.UnitId;
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.HistoryModel);
-        _unitService.SetUnitStatus(unitId, Status.Triggered);
-        Unit unit = _unitService.GetUnitById(unitId);
+        Unit unit = _unitService.SetUnitStatus(unitId, Status.Triggered);
         _emailService.SendEmail(loggedEvent, unit);
-        var alarmTriggerDto = new ServerAlarmTriggered()
+        var response = new ServerAlarmTriggered()
         {
             History = loggedEvent,
             Unit = unit
         };
-        var alarmTriggerToClient = JsonSerializer.Serialize(alarmTriggerDto, StateService.JsonOptions());
+        var alarmTriggerToClient = JsonSerializer.Serialize(response, StateService.JsonOptions());
         socket.Send(alarmTriggerToClient);
         return Task.CompletedTask;
     }

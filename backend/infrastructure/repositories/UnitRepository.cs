@@ -38,7 +38,7 @@ public class UnitRepository
 
         using (var conn = _dataSource.OpenConnection())
         {
-            return conn.QueryFirst<Unit>(sql, new {@unitId, @status});
+            return conn.QueryFirst<Unit>(sql, new {unitId, status});
         }
     }
 
@@ -48,7 +48,7 @@ public class UnitRepository
 
         using (var conn = _dataSource.OpenConnection())
         { 
-            return conn.Query<Unit>(sql, new {@status}).ToList();
+            return conn.Query<Unit>(sql, new {status}).ToList();
         }
     }
 
@@ -58,17 +58,27 @@ public class UnitRepository
 
         using (var conn = _dataSource.OpenConnection())
         {
-            return conn.Query<Unit>(sql, new { @status }).ToList();
+            return conn.Query<Unit>(sql, new { status }).ToList();
         }
     }
 
-    public List<Unit> getUnitsById(List<int> unitIds)
+    public List<Unit> GetUnitsById(List<int> unitIds)
     {
         string sql = "SELECT * FROM unit WHERE unitid IN @values;";
         
         using (var conn = _dataSource.OpenConnection())
         {
             return conn.Query<Unit>(sql, new[] {unitIds}).ToList();
+        }
+    }
+
+    public void SetMotionSensorStatus(Status armed)
+    {
+        string sql = "UPDATE unit SET status = @armed WHERE unittype = 2;";
+
+        using (var conn = _dataSource.OpenConnection())
+        {
+            conn.Query<Unit>(sql, new { armed });
         }
     }
 }

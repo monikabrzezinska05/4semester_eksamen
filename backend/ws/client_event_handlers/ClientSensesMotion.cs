@@ -16,22 +16,24 @@ public class ClientSensesMotionDto : BaseDto
 public class ClientSensesMotion : BaseEventHandler<ClientSensesMotionDto>
 {
     private readonly HistoryService _historyService;
+    private readonly UnitService _unitService;
 
-    public ClientSensesMotion(HistoryService historyService)
+    public ClientSensesMotion(HistoryService historyService, UnitService unitService)
     {
+        _unitService = unitService;
         _historyService = historyService;
     }
 
     public override Task Handle(ClientSensesMotionDto dto, IWebSocketConnection socket)
     {
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.historyModel);
-
-        var sensingMotionHistoryToClient = JsonSerializer.Serialize(new ServerSensesMotion()
+        var unit = _unitService.SetUnitStatus(dto.historyModel.UnitId, Status.Armed);
+        var response = JsonSerializer.Serialize(new ServerSensesMotion()
         {
             History = loggedEvent,
-            Unit = dto.unit
+            Unit = unit
         }, StateService.JsonOptions());
-        socket.Send(sensingMotionHistoryToClient);
+        socket.Send(response);
         return Task.CompletedTask;
     }
 }
