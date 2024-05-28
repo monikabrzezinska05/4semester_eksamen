@@ -12,7 +12,12 @@ import {
   ServerHasActivatedMotionSensorAlarmDto,
   ServerHasDeactivatedAlarmDto,
   ServerHasDeactivatedMotionSensorAlarmDto,
-  ServerCreatesEmailDto, ServerDeletesEmailDto, ServerCreatesNewUserDto, ServerShowsEmailsDto
+  ServerCreatesEmailDto,
+  ServerDeletesEmailDto,
+  ServerCreatesNewUserDto,
+  ServerShowsEmailsDto,
+  ServerLocksDoorDto,
+  ServerUnlocksDoorDto, ServerSensesMotionDto, ServerStopsSensingMotionDto
 } from "../models/BaseDto";
 import {HistoryModel} from "../models/HistoryModel";
 import {UserModel} from "../models/UserModel";
@@ -135,6 +140,26 @@ export class State {
   ServerHasDeactivatedMotionSensorAlarm(dto: ServerHasDeactivatedMotionSensorAlarmDto){
     this.addToHistory(dto.history);
     this.setMotionSensorStatus(Status.Disarmed);
+  }
+
+  ServerLocksDoor(dto: ServerLocksDoorDto) {
+    this.updateUnit(dto.unit);
+    this.addToHistory(dto.history);
+  }
+
+  ServerUnlocksDoor(dto: ServerUnlocksDoorDto) {
+    this.updateUnit(dto.unit);
+    this.addToHistory(dto.history);
+  }
+
+  ServerSensesMotion(dto: ServerSensesMotionDto) {
+    this.updateUnit(dto.unit);
+    this.addToHistory(dto.history);
+  }
+
+  ServerStopsSensingMotionDto(dto: ServerStopsSensingMotionDto) {
+    this.updateUnit(dto.unit);
+    this.addToHistory(dto.history);
   }
 
   ServerOpensWindowDoor(dto: ServerClosesWindowDoorDto) {
