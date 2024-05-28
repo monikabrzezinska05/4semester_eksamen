@@ -1,24 +1,24 @@
 using System.Text.Json;
 using infrastructure;
+using infrastructure.models;
 using MediatR;
 using service;
 using ws.transfer_models.server_models;
 
 namespace ws.client_event_handlers.MediaIntroducedEvents;
 
-public class StopsSensingMotionMediatR(HistoryService historyService) : INotificationHandler<StopsSensingMotionMediatRDto>
+public class StopsSensingMotionMediatR(HistoryService historyService, UnitService unitService) : INotificationHandler<StopsSensingMotionMediatRDto>
 {
     public Task Handle(StopsSensingMotionMediatRDto notification, CancellationToken cancellationToken)
     {
-        var dto = new ServerStopsSensingMotion
+        var loggedEvent = historyService.CreateHistory(notification.historyModel);
+        var unit = unitService.SetUnitStatus(notification.historyModel.UnitId, Status.Disarmed);
+        var response = JsonSerializer.Serialize(new ServerStopsSensingMotion()
         {
-            History = notification.historyModel,
-            Unit = notification.unit
-        };
-        historyService.CreateHistory(dto.History);
-        var dtoResult = JsonSerializer.Serialize(dto, StateService.JsonOptions());
-
-        StateService.SendToAll(dtoResult);
+            History = loggedEvent,
+            Unit = unit
+        }, StateService.JsonOptions());
+        StateService.SendToAll(response);
         return Task.CompletedTask;
     }
 }
