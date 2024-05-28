@@ -245,3 +245,17 @@ details summary::-webkit-details-marker {
 .button-add:active {
   background-color: white;
 }
+
+.add-email-container {
+  bottom: 0;
+  position: absolute;
+  margin-left: 10px;
+}
+
+.create-user-inputs-container {
+  margin-left: 10px;
+}
+
+.create-user-checkbox-container {
+  margin: 5px 0 5px 0;
+}

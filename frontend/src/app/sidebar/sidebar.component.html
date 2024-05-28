@@ -47,17 +47,17 @@
         </div>
         <div class="line"></div>
       </div>
-      <div style="bottom: 0; position: absolute;">
+      <div class="add-email-container">
         <form [formGroup]="addEmail">
-          <input class="email-input" style="margin-left: 10px" type="email" formControlName="Email">
-          <button class="button-add" style="margin-left: 10px" (click)="onAddEmailPressed()">Add</button>
+          <input class="email-input" type="email" formControlName="Email">
+          <button class="button-add" (click)="onAddEmailPressed()">Add</button>
         </form>
       </div>
     </details>
 
     <details class="create-user-details">
       <summary>Create user</summary>
-      <div style="margin-left: 10px">
+      <div class="create-user-inputs-container">
         <form [formGroup]="createUser">
           <div>
             <input class="email-input" placeholder="Name" formControlName="Name">
@@ -71,7 +71,7 @@
           <div>
             <input class="email-input" type="password" placeholder="Confirm Password" formControlName="ConfirmPassword">
           </div>
-          <div style="margin: 5px 0 5px 0">
+          <div class="create-user-checkbox-container">
             <label>Child:</label>
             <input type="checkbox" formControlName="IsChild">
           </div>
