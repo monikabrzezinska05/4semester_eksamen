@@ -39,7 +39,6 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   }
 
   void _onDeAuthentication() {
-    _send(ClientWantsToDeAuthenticate(eventType: ClientWantsToDeAuthenticate.name));
     emit(state.copyWith(user: null, jwt: null, isAuthenticated: false));
   }
 
@@ -52,6 +51,6 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
   }
 
   void deAuthenticateUser() {
-    _onDeAuthentication();
+    _send(ClientWantsToDeAuthenticate(eventType: ClientWantsToDeAuthenticate.name));
   }
 }
