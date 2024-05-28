@@ -31,6 +31,7 @@ export class State {
   jwt?: string | null = localStorage.getItem('jwt');
   currentUserId?: string | null = localStorage.getItem('currentUserId');
   ws: WebSocket = new WebSocket(environment.websocketBaseUrl);
+  messageToClient?: string | null = localStorage.getItem('messageToClient');
 
   history$: BehaviorSubject<HistoryModel[]> = new BehaviorSubject<HistoryModel[]>([]);
   units$: BehaviorSubject<Unit[]> = new BehaviorSubject<Unit[]>([]);
@@ -102,6 +103,7 @@ export class State {
     this.units$ = new BehaviorSubject<Unit[]>([]);
     this.history$ = new BehaviorSubject<HistoryModel[]>([]);
     this.emails$ = new BehaviorSubject<EmailModel[]>([]);
+
     this.router.navigateByUrl('/login');
   }
 
@@ -154,7 +156,7 @@ export class State {
   }
 
   ServerCreatesNewUser(dto: ServerCreatesNewUserDto) {
-    //TODO - implement this function.
+    this.messageToClient = dto.messageToClient;
   }
 
   private updateUnit(unit: Unit) {

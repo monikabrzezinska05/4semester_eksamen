@@ -5,6 +5,7 @@ import {ServerDeAuthenticatesUserDto} from "../../models/BaseDto";
 import {Router} from "@angular/router";
 import {map, Observable} from "rxjs";
 import {EmailModel} from "../../models/EmailModel";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-sidebar',
@@ -21,7 +22,8 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   constructor(private renderer: Renderer2,
               private state: State,
               private formBuilder: FormBuilder,
-              private router: Router) {
+              private router: Router,
+              private toastr: ToastrService) {
   }
 
   readonly addEmail = this.formBuilder.group({
@@ -162,8 +164,18 @@ export class SidebarComponent implements OnInit, AfterViewInit {
         },
         password: this.createUser.value.Password
       }
-      console.log("user: " + dto);
+
       this.state.ws.send(JSON.stringify(dto));
+
+      if (this.state.messageToClient == "User created"){
+        this.toastr.success("User created!");
+      }else {
+        this.toastr.error("Username or Email is in use");
+      }
+      } else if (this.createUser.value.Password != this.createUser.value.ConfirmPassword) {
+      this.toastr.error("Password doesn't match!");
+    } else {
+      this.toastr.error("Failed to create user");
     }
   }
 }
