@@ -58,8 +58,28 @@ export class ServerHasDeactivatedMotionSensorAlarmDto extends BaseDto<ServerHasD
   history!: HistoryModel;
 }
 
+export class ServerLocksDoorDto extends BaseDto<ServerLocksDoorDto>{
+  history!: HistoryModel;
+  unit!: Unit;
+}
+
+export class ServerUnlocksDoorDto extends BaseDto<ServerUnlocksDoorDto>{
+  history!: HistoryModel;
+  unit!: Unit;
+}
+
+export class ServerSensesMotionDto extends BaseDto<ServerSensesMotionDto> {
+  history!: HistoryModel;
+  unit!: Unit;
+}
+
+export class ServerStopsSensingMotionDto extends BaseDto<ServerStopsSensingMotionDto>{
+  history!: HistoryModel;
+  unit!: Unit;
+}
+
 export class ServerShowsEmailsDto extends BaseDto<ServerShowsEmailsDto>{
-  Emails!: EmailModel[];
+  emails!: EmailModel[];
 }
 
 export class ServerShowsHistoryDto extends BaseDto<ServerShowsHistoryDto>{

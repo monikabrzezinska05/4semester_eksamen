@@ -1,10 +1,93 @@
 <div class="sidebarMain">
   <img src="assets/securty_logo.png" class="sidebarImage">
+
   <button class="sidebarButton" (click)="onDashboardButtonPressed()">Dashboard</button>
-  <button class="sidebarButton" (click)="onHistoryButtonPress()">HistoryModel</button>
-  <button class="sidebarButton">Settings</button>
+  <button class="sidebarButton" (click)="onHistoryButtonPress()" id="historyButton">HistoryModel</button>
+  <button class="sidebarButton" (click)="onSettingsButtonPressed()">Settings</button>
+
   <div class="toggle-switch" #toggleSwitch>
     <div class="toggle-knob"></div>
   </div>
-  <button type="logoff" class="sidebarButton" (click)="Logoff()"> Sign out</button>
+  <button type="logoff" class="sidebarButton" (click)="Logoff()" id="logoutButton"> Sign out</button>
+</div>
+
+
+<div id="settingsModal" class="modal" (click)="onOutsideModalPressed()">
+  <div class="modal-content">
+    <span class="close" (click)="onModalClosePressed()">&times;</span>
+    <details>
+      <summary>Color Codes</summary>
+      <div [style.display]="'flex'">
+        <div class="status-circle" [style.border-color]="'green'"></div>
+        <p>Green indicates alarm is armed.</p>
+      </div>
+      <div [style.display]="'flex'">
+        <div class="status-circle" [style.border-color]="'yellow'"></div>
+        <p>Yellow indicates a unit is open.</p>
+      </div>
+      <div [style.display]="'flex'">
+        <div class="status-circle" [style.border-color]="'red'"></div>
+        <p>Red indicates an alarm is triggered.</p>
+      </div>
+      <div [style.display]="'flex'">
+        <div class="status-circle" [style.border-color]="'black'"></div>
+        <p>If you see this call help.</p>
+      </div>
+    </details>
+
+<!--    <p>Change Pin:</p>-->
+<!--    <input type="password" placeholder="Pin kode" maxlength="4">-->
+<!--    <button style="margin-left: 10px">Confirm</button>-->
+
+    <details>
+      <summary>Email list for notifications</summary>
+      <div class="email" *ngFor="let emailItem of Email$ | async">
+        <div class="email-content">
+          <p>{{ emailItem.mail }}</p>
+          <button class="button-delete-email" (click)="onDeleteEmailPressed(emailItem.id)">&times;</button>
+        </div>
+        <div class="line"></div>
+      </div>
+      <div class="add-email-container">
+        <form [formGroup]="addEmail">
+          <input class="email-input" type="email" formControlName="Email">
+          <button class="button-add" (click)="onAddEmailPressed()">Add</button>
+        </form>
+      </div>
+    </details>
+
+    <details class="create-user-details">
+      <summary>Create user</summary>
+      <div class="create-user-inputs-container">
+        <form [formGroup]="createUser">
+          <div>
+            <input class="email-input" placeholder="Name" formControlName="Name">
+          </div>
+          <div>
+            <input class="email-input" type="email" placeholder="Email" formControlName="Email">
+          </div>
+          <div>
+            <input class="email-input" type="password" placeholder="Password" formControlName="Password">
+          </div>
+          <div>
+            <input class="email-input" type="password" placeholder="Confirm Password" formControlName="ConfirmPassword">
+          </div>
+          <div class="create-user-checkbox-container">
+            <label>Child:</label>
+            <input type="checkbox" formControlName="IsChild">
+          </div>
+        </form>
+        <div>
+          <button class="button-add" (click)="onCreateUserPressed()">Create</button>
+        </div>
+      </div>
+    </details>
+
+    <p>Dark mode:</p>
+    <div class="toggle-switch" #toggleDarkmode>
+      <div class="toggle-knob">
+        <p class="knob-icon">&#9728;</p>
+      </div>
+    </div>
+  </div>
 </div>

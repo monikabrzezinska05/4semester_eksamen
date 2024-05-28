@@ -12,13 +12,19 @@ import {
   ServerHasActivatedMotionSensorAlarmDto,
   ServerHasDeactivatedAlarmDto,
   ServerHasDeactivatedMotionSensorAlarmDto,
-  ServerCreatesEmailDto, ServerDeletesEmailDto, ServerCreatesNewUserDto
+  ServerCreatesEmailDto,
+  ServerDeletesEmailDto,
+  ServerCreatesNewUserDto,
+  ServerShowsEmailsDto,
+  ServerLocksDoorDto,
+  ServerUnlocksDoorDto, ServerSensesMotionDto, ServerStopsSensingMotionDto
 } from "../models/BaseDto";
 import {HistoryModel} from "../models/HistoryModel";
 import {UserModel} from "../models/UserModel";
 import {Router} from "@angular/router";
 import {BehaviorSubject, map, Observable} from "rxjs";
 import {EmailModel} from "../models/EmailModel";
+import {ToastrService} from "ngx-toastr";
 
 @Injectable({
   providedIn: 'root'
@@ -30,12 +36,13 @@ export class State {
   jwt?: string | null = localStorage.getItem('jwt');
   currentUserId?: string | null = localStorage.getItem('currentUserId');
   ws: WebSocket = new WebSocket(environment.websocketBaseUrl);
+  messageToClient?: string | null = localStorage.getItem('messageToClient');
 
   history$: BehaviorSubject<HistoryModel[]> = new BehaviorSubject<HistoryModel[]>([]);
   units$: BehaviorSubject<Unit[]> = new BehaviorSubject<Unit[]>([]);
   emails$: BehaviorSubject<EmailModel[]> = new BehaviorSubject<EmailModel[]>([]);
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private toastr: ToastrService) {
     this.ws.onmessage = message => {
 
       const messageFromServer = JSON.parse(message.data) as BaseDto<any>
@@ -50,6 +57,11 @@ export class State {
     this.history$.next([...current, ...dto.historyList]);
   }
 
+  ServerShowsEmails(dto: ServerShowsEmailsDto) {
+    let current = this.emails$.getValue();
+    this.emails$.next([...current, ...dto.emails]);
+  }
+
   ServerAuthenticatesUser(dto: ServerAuthenticatesUserDto) {
     if (dto.user !== null && dto.jwt !== null) {
       this.authenticated = true;
@@ -58,12 +70,15 @@ export class State {
       localStorage.setItem('jwt', this.jwt);
       localStorage.setItem('currentUserId', this.currentUser.mail);
       this.router.navigateByUrl('');
+
+      this.getUnitsFromServer();
+      this.getHistoryFromServer();
+      this.getEmailsFromServer();
     }
     else {
       this.router.navigateByUrl('/login');
+      this.toastr.error("Login failed, please try again.");
     }
-    this.getUnitsFromServer();
-    this.getHistoryFromServer();
   }
 
   private getUnitsFromServer() {
@@ -80,11 +95,20 @@ export class State {
     this.ws.send(JSON.stringify(dto));
   }
 
+  private getEmailsFromServer() {
+    let dto = {
+      eventType: "ClientWantsToSeeEmails"
+    }
+    this.ws.send(JSON.stringify(dto));
+  }
+
   ServerDeAuthenticatesUser(dto: ServerDeAuthenticatesUserDto) {
     this.authenticated = false;
     this.currentUser = undefined;
     this.units$ = new BehaviorSubject<Unit[]>([]);
     this.history$ = new BehaviorSubject<HistoryModel[]>([]);
+    this.emails$ = new BehaviorSubject<EmailModel[]>([]);
+
     this.router.navigateByUrl('/login');
   }
 
@@ -118,6 +142,26 @@ export class State {
     this.setMotionSensorStatus(Status.Disarmed);
   }
 
+  ServerLocksDoor(dto: ServerLocksDoorDto) {
+    this.updateUnit(dto.unit);
+    this.addToHistory(dto.history);
+  }
+
+  ServerUnlocksDoor(dto: ServerUnlocksDoorDto) {
+    this.updateUnit(dto.unit);
+    this.addToHistory(dto.history);
+  }
+
+  ServerSensesMotion(dto: ServerSensesMotionDto) {
+    this.updateUnit(dto.unit);
+    this.addToHistory(dto.history);
+  }
+
+  ServerStopsSensingMotionDto(dto: ServerStopsSensingMotionDto) {
+    this.updateUnit(dto.unit);
+    this.addToHistory(dto.history);
+  }
+
   ServerOpensWindowDoor(dto: ServerClosesWindowDoorDto) {
     this.updateUnit(dto.unit);
     this.addToHistory(dto.history);
@@ -137,7 +181,7 @@ export class State {
   }
 
   ServerCreatesNewUser(dto: ServerCreatesNewUserDto) {
-    //TODO - implement this function.
+    this.messageToClient = dto.messageToClient;
   }
 
   private updateUnit(unit: Unit) {
@@ -200,5 +244,9 @@ export class State {
       user: this.currentUserId
     }
     this.ws.send(JSON.stringify(dto));
+  }
+
+  getAllEmails() : Observable<EmailModel[]> {
+    return this.emails$.asObservable();
   }
 }

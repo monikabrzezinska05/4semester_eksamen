@@ -7,27 +7,23 @@ using ws.transfer_models.server_models;
 
 namespace ws.client_event_handlers.MediaIntroducedEvents;
 
-public class LocksDoorMediatR(HistoryService historyService) : INotificationHandler<LocksDoorMediatRDto>
+public class LocksDoorMediatR(HistoryService historyService, UnitService unitService) : INotificationHandler<LocksDoorMediatRDto>
 {
     public Task Handle(LocksDoorMediatRDto notification, CancellationToken cancellationToken)
     {
         var rfid = notification.rfid;//rfid til at finde navnet på den der låser.
         
-        var dto = new ServerLocksDoor
+        var loggedHistory = historyService.CreateHistory(notification.historyModel);
+        var unit = unitService.SetUnitStatus(loggedHistory.UnitId, Status.Armed);
+        
+        var responseDto = new ServerLocksDoor
         {
-            History = new HistoryModel
-            {
-                PersonName = "boobie@email.dk",//Lav det med at bruge rfid til at finde navnet.
-                UnitId = notification.historyModel.UnitId,
-                Date = notification.historyModel.Date,
-                EventType = notification.historyModel.EventType
-            },
+            History = loggedHistory,
             Unit = notification.unit
         };
-        historyService.CreateHistory(dto.History);
-        var dtoResult = JsonSerializer.Serialize(dto, StateService.JsonOptions());
+        var response = JsonSerializer.Serialize(responseDto, StateService.JsonOptions());
 
-        StateService.SendToAll(dtoResult);
+        StateService.SendToAll(response);
         return Task.CompletedTask;
     }
 }

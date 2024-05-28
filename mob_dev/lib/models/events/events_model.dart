@@ -154,6 +154,7 @@ class ServerEvent extends BaseEvent {
       ServerShowsUnits.name => ServerShowsUnits.fromJson(json),
       ServerShowsEmails.name => ServerShowsEmails.fromJson(json),
       ServerAuthenticatesUser.name => ServerAuthenticatesUser.fromJson(json),
+      ServerDeAuthenticatesUser.name => ServerDeAuthenticatesUser.fromJson(json),
       ServerShowsEmails.name => ServerShowsEmails.fromJson(json),
       ServerCreatesEmail.name => ServerCreatesEmail.fromJson(json),
       ServerDeletesEmail.name => ServerDeletesEmail.fromJson(json),
@@ -164,11 +165,42 @@ class ServerEvent extends BaseEvent {
       ServerHasActivatedMotionSensorAlarm.name => ServerHasActivatedMotionSensorAlarm.fromJson(json),
       ServerHasDeactivatedMotionSensorAlarm.name => ServerHasDeactivatedMotionSensorAlarm.fromJson(json),
       ServerAlarmTriggered.name => ServerAlarmTriggered.fromJson(json),
+      ServerLocksDoor.name => ServerLocksDoor.fromJson(json),
+      ServerUnlocksDoor.name => ServerUnlocksDoor.fromJson(json),
+      ServerSensesMotion.name => ServerSensesMotion.fromJson(json),
+      ServerStopsSensingMotion.name => ServerStopsSensingMotion.fromJson(json),
       _ => throw "Unknown event type: $type in $json"
     };
   }
 }
 
+@freezed
+class ServerSensesMotion extends ServerEvent with _$ServerSensesMotion{
+  static const String name = "ServerSensesMotion";
+
+  const factory ServerSensesMotion({
+    required String eventType,
+    required HistoryModel history,
+    required UnitModel unit,
+  }) = _ServerSensesMotion;
+
+  factory ServerSensesMotion.fromJson(Map<String, Object?> json) =>
+      _$ServerSensesMotionFromJson(json);
+}
+
+@freezed
+class ServerStopsSensingMotion extends ServerEvent with _$ServerStopsSensingMotion {
+  static const String name = "ServerStopsSensingMotion";
+
+  const factory ServerStopsSensingMotion({
+    required String eventType,
+    required HistoryModel history,
+    required UnitModel unit,
+  }) = _ServerStopsSensingMotion;
+
+  factory ServerStopsSensingMotion.fromJson(Map<String, Object?> json) =>
+      _$ServerStopsSensingMotionFromJson(json);
+}
 
 @freezed
 class ServerShowsEmails extends ServerEvent with _$ServerShowsEmails {
@@ -224,6 +256,34 @@ class ServerShowsHistory extends ServerEvent with _$ServerShowsHistory {
 }
 
 @freezed
+class ServerLocksDoor extends ServerEvent with _$ServerLocksDoor {
+  static const String name = "ServerLocksDoor";
+
+  const factory ServerLocksDoor({
+    required String eventType,
+    required HistoryModel history,
+    required UnitModel unit,
+  }) = _ServerLocksDoor;
+
+  factory ServerLocksDoor.fromJson(Map<String, Object?> json) =>
+      _$ServerLocksDoorFromJson(json);
+}
+
+@freezed
+class ServerUnlocksDoor extends ServerEvent with _$ServerUnlocksDoor {
+  static const String name = "ServerUnlocksDoor";
+
+  const factory ServerUnlocksDoor({
+    required String eventType,
+    required HistoryModel history,
+    required UnitModel unit,
+  }) = _ServerUnlocksDoor;
+
+  factory ServerUnlocksDoor.fromJson(Map<String, Object?> json) =>
+      _$ServerUnlocksDoorFromJson(json);
+}
+
+@freezed
 class ServerShowsUnits extends ServerEvent with _$ServerShowsUnits {
   static const String name = "ServerShowsUnits";
 
@@ -252,7 +312,7 @@ class ServerAuthenticatesUser extends ServerEvent
 }
 
 @freezed
-class ServerDeAuthenticatesUser with _$ServerDeAuthenticatesUser {
+class ServerDeAuthenticatesUser extends ServerEvent with _$ServerDeAuthenticatesUser {
   static const String name = "ServerDeAuthenticatesUser";
 
   const factory ServerDeAuthenticatesUser({

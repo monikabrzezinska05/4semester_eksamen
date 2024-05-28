@@ -6,7 +6,6 @@ using lib;
 using MediatR;
 using service;
 using service.PasswordHashing;
-using ws.client_event_handlers.MediaIntroducedEvents;
 
 namespace api;
 

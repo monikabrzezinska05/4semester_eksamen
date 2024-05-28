@@ -1,0 +1,38 @@
+body.dark-mode {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.dark-mode .modal-content {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.modal-content {
+  background-color: white;
+  color: black;
+}
+
+.dark-mode .toggle-switch {
+  background-color: #ffffff;
+}
+
+.toggle-switch {
+  background-color: #ccc;
+}
+
+.dark-mode .toggle-knob {
+  background-color: #444444;
+}
+
+.toggle-knob {
+  background-color: #ffffff;
+}
+
+.dark-mode .close:hover {
+  color: white;
+}
+
+.close:hover {
+  color: black
+}

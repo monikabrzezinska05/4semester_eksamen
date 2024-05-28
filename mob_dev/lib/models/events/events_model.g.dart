@@ -145,6 +145,38 @@ Map<String, dynamic> _$$ClientWantsToTurnOnMotionAlarmImplToJson(
       'historyModel': instance.historyModel,
     };
 
+_$ServerSensesMotionImpl _$$ServerSensesMotionImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ServerSensesMotionImpl(
+      eventType: json['eventType'] as String,
+      history: HistoryModel.fromJson(json['history'] as Map<String, dynamic>),
+      unit: UnitModel.fromJson(json['unit'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$ServerSensesMotionImplToJson(
+        _$ServerSensesMotionImpl instance) =>
+    <String, dynamic>{
+      'eventType': instance.eventType,
+      'history': instance.history,
+      'unit': instance.unit,
+    };
+
+_$ServerStopsSensingMotionImpl _$$ServerStopsSensingMotionImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ServerStopsSensingMotionImpl(
+      eventType: json['eventType'] as String,
+      history: HistoryModel.fromJson(json['history'] as Map<String, dynamic>),
+      unit: UnitModel.fromJson(json['unit'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$ServerStopsSensingMotionImplToJson(
+        _$ServerStopsSensingMotionImpl instance) =>
+    <String, dynamic>{
+      'eventType': instance.eventType,
+      'history': instance.history,
+      'unit': instance.unit,
+    };
+
 _$ServerShowsEmailsImpl _$$ServerShowsEmailsImplFromJson(
         Map<String, dynamic> json) =>
     _$ServerShowsEmailsImpl(
@@ -205,6 +237,38 @@ Map<String, dynamic> _$$ServerShowsHistoryImplToJson(
     <String, dynamic>{
       'eventType': instance.eventType,
       'historyList': instance.historyList,
+    };
+
+_$ServerLocksDoorImpl _$$ServerLocksDoorImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ServerLocksDoorImpl(
+      eventType: json['eventType'] as String,
+      history: HistoryModel.fromJson(json['history'] as Map<String, dynamic>),
+      unit: UnitModel.fromJson(json['unit'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$ServerLocksDoorImplToJson(
+        _$ServerLocksDoorImpl instance) =>
+    <String, dynamic>{
+      'eventType': instance.eventType,
+      'history': instance.history,
+      'unit': instance.unit,
+    };
+
+_$ServerUnlocksDoorImpl _$$ServerUnlocksDoorImplFromJson(
+        Map<String, dynamic> json) =>
+    _$ServerUnlocksDoorImpl(
+      eventType: json['eventType'] as String,
+      history: HistoryModel.fromJson(json['history'] as Map<String, dynamic>),
+      unit: UnitModel.fromJson(json['unit'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$$ServerUnlocksDoorImplToJson(
+        _$ServerUnlocksDoorImpl instance) =>
+    <String, dynamic>{
+      'eventType': instance.eventType,
+      'history': instance.history,
+      'unit': instance.unit,
     };
 
 _$ServerShowsUnitsImpl _$$ServerShowsUnitsImplFromJson(

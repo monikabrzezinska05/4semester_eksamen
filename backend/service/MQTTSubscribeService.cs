@@ -1,4 +1,3 @@
-using System.Text.Json;
 using infrastructure;
 using infrastructure.models;
 using MediatR;
@@ -166,13 +165,22 @@ public class MQTTSubscribeService
                             }
                         });
                         break;
+                    case "ClientTriggersAlarm":
+                        _mediatr.Publish(new AlarmTriggerMediatRDto()
+                        {
+                            HistoryModel = new HistoryModel
+                            {
+                                UnitId = deserialized.historyModel!.unitId,
+                                Date = DateTime.Now,
+                                EventType = (EventType)deserialized.historyModel.eventTypeId
+                            }
+                        });
+                        break;
                 }
             }
             catch (Exception exc)
             {
-                Console.WriteLine(exc.Message);
-                Console.WriteLine(exc.InnerException);
-                Console.WriteLine(exc.StackTrace);
+                Console.WriteLine(exc);
             }
 
             return Task.CompletedTask;
