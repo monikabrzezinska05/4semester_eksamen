@@ -6,6 +6,7 @@ import {Router} from "@angular/router";
 import {map, Observable} from "rxjs";
 import {EmailModel} from "../../models/EmailModel";
 import {ToastrService} from "ngx-toastr";
+import {EventType} from "../../models/HistoryModel";
 
 @Component({
   selector: 'app-sidebar',
@@ -43,17 +44,27 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    const knob = this.toggleSwitch.nativeElement.querySelector('.toggle-knob') as HTMLElement;
+    if (this.state.alarmOn) {
+      knob.style.left = '55px';
+      knob.style.backgroundColor = '#08ff00';
+    } else {
+      knob.style.left = '5px';
+      knob.style.backgroundColor = '#ff0000';
+    }
+
     setTimeout(() => {
       this.renderer.listen(this.toggleSwitch.nativeElement, 'click', (event) => {
-        const knob = this.toggleSwitch.nativeElement.querySelector('.toggle-knob') as HTMLElement;
         if (knob.style.left === '55px') {
           // KALD HER METODE DER SKAL DEAKTIVERE NOGET!!!!
           knob.style.left = '5px';
           knob.style.backgroundColor = '#ff0000';
+          this.toggleAlarm();
         } else {
           // KALD HER METODE DER SKAL AKTIVERE NOGET!!!!
           knob.style.left = '55px';
           knob.style.backgroundColor = '#08ff00';
+          this.toggleAlarm();
         }
       });
 
@@ -178,4 +189,34 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       this.toastr.error("Failed to create user");
     }
   }
+
+  toggleAlarm() {
+    if (this.state.alarmOn) {
+      var dto = {
+        eventType: "ClientWantsToTurnOffAlarm",
+        historyModel: {
+          unit: this.state.units$.getValue()[0],
+          personName: this.state.currentUser?.mail,
+          unitId: this.state.units$.getValue()[0].unitId,
+          date: new Date(Date.now()),
+          eventType: EventType.AlarmDisarmed
+        }
+      }
+      console.log(dto);
+      this.state.ws.send(JSON.stringify(dto));
+    } else {
+      var dto = {
+        eventType: "ClientWantsToTurnOnAlarm",
+        historyModel: {
+          unit: this.state.units$.getValue()[0],
+          personName: this.state.currentUser?.mail,
+          unitId: this.state.units$.getValue()[0].unitId,
+          date: new Date(Date.now()),
+          eventType: EventType.AlarmArmed
+        }
+      }
+      this.state.ws.send(JSON.stringify(dto));
+    }
+  }
+
 }

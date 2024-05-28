@@ -4,20 +4,22 @@ import {environment} from "../environments/environment";
 import {
   BaseDto,
   ServerAuthenticatesUserDto,
-  ServerShowsUnitsDto,
-  ServerShowsHistoryDto,
-  ServerDeAuthenticatesUserDto,
   ServerClosesWindowDoorDto,
+  ServerCreatesEmailDto,
+  ServerCreatesNewUserDto,
+  ServerDeAuthenticatesUserDto,
+  ServerDeletesEmailDto,
   ServerHasActivatedAlarmDto,
   ServerHasActivatedMotionSensorAlarmDto,
   ServerHasDeactivatedAlarmDto,
   ServerHasDeactivatedMotionSensorAlarmDto,
-  ServerCreatesEmailDto,
-  ServerDeletesEmailDto,
-  ServerCreatesNewUserDto,
-  ServerShowsEmailsDto,
   ServerLocksDoorDto,
-  ServerUnlocksDoorDto, ServerSensesMotionDto, ServerStopsSensingMotionDto
+  ServerSensesMotionDto,
+  ServerShowsEmailsDto,
+  ServerShowsHistoryDto,
+  ServerShowsUnitsDto,
+  ServerStopsSensingMotionDto,
+  ServerUnlocksDoorDto
 } from "../models/BaseDto";
 import {HistoryModel} from "../models/HistoryModel";
 import {UserModel} from "../models/UserModel";
@@ -37,6 +39,7 @@ export class State {
   currentUserId?: string | null = localStorage.getItem('currentUserId');
   ws: WebSocket = new WebSocket(environment.websocketBaseUrl);
   messageToClient?: string | null = localStorage.getItem('messageToClient');
+  alarmOn: boolean = false;
 
   history$: BehaviorSubject<HistoryModel[]> = new BehaviorSubject<HistoryModel[]>([]);
   units$: BehaviorSubject<Unit[]> = new BehaviorSubject<Unit[]>([]);
@@ -50,6 +53,7 @@ export class State {
       // @ts-ignore
       this[messageFromServer.eventType].call(this, messageFromServer);
     }
+    this.alarmOn = this.getAlarmStatus();
   }
 
   ServerShowsHistory(dto: ServerShowsHistoryDto) {
@@ -248,5 +252,15 @@ export class State {
 
   getAllEmails() : Observable<EmailModel[]> {
     return this.emails$.asObservable();
+  }
+
+  getAlarmStatus() {
+    const units = this.units$.pipe(map((units) => units.filter((unit) => unit.status === Status.Armed && unit.unitType !== UnitType.MotionSensor)));
+
+    if (units) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
