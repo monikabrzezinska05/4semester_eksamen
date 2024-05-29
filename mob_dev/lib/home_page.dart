@@ -21,14 +21,15 @@ class HomePage extends StatelessWidget {
       child: BlocBuilder<HomeCubit, HomeState>(
         builder: (context, state) {
           final units = state.units.entries.toList();
+          final homeCubit = context.read<HomeCubit>();
           return ListView.builder(
             itemCount: units.length,
             itemBuilder: (context, index) {
               return Column(
                 children: <Widget>[
-                  IndicatorHeadline(headline: units[index].key.name, indicatorColor: context.read<HomeCubit>().,),
+                  IndicatorHeadline(headline: units[index].key.name, indicatorColor: homeCubit.state.indicatorColor),
                   ...units[index].value.map((unit) =>
-                     IndicatorLine(unitName: unit.name, unitStatus: unit.status,)),
+                     IndicatorLine(unitName: unit.name, unitStatus: unit.status, homeCubit: homeCubit)),
                 ],
               );
             },

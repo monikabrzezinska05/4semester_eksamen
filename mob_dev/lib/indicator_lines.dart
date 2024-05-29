@@ -1,34 +1,25 @@
 import 'package:flutter/material.dart';
 
+import 'home_bloc/home_cubit.dart';
 import 'models/unit/unit_model.dart';
 
 class IndicatorLine extends StatefulWidget {
   final String unitName;
   final Status unitStatus;
+  final HomeCubit homeCubit;
 
   IndicatorLine({
     required this.unitName,
     required this.unitStatus,
+    required this.homeCubit,
     super.key,
   });
 
   @override
-  State<IndicatorLine> createState() => _IndicatorLineState();
+  _IndicatorLineState createState() => _IndicatorLineState();
 }
 
 class _IndicatorLineState extends State<IndicatorLine> {
-  Color getColorForStatus(Status status){
-    if(status == Status.Armed || status == Status.Closed) {
-      return Colors.green;
-    } else if (status == Status.Disarmed || status == Status.Open) {
-      return Colors.yellow;
-    } else if (status == Status.Triggered){
-      return Colors.red;
-    } else {
-      return Colors.black;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,7 +36,7 @@ class _IndicatorLineState extends State<IndicatorLine> {
                   // Add a circular indicator that can change colour
                   Padding(
                     padding: const EdgeInsets.only(right: 11.5),
-                    child: Icon(Icons.circle, color: getColorForStatus(widget.unitStatus), size: 15),
+                    child: Icon(Icons.circle, color: widget.homeCubit.state.indicatorColor, size: 15),
                   )
                 ],
               ),

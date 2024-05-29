@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mob_dev/home_bloc/home_state.dart';
 import 'package:mob_dev/models/history/history_model.dart';
@@ -163,14 +165,22 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  void _statusColors(List<UnitModel> model) {
-    Map<UnitType, List<UnitModel>> units = Map.from(state.units);
-    List<UnitModel> unitList = List.from(value);
+  void _statusColors(Status status) {
+    Color color;
+    if(status == Status.Armed || status == Status.Closed) {
+      color = Colors.green;
+    } else if (status == Status.Disarmed || status == Status.Open) {
+      color = Colors.yellow;
+    } else if (status == Status.Triggered){
+      color = Colors.red;
+    } else {
+      color = Colors.black;
+    }
+    emit(state.copyWith(indicatorColor: color));
+  }
 
-    model.forEach(unit) {
-      if (units.containsKey(unit.unitType)) {
-
-      }
-    };
+  void getUnitsByType(UnitType type) {
+    List<UnitModel> units = state.allUnits.where((unit) => unit.unitType == type).toList();
+    emit(state.copyWith(allUnits: units));
   }
 }
