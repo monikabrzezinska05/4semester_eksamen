@@ -21,8 +21,8 @@ public class MQTTPublishService
         await mqttClient.ConnectAsync(mqttClientOptions, CancellationToken.None);
 
         var alarmOff = new MqttApplicationMessageBuilder()
-            .WithTopic("Security/Alarm/1")
-            .WithPayload("OFF")
+
+            .WithTopic("Security/Alarm/Off")
             .Build();
 
         await mqttClient.PublishAsync(alarmOff, CancellationToken.None);
@@ -31,7 +31,7 @@ public class MQTTPublishService
 
         Console.WriteLine("Alarm turn off has been published");
     }
-    
+
     public async Task AlarmTurnOnPublish()
     {
         var mqttFactory = new MqttFactory();
@@ -47,8 +47,7 @@ public class MQTTPublishService
         await mqttClient.ConnectAsync(mqttClientOptions, CancellationToken.None);
 
         var alarmOn = new MqttApplicationMessageBuilder()
-            .WithTopic("Security/Alarm/1")
-            .WithPayload("ON")
+            .WithTopic("Security/Alarm/On")
             .Build();
 
         await mqttClient.PublishAsync(alarmOn, CancellationToken.None);
@@ -73,8 +72,7 @@ public class MQTTPublishService
         await mqttClient.ConnectAsync(mqttClientOptions, CancellationToken.None);
 
         var alarmOff = new MqttApplicationMessageBuilder()
-            .WithTopic("Security/Motion/Toggle")
-            .WithPayload("OFF")
+            .WithTopic("Security/Motion/Off")
             .Build();
 
         await mqttClient.PublishAsync(alarmOff, CancellationToken.None);
@@ -83,7 +81,7 @@ public class MQTTPublishService
 
         Console.WriteLine("Alarm turn off has been published");
     }
-    
+
     public async Task AlarmTurnOnMotionPublish()
     {
         var mqttFactory = new MqttFactory();
@@ -99,8 +97,7 @@ public class MQTTPublishService
         await mqttClient.ConnectAsync(mqttClientOptions, CancellationToken.None);
 
         var alarmOn = new MqttApplicationMessageBuilder()
-            .WithTopic("Security/Motion/Toggle")
-            .WithPayload("ON")
+            .WithTopic("Security/Motion/On")
             .Build();
 
         await mqttClient.PublishAsync(alarmOn, CancellationToken.None);
@@ -109,5 +106,4 @@ public class MQTTPublishService
 
         Console.WriteLine("Alarm turn on has been published");
     }
-    
 }

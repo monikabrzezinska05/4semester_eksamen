@@ -28,13 +28,21 @@ public class ClientWantsToTurnOnAlarm : BaseEventHandler<ClientWantsToTurnOnAlar
     public override async Task Handle(ClientWantsToTurnOnAlarmDto dto, IWebSocketConnection socket)
     {
         StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
-        HistoryModel loggedEvent = _historyService.CreateHistory(dto.HistoryModel);
+        var loggedEvents = new List<HistoryModel>();
+        var units = _unitService.GetAllUnits();
+        var unitsToUpdate = units.Where(u => u.UnitType != UnitType.MotionSensor).ToList();
+        foreach (var unit in unitsToUpdate)
+        {
+            dto.HistoryModel.UnitId = unit.UnitId;
+            HistoryModel loggedEvent = _historyService.CreateHistory(dto.HistoryModel);
+            loggedEvents.Add(loggedEvent);
+        }
         _unitService.SetAllWindowDoorStatus(Status.Armed);
         await _mqttPublishService.AlarmTurnOnPublish();
         
         var turnOnAlarmToClient = JsonSerializer.Serialize(new ServerHasActivatedAlarm()
         {
-            History = loggedEvent
+            History = loggedEvents
         });
         await socket.Send(turnOnAlarmToClient);
     }

@@ -50,132 +50,135 @@ public class MQTTSubscribeService
             {
                 //Få beskeden.
                 var message = receivedMessage.ApplicationMessage.ConvertPayloadToString();
-                var deserialized = JsonSerializer.Deserialize<Root>(message);
-                switch (deserialized.eventType)
+                if (message != null)
                 {
-                    case "ClientSensesMotion":
-                        _mediatr.Publish(new SensingMotionMediatRDto
-                        {
-                            historyModel = new HistoryModel
+                    var deserialized = JsonSerializer.Deserialize<Root>(message);
+                    switch (deserialized.eventType)
+                    {
+                        case "ClientSensesMotion":
+                            _mediatr.Publish(new SensingMotionMediatRDto
                             {
-                                UnitId = deserialized.historyModel!.unitId,
-                                Date = DateTime.Now,
-                                EventType = (EventType)deserialized.historyModel.eventTypeId
-                            }
-                        });
-                        break;
-                    case "ClientStopsSensingMotion":
-                        _mediatr.Publish(new StopsSensingMotionMediatRDto()
-                        {
-                            historyModel = new HistoryModel
+                                historyModel = new HistoryModel
+                                {
+                                    UnitId = deserialized.historyModel!.unitId,
+                                    Date = DateTime.Now,
+                                    EventType = (EventType)deserialized.historyModel.eventTypeId
+                                }
+                            });
+                            break;
+                        case "ClientStopsSensingMotion":
+                            _mediatr.Publish(new StopsSensingMotionMediatRDto()
                             {
-                                UnitId = deserialized.historyModel!.unitId,
-                                Date = DateTime.Now,
-                                EventType = (EventType)deserialized.historyModel.eventTypeId
-                            }
-                        });
-                        break;
-                    case "ClientOpensWindowDoor":
-                        _mediatr.Publish(new OpensWindowDoorMediatRDto()
-                        {
-                            historyModel = new HistoryModel
+                                historyModel = new HistoryModel
+                                {
+                                    UnitId = deserialized.historyModel!.unitId,
+                                    Date = DateTime.Now,
+                                    EventType = (EventType)deserialized.historyModel.eventTypeId
+                                }
+                            });
+                            break;
+                        case "ClientOpensWindowDoor":
+                            _mediatr.Publish(new OpensWindowDoorMediatRDto()
                             {
-                                UnitId = deserialized.historyModel!.unitId,
-                                Date = DateTime.Now,
-                                EventType = (EventType)deserialized.historyModel.eventTypeId
-                            }
-                        });
-                        break;
-                    case "ClientClosesWindowDoor":
-                        _mediatr.Publish(new ClosesWindowDoorMediatRDto()
-                        {
-                            historyModel = new HistoryModel
+                                historyModel = new HistoryModel
+                                {
+                                    UnitId = deserialized.historyModel!.unitId,
+                                    Date = DateTime.Now,
+                                    EventType = (EventType)deserialized.historyModel.eventTypeId
+                                }
+                            });
+                            break;
+                        case "ClientClosesWindowDoor":
+                            _mediatr.Publish(new ClosesWindowDoorMediatRDto()
                             {
-                                UnitId = deserialized.historyModel!.unitId,
-                                Date = DateTime.Now,
-                                EventType = (EventType)deserialized.historyModel.eventTypeId
-                            }
-                        });
-                        break;
-                    case "ClientWantsToTurnOnAlarm":
-                        _mediatr.Publish(new TurnsOnAlarmMediatRDto()
-                        {
-                            historyModel = new HistoryModel
+                                historyModel = new HistoryModel
+                                {
+                                    UnitId = deserialized.historyModel!.unitId,
+                                    Date = DateTime.Now,
+                                    EventType = (EventType)deserialized.historyModel.eventTypeId
+                                }
+                            });
+                            break;
+                        case "ClientWantsToTurnOnAlarm":
+                            _mediatr.Publish(new TurnsOnAlarmMediatRDto()
                             {
-                                UnitId = deserialized.historyModel!.unitId,
-                                Date = DateTime.Now,
-                                EventType = (EventType)deserialized.historyModel.eventTypeId
-                            }
-                        });
-                        break;
-                    case "ClientWantsToTurnOffAlarm":
-                        _mediatr.Publish(new TurnsOffAlarmMediatRDto()
-                        {
-                            historyModel = new HistoryModel
+                                historyModel = new HistoryModel
+                                {
+                                    UnitId = deserialized.historyModel!.unitId,
+                                    Date = DateTime.Now,
+                                    EventType = (EventType)deserialized.historyModel.eventTypeId
+                                }
+                            });
+                            break;
+                        case "ClientWantsToTurnOffAlarm":
+                            _mediatr.Publish(new TurnsOffAlarmMediatRDto()
                             {
-                                UnitId = deserialized.historyModel!.unitId,
-                                Date = DateTime.Now,
-                                EventType = (EventType)deserialized.historyModel.eventTypeId
-                            }
-                        });
-                        break;
-                    case "ClientWantsToTurnOnMotionAlarm":
-                        _mediatr.Publish(new TurnsOnMotionAlarmMediatRDto()
-                        {
-                            historyModel = new HistoryModel
+                                historyModel = new HistoryModel
+                                {
+                                    UnitId = deserialized.historyModel!.unitId,
+                                    Date = DateTime.Now,
+                                    EventType = (EventType)deserialized.historyModel.eventTypeId
+                                }
+                            });
+                            break;
+                        case "ClientWantsToTurnOnMotionAlarm":
+                            _mediatr.Publish(new TurnsOnMotionAlarmMediatRDto()
                             {
-                                UnitId = deserialized.historyModel!.unitId,
-                                Date = DateTime.Now,
-                                EventType = (EventType)deserialized.historyModel.eventTypeId
-                            }
-                        });
-                        break;
-                    case "ClientWantsToTurnOffMotionAlarm":
-                        _mediatr.Publish(new TurnsOffMotionAlarmMediatRDto()
-                        {
-                            historyModel = new HistoryModel
+                                historyModel = new HistoryModel
+                                {
+                                    UnitId = deserialized.historyModel!.unitId,
+                                    Date = DateTime.Now,
+                                    EventType = (EventType)deserialized.historyModel.eventTypeId
+                                }
+                            });
+                            break;
+                        case "ClientWantsToTurnOffMotionAlarm":
+                            _mediatr.Publish(new TurnsOffMotionAlarmMediatRDto()
                             {
-                                UnitId = deserialized.historyModel!.unitId,
-                                Date = DateTime.Now,
-                                EventType = (EventType)deserialized.historyModel.eventTypeId
-                            }
-                        });
-                        break;
-                    case "ClientLocksDoor":
-                        _mediatr.Publish(new LocksDoorMediatRDto()
-                        {
-                            rfid = deserialized.rfid,
-                            historyModel = new HistoryModel
+                                historyModel = new HistoryModel
+                                {
+                                    UnitId = deserialized.historyModel!.unitId,
+                                    Date = DateTime.Now,
+                                    EventType = (EventType)deserialized.historyModel.eventTypeId
+                                }
+                            });
+                            break;
+                        case "ClientLocksDoor":
+                            _mediatr.Publish(new LocksDoorMediatRDto()
                             {
-                                UnitId = deserialized.historyModel!.unitId,
-                                Date = DateTime.Now,
-                                EventType = (EventType)deserialized.historyModel.eventTypeId
-                            }
-                        });
-                        break;
-                    case "ClientUnlocksDoor":
-                        _mediatr.Publish(new UnlocksDoorMediatRDto()
-                        {
-                            rfid = deserialized.rfid,
-                            historyModel = new HistoryModel
+                                rfid = deserialized.rfid,
+                                historyModel = new HistoryModel
+                                {
+                                    UnitId = deserialized.historyModel!.unitId,
+                                    Date = DateTime.Now,
+                                    EventType = (EventType)deserialized.historyModel.eventTypeId
+                                }
+                            });
+                            break;
+                        case "ClientUnlocksDoor":
+                            _mediatr.Publish(new UnlocksDoorMediatRDto()
                             {
-                                UnitId = deserialized.historyModel!.unitId,
-                                Date = DateTime.Now,
-                                EventType = (EventType)deserialized.historyModel.eventTypeId
-                            }
-                        });
-                        break;
-                    case "ClientTriggersAlarm":
-                        _mediatr.Publish(new AlarmTriggerMediatRDto()
-                        {
-                            HistoryModel = new HistoryModel
+                                rfid = deserialized.rfid,
+                                historyModel = new HistoryModel
+                                {
+                                    UnitId = deserialized.historyModel!.unitId,
+                                    Date = DateTime.Now,
+                                    EventType = (EventType)deserialized.historyModel.eventTypeId
+                                }
+                            });
+                            break;
+                        case "ClientTriggersAlarm":
+                            _mediatr.Publish(new AlarmTriggerMediatRDto()
                             {
-                                UnitId = deserialized.historyModel!.unitId,
-                                Date = DateTime.Now,
-                                EventType = (EventType)deserialized.historyModel.eventTypeId
-                            }
-                        });
-                        break;
+                                HistoryModel = new HistoryModel
+                                {
+                                    UnitId = deserialized.historyModel!.unitId,
+                                    Date = DateTime.Now,
+                                    EventType = (EventType)deserialized.historyModel.eventTypeId
+                                }
+                            });
+                            break;
+                    }
                 }
             }
             catch (Exception exc)

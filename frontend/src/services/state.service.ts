@@ -4,20 +4,22 @@ import {environment} from "../environments/environment";
 import {
   BaseDto,
   ServerAuthenticatesUserDto,
-  ServerShowsUnitsDto,
-  ServerShowsHistoryDto,
-  ServerDeAuthenticatesUserDto,
   ServerClosesWindowDoorDto,
+  ServerCreatesEmailDto,
+  ServerCreatesNewUserDto,
+  ServerDeAuthenticatesUserDto,
+  ServerDeletesEmailDto,
   ServerHasActivatedAlarmDto,
   ServerHasActivatedMotionSensorAlarmDto,
   ServerHasDeactivatedAlarmDto,
   ServerHasDeactivatedMotionSensorAlarmDto,
-  ServerCreatesEmailDto,
-  ServerDeletesEmailDto,
-  ServerCreatesNewUserDto,
-  ServerShowsEmailsDto,
   ServerLocksDoorDto,
-  ServerUnlocksDoorDto, ServerSensesMotionDto, ServerStopsSensingMotionDto
+  ServerSensesMotionDto,
+  ServerShowsEmailsDto,
+  ServerShowsHistoryDto,
+  ServerShowsUnitsDto,
+  ServerStopsSensingMotionDto,
+  ServerUnlocksDoorDto
 } from "../models/BaseDto";
 import {HistoryModel} from "../models/HistoryModel";
 import {UserModel} from "../models/UserModel";
@@ -37,6 +39,8 @@ export class State {
   currentUserId?: string | null = localStorage.getItem('currentUserId');
   ws: WebSocket = new WebSocket(environment.websocketBaseUrl);
   messageToClient?: string | null = localStorage.getItem('messageToClient');
+  alarmOn: Observable<boolean> = new Observable<boolean>();
+  motionAlarmOn: Observable<boolean> = new Observable<boolean>();
 
   history$: BehaviorSubject<HistoryModel[]> = new BehaviorSubject<HistoryModel[]>([]);
   units$: BehaviorSubject<Unit[]> = new BehaviorSubject<Unit[]>([]);
@@ -50,6 +54,8 @@ export class State {
       // @ts-ignore
       this[messageFromServer.eventType].call(this, messageFromServer);
     }
+    this.alarmOn = this.getAlarmStatus();
+    this.motionAlarmOn = this.getMotionAlarmStatus();
   }
 
   ServerShowsHistory(dto: ServerShowsHistoryDto) {
@@ -133,7 +139,7 @@ export class State {
   }
 
   ServerHasDeactivatedAlarm(dto: ServerHasDeactivatedAlarmDto) {
-    this.addToHistory(dto.history);
+    this.addToManyHistory(dto.history);
     this.setDoorWindowUnitsStatus(Status.Disarmed);
   }
 
@@ -196,6 +202,10 @@ export class State {
     current.push(history);
     this.history$.next(current);
   }
+  private addToManyHistory(history: HistoryModel[]) {
+    let current = this.history$.getValue();
+    this.history$.next([...current, ...history]);
+  }
 
   private setDoorWindowUnitsStatus(status: Status) {
     let current = this.units$.getValue();
@@ -249,4 +259,30 @@ export class State {
   getAllEmails() : Observable<EmailModel[]> {
     return this.emails$.asObservable();
   }
+
+  private getAlarmStatus() {
+    return this.units$.pipe(map((units) => {
+      let Disarmed = units.filter((unit) => unit.status === Status.Disarmed && unit.unitType !== UnitType.MotionSensor);
+
+      console.log("Disarmed: ", Disarmed)
+      if (Disarmed.length > 0) {
+        return false;
+      } else {
+        return true;
+      }
+    }));
+  }
+
+  private getMotionAlarmStatus() {
+    return this.units$.pipe(map((units) => {
+      let Disarmed = units.filter((unit) => unit.status === Status.Disarmed && unit.unitType === UnitType.MotionSensor);
+
+    if (Disarmed.length > 0) {
+      return false;
+    } else {
+      return true;
+    }
+    }));
+  }
+
 }

@@ -96,6 +96,11 @@
   float: right;
   font-size: 28px;
   font-weight: bold;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .close:hover, .close:focus {
@@ -258,4 +263,11 @@ details summary::-webkit-details-marker {
 
 .create-user-checkbox-container {
   margin: 5px 0 5px 0;
+}
+
+.toggles {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
