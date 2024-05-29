@@ -13,7 +13,7 @@ public class TurnsOnMotionAlarmMediatR(HistoryService historyService, UnitServic
     {
         var loggedHistory = historyService.CreateHistory(notification.historyModel);
         unitService.SetMotionSensorStatus(Status.Armed);
-        var dto = new ServerHasActivatedAlarm()
+        var dto = new ServerHasActivatedMotionSensorAlarm()
         {
             History = loggedHistory
         };

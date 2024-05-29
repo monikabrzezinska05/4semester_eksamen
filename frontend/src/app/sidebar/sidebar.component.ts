@@ -1,12 +1,12 @@
-import {Component, OnInit, ViewChild, ElementRef, Renderer2, AfterViewInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {State} from "../../services/state.service";
-import {ServerDeAuthenticatesUserDto} from "../../models/BaseDto";
 import {Router} from "@angular/router";
-import {map, Observable} from "rxjs";
+import {firstValueFrom, map, Observable, of} from "rxjs";
 import {EmailModel} from "../../models/EmailModel";
 import {ToastrService} from "ngx-toastr";
 import {EventType} from "../../models/HistoryModel";
+import {UnitType} from "../../models/Unit";
 
 @Component({
   selector: 'app-sidebar',
@@ -45,13 +45,16 @@ export class SidebarComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     const knob = this.toggleSwitch.nativeElement.querySelector('.toggle-knob') as HTMLElement;
-    if (this.state.alarmOn) {
-      knob.style.left = '55px';
-      knob.style.backgroundColor = '#08ff00';
-    } else {
-      knob.style.left = '5px';
-      knob.style.backgroundColor = '#ff0000';
-    }
+    this.state.alarmOn.subscribe((alarmOn) => {
+      if (alarmOn) {
+        knob.style.left = '55px';
+        knob.style.backgroundColor = '#08ff00';
+      } else {
+        knob.style.left = '5px';
+        knob.style.backgroundColor = '#ff0000';
+      }
+    });
+
 
     setTimeout(() => {
       this.renderer.listen(this.toggleSwitch.nativeElement, 'click', (event) => {
@@ -93,10 +96,10 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   private getEmailObservable(): Observable<EmailModel[]> {
     return this.state.getAllEmails().pipe(
       map(emailItems => emailItems.map(item => (
-        console.log("email: "+item),
-        {
-          ...item
-        }
+        console.log("email: " + item),
+          {
+            ...item
+          }
       )))
     );
   }
@@ -147,7 +150,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   onAddEmailPressed() {
-    if (this.addEmail.valid){
+    if (this.addEmail.valid) {
       var dto = {
         eventType: "ClientWantsToCreateEmail",
         Email: this.addEmail.value.Email
@@ -178,39 +181,36 @@ export class SidebarComponent implements OnInit, AfterViewInit {
 
       this.state.ws.send(JSON.stringify(dto));
 
-      if (this.state.messageToClient == "User created"){
+      if (this.state.messageToClient == "User created") {
         this.toastr.success("User created!");
-      }else {
+      } else {
         this.toastr.error("Username or Email is in use");
       }
-      } else if (this.createUser.value.Password != this.createUser.value.ConfirmPassword) {
+    } else if (this.createUser.value.Password != this.createUser.value.ConfirmPassword) {
       this.toastr.error("Password doesn't match!");
     } else {
       this.toastr.error("Failed to create user");
     }
   }
 
-  toggleAlarm() {
-    if (this.state.alarmOn) {
+  async toggleAlarm() {
+    if (await firstValueFrom(this.state.alarmOn)) {
       var dto = {
         eventType: "ClientWantsToTurnOffAlarm",
         historyModel: {
-          unit: this.state.units$.getValue()[0],
+          unitId: 0,
           personName: this.state.currentUser?.mail,
-          unitId: this.state.units$.getValue()[0].unitId,
           date: new Date(Date.now()),
           eventType: EventType.AlarmDisarmed
         }
       }
-      console.log(dto);
       this.state.ws.send(JSON.stringify(dto));
     } else {
       var dto = {
         eventType: "ClientWantsToTurnOnAlarm",
         historyModel: {
-          unit: this.state.units$.getValue()[0],
+          unitId: 0,
           personName: this.state.currentUser?.mail,
-          unitId: this.state.units$.getValue()[0].unitId,
           date: new Date(Date.now()),
           eventType: EventType.AlarmArmed
         }
@@ -218,5 +218,4 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       this.state.ws.send(JSON.stringify(dto));
     }
   }
-
 }

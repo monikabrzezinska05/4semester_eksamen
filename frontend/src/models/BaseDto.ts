@@ -51,7 +51,7 @@ export class ServerHasActivatedMotionSensorAlarmDto extends BaseDto<ServerHasAct
 }
 
 export class ServerHasDeactivatedAlarmDto extends BaseDto<ServerHasDeactivatedAlarmDto>{
-  history!: HistoryModel;
+  history!: HistoryModel[];
 }
 
 export class ServerHasDeactivatedMotionSensorAlarmDto extends BaseDto<ServerHasDeactivatedMotionSensorAlarmDto>{

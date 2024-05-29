@@ -39,7 +39,7 @@ export class State {
   currentUserId?: string | null = localStorage.getItem('currentUserId');
   ws: WebSocket = new WebSocket(environment.websocketBaseUrl);
   messageToClient?: string | null = localStorage.getItem('messageToClient');
-  alarmOn: boolean = false;
+  alarmOn: Observable<boolean> = new Observable<boolean>();
 
   history$: BehaviorSubject<HistoryModel[]> = new BehaviorSubject<HistoryModel[]>([]);
   units$: BehaviorSubject<Unit[]> = new BehaviorSubject<Unit[]>([]);
@@ -137,7 +137,7 @@ export class State {
   }
 
   ServerHasDeactivatedAlarm(dto: ServerHasDeactivatedAlarmDto) {
-    this.addToHistory(dto.history);
+    this.addToManyHistory(dto.history);
     this.setDoorWindowUnitsStatus(Status.Disarmed);
   }
 
@@ -200,6 +200,10 @@ export class State {
     current.push(history);
     this.history$.next(current);
   }
+  private addToManyHistory(history: HistoryModel[]) {
+    let current = this.history$.getValue();
+    this.history$.next([...current, ...history]);
+  }
 
   private setDoorWindowUnitsStatus(status: Status) {
     let current = this.units$.getValue();
@@ -254,13 +258,17 @@ export class State {
     return this.emails$.asObservable();
   }
 
-  getAlarmStatus() {
-    const units = this.units$.pipe(map((units) => units.filter((unit) => unit.status === Status.Armed && unit.unitType !== UnitType.MotionSensor)));
+  private getAlarmStatus() {
+    return this.units$.pipe(map((units) => {
+      let Disarmed = units.filter((unit) => unit.status === Status.Disarmed && unit.unitType !== UnitType.MotionSensor);
 
-    if (units) {
-      return true;
-    } else {
-      return false;
-    }
+      console.log("Disarmed: ", Disarmed)
+      if (Disarmed.length > 0) {
+        return false;
+      } else {
+        return true;
+      }
+    }));
   }
+
 }
