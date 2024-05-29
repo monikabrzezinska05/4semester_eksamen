@@ -27,7 +27,7 @@ public static class Startup
             dataSourceBuilder => dataSourceBuilder.EnableParameterLogging());
         
         builder.Services.AddSingleton<Mediator>();
-        builder.Services.AddSingleton<HistoryRepo>();
+        builder.Services.AddSingleton<HistoryRepository>();
         builder.Services.AddSingleton<AuthenticateRepository>();
         builder.Services.AddSingleton<UserRepository>();
         builder.Services.AddSingleton<EmailRepository>();

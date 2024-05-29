@@ -14,6 +14,7 @@ public class AlarmTriggerMediatR(HistoryService historyService, UnitService unit
         var loggedHistory = historyService.CreateHistory(notification.HistoryModel);
         var updatedUnit = unitService.SetUnitStatus(notification.HistoryModel.UnitId, Status.Triggered);
         emailService.SendEmail(notification.HistoryModel, updatedUnit);
+        NotificationService.SendNotification(StateService.GetNotificationTokens());
         
         var dto = new ServerAlarmTriggered()
         {
