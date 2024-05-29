@@ -17,6 +17,7 @@ export class DashboardComponent implements AfterViewInit{
 
   ngAfterViewInit() {
     this.toastr.success("Welcome back to the dashboard!");
+
   }
 
   toggleSidebar() {

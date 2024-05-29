@@ -40,6 +40,7 @@ export class State {
   ws: WebSocket = new WebSocket(environment.websocketBaseUrl);
   messageToClient?: string | null = localStorage.getItem('messageToClient');
   alarmOn: Observable<boolean> = new Observable<boolean>();
+  motionAlarmOn: Observable<boolean> = new Observable<boolean>();
 
   history$: BehaviorSubject<HistoryModel[]> = new BehaviorSubject<HistoryModel[]>([]);
   units$: BehaviorSubject<Unit[]> = new BehaviorSubject<Unit[]>([]);
@@ -54,6 +55,7 @@ export class State {
       this[messageFromServer.eventType].call(this, messageFromServer);
     }
     this.alarmOn = this.getAlarmStatus();
+    this.motionAlarmOn = this.getMotionAlarmStatus();
   }
 
   ServerShowsHistory(dto: ServerShowsHistoryDto) {
@@ -268,6 +270,18 @@ export class State {
       } else {
         return true;
       }
+    }));
+  }
+
+  private getMotionAlarmStatus() {
+    return this.units$.pipe(map((units) => {
+      let Disarmed = units.filter((unit) => unit.status === Status.Disarmed && unit.unitType === UnitType.MotionSensor);
+
+    if (Disarmed.length > 0) {
+      return false;
+    } else {
+      return true;
+    }
     }));
   }
 

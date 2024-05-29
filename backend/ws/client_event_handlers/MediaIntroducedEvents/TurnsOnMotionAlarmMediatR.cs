@@ -11,11 +11,19 @@ public class TurnsOnMotionAlarmMediatR(HistoryService historyService, UnitServic
 {
     public Task Handle(TurnsOnMotionAlarmMediatRDto notification, CancellationToken cancellationToken)
     {
-        var loggedHistory = historyService.CreateHistory(notification.historyModel);
+        var loggedEvents = new List<HistoryModel>();
+        var units = unitService.GetAllUnits();
+        var unitsToUpdate = units.Where(u => u.UnitType == UnitType.MotionSensor).ToList();
+        foreach (var unit in unitsToUpdate)
+        {
+            notification.historyModel.UnitId = unit.UnitId;
+            HistoryModel loggedEvent = historyService.CreateHistory(notification.historyModel);
+            loggedEvents.Add(loggedEvent);
+        }
         unitService.SetMotionSensorStatus(Status.Armed);
         var dto = new ServerHasActivatedMotionSensorAlarm()
         {
-            History = loggedHistory
+            History = loggedEvents
         };
         var response = JsonSerializer.Serialize(dto, StateService.JsonOptions());
 

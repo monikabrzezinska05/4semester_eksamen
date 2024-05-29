@@ -2,12 +2,25 @@
   <img src="assets/securty_logo.png" class="sidebarImage">
 
   <button class="sidebarButton" (click)="onDashboardButtonPressed()">Dashboard</button>
-  <button class="sidebarButton" (click)="onHistoryButtonPress()" id="historyButton">HistoryModel</button>
+  <button class="sidebarButton" (click)="onHistoryButtonPress()" id="historyButton">History</button>
   <button class="sidebarButton" (click)="onSettingsButtonPressed()">Settings</button>
 
-  <div class="toggle-switch" #toggleSwitch>
-    <div class="toggle-knob"></div>
+  <div class="toggles">
+    <p>Door & Window Alarm</p>
+
+    <div class="toggle-switch" #toggleSwitch>
+      <div class="toggle-knob"></div>
+    </div>
   </div>
+
+  <div class="toggles">
+    <p>Motion Alarm</p>
+
+    <div class="toggle-switch" #toggleMotion>
+      <div class="toggle-knob"></div>
+    </div>
+  </div>
+
   <button type="logoff" class="sidebarButton" (click)="Logoff()" id="logoutButton"> Sign out</button>
 </div>
 
@@ -35,9 +48,9 @@
       </div>
     </details>
 
-<!--    <p>Change Pin:</p>-->
-<!--    <input type="password" placeholder="Pin kode" maxlength="4">-->
-<!--    <button style="margin-left: 10px">Confirm</button>-->
+    <!--    <p>Change Pin:</p>-->
+    <!--    <input type="password" placeholder="Pin kode" maxlength="4">-->
+    <!--    <button style="margin-left: 10px">Confirm</button>-->
 
     <details>
       <summary>Email list for notifications</summary>

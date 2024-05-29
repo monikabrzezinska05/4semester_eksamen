@@ -40,7 +40,7 @@ public class ClientWantsToTurnOnAlarm : BaseEventHandler<ClientWantsToTurnOnAlar
             loggedEvents.Add(loggedEvent);
         }
         _unitService.SetAllWindowDoorStatus(Status.Armed);
-        //await _mqttPublishService.AlarmTurnOnPublish();
+        await _mqttPublishService.AlarmTurnOnPublish();
         
         var turnOnAlarmToClient = JsonSerializer.Serialize(new ServerHasActivatedAlarm()
         {

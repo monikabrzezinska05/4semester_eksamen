@@ -16,6 +16,7 @@ import {UnitType} from "../../models/Unit";
 export class SidebarComponent implements OnInit, AfterViewInit {
   @ViewChild('toggleSwitch') toggleSwitch!: ElementRef;
   @ViewChild('toggleDarkmode') toggleDarkmodeSwitch!: ElementRef;
+  @ViewChild('toggleMotion') toggleMotion!: ElementRef;
   private modal!: HTMLElement;
   Email$!: Observable<EmailModel[]>;
   darkMode = false;
@@ -55,19 +56,39 @@ export class SidebarComponent implements OnInit, AfterViewInit {
       }
     });
 
+    const motionKnob = this.toggleMotion.nativeElement.querySelector('.toggle-knob') as HTMLElement;
+    this.state.motionAlarmOn.subscribe((alarmOn) => {
+      if (alarmOn) {
+        motionKnob.style.left = '55px';
+        motionKnob.style.backgroundColor = '#08ff00';
+      } else {
+        motionKnob.style.left = '5px';
+        motionKnob.style.backgroundColor = '#ff0000';
+      }
+    });
 
     setTimeout(() => {
       this.renderer.listen(this.toggleSwitch.nativeElement, 'click', (event) => {
         if (knob.style.left === '55px') {
-          // KALD HER METODE DER SKAL DEAKTIVERE NOGET!!!!
           knob.style.left = '5px';
           knob.style.backgroundColor = '#ff0000';
           this.toggleAlarm();
         } else {
-          // KALD HER METODE DER SKAL AKTIVERE NOGET!!!!
           knob.style.left = '55px';
           knob.style.backgroundColor = '#08ff00';
           this.toggleAlarm();
+        }
+      });
+
+      this.renderer.listen(this.toggleMotion.nativeElement, 'click', (event) => {
+        if (motionKnob.style.left === '55px') {
+          motionKnob.style.left = '5px';
+          motionKnob.style.backgroundColor = '#ff0000';
+          this.toggleMotionAlarm();
+        } else {
+          motionKnob.style.left = '55px';
+          motionKnob.style.backgroundColor = '#08ff00';
+          this.toggleMotionAlarm();
         }
       });
 
@@ -213,6 +234,32 @@ export class SidebarComponent implements OnInit, AfterViewInit {
           personName: this.state.currentUser?.mail,
           date: new Date(Date.now()),
           eventType: EventType.AlarmArmed
+        }
+      }
+      this.state.ws.send(JSON.stringify(dto));
+    }
+  }
+
+  async toggleMotionAlarm() {
+    if (await firstValueFrom(this.state.motionAlarmOn)) {
+      var dto = {
+        eventType: "ClientWantsToTurnOffMotionAlarm",
+        historyModel: {
+          unitId: 0,
+          personName: this.state.currentUser?.mail,
+          date: new Date(Date.now()),
+          eventType: EventType.AlarmArmed
+        }
+      }
+      this.state.ws.send(JSON.stringify(dto));
+    } else {
+      var dto = {
+        eventType: "ClientWantsToTurnOnMotionAlarm",
+        historyModel: {
+          unitId: 0,
+          personName: this.state.currentUser?.mail,
+          date: new Date(Date.now()),
+          eventType: EventType.AlarmDisarmed
         }
       }
       this.state.ws.send(JSON.stringify(dto));

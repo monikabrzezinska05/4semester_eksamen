@@ -41,7 +41,7 @@ public class ClientWantsToTurnOffAlarm : BaseEventHandler<ClientWantsToTurnOffAl
             loggedEvents.Add(loggedEvent);
         }
         _unitService.SetAllWindowDoorStatus(Status.Disarmed);
-        //await _mqttPublishService.AlarmTurnOffPublish();
+        await _mqttPublishService.AlarmTurnOffPublish();
 
         var turnOffAlarmToClient = JsonSerializer.Serialize(new ServerHasDeactivatedAlarm()
         {
