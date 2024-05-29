@@ -20,14 +20,9 @@ public class MQTTPublishService
 
         await mqttClient.ConnectAsync(mqttClientOptions, CancellationToken.None);
 
-        var json =
-            @"{
-            ""Payload"": ""OFF""
-            }";
-
         var alarmOff = new MqttApplicationMessageBuilder()
-            .WithTopic("Security/Alarm/1")
-            .WithPayload(json)
+
+            .WithTopic("Security/Alarm/Off")
             .Build();
 
         await mqttClient.PublishAsync(alarmOff, CancellationToken.None);
@@ -51,14 +46,8 @@ public class MQTTPublishService
 
         await mqttClient.ConnectAsync(mqttClientOptions, CancellationToken.None);
 
-        var json =
-            @"{
-            ""Payload"": ""ON""
-            }";
-
         var alarmOn = new MqttApplicationMessageBuilder()
-            .WithTopic("Security/Alarm/1")
-            .WithPayload(json)
+            .WithTopic("Security/Alarm/On")
             .Build();
 
         await mqttClient.PublishAsync(alarmOn, CancellationToken.None);
@@ -82,14 +71,8 @@ public class MQTTPublishService
 
         await mqttClient.ConnectAsync(mqttClientOptions, CancellationToken.None);
 
-        var json =
-            @"{
-            ""Payload"": ""OFF""
-            }";
-
         var alarmOff = new MqttApplicationMessageBuilder()
-            .WithTopic("Security/Motion/Toggle")
-            .WithPayload(json)
+            .WithTopic("Security/Motion/Off")
             .Build();
 
         await mqttClient.PublishAsync(alarmOff, CancellationToken.None);
@@ -113,14 +96,8 @@ public class MQTTPublishService
 
         await mqttClient.ConnectAsync(mqttClientOptions, CancellationToken.None);
 
-        var json =
-            @"{
-            ""Payload"": ""ON""
-            }";
-
         var alarmOn = new MqttApplicationMessageBuilder()
-            .WithTopic("Security/Motion/Toggle")
-            .WithPayload(json)
+            .WithTopic("Security/Motion/On")
             .Build();
 
         await mqttClient.PublishAsync(alarmOn, CancellationToken.None);
