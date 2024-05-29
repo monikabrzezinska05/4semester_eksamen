@@ -82,6 +82,13 @@ public static class Startup
                     GlobalExceptionHandler.Handle(e, ws, message);
                 }
             };
+            
+            ws.OnClose = () =>
+            {
+                Console.WriteLine("Client disconnected");
+                StateService.RemoveConnection(ws);
+                StateService.RemoveClient(ws.ConnectionInfo.Id);
+            };
         });
         app.Services.GetService<MQTTSubscribeService>().CommunicateWithBroker();
     }

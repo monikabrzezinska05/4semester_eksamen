@@ -15,10 +15,10 @@ Color statusColors(Status status) {
   return color;
 }
 
-Color headlineStatusColor(Status status, UnitType unitType, List<UnitModel> units) {
+Color headlineStatusColor(Status status, List<UnitModel> units) {
   Color color;
-  var statusYellow = units.where((unit) => unit.unitType == unitType && unit.status == Status.Disarmed || unit.status == Status.Open);
-  var statusRed = units.where((unit) => unit.unitType == unitType && unit.status == Status.Triggered);
+  var statusYellow = units.where((unit) => unit.status == Status.Disarmed || unit.status == Status.Open);
+  var statusRed = units.where((unit) => unit.status == Status.Triggered);
   if (statusRed.isNotEmpty) {
     color = Colors.red;
   }

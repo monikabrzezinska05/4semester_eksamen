@@ -12,7 +12,6 @@ class IndicatorHeadline extends StatelessWidget {
     Key? key, required this.status, required this.units,
   }) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -25,7 +24,7 @@ class IndicatorHeadline extends StatelessWidget {
               // Insert whitespace so screen is filled
               const Spacer(),
               // Add a circular indicator that can change colour
-              Icon(Icons.circle, color: headlineStatusColor(status, UnitType.values.byName(headline), units)),
+              Icon(Icons.circle, color: headlineStatusColor(status, units)),
             ],
           ),
         ),
