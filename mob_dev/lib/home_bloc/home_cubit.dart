@@ -81,6 +81,8 @@ class HomeCubit extends Cubit<HomeState> {
       unitList[index] = updatedUnit;
       units[model.unitType] = unitList;
       emit(state.copyWith(units: units));
+
+      _statusColors(updatedUnit.status);
     }
   }
 
