@@ -12,10 +12,19 @@ public class TurnsOffAlarmMediatR(HistoryService historyService, UnitService uni
     public Task Handle(TurnsOffAlarmMediatRDto notification, CancellationToken cancellationToken)
     {
         var loggedHistory = historyService.CreateHistory(notification.historyModel);
+        var loggedEvents = new List<HistoryModel>();
+        var units = unitService.GetAllUnits();
+        var unitsToUpdate = units.Where(u => u.UnitType != UnitType.MotionSensor).ToList();
+        foreach (var unit in unitsToUpdate)
+        {
+            notification.historyModel.UnitId = unit.UnitId;
+            HistoryModel loggedEvent = historyService.CreateHistory(notification.historyModel);
+            loggedEvents.Add(loggedEvent);
+        }
         unitService.SetAllWindowDoorStatus(Status.Disarmed);
         var dto = new ServerHasDeactivatedAlarm()
         {
-            History = loggedHistory
+            History = loggedEvents
         };
         var dtoResult = JsonSerializer.Serialize(dto, StateService.JsonOptions());
 

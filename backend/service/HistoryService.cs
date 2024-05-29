@@ -6,16 +6,16 @@ namespace service;
 
 public class HistoryService
 {
-    private readonly HistoryRepo _historyRepo;
+    private readonly HistoryRepository _historyRepository;
     
-    public HistoryService(HistoryRepo historyRepo)
+    public HistoryService(HistoryRepository historyRepository)
     {
-        _historyRepo = historyRepo;
+        _historyRepository = historyRepository;
     }
 
     public List<HistoryModel> GetHistory(DateTime? timePeriod)
     {
-        var histories = _historyRepo.GetHistory(timePeriod);
+        var histories = _historyRepository.GetHistory(timePeriod);
 
         foreach (var history in histories)
         {
@@ -29,7 +29,7 @@ public class HistoryService
 
     public HistoryModel CreateHistory(HistoryModel model)
     {
-        var history = _historyRepo.CreateHistory(model);
+        var history = _historyRepository.CreateHistory(model);
         
         List<Unit> units = JsonConvert.DeserializeObject<List<Unit>>(history.UnitTable);
         history.Unit = units[0];

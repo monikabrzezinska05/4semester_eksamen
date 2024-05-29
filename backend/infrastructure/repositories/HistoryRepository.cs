@@ -5,11 +5,11 @@ using Npgsql;
 
 namespace infrastructure.repositories;
 
-public class HistoryRepo
+public class HistoryRepository
 {
     private readonly NpgsqlDataSource _dataSource;
 
-    public HistoryRepo(NpgsqlDataSource dataSource)
+    public HistoryRepository(NpgsqlDataSource dataSource)
     {
         _dataSource = dataSource;
     }
@@ -61,7 +61,7 @@ public class HistoryRepo
         using (var conn = _dataSource.OpenConnection())
         {
             var newHistory = conn.QueryFirst<HistoryModel>(sql,
-                new { UserEmail = model.PersonName, model.UnitId, model.Date, EventTypeId = model.EventType });
+                new { UserEmail = model.PersonName, model.UnitId, date = DateTime.UtcNow, EventTypeId = model.EventType });
             var response = conn.QueryFirst<HistoryModel>(sqlGetter, new { newHistory.HistoryId });
             return response;
         }

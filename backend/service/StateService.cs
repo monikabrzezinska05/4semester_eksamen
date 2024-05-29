@@ -1,3 +1,4 @@
+using System.Collections.Concurrent;
 using System.Text.Json;
 using System.Security.Authentication;
 using Fleck;
@@ -14,8 +15,9 @@ public class WsWithMetadata(IWebSocketConnection connection)
 
 public static class StateService
 {
-    public static Dictionary<Guid, WsWithMetadata> Clients = new();
-    public static Dictionary<Guid, IWebSocketConnection> Connections = new();
+    public static ConcurrentDictionary<Guid, WsWithMetadata> Clients = new();
+    public static ConcurrentDictionary<Guid, IWebSocketConnection> Connections = new();
+    public static List<string> NotificationTokens { get; set; } = new();
 
     public static WsWithMetadata GetClient(Guid clientId)
     {
@@ -37,7 +39,7 @@ public static class StateService
 
     public static void RemoveClient(Guid clientId)
     {
-        Clients.Remove(clientId);
+        Clients.Remove(clientId, out _);
     }
     
     public static bool AddConnection(IWebSocketConnection ws)
@@ -47,9 +49,9 @@ public static class StateService
     
     public static bool RemoveConnection(IWebSocketConnection ws)
     {
-        return Connections.Remove(ws.ConnectionInfo.Id);
+        return Connections.Remove(ws.ConnectionInfo.Id, out _);
     }
-
+    
     public static JsonSerializerOptions JsonOptions()
     {
         return new JsonSerializerOptions()
@@ -63,6 +65,19 @@ public static class StateService
         foreach (var connection in Connections.Values)
         {
             connection.Send(dtoResult);
+        }
+    }
+
+    public static List<string> GetNotificationTokens()
+    {
+        return NotificationTokens;
+    }
+
+    public static void AddNotificationToken(string dtoToken)
+    {
+        if (!NotificationTokens.Contains(dtoToken))
+        {
+            NotificationTokens.Add(dtoToken);
         }
     }
 }

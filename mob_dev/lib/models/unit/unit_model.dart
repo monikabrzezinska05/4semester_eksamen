@@ -19,7 +19,7 @@ class UnitModel with _$UnitModel {
 enum Status {
   @JsonValue(0)Armed,
   @JsonValue(1)Disarmed,
-  @JsonValue(2)Triggeret,
+  @JsonValue(2)Triggered,
   @JsonValue(3)Closed,
   @JsonValue(4)Open,
 }

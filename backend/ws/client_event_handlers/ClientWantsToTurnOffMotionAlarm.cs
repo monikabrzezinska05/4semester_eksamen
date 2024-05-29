@@ -29,14 +29,22 @@ public class ClientWantsToTurnOffMotionAlarm : BaseEventHandler<ClientWantsToTur
     public override async Task Handle(ClientWantsToTurnOffAlarmsWindowDoorDto dto, IWebSocketConnection socket)
     {
         StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
-        HistoryModel loggedEvent = _historyService.CreateHistory(dto.HistoryModel);
-        _unitService.SetAllUnitStatus(Status.Disarmed);
-        await _mqttPublishService.AlarmTurnOffMotionPublish();
-        
+        var loggedEvents = new List<HistoryModel>();
+        var units = _unitService.GetAllUnits();
+        var unitsToUpdate = units.Where(u => u.UnitType == UnitType.MotionSensor).ToList();
+        foreach (var unit in unitsToUpdate)
+        {
+            dto.HistoryModel.UnitId = unit.UnitId;
+            HistoryModel loggedEvent = _historyService.CreateHistory(dto.HistoryModel);
+            loggedEvents.Add(loggedEvent);
+        }
+        _unitService.SetMotionSensorStatus(Status.Disarmed);
+        await _mqttPublishService.AlarmTurnOnMotionPublish();
+
         var turnOffAlarmToClient = JsonSerializer.Serialize(new ServerHasDeactivatedMotionSensorAlarm()
         {
-            History = loggedEvent
-        });
+            History = loggedEvents
+        }, StateService.JsonOptions());
         await socket.Send(turnOffAlarmToClient);
     }
 }

@@ -27,7 +27,7 @@ public static class Startup
             dataSourceBuilder => dataSourceBuilder.EnableParameterLogging());
         
         builder.Services.AddSingleton<Mediator>();
-        builder.Services.AddSingleton<HistoryRepo>();
+        builder.Services.AddSingleton<HistoryRepository>();
         builder.Services.AddSingleton<AuthenticateRepository>();
         builder.Services.AddSingleton<UserRepository>();
         builder.Services.AddSingleton<EmailRepository>();
@@ -81,6 +81,13 @@ public static class Startup
                 {
                     GlobalExceptionHandler.Handle(e, ws, message);
                 }
+            };
+            
+            ws.OnClose = () =>
+            {
+                Console.WriteLine("Client disconnected");
+                StateService.RemoveConnection(ws);
+                StateService.RemoveClient(ws.ConnectionInfo.Id);
             };
         });
         app.Services.GetService<MQTTSubscribeService>().CommunicateWithBroker();

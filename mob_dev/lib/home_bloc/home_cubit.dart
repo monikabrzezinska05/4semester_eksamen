@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mob_dev/home_bloc/home_state.dart';
 import 'package:mob_dev/models/history/history_model.dart';
@@ -63,6 +65,7 @@ class HomeCubit extends Cubit<HomeState> {
       }
     });
     emit(state.copyWith(units: units));
+    _onUnitStatusChanged(model[0]);
   }
 
   void _onUnitStatusChanged(UnitModel model) {
@@ -123,7 +126,7 @@ class HomeCubit extends Cubit<HomeState> {
       unitList.forEach((unit) {
         if (unit.unitType == UnitType.MotionSensor) {
           unitList[unitList
-                  .indexWhere((element) => element.unitId == unit.unitId)] =
+              .indexWhere((element) => element.unitId == unit.unitId)] =
               unit.copyWith(status: Status.Armed);
         }
       });
@@ -139,7 +142,7 @@ class HomeCubit extends Cubit<HomeState> {
       unitList.forEach((unit) {
         if (unit.unitType == UnitType.MotionSensor) {
           unitList[unitList
-                  .indexWhere((element) => element.unitId == unit.unitId)] =
+              .indexWhere((element) => element.unitId == unit.unitId)] =
               unit.copyWith(status: Status.Disarmed);
         }
       });
@@ -156,10 +159,15 @@ class HomeCubit extends Cubit<HomeState> {
 
     if (index != -1) {
       UnitModel updatedUnit =
-          unitList[index].copyWith(status: Status.Triggeret);
+          unitList[index].copyWith(status: Status.Triggered);
       unitList[index] = updatedUnit;
       units[model.unitType] = unitList;
       emit(state.copyWith(units: units));
     }
+  }
+
+  void getUnitsByType(UnitType type) {
+    List<UnitModel> units = state.allUnits.where((unit) => unit.unitType == type).toList();
+    emit(state.copyWith(allUnits: units));
   }
 }

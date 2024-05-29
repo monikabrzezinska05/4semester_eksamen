@@ -31,7 +31,7 @@ const _$UnitTypeEnumMap = {
 const _$StatusEnumMap = {
   Status.Armed: 0,
   Status.Disarmed: 1,
-  Status.Triggeret: 2,
+  Status.Triggered: 2,
   Status.Closed: 3,
   Status.Open: 4,
 };

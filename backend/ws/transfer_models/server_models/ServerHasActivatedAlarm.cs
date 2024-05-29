@@ -5,5 +5,5 @@ namespace ws.transfer_models.server_models;
 
 public class ServerHasActivatedAlarm : BaseDto
 {
-    public HistoryModel History { get; set; }
+    public List<HistoryModel> History { get; set; }
 }
