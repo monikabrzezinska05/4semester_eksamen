@@ -1,38 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:mob_dev/utillities.dart';
+
+import 'home_bloc/home_cubit.dart';
+import 'models/unit/unit_model.dart';
 
 class IndicatorLine extends StatefulWidget {
   final String unitName;
+  final Status unitStatus;
+
   IndicatorLine({
     required this.unitName,
+    required this.unitStatus,
     super.key,
   });
 
   @override
-  State<IndicatorLine> createState() => _IndicatorLineState();
+  _IndicatorLineState createState() => _IndicatorLineState();
 }
 
 class _IndicatorLineState extends State<IndicatorLine> {
-  Color TheColor = Colors.red;
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-      child: TextButton(
-        style: ButtonStyle(
-          visualDensity: VisualDensity.compact,
-        ),
-        onPressed: () {
-          setState(() {
-            if (TheColor == Colors.red)
-              {
-                TheColor = Colors.green;
-              }
-            else
-              {
-                TheColor = Colors.red;
-              }
-          });
-        },
         child: Column(
           children: [
             Padding(
@@ -43,13 +33,15 @@ class _IndicatorLineState extends State<IndicatorLine> {
                   // Insert whitespace so screen is filled
                   const Spacer(),
                   // Add a circular indicator that can change colour
-                  Icon(Icons.circle, color: TheColor, size: 15)
+                  Padding(
+                    padding: const EdgeInsets.only(right: 11.5),
+                    child: Icon(Icons.circle, color: statusColors(widget.unitStatus), size: 15),
+                  )
                 ],
               ),
             ),
           ],
         ),
-      ),
     );
   }
 }
