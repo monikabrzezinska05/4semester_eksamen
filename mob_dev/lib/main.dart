@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -12,13 +13,19 @@ import 'package:provider/provider.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 import 'authentication_bloc/authentication_cubit.dart';
+import 'firebase_options.dart';
 import 'history_bloc/history_cubit.dart';
 import 'home_page.dart';
 import 'models/events/events_model.dart';
 
 void main() async {
-  final wsUrl = Uri.parse('ws://localhost:8181');
+  final wsUrl = Uri.parse('ws://10.0.2.2:8181');
   final channel = WebSocketChannel.connect(wsUrl);
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   runApp(
     MultiProvider(providers: [
@@ -32,7 +39,7 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   static final ValueNotifier<ThemeMode> themeNotifier =
-      ValueNotifier(ThemeMode.dark);
+      ValueNotifier(ThemeMode.system);
 
   const MyApp({super.key});
 
@@ -56,64 +63,6 @@ class MyApp extends StatelessWidget {
         home: LoginPage(),
       ),
     );
-  }
-}
-
-class MainPage extends StatefulWidget {
-  @override
-  State<MainPage> createState() => _MainPageState();
-}
-
-class _MainPageState extends State<MainPage> {
-  int _selectedIndex = 1;
-  late List<Widget> _widgetOptions;
-
-  @override
-  void initState() {
-    super.initState();
-    _widgetOptions = <Widget>[HistoryPage(), HomePage(), SettingsPage()];
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          toolbarHeight: 200,
-          title: Image.asset(
-            "assets/securty_logo.png",
-            fit: BoxFit.cover,
-            height: 200,
-            width: 200,
-          )),
-      body: Center(
-        child: _widgetOptions.elementAt(_selectedIndex),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.history),
-            label: 'history',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
-      ),
-    );
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
   }
 }
 

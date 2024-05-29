@@ -30,7 +30,7 @@ public class ClientWantsToTurnOffMotionAlarm : BaseEventHandler<ClientWantsToTur
     {
         StateService.IsClientAuthenticated(socket.ConnectionInfo.Id);
         HistoryModel loggedEvent = _historyService.CreateHistory(dto.HistoryModel);
-        _unitService.SetAllWindowDoorStatus(Status.Disarmed);
+        _unitService.SetAllUnitStatus(Status.Disarmed);
         await _mqttPublishService.AlarmTurnOffMotionPublish();
         
         var turnOffAlarmToClient = JsonSerializer.Serialize(new ServerHasDeactivatedMotionSensorAlarm()

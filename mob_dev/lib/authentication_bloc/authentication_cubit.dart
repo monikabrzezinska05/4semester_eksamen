@@ -38,7 +38,9 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
     ));
   }
 
-  void _onDeAuthentication() {}
+  void _onDeAuthentication() {
+    emit(state.copyWith(user: null, jwt: null, isAuthenticated: false));
+  }
 
   void _onAuthentication(UserModel model, String jwt) {
     emit(state.copyWith(user: model, jwt: jwt, isAuthenticated: true));
@@ -46,5 +48,17 @@ class AuthenticationCubit extends Cubit<AuthenticationState> {
 
   _send(ClientEvent event) {
     wsChannel.sink.add(jsonEncode(event.toJson()));
+  }
+
+  void deAuthenticateUser() {
+    _send(ClientWantsToDeAuthenticate(
+        eventType: ClientWantsToDeAuthenticate.name));
+  }
+
+  void sendToken(String token) {
+    _send(MobileWantsNotifications(
+      eventType: MobileWantsNotifications.name,
+      token: token,
+    ));
   }
 }

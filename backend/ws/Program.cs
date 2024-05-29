@@ -1,10 +1,9 @@
-using System.Net.Sockets;
 using System.Reflection;
-using System.Text.Json;
 using Fleck;
 using infrastructure;
 using infrastructure.repositories;
 using lib;
+using MediatR;
 using service;
 using service.PasswordHashing;
 
@@ -21,11 +20,14 @@ public static class Startup
     public static void Statup(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+        
+        builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly())); 
 
         builder.Services.AddNpgsqlDataSource(Utilities.connectionString,
             dataSourceBuilder => dataSourceBuilder.EnableParameterLogging());
-
-        builder.Services.AddSingleton<HistoryRepo>();
+        
+        builder.Services.AddSingleton<Mediator>();
+        builder.Services.AddSingleton<HistoryRepository>();
         builder.Services.AddSingleton<AuthenticateRepository>();
         builder.Services.AddSingleton<UserRepository>();
         builder.Services.AddSingleton<EmailRepository>();

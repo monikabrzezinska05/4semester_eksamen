@@ -1,11 +1,8 @@
-﻿using System.Security.Authentication;
-using infrastructure.models;
+﻿using infrastructure.models;
 using JWT;
 using JWT.Algorithms;
 using JWT.Serializers;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using Serilog;
 
 namespace service;
@@ -13,16 +10,27 @@ namespace service;
 public class TokenService(IConfiguration configuration)
 {
     private readonly string jwtKey = configuration.GetValue<string>("JWT_KEY");
-
+    
     public string IssueJwt(User user)
     {
         try
         {
+            IDateTimeProvider provider = new UtcDateTimeProvider();
+            var now = provider.GetNow().AddMinutes(60);
+
+            double seconds = UnixEpoch.GetSecondsSince(now);
+            
+            var payload = new Dictionary<string, object>
+            {
+                {"user", user},
+                {"exp", seconds}
+            };
+            
             IJwtAlgorithm algorithm = new HMACSHA512Algorithm();
             IJsonSerializer serializer = new JsonNetSerializer();
             IBase64UrlEncoder urlEncoder = new JwtBase64UrlEncoder();
             IJwtEncoder encoder = new JwtEncoder(algorithm, serializer, urlEncoder);
-            return encoder.Encode(user, jwtKey);
+            return encoder.Encode(payload, jwtKey);
         }
         catch (Exception e)
         {
@@ -32,22 +40,24 @@ public class TokenService(IConfiguration configuration)
         }
     }
 
-    public Dictionary<string, string> ValidateJwtAndReturnClaims(string jwt)
+    public bool ValidateJwtAndReturnClaims(string jwt)
     {
         try
         {
             IJsonSerializer serializer = new JsonNetSerializer();
-            var provider = new UtcDateTimeProvider();
+            IJwtAlgorithm algorithm = new HMACSHA512Algorithm();
+            IDateTimeProvider provider = new UtcDateTimeProvider();
             IBase64UrlEncoder urlEncoder = new JwtBase64UrlEncoder();
             IJwtValidator validator = new JwtValidator(serializer, provider);
-            IJwtDecoder decoder = new JwtDecoder(serializer, validator, urlEncoder, new HMACSHA512Algorithm());
-            var json = decoder.Decode(jwt, jwtKey);
-            return JsonConvert.DeserializeObject<Dictionary<string, string>>(json)!;
+            IJwtDecoder decoder = new JwtDecoder(serializer, validator, urlEncoder, algorithm);
+            
+            decoder.Decode(jwt, jwtKey);
+            return true;
         }
         catch (Exception e)
         {
             Log.Error(e, "ValidateJwtAndReturnClaims");
-            throw new AuthenticationException("Authentication failed");
+            return false;
         }
     }
 }

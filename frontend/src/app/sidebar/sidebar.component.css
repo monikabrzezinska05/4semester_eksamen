@@ -14,11 +14,12 @@
 }
 
 .sidebarButton {
-    width: 60%;
-    height: 20px;
-    background-color: black;
+    width: 50%;
+    height: 30px;
+    background-color: #e05426;
     color: white;
     border: none;
+  border-radius: 10px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -30,7 +31,6 @@
 .toggle-switch {
     width: 100px;
     height: 50px;
-    background-color: #ccc;
     position: relative;
     border-radius: 25px;
     cursor: pointer;
@@ -42,7 +42,220 @@
     left: 5px;
     width: 40px;
     height: 40px;
-    background-color: #fff;
     border-radius: 20px;
     transition: left 0.3s;
+}
+
+.knob-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.modal {
+  background-color: rgba(0,0,0, 0.3);
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.modal-content {
+  position: relative;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 60%;
+  border-radius: 15px;
+  box-shadow: 5px 5px 8px;
+  animation-name: swooshIn;
+  animation-duration: 0.4s;
+}
+
+@keyframes swooshIn {
+  from{top: 500px; opacity: 0}
+  to{top: 0px; opacity: 1}
+}
+
+@keyframes swooshOut {
+  from{top: 0px; opacity: 1}
+  to{top: 500px; opacity: 0}
+}
+
+.close {
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover, .close:focus {
+  color: #aaa;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.status-circle {
+  height: 20px;
+  width: 20px;
+  border: 10px solid;
+  border-radius: 50%;
+  background-color: transparent;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+details {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 80%;
+  border: 1px solid;
+  border-radius: 4px;
+  margin: 0;
+  margin-bottom: .5rem;
+  transition: height .2s;
+  background-color: #e05426;
+  color: #fff;
+  overflow: auto;
+  position: relative;
+}
+
+summary {
+  display: block;
+  padding: 1rem;
+  padding-left: 2.2rem;
+  position: relative;
+  user-select: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+summary:before {
+  content: '';
+  border-width: .4rem;
+  border-style: solid;
+  border-color: transparent transparent transparent #fff;
+  position: absolute;
+  top: 1.3rem;
+  left: 1rem;
+  transform: rotate(0);
+  transform-origin: .2rem 50%;
+  transition: .25s transform ease-out;
+}
+
+details[open] > summary:before {
+  transform: rotate(90deg);
+}
+
+details:not([open]) {
+  height: 50px;
+}
+
+details[open] {
+  height: 260px;
+}
+.create-user-details[open] {
+  height: 320px;
+}
+
+details > p {
+  padding: 4px;
+  margin: 0;
+}
+
+details summary::-webkit-details-marker {
+  display:none;
+}
+
+
+.email {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 10px;
+  width: 300px;
+}
+
+.email-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 30px;
+  width: 100%;
+}
+
+.line {
+  width: 98%;
+  height: 1px;
+  background-color: white;
+  margin: 5px 0 5px 0;
+}
+
+.button-delete-email {
+  background-color: red;
+  border-radius: 50%;
+  color: white;
+  width: 20px;
+  height: 20px;
+  border: none;
+  text-align: center;
+  align-self: center;
+  margin-right: 15px;
+}
+
+.button-delete-email:hover {
+  background-color: #c00000;
+}
+
+.button-delete-email:active {
+  background-color: red;
+}
+
+.email-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 5px 0 5px 0;
+}
+
+.button-add {
+  padding: 5px;
+  border-radius: 10px;
+  width: 50px;
+  background-color: white;
+  border: none;
+}
+
+.button-add:hover {
+  background-color: #ececec;
+}
+
+.button-add:active {
+  background-color: white;
+}
+
+.add-email-container {
+  bottom: 0;
+  position: absolute;
+  margin-left: 10px;
+}
+
+.create-user-inputs-container {
+  margin-left: 10px;
+}
+
+.create-user-checkbox-container {
+  margin: 5px 0 5px 0;
 }

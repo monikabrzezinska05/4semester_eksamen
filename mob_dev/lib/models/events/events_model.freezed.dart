@@ -1767,6 +1767,762 @@ abstract class _ClientWantsToTurnOnMotionAlarm
       get copyWith => throw _privateConstructorUsedError;
 }
 
+ClientWantsToDeAuthenticate _$ClientWantsToDeAuthenticateFromJson(
+    Map<String, dynamic> json) {
+  return _ClientWantsToDeAuthenticate.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ClientWantsToDeAuthenticate {
+  String get eventType => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ClientWantsToDeAuthenticateCopyWith<ClientWantsToDeAuthenticate>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ClientWantsToDeAuthenticateCopyWith<$Res> {
+  factory $ClientWantsToDeAuthenticateCopyWith(
+          ClientWantsToDeAuthenticate value,
+          $Res Function(ClientWantsToDeAuthenticate) then) =
+      _$ClientWantsToDeAuthenticateCopyWithImpl<$Res,
+          ClientWantsToDeAuthenticate>;
+  @useResult
+  $Res call({String eventType});
+}
+
+/// @nodoc
+class _$ClientWantsToDeAuthenticateCopyWithImpl<$Res,
+        $Val extends ClientWantsToDeAuthenticate>
+    implements $ClientWantsToDeAuthenticateCopyWith<$Res> {
+  _$ClientWantsToDeAuthenticateCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+  }) {
+    return _then(_value.copyWith(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$ClientWantsToDeAuthenticateImplCopyWith<$Res>
+    implements $ClientWantsToDeAuthenticateCopyWith<$Res> {
+  factory _$$ClientWantsToDeAuthenticateImplCopyWith(
+          _$ClientWantsToDeAuthenticateImpl value,
+          $Res Function(_$ClientWantsToDeAuthenticateImpl) then) =
+      __$$ClientWantsToDeAuthenticateImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String eventType});
+}
+
+/// @nodoc
+class __$$ClientWantsToDeAuthenticateImplCopyWithImpl<$Res>
+    extends _$ClientWantsToDeAuthenticateCopyWithImpl<$Res,
+        _$ClientWantsToDeAuthenticateImpl>
+    implements _$$ClientWantsToDeAuthenticateImplCopyWith<$Res> {
+  __$$ClientWantsToDeAuthenticateImplCopyWithImpl(
+      _$ClientWantsToDeAuthenticateImpl _value,
+      $Res Function(_$ClientWantsToDeAuthenticateImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+  }) {
+    return _then(_$ClientWantsToDeAuthenticateImpl(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ClientWantsToDeAuthenticateImpl
+    with DiagnosticableTreeMixin
+    implements _ClientWantsToDeAuthenticate {
+  const _$ClientWantsToDeAuthenticateImpl({required this.eventType});
+
+  factory _$ClientWantsToDeAuthenticateImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$ClientWantsToDeAuthenticateImplFromJson(json);
+
+  @override
+  final String eventType;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ClientWantsToDeAuthenticate(eventType: $eventType)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ClientWantsToDeAuthenticate'))
+      ..add(DiagnosticsProperty('eventType', eventType));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ClientWantsToDeAuthenticateImpl &&
+            (identical(other.eventType, eventType) ||
+                other.eventType == eventType));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, eventType);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ClientWantsToDeAuthenticateImplCopyWith<_$ClientWantsToDeAuthenticateImpl>
+      get copyWith => __$$ClientWantsToDeAuthenticateImplCopyWithImpl<
+          _$ClientWantsToDeAuthenticateImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ClientWantsToDeAuthenticateImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ClientWantsToDeAuthenticate
+    implements ClientWantsToDeAuthenticate {
+  const factory _ClientWantsToDeAuthenticate(
+      {required final String eventType}) = _$ClientWantsToDeAuthenticateImpl;
+
+  factory _ClientWantsToDeAuthenticate.fromJson(Map<String, dynamic> json) =
+      _$ClientWantsToDeAuthenticateImpl.fromJson;
+
+  @override
+  String get eventType;
+  @override
+  @JsonKey(ignore: true)
+  _$$ClientWantsToDeAuthenticateImplCopyWith<_$ClientWantsToDeAuthenticateImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+MobileWantsNotifications _$MobileWantsNotificationsFromJson(
+    Map<String, dynamic> json) {
+  return _MobileWantsNotifications.fromJson(json);
+}
+
+/// @nodoc
+mixin _$MobileWantsNotifications {
+  String get eventType => throw _privateConstructorUsedError;
+  String get token => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $MobileWantsNotificationsCopyWith<MobileWantsNotifications> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MobileWantsNotificationsCopyWith<$Res> {
+  factory $MobileWantsNotificationsCopyWith(MobileWantsNotifications value,
+          $Res Function(MobileWantsNotifications) then) =
+      _$MobileWantsNotificationsCopyWithImpl<$Res, MobileWantsNotifications>;
+  @useResult
+  $Res call({String eventType, String token});
+}
+
+/// @nodoc
+class _$MobileWantsNotificationsCopyWithImpl<$Res,
+        $Val extends MobileWantsNotifications>
+    implements $MobileWantsNotificationsCopyWith<$Res> {
+  _$MobileWantsNotificationsCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? token = null,
+  }) {
+    return _then(_value.copyWith(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      token: null == token
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$MobileWantsNotificationsImplCopyWith<$Res>
+    implements $MobileWantsNotificationsCopyWith<$Res> {
+  factory _$$MobileWantsNotificationsImplCopyWith(
+          _$MobileWantsNotificationsImpl value,
+          $Res Function(_$MobileWantsNotificationsImpl) then) =
+      __$$MobileWantsNotificationsImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String eventType, String token});
+}
+
+/// @nodoc
+class __$$MobileWantsNotificationsImplCopyWithImpl<$Res>
+    extends _$MobileWantsNotificationsCopyWithImpl<$Res,
+        _$MobileWantsNotificationsImpl>
+    implements _$$MobileWantsNotificationsImplCopyWith<$Res> {
+  __$$MobileWantsNotificationsImplCopyWithImpl(
+      _$MobileWantsNotificationsImpl _value,
+      $Res Function(_$MobileWantsNotificationsImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? token = null,
+  }) {
+    return _then(_$MobileWantsNotificationsImpl(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      token: null == token
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$MobileWantsNotificationsImpl
+    with DiagnosticableTreeMixin
+    implements _MobileWantsNotifications {
+  const _$MobileWantsNotificationsImpl(
+      {required this.eventType, required this.token});
+
+  factory _$MobileWantsNotificationsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MobileWantsNotificationsImplFromJson(json);
+
+  @override
+  final String eventType;
+  @override
+  final String token;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'MobileWantsNotifications(eventType: $eventType, token: $token)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'MobileWantsNotifications'))
+      ..add(DiagnosticsProperty('eventType', eventType))
+      ..add(DiagnosticsProperty('token', token));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$MobileWantsNotificationsImpl &&
+            (identical(other.eventType, eventType) ||
+                other.eventType == eventType) &&
+            (identical(other.token, token) || other.token == token));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, eventType, token);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$MobileWantsNotificationsImplCopyWith<_$MobileWantsNotificationsImpl>
+      get copyWith => __$$MobileWantsNotificationsImplCopyWithImpl<
+          _$MobileWantsNotificationsImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$MobileWantsNotificationsImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _MobileWantsNotifications implements MobileWantsNotifications {
+  const factory _MobileWantsNotifications(
+      {required final String eventType,
+      required final String token}) = _$MobileWantsNotificationsImpl;
+
+  factory _MobileWantsNotifications.fromJson(Map<String, dynamic> json) =
+      _$MobileWantsNotificationsImpl.fromJson;
+
+  @override
+  String get eventType;
+  @override
+  String get token;
+  @override
+  @JsonKey(ignore: true)
+  _$$MobileWantsNotificationsImplCopyWith<_$MobileWantsNotificationsImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+ServerSensesMotion _$ServerSensesMotionFromJson(Map<String, dynamic> json) {
+  return _ServerSensesMotion.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ServerSensesMotion {
+  String get eventType => throw _privateConstructorUsedError;
+  HistoryModel get history => throw _privateConstructorUsedError;
+  UnitModel get unit => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ServerSensesMotionCopyWith<ServerSensesMotion> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ServerSensesMotionCopyWith<$Res> {
+  factory $ServerSensesMotionCopyWith(
+          ServerSensesMotion value, $Res Function(ServerSensesMotion) then) =
+      _$ServerSensesMotionCopyWithImpl<$Res, ServerSensesMotion>;
+  @useResult
+  $Res call({String eventType, HistoryModel history, UnitModel unit});
+
+  $HistoryModelCopyWith<$Res> get history;
+  $UnitModelCopyWith<$Res> get unit;
+}
+
+/// @nodoc
+class _$ServerSensesMotionCopyWithImpl<$Res, $Val extends ServerSensesMotion>
+    implements $ServerSensesMotionCopyWith<$Res> {
+  _$ServerSensesMotionCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? history = null,
+    Object? unit = null,
+  }) {
+    return _then(_value.copyWith(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      history: null == history
+          ? _value.history
+          : history // ignore: cast_nullable_to_non_nullable
+              as HistoryModel,
+      unit: null == unit
+          ? _value.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as UnitModel,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $HistoryModelCopyWith<$Res> get history {
+    return $HistoryModelCopyWith<$Res>(_value.history, (value) {
+      return _then(_value.copyWith(history: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UnitModelCopyWith<$Res> get unit {
+    return $UnitModelCopyWith<$Res>(_value.unit, (value) {
+      return _then(_value.copyWith(unit: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$ServerSensesMotionImplCopyWith<$Res>
+    implements $ServerSensesMotionCopyWith<$Res> {
+  factory _$$ServerSensesMotionImplCopyWith(_$ServerSensesMotionImpl value,
+          $Res Function(_$ServerSensesMotionImpl) then) =
+      __$$ServerSensesMotionImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String eventType, HistoryModel history, UnitModel unit});
+
+  @override
+  $HistoryModelCopyWith<$Res> get history;
+  @override
+  $UnitModelCopyWith<$Res> get unit;
+}
+
+/// @nodoc
+class __$$ServerSensesMotionImplCopyWithImpl<$Res>
+    extends _$ServerSensesMotionCopyWithImpl<$Res, _$ServerSensesMotionImpl>
+    implements _$$ServerSensesMotionImplCopyWith<$Res> {
+  __$$ServerSensesMotionImplCopyWithImpl(_$ServerSensesMotionImpl _value,
+      $Res Function(_$ServerSensesMotionImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? history = null,
+    Object? unit = null,
+  }) {
+    return _then(_$ServerSensesMotionImpl(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      history: null == history
+          ? _value.history
+          : history // ignore: cast_nullable_to_non_nullable
+              as HistoryModel,
+      unit: null == unit
+          ? _value.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as UnitModel,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ServerSensesMotionImpl
+    with DiagnosticableTreeMixin
+    implements _ServerSensesMotion {
+  const _$ServerSensesMotionImpl(
+      {required this.eventType, required this.history, required this.unit});
+
+  factory _$ServerSensesMotionImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ServerSensesMotionImplFromJson(json);
+
+  @override
+  final String eventType;
+  @override
+  final HistoryModel history;
+  @override
+  final UnitModel unit;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ServerSensesMotion(eventType: $eventType, history: $history, unit: $unit)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ServerSensesMotion'))
+      ..add(DiagnosticsProperty('eventType', eventType))
+      ..add(DiagnosticsProperty('history', history))
+      ..add(DiagnosticsProperty('unit', unit));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ServerSensesMotionImpl &&
+            (identical(other.eventType, eventType) ||
+                other.eventType == eventType) &&
+            (identical(other.history, history) || other.history == history) &&
+            (identical(other.unit, unit) || other.unit == unit));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, eventType, history, unit);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ServerSensesMotionImplCopyWith<_$ServerSensesMotionImpl> get copyWith =>
+      __$$ServerSensesMotionImplCopyWithImpl<_$ServerSensesMotionImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ServerSensesMotionImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ServerSensesMotion implements ServerSensesMotion {
+  const factory _ServerSensesMotion(
+      {required final String eventType,
+      required final HistoryModel history,
+      required final UnitModel unit}) = _$ServerSensesMotionImpl;
+
+  factory _ServerSensesMotion.fromJson(Map<String, dynamic> json) =
+      _$ServerSensesMotionImpl.fromJson;
+
+  @override
+  String get eventType;
+  @override
+  HistoryModel get history;
+  @override
+  UnitModel get unit;
+  @override
+  @JsonKey(ignore: true)
+  _$$ServerSensesMotionImplCopyWith<_$ServerSensesMotionImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ServerStopsSensingMotion _$ServerStopsSensingMotionFromJson(
+    Map<String, dynamic> json) {
+  return _ServerStopsSensingMotion.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ServerStopsSensingMotion {
+  String get eventType => throw _privateConstructorUsedError;
+  HistoryModel get history => throw _privateConstructorUsedError;
+  UnitModel get unit => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ServerStopsSensingMotionCopyWith<ServerStopsSensingMotion> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ServerStopsSensingMotionCopyWith<$Res> {
+  factory $ServerStopsSensingMotionCopyWith(ServerStopsSensingMotion value,
+          $Res Function(ServerStopsSensingMotion) then) =
+      _$ServerStopsSensingMotionCopyWithImpl<$Res, ServerStopsSensingMotion>;
+  @useResult
+  $Res call({String eventType, HistoryModel history, UnitModel unit});
+
+  $HistoryModelCopyWith<$Res> get history;
+  $UnitModelCopyWith<$Res> get unit;
+}
+
+/// @nodoc
+class _$ServerStopsSensingMotionCopyWithImpl<$Res,
+        $Val extends ServerStopsSensingMotion>
+    implements $ServerStopsSensingMotionCopyWith<$Res> {
+  _$ServerStopsSensingMotionCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? history = null,
+    Object? unit = null,
+  }) {
+    return _then(_value.copyWith(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      history: null == history
+          ? _value.history
+          : history // ignore: cast_nullable_to_non_nullable
+              as HistoryModel,
+      unit: null == unit
+          ? _value.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as UnitModel,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $HistoryModelCopyWith<$Res> get history {
+    return $HistoryModelCopyWith<$Res>(_value.history, (value) {
+      return _then(_value.copyWith(history: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UnitModelCopyWith<$Res> get unit {
+    return $UnitModelCopyWith<$Res>(_value.unit, (value) {
+      return _then(_value.copyWith(unit: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$ServerStopsSensingMotionImplCopyWith<$Res>
+    implements $ServerStopsSensingMotionCopyWith<$Res> {
+  factory _$$ServerStopsSensingMotionImplCopyWith(
+          _$ServerStopsSensingMotionImpl value,
+          $Res Function(_$ServerStopsSensingMotionImpl) then) =
+      __$$ServerStopsSensingMotionImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String eventType, HistoryModel history, UnitModel unit});
+
+  @override
+  $HistoryModelCopyWith<$Res> get history;
+  @override
+  $UnitModelCopyWith<$Res> get unit;
+}
+
+/// @nodoc
+class __$$ServerStopsSensingMotionImplCopyWithImpl<$Res>
+    extends _$ServerStopsSensingMotionCopyWithImpl<$Res,
+        _$ServerStopsSensingMotionImpl>
+    implements _$$ServerStopsSensingMotionImplCopyWith<$Res> {
+  __$$ServerStopsSensingMotionImplCopyWithImpl(
+      _$ServerStopsSensingMotionImpl _value,
+      $Res Function(_$ServerStopsSensingMotionImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? history = null,
+    Object? unit = null,
+  }) {
+    return _then(_$ServerStopsSensingMotionImpl(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      history: null == history
+          ? _value.history
+          : history // ignore: cast_nullable_to_non_nullable
+              as HistoryModel,
+      unit: null == unit
+          ? _value.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as UnitModel,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ServerStopsSensingMotionImpl
+    with DiagnosticableTreeMixin
+    implements _ServerStopsSensingMotion {
+  const _$ServerStopsSensingMotionImpl(
+      {required this.eventType, required this.history, required this.unit});
+
+  factory _$ServerStopsSensingMotionImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ServerStopsSensingMotionImplFromJson(json);
+
+  @override
+  final String eventType;
+  @override
+  final HistoryModel history;
+  @override
+  final UnitModel unit;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ServerStopsSensingMotion(eventType: $eventType, history: $history, unit: $unit)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ServerStopsSensingMotion'))
+      ..add(DiagnosticsProperty('eventType', eventType))
+      ..add(DiagnosticsProperty('history', history))
+      ..add(DiagnosticsProperty('unit', unit));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ServerStopsSensingMotionImpl &&
+            (identical(other.eventType, eventType) ||
+                other.eventType == eventType) &&
+            (identical(other.history, history) || other.history == history) &&
+            (identical(other.unit, unit) || other.unit == unit));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, eventType, history, unit);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ServerStopsSensingMotionImplCopyWith<_$ServerStopsSensingMotionImpl>
+      get copyWith => __$$ServerStopsSensingMotionImplCopyWithImpl<
+          _$ServerStopsSensingMotionImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ServerStopsSensingMotionImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ServerStopsSensingMotion implements ServerStopsSensingMotion {
+  const factory _ServerStopsSensingMotion(
+      {required final String eventType,
+      required final HistoryModel history,
+      required final UnitModel unit}) = _$ServerStopsSensingMotionImpl;
+
+  factory _ServerStopsSensingMotion.fromJson(Map<String, dynamic> json) =
+      _$ServerStopsSensingMotionImpl.fromJson;
+
+  @override
+  String get eventType;
+  @override
+  HistoryModel get history;
+  @override
+  UnitModel get unit;
+  @override
+  @JsonKey(ignore: true)
+  _$$ServerStopsSensingMotionImplCopyWith<_$ServerStopsSensingMotionImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
 ServerShowsEmails _$ServerShowsEmailsFromJson(Map<String, dynamic> json) {
   return _ServerShowsEmails.fromJson(json);
 }
@@ -2483,6 +3239,426 @@ abstract class _ServerShowsHistory implements ServerShowsHistory {
   @override
   @JsonKey(ignore: true)
   _$$ServerShowsHistoryImplCopyWith<_$ServerShowsHistoryImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ServerLocksDoor _$ServerLocksDoorFromJson(Map<String, dynamic> json) {
+  return _ServerLocksDoor.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ServerLocksDoor {
+  String get eventType => throw _privateConstructorUsedError;
+  HistoryModel get history => throw _privateConstructorUsedError;
+  UnitModel get unit => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ServerLocksDoorCopyWith<ServerLocksDoor> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ServerLocksDoorCopyWith<$Res> {
+  factory $ServerLocksDoorCopyWith(
+          ServerLocksDoor value, $Res Function(ServerLocksDoor) then) =
+      _$ServerLocksDoorCopyWithImpl<$Res, ServerLocksDoor>;
+  @useResult
+  $Res call({String eventType, HistoryModel history, UnitModel unit});
+
+  $HistoryModelCopyWith<$Res> get history;
+  $UnitModelCopyWith<$Res> get unit;
+}
+
+/// @nodoc
+class _$ServerLocksDoorCopyWithImpl<$Res, $Val extends ServerLocksDoor>
+    implements $ServerLocksDoorCopyWith<$Res> {
+  _$ServerLocksDoorCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? history = null,
+    Object? unit = null,
+  }) {
+    return _then(_value.copyWith(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      history: null == history
+          ? _value.history
+          : history // ignore: cast_nullable_to_non_nullable
+              as HistoryModel,
+      unit: null == unit
+          ? _value.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as UnitModel,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $HistoryModelCopyWith<$Res> get history {
+    return $HistoryModelCopyWith<$Res>(_value.history, (value) {
+      return _then(_value.copyWith(history: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UnitModelCopyWith<$Res> get unit {
+    return $UnitModelCopyWith<$Res>(_value.unit, (value) {
+      return _then(_value.copyWith(unit: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$ServerLocksDoorImplCopyWith<$Res>
+    implements $ServerLocksDoorCopyWith<$Res> {
+  factory _$$ServerLocksDoorImplCopyWith(_$ServerLocksDoorImpl value,
+          $Res Function(_$ServerLocksDoorImpl) then) =
+      __$$ServerLocksDoorImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String eventType, HistoryModel history, UnitModel unit});
+
+  @override
+  $HistoryModelCopyWith<$Res> get history;
+  @override
+  $UnitModelCopyWith<$Res> get unit;
+}
+
+/// @nodoc
+class __$$ServerLocksDoorImplCopyWithImpl<$Res>
+    extends _$ServerLocksDoorCopyWithImpl<$Res, _$ServerLocksDoorImpl>
+    implements _$$ServerLocksDoorImplCopyWith<$Res> {
+  __$$ServerLocksDoorImplCopyWithImpl(
+      _$ServerLocksDoorImpl _value, $Res Function(_$ServerLocksDoorImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? history = null,
+    Object? unit = null,
+  }) {
+    return _then(_$ServerLocksDoorImpl(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      history: null == history
+          ? _value.history
+          : history // ignore: cast_nullable_to_non_nullable
+              as HistoryModel,
+      unit: null == unit
+          ? _value.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as UnitModel,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ServerLocksDoorImpl
+    with DiagnosticableTreeMixin
+    implements _ServerLocksDoor {
+  const _$ServerLocksDoorImpl(
+      {required this.eventType, required this.history, required this.unit});
+
+  factory _$ServerLocksDoorImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ServerLocksDoorImplFromJson(json);
+
+  @override
+  final String eventType;
+  @override
+  final HistoryModel history;
+  @override
+  final UnitModel unit;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ServerLocksDoor(eventType: $eventType, history: $history, unit: $unit)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ServerLocksDoor'))
+      ..add(DiagnosticsProperty('eventType', eventType))
+      ..add(DiagnosticsProperty('history', history))
+      ..add(DiagnosticsProperty('unit', unit));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ServerLocksDoorImpl &&
+            (identical(other.eventType, eventType) ||
+                other.eventType == eventType) &&
+            (identical(other.history, history) || other.history == history) &&
+            (identical(other.unit, unit) || other.unit == unit));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, eventType, history, unit);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ServerLocksDoorImplCopyWith<_$ServerLocksDoorImpl> get copyWith =>
+      __$$ServerLocksDoorImplCopyWithImpl<_$ServerLocksDoorImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ServerLocksDoorImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ServerLocksDoor implements ServerLocksDoor {
+  const factory _ServerLocksDoor(
+      {required final String eventType,
+      required final HistoryModel history,
+      required final UnitModel unit}) = _$ServerLocksDoorImpl;
+
+  factory _ServerLocksDoor.fromJson(Map<String, dynamic> json) =
+      _$ServerLocksDoorImpl.fromJson;
+
+  @override
+  String get eventType;
+  @override
+  HistoryModel get history;
+  @override
+  UnitModel get unit;
+  @override
+  @JsonKey(ignore: true)
+  _$$ServerLocksDoorImplCopyWith<_$ServerLocksDoorImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+ServerUnlocksDoor _$ServerUnlocksDoorFromJson(Map<String, dynamic> json) {
+  return _ServerUnlocksDoor.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ServerUnlocksDoor {
+  String get eventType => throw _privateConstructorUsedError;
+  HistoryModel get history => throw _privateConstructorUsedError;
+  UnitModel get unit => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ServerUnlocksDoorCopyWith<ServerUnlocksDoor> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ServerUnlocksDoorCopyWith<$Res> {
+  factory $ServerUnlocksDoorCopyWith(
+          ServerUnlocksDoor value, $Res Function(ServerUnlocksDoor) then) =
+      _$ServerUnlocksDoorCopyWithImpl<$Res, ServerUnlocksDoor>;
+  @useResult
+  $Res call({String eventType, HistoryModel history, UnitModel unit});
+
+  $HistoryModelCopyWith<$Res> get history;
+  $UnitModelCopyWith<$Res> get unit;
+}
+
+/// @nodoc
+class _$ServerUnlocksDoorCopyWithImpl<$Res, $Val extends ServerUnlocksDoor>
+    implements $ServerUnlocksDoorCopyWith<$Res> {
+  _$ServerUnlocksDoorCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? history = null,
+    Object? unit = null,
+  }) {
+    return _then(_value.copyWith(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      history: null == history
+          ? _value.history
+          : history // ignore: cast_nullable_to_non_nullable
+              as HistoryModel,
+      unit: null == unit
+          ? _value.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as UnitModel,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $HistoryModelCopyWith<$Res> get history {
+    return $HistoryModelCopyWith<$Res>(_value.history, (value) {
+      return _then(_value.copyWith(history: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UnitModelCopyWith<$Res> get unit {
+    return $UnitModelCopyWith<$Res>(_value.unit, (value) {
+      return _then(_value.copyWith(unit: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$ServerUnlocksDoorImplCopyWith<$Res>
+    implements $ServerUnlocksDoorCopyWith<$Res> {
+  factory _$$ServerUnlocksDoorImplCopyWith(_$ServerUnlocksDoorImpl value,
+          $Res Function(_$ServerUnlocksDoorImpl) then) =
+      __$$ServerUnlocksDoorImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String eventType, HistoryModel history, UnitModel unit});
+
+  @override
+  $HistoryModelCopyWith<$Res> get history;
+  @override
+  $UnitModelCopyWith<$Res> get unit;
+}
+
+/// @nodoc
+class __$$ServerUnlocksDoorImplCopyWithImpl<$Res>
+    extends _$ServerUnlocksDoorCopyWithImpl<$Res, _$ServerUnlocksDoorImpl>
+    implements _$$ServerUnlocksDoorImplCopyWith<$Res> {
+  __$$ServerUnlocksDoorImplCopyWithImpl(_$ServerUnlocksDoorImpl _value,
+      $Res Function(_$ServerUnlocksDoorImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? eventType = null,
+    Object? history = null,
+    Object? unit = null,
+  }) {
+    return _then(_$ServerUnlocksDoorImpl(
+      eventType: null == eventType
+          ? _value.eventType
+          : eventType // ignore: cast_nullable_to_non_nullable
+              as String,
+      history: null == history
+          ? _value.history
+          : history // ignore: cast_nullable_to_non_nullable
+              as HistoryModel,
+      unit: null == unit
+          ? _value.unit
+          : unit // ignore: cast_nullable_to_non_nullable
+              as UnitModel,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$ServerUnlocksDoorImpl
+    with DiagnosticableTreeMixin
+    implements _ServerUnlocksDoor {
+  const _$ServerUnlocksDoorImpl(
+      {required this.eventType, required this.history, required this.unit});
+
+  factory _$ServerUnlocksDoorImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ServerUnlocksDoorImplFromJson(json);
+
+  @override
+  final String eventType;
+  @override
+  final HistoryModel history;
+  @override
+  final UnitModel unit;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ServerUnlocksDoor(eventType: $eventType, history: $history, unit: $unit)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ServerUnlocksDoor'))
+      ..add(DiagnosticsProperty('eventType', eventType))
+      ..add(DiagnosticsProperty('history', history))
+      ..add(DiagnosticsProperty('unit', unit));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ServerUnlocksDoorImpl &&
+            (identical(other.eventType, eventType) ||
+                other.eventType == eventType) &&
+            (identical(other.history, history) || other.history == history) &&
+            (identical(other.unit, unit) || other.unit == unit));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, eventType, history, unit);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ServerUnlocksDoorImplCopyWith<_$ServerUnlocksDoorImpl> get copyWith =>
+      __$$ServerUnlocksDoorImplCopyWithImpl<_$ServerUnlocksDoorImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ServerUnlocksDoorImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ServerUnlocksDoor implements ServerUnlocksDoor {
+  const factory _ServerUnlocksDoor(
+      {required final String eventType,
+      required final HistoryModel history,
+      required final UnitModel unit}) = _$ServerUnlocksDoorImpl;
+
+  factory _ServerUnlocksDoor.fromJson(Map<String, dynamic> json) =
+      _$ServerUnlocksDoorImpl.fromJson;
+
+  @override
+  String get eventType;
+  @override
+  HistoryModel get history;
+  @override
+  UnitModel get unit;
+  @override
+  @JsonKey(ignore: true)
+  _$$ServerUnlocksDoorImplCopyWith<_$ServerUnlocksDoorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

@@ -4,6 +4,7 @@ using lib;
 
 namespace ws;
 
+// Bliver den her klasse brugt til noget? @peder
 public static class ExtensionMethods
 {
     public static void SendDto<T>(this IWebSocketConnection ws, T dto) where T : BaseDto

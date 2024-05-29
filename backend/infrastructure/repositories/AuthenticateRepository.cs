@@ -12,7 +12,7 @@ public class AuthenticateRepository
         _dataSource = dataSource;
     }
 
-    public PasswordModel GetUserByEmail(string userEmail)
+    public PasswordModel? GetUserByEmail(string userEmail)
     {
         const string sql = "SELECT passwords.useremail, passwords.password, passwords.salt " +
                            "FROM public.passwords " +
@@ -20,7 +20,7 @@ public class AuthenticateRepository
                            "WHERE public.\"User\".mail = @userEmail;";
         using (var conn = _dataSource.OpenConnection())
         {
-            return conn.QueryFirst<PasswordModel>(sql, new {userEmail});
+            return conn.QueryFirst<PasswordModel?>(sql, new {userEmail});
         }
     }
 }

@@ -8,8 +8,8 @@
     <h2 class="welcome-text">Welcome back!</h2>
     <p class="login-instruction">Please login to your account.</p>
     <form [formGroup]="login" class="login-form">
-      <input type="text" formControlName="Email" name="Email" placeholder="Email" class="email-input">
-      <input type="password" formControlName="Password" name="Password" placeholder="Password" class="password-input">
+      <input type="text" formControlName="Email" name="Email" placeholder="Email" class="email-input" id="usernameField">
+      <input type="password" formControlName="Password" name="Password" placeholder="Password" class="password-input" id="passwordField">
 
       <!--Remember me checkbox-->
       <div class="remember-me">
@@ -18,7 +18,7 @@
       </div>
 
       <!--Login Button-->
-      <button type="login" class="login-button" (click)="Login()">Login</button>
+      <button type="login" class="login-button" (click)="Login()" id="loginButton">Login</button>
 
       <!--Forgot Password Link-->
       <a href="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExYWYwcmxrNHYxOGFnczRqdnV5ZTRxMjc0NndpZmhmaHJkZWsyb2MyMyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/FY0NAXjo7iB3BhKHd6/giphy.gif" class="forgot-password-link">Forgot your password?</a>
