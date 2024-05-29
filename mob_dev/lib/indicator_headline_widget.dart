@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:mob_dev/models/unit/unit_model.dart';
+import 'package:mob_dev/utillities.dart';
 
 class IndicatorHeadline extends StatelessWidget {
   final String headline;
-  final Color indicatorColor;
+  final Status status;
+  final List<UnitModel> units;
 
   IndicatorHeadline({
     required this.headline,
-    required this.indicatorColor,
-    Key? key,
+    Key? key, required this.status, required this.units,
   }) : super(key: key);
 
 
@@ -23,7 +25,7 @@ class IndicatorHeadline extends StatelessWidget {
               // Insert whitespace so screen is filled
               const Spacer(),
               // Add a circular indicator that can change colour
-              Icon(Icons.circle, color: indicatorColor)
+              Icon(Icons.circle, color: headlineStatusColor(status, UnitType.values.byName(headline), units)),
             ],
           ),
         ),

@@ -65,6 +65,7 @@ class HomeCubit extends Cubit<HomeState> {
       }
     });
     emit(state.copyWith(units: units));
+    _onUnitStatusChanged(model[0]);
   }
 
   void _onUnitStatusChanged(UnitModel model) {
@@ -81,8 +82,6 @@ class HomeCubit extends Cubit<HomeState> {
       unitList[index] = updatedUnit;
       units[model.unitType] = unitList;
       emit(state.copyWith(units: units));
-
-      _statusColors(updatedUnit.status);
     }
   }
 
@@ -165,20 +164,6 @@ class HomeCubit extends Cubit<HomeState> {
       units[model.unitType] = unitList;
       emit(state.copyWith(units: units));
     }
-  }
-
-  void _statusColors(Status status) {
-    Color color;
-    if(status == Status.Armed || status == Status.Closed) {
-      color = Colors.green;
-    } else if (status == Status.Disarmed || status == Status.Open) {
-      color = Colors.yellow;
-    } else if (status == Status.Triggered){
-      color = Colors.red;
-    } else {
-      color = Colors.black;
-    }
-    emit(state.copyWith(indicatorColor: color));
   }
 
   void getUnitsByType(UnitType type) {

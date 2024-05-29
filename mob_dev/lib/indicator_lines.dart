@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mob_dev/utillities.dart';
 
 import 'home_bloc/home_cubit.dart';
 import 'models/unit/unit_model.dart';
@@ -6,12 +7,10 @@ import 'models/unit/unit_model.dart';
 class IndicatorLine extends StatefulWidget {
   final String unitName;
   final Status unitStatus;
-  final HomeCubit homeCubit;
 
   IndicatorLine({
     required this.unitName,
     required this.unitStatus,
-    required this.homeCubit,
     super.key,
   });
 
@@ -36,7 +35,7 @@ class _IndicatorLineState extends State<IndicatorLine> {
                   // Add a circular indicator that can change colour
                   Padding(
                     padding: const EdgeInsets.only(right: 11.5),
-                    child: Icon(Icons.circle, color: widget.homeCubit.state.indicatorColor, size: 15),
+                    child: Icon(Icons.circle, color: statusColors(widget.unitStatus), size: 15),
                   )
                 ],
               ),

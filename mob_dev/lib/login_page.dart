@@ -41,80 +41,85 @@ class _LoginPageState extends State<LoginPage> {
               MaterialPageRoute(builder: (context) => MainPage()));
         },
         builder: (context, state) {
-          return Form(
-              key: _authFormKey,
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    colors: [
-                      Colors.orange.shade900,
-                      Colors.yellow.shade600,
-                      Colors.yellow.shade400
-                    ],
+          return ListView(
+              children: [
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      colors: [
+                        Colors.orange.shade900,
+                        Colors.yellow.shade600,
+                        Colors.yellow.shade400
+                      ],
+                    ),
                   ),
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    const SizedBox(height: 49),
-                    const Header(),
-                    Flexible(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).brightness == Brightness.dark
-                              ? Colors.black // Dark theme background color
-                              : Colors.white, // Light theme background color
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(60),
-                            topRight: Radius.circular(60),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      const SizedBox(height: 49),
+                      const Header(),
+                      Flexible(
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Theme.of(context).brightness == Brightness.dark
+                                ? Colors.black // Dark theme background color
+                                : Colors.white, // Light theme background color
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(60),
+                              topRight: Radius.circular(60),
+                            ),
                           ),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(30),
-                          child: Column(
-                            children: <Widget>[
-                              const SizedBox(height: 50),
-                              Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.orange.shade300,
-                                  borderRadius: BorderRadius.circular(10),
+                          child: Padding(
+                            padding: const EdgeInsets.all(30),
+                            child: Column(
+                              children: <Widget>[
+                                const SizedBox(height: 50),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.orange.shade300,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Form(
+                                    key: _authFormKey,
+                                    child: Column(children: <Widget>[
+                                      EmailField(
+                                          usernameController: _usernameController,
+                                          authFormKey: _authFormKey),
+                                      PasswordField(
+                                          passwordController: _passwordController,
+                                          authFormKey: _authFormKey),
+                                    ]),
+                                  ),
                                 ),
-                                child: Column(children: <Widget>[
-                                  EmailField(
-                                      usernameController:
-                                      _usernameController,
-                                      authFormKey: _authFormKey),
-                                  PasswordField(
-                                      passwordController:
-                                      _passwordController,
-                                      authFormKey: _authFormKey),
-                                ]),
-                              ),
-                              Container(
-                                margin: const EdgeInsets.only(top: 20),
-                                padding: const EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  color: Colors.orange.shade300,
-                                  borderRadius: BorderRadius.circular(10),
+                                Container(
+                                  margin: const EdgeInsets.only(top: 20),
+                                  padding: const EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                    color: Colors.orange.shade300,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: TextButton(
+                                      onPressed: onSignIn,
+                                      child: const Text("Sign in",
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.black))),
                                 ),
-                                child: TextButton(
-                                    onPressed: onSignIn,
-                                    child: const Text("Sign in",
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            color: Colors.black))),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),);
-        },),);
+              ],
+          );
+        },
+      ),
+    );
   }
 }
 
@@ -123,8 +128,7 @@ class PasswordField extends StatelessWidget {
     super.key,
     required TextEditingController passwordController,
     required GlobalKey<FormState> authFormKey,
-  })
-      : _passwordController = passwordController,
+  })  : _passwordController = passwordController,
         _authFormKey = authFormKey;
 
   final TextEditingController _passwordController;
@@ -143,7 +147,11 @@ class PasswordField extends StatelessWidget {
             contentPadding: EdgeInsets.all(20)),
         controller: _passwordController,
         obscureText: true,
-        onChanged: (value) => _authFormKey.currentState!.validate(),
+        onChanged: (value) {
+          if (_authFormKey.currentState != null) {
+            _authFormKey.currentState!.validate();
+          }
+        },
       ),
     );
   }
@@ -154,8 +162,7 @@ class EmailField extends StatelessWidget {
     super.key,
     required TextEditingController usernameController,
     required GlobalKey<FormState> authFormKey,
-  })
-      : _usernameController = usernameController,
+  })  : _usernameController = usernameController,
         _authFormKey = authFormKey;
 
   final TextEditingController _usernameController;
@@ -176,7 +183,11 @@ class EmailField extends StatelessWidget {
             hintStyle: TextStyle(color: Colors.black),
             contentPadding: EdgeInsets.all(20)),
         controller: _usernameController,
-        onChanged: (value) => _authFormKey.currentState!.validate(),
+        onChanged: (value) {
+          if (_authFormKey.currentState != null) {
+            _authFormKey.currentState!.validate();
+          }
+        },
       ),
     );
   }
@@ -205,11 +216,12 @@ class Header extends StatelessWidget {
               padding: EdgeInsets.only(top: 20),
             ),
             const Text('Log into your Securty System!',
-                style: TextStyle(fontSize: 28, color: Colors.black)),
-            ],
+                style: TextStyle(fontSize: 27, color: Colors.black)),
+          ],
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
-      ),);
+      ),
+    );
   }
 }

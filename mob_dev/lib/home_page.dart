@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mob_dev/home_bloc/home_cubit.dart';
+import 'package:mob_dev/utillities.dart';
 
 import 'authentication_bloc/authentication_cubit.dart';
 import 'home_bloc/home_state.dart';
@@ -27,9 +28,9 @@ class HomePage extends StatelessWidget {
             itemBuilder: (context, index) {
               return Column(
                 children: <Widget>[
-                  IndicatorHeadline(headline: units[index].key.name, indicatorColor: homeCubit.state.indicatorColor),
+                  IndicatorHeadline(headline: units[index].key.name, status: units[index].value[0].status, units: units[index].value),
                   ...units[index].value.map((unit) =>
-                     IndicatorLine(unitName: unit.name, unitStatus: unit.status, homeCubit: homeCubit)),
+                     IndicatorLine(unitName: unit.name, unitStatus: unit.status)),
                 ],
               );
             },
