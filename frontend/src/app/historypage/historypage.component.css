@@ -1,7 +1,7 @@
 .headDiv {
   display: flex;
   justify-content: flex-start;
-  height: 100vh;
+  height: 98vh;
 }
 
 .historyView {
@@ -9,6 +9,7 @@
   flex-direction: column;
   flex: 3;
   min-width: 400px;
+  overflow: auto;
 }
 
 .vertical-line {
