@@ -17,7 +17,7 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   @ViewChild('toggleSwitch') toggleSwitch!: ElementRef;
   @ViewChild('toggleDarkmode') toggleDarkmodeSwitch!: ElementRef;
   @ViewChild('toggleMotion') toggleMotion!: ElementRef;
-  private modal!: HTMLElement;
+  @ViewChild('settingsModal') modal!: ElementRef;
   Email$!: Observable<EmailModel[]>;
   darkMode = false;
 
@@ -111,7 +111,6 @@ export class SidebarComponent implements OnInit, AfterViewInit {
         }
       });
     }, 0);
-    this.modal = document.getElementById("settingsModal")!;
   }
 
   private getEmailObservable(): Observable<EmailModel[]> {
@@ -134,17 +133,21 @@ export class SidebarComponent implements OnInit, AfterViewInit {
   }
 
   onSettingsButtonPressed() {
-    this.modal.style.display = "block";
+    if (this.modal && this.modal.nativeElement) {
+      this.renderer.setStyle(this.modal.nativeElement, 'display', 'block');
+    } else {
+      console.error('Modal is not available yet');
+    }
   }
 
   onModalClosePressed() {
-    this.modal.style.display = "none";
+    this.renderer.setStyle(this.modal.nativeElement, 'display', 'none');
   }
 
   onOutsideModalPressed() {
     window.onclick = (event: MouseEvent) => {
-      if (event.target === this.modal) {
-        this.modal.style.display = "none";
+      if (event.target === this.modal.nativeElement) {
+        this.renderer.setStyle(this.modal.nativeElement, 'display', 'none');
       }
     }
   }
